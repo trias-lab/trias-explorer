@@ -1,0 +1,351 @@
+@background: #202129;
+@text: #FEFEFE;
+@border: #444851;
+#app main {
+    min-width: 1080px;
+    padding-top: 76px;
+}
+
+input {
+    outline: none;
+}
+
+input[type="text"] {
+    &:focus {
+        border: 1px solid rgba(161, 252, 58, 1);
+        outline: none;
+    }
+}
+
+input[type="button"] {
+    &:hover {
+        background: rgba(57, 62, 76, 1);
+    }
+    &:focus {
+        background: rgba(37, 40, 48, 1);
+    }
+}
+
+/* 自定义分页样式------------------------------------------------start*/
+
+.pagination-all {
+    width: 100%;
+    height: 79px;
+    background-color: transparent;
+    font-size: 12px;
+    color: @text;
+    .rowsPerPage {
+        float: left;
+        .my-dropdown-list {
+            width: 106px;
+            .item-selected {
+                width: 106px;
+            }
+            .list-block {
+                width: 106px;
+            }
+        }
+        p.itemsCount {
+            display: inline-block;
+            margin-left: 8px;
+            color: rgba(161, 166, 173, 1);
+        }
+    }
+    .pagination-right {
+        float: right;
+        line-height: 38px;
+    }
+}
+
+.pagination {
+    color: #eee;
+    vertical-align: middle; // background-color: #2e323c;
+    // border-radius: 20px;
+    // padding-top: 4px;
+    margin: 0;
+    height: 38px;
+    float: left;
+}
+
+/*页码框*/
+.pageNum {
+    vertical-align: middle;
+    border-radius: 4px;
+    padding: 0 8px;
+    width: 64px;
+    height: 38px;
+    border-radius: 4px;
+    border: 1px solid #444851;
+    background: transparent;
+    color: @text;
+    font-size: 12px;
+}
+
+.searchNum {
+    cursor: pointer;
+    margin-left: 8px;
+    width: 56px;
+    height: 38px;
+    background: #2e323c;
+    border-radius: 4px;
+    border: 1px solid #444851;
+    vertical-align: middle;
+    font-size: 12px;
+    color: #DAE1E9;
+}
+
+.pageCount {
+    display: inline-block; // margin: 20px 0;
+    margin-left: 24px; // width:128px;
+    height: 38px; // border-radius: 20px;
+    // background-color: #2e323c;
+    float: right;
+    .totalPages {
+        margin-left: 8px;
+        color: rgba(161, 166, 173, 1);
+    }
+}
+
+.pagination>li {
+    display: inline-block; // background: #2e323c;
+    // width: 40px;
+    height: 38px;
+    vertical-align: middle;
+    &:nth-child(2) {
+        margin-left: 16px;
+    }
+    &:nth-last-child(2) {
+        margin-right: 16px;
+    }
+}
+
+.pagination>li>a {
+    border-radius: 4px;
+    float: none;
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+    text-decoration: none;
+    color: #A1A6AD;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.pagination>li>a>span {
+    font-size: 33px; // color: #32a1ff;
+    line-height: 29px;
+}
+
+.pagination>li>a>span[aria-label='More'] {
+    font-size: 12px;
+    color: #a1a6ad;
+    line-height: 18px;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #DAE1E9;
+    cursor: default;
+    background: #274108;
+    border-radius: 4px;
+    border: 1px solid #A1FC3A;
+    line-height: 18px;
+}
+
+.pagination>li>a:hover,
+.pagination>li>span:hover {
+    z-index: 2;
+    background: rgba(71, 72, 86, 1);
+    border: 1px solid transparent;
+    color: rgba(161, 166, 173, 1);
+}
+
+.pagination>li>a:focus,
+.pagination>li>span:focus {
+    z-index: 2;
+    background: rgba(41, 42, 50, 1);
+    border: 1px solid transparent;
+    color: rgba(161, 166, 173, 1);
+}
+
+.pagination>li:first-child,
+.pagination>li:last-child {
+    a {
+        width: 38px;
+        height: 38px;
+        background: #2e323e;
+        border-radius: 4px;
+        border: 1px solid #444851;
+        color: rgba(218, 225, 233, 1);
+        &:hover {
+            background: rgba(57, 62, 76, 1);
+            border: 1px solid rgba(68, 72, 81, 1);
+        }
+        &.focus {
+            background: rgba(37, 40, 48, 1);
+            border: 1px solid rgba(68, 72, 81, 1);
+        }
+    }
+    &.disabled {
+        &>a,
+        &>a:hover,
+        &>a:focus {
+            background: rgba(32, 33, 41, 1);
+            border: 1px solid rgba(68, 72, 81, 1);
+            color: rgba(108, 118, 131, 1);
+        }
+    }
+}
+
+/* 自定义分页样式------------------------------------------------end*/
+
+/*自定义下拉列表组件的样式--------------------------------------------------------------------start*/
+.my-dropdown-list {
+    position: relative;
+    display: inline-block;
+    background: transparent;//当前已选中的选项
+    cursor: pointer;
+    .item-selected {
+        border: none;
+        font-size: 16px;
+        font-family: MoskMedium500;
+        color: #f6f6f6;
+        line-height: 20px;
+        >a>.fas{
+            margin-left: 4px;
+        }
+    }
+    //下拉列表的选项框 
+    .list-block {
+        position: absolute;
+        width: 250px;
+        color: #DAE1E9;
+        z-index: 18;
+        top: 53px;
+        right: -40px;
+        background: #2B2F37;
+        box-shadow: 0 4px 10px 0 rgba(0,0,0,0.80);
+        border-radius: 4px;
+        padding: 16px 24px;
+        ul {
+            margin-bottom: 6px;
+            li {
+                // padding: 16px 0px;
+                cursor: pointer;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 1);
+                line-height: 20px;
+                &.active {
+                    background: rgba(39, 65, 8, 1);
+                    border-top: 1px solid rgba(161, 252, 58, 1);
+                    border-bottom: 1px solid rgba(161, 252, 58, 1);
+                }
+                &:hover {
+                    background: rgba(40, 44, 53, 1);
+                }
+                span:hover {
+                    cursor: pointer;
+                }                
+            }
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-bottom: 8px solid #2B2F37;
+            top: -16px;
+            right: 56px;
+        }
+    }
+}
+
+/*自定义下拉列表--------------------------------------------------------------------end*/
+
+//清除浮动
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+//表格公共样式<table>标签加上此类名　
+.customTable {
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+    color: #FEFEFE;
+    margin-bottom: 48px;
+    table-layout: fixed;
+    thead {
+        background-color: transparent;
+        color: #A1A6AD;
+    }
+    thead tr,
+    tbody tr {
+        height: 60px;
+        padding: 0 10px;
+    }
+    thead tr th,
+    tbody tr td {
+        padding: 20px 20px;
+        word-break: break-all;
+        word-wrap: break-word;
+        a {
+            color: #A1FC3A;
+        }
+    }
+    tbody tr:nth-child(odd) {
+        background-color: #292A32;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #25262E;
+    }
+}
+
+.cutomUglily {
+    >.cutomUglily-row {
+        height: 24px;
+        line-height: 24px;
+        background: #292A32;
+        border: 1px solid #444851;
+        .cutomUglily-title {
+            padding-left: 10px;
+            height: 100%;
+            width: 20%;
+            float: left;
+            color: #A1A6AD;
+            background-color: #292A32;
+            border-right: 1px solid#444851
+        }
+        .cutomUglily-content {
+            padding-left: 10px;
+            float: left;
+            width: 80%;
+            height: 100%;
+            color: #FEFEFE;
+            background-color: #25262E;
+        }
+    }
+    .cutomUglily-row+.cutomUglily-row {
+        border-top: none;
+    }
+}
