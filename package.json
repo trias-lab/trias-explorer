@@ -1,7 +1,7 @@
 {
-  "name": "trias-blockchain",
+  "name": "trias-explorer",
   "version": "1.0.0",
-  "description": "public blockchain project",
+  "description": "The lightweight trias block explorer",
   "scripts": {
     "start": "set NODE_ENV=development && webpack-dev-server --config webpack.config.dev.js",
     "build": "set NODE_ENV=production && webpack --config webpack.config.prod.js --progress --colors -p"
