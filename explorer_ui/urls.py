@@ -18,7 +18,9 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from app.views import (
     index,
-    blocks
+    blocks,
+    transactions,
+    address
 )
 
 urlpatterns = [
@@ -32,4 +34,10 @@ urlpatterns = [
     url(r'^api/all_blocks/', blocks.all_blocks),  # Blocks List
     url(r'^api/block_info/', blocks.block_info),  # Block Detail Info
     url(r'^api/block_transactions/', blocks.block_transactions),  # Transactions Of Block
+
+    url(r'^api/all_transactions/', transactions.all_transactions),  # Transactions List
+    url(r'^api/transaction_info/', transactions.transaction_info),  # Transaction Detail Info
+
+    url(r'^api/address/', address.address_info),  # Address Detail Info
+    url(r'^api/address_transactions/', address.address_transactions),  # Transactions Of Address
 ]
