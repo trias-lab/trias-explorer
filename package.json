@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "The lightweight trias block explorer",
   "scripts": {
-    "start": "set NODE_ENV=development && webpack-dev-server --config webpack.config.dev.js",
-    "build": "set NODE_ENV=production && webpack --config webpack.config.prod.js --progress --colors -p"
+    "start": "set NODE_ENV=development&& webpack-dev-server --config webpack.config.dev.js",
+    "build": "set NODE_ENV=production&& webpack --config webpack.config.prod.js --progress --colors -p"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.4",
@@ -48,6 +48,5 @@
     "react-router-dom": "^4.3.0-rc.3"
   },
   "main": "",
-  "author": "",
-  "license": "BSD-2-Clause"
+  "author": ""
 }
