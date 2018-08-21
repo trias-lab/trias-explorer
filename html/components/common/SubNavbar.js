@@ -74,7 +74,7 @@ class SubNavbar extends React.Component {
                     {name:messages.blocks, path:"/blocklist"},
                     {name:messages.block+' '+params.blockID, path:url}
                 ],
-                subNavbarTitle: messages.blocks
+                subNavbarTitle: messages.block
             })
         }else if(path === '/translist'){
             this.setState({
@@ -91,7 +91,7 @@ class SubNavbar extends React.Component {
                     {name:messages.transactions, path:'/translist'},
                     {name:messages.transaction+' '+params.transID, path:url}
                 ],
-                subNavbarTitle: messages.transactions
+                subNavbarTitle: messages.transaction
             })
         }else if(path === '/address/:addressID'){
             this.setState({
