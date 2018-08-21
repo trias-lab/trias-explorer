@@ -88,7 +88,7 @@ module.exports = {
         use: 'raw-loader'
       },
       {
-        test: /\.(gif|png|jpg)$/, 
+        test: /\.(gif|png|jpg|jpeg)$/, 
         use: 'url-loader?limit=8192'
       },
       {

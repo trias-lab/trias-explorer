@@ -1,8 +1,5 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
-import Home from "./Home"
-import Other from "./Other"
-import DropdownList from './common/DropdownList'    //import drop-down list component
+import { BrowserRouter as Router, Route, Link, NavLink, Switch, Redirect} from 'react-router-dom'
 // import ES6Promise from 'es6-promise'
 // ES6Promise.polyfill() //关键代码,让ie识别promise对象!
 import { addLocaleData, IntlProvider, FormattedMessage } from 'react-intl'; /* react-intl imports */
@@ -14,6 +11,16 @@ import en_US from "../locale/en_US"     // import defined messages in English
 /* Import basic support for another locale if needed */
 addLocaleData([...en, ...zh]);  // load React Intl's locale data for multiple languages
 import $ from 'jquery'
+
+import DropdownList from './common/DropdownList'    //import drop-down list component
+import Home from "./Home"
+import Other from "./Other"
+import Footer from "./common/Footer"
+import BlockList from "./BlockList"
+import BlockDetail from "./BlockDetail"
+import TransactionList from "./TransactionList"
+import TransactionDetail from "./TransactionDetail"
+import Address from "./Address"
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -79,6 +86,10 @@ export default class Main extends React.Component {
                                         <img src={require("../img/logo.png")} alt="" />
                                     </Link>
                                 </div>
+                                <div className="btn-group">
+                                    <input type="text" className="ipt-search"/>
+                                    <input type="button" className="btn-search" value={this.state.lang==='zh'?"搜索":"Search"}/>
+                                </div>
                                 <ul className="navbar-menu-pc">
                                     <li>
                                         <NavLink exact to="/" activeClassName="active">
@@ -126,9 +137,17 @@ export default class Main extends React.Component {
                             </div>                
                         </header>
                         <main>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/other" component={Other} />
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <Route exact path="/address" component={Address} />
+                                <Route exact path="/translist/:transID" component={TransactionDetail} />
+                                <Route exact path="/blocklist" component={BlockList} />
+                                <Route exact path="/blocklist/:blockID" component={BlockDetail} />
+                                <Route exact path="/address/:addressID" component={Address} />
+                                <Redirect to="/" component={Home} /> {/* if no routes above is matched */}
+                            </Switch>                            
                         </main>
+                        <Footer/>
                     </div>
                 </Router>
             </IntlProvider>
