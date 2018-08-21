@@ -8,10 +8,12 @@ import $ from "jquery"
 import { Link } from 'react-router-dom'
 import CustomPagination from "./common/CustomPagination"
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import SubNavbar from "./common/SubNavbar"
 export default class BlockInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            subNavbarMatch: this.props.match,
             addressID: this.props.match.params.addressID,
             nodeSearchKey: '',//节点列表搜索关键字
             totalItemsCount: 100,
@@ -32,19 +34,16 @@ export default class BlockInfo extends React.Component {
 
     /**
      * Before a mounted component receives new props, reset some state.
-     * If block is changed, reset the state blockid and get new data
+     * Determine whether the location is changed, then update the navigation bar based on the current URL.
      * @param {Object} nextProps new props
      */
-    // componentWillReceiveProps(nextProps){
-    //     if(this.props.match.params.blockid !== nextProps.match.params.blockid){   // if blockid changed.
-    //         this.setState({
-    //             blockid: nextProps.match.params.blockid
-    //         },()=>{
-    //             this.getList(this.state.currentPage, this.state.rowsPerPage);
-    //             this.getInfo()
-    //         })            
-    //     }
-    // }
+    componentWillReceiveProps(nextProps){
+        if(this.state.subNavbarMatch.url !== nextProps.match.url){
+            this.setState({
+                subNavbarMatch: nextProps.match
+            })
+        }
+    }
 
     /**
      * 获取列表数据
@@ -170,10 +169,8 @@ export default class BlockInfo extends React.Component {
         // )
         return (
             <div className='address-container'>
+                <SubNavbar match={this.state.subNavbarMatch}/>
                 <div className="page-content">
-                    <section className="nav-part" >
-
-                    </section>
                     <section className="graph-group" >
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
