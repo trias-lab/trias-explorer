@@ -20,7 +20,7 @@ def index_base_info(request):
 
     for i in range(14):
         today = datetime.date.today()
-        x = str(today - datetime.timedelta(days=i))
+        x = str((today - datetime.timedelta(days=i)).strftime('%-m/%-d'))
         hash_rate_growth[x] = hash_rate_growth_data[i]
         transactions_history[x] = transactions_data[i]
 

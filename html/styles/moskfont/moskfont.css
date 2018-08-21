@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'MoskBold700';
+    src: url('./MoskBold700.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskSemi-Bold600';
+    src: url('./MoskSemi-Bold600.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskExtra-Bold800';
+    src: url('./MoskExtra-Bold800.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskMedium500';
+    src: url('./MoskMedium500.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskUltra-Bold900';
+    src: url('./MoskUltra-Bold900.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskThin100';
+    src: url('./MoskThin100.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskLight300';
+    src: url('./MoskLight300.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskExtra-Light200';
+    src: url('./MoskExtra-Light200.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoskNormal400';
+    src: url('./MoskNormal400.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

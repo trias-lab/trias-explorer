@@ -130,7 +130,7 @@ export default class Main extends React.Component {
                                             <FormattedMessage id="home" />
                                         </NavLink>
                                         <NavLink exact to="/other" onClick={()=> this.hideAllDropdownList()} >
-                                            other
+                                            other11 1212121
                                         </NavLink>                        
                                     </div>
                                 </div>                
