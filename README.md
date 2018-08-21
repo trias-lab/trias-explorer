@@ -1,5 +1,9 @@
+## License
+GPL (see [LICENSE](http://www.gnu.org/licenses/gpl.html))
+
 # trias-explorer
-The lightweight trias block explorer
+trias-explorer is a Trias blockchain explorer built with Python, Django and React.    
+It must connect to Trias public chain nodes to collect information. You can use it to browse blocks, transactions, and accounts.
 
 ## Requirements
  - python: 3.4 or later.

@@ -1,8 +1,6 @@
 """
 blocks message
 """
-import datetime
-import random
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 
@@ -116,12 +114,11 @@ def block_transactions(request):
                          "amount_transacted": "0.44662462 BTC",
                          "fees": "0.00090000 BTC",
                          "fees_rate": "791 Satoshis/vByte",
-                         "time": "2 month ago",
                          "confirmations": 3,
                          "tx_hash": "0x4507a69d03d0dc145d5e7b47bc60f4796d99f594bd450749d689db6e8cebb157",
                          "tx_receipt_status": "success",
                          "block_height": "6179213 (2 block confirmations)",
-                         "time_stamp": "2018-08-17 17:38:48",
+                         "time": "2018-08-17 17:38:48",
                          "value": "0 Ether ($0.00)",
                          "actual_tx_cost": "0.000189756 Ether ($0.06)",
                          "nonce": 78005,
