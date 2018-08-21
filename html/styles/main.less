@@ -16,6 +16,16 @@ body {
     font-size: 14px;
 }
 
+#app main {
+    width: 100%;
+    padding-top: 76px;
+    >div {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+}
+
 .header {
     background: #01001a;
     position: fixed;
@@ -25,8 +35,9 @@ body {
     transition: background-color .5s;
     &>div {
         position: relative;
-        max-width: 1080px;
+        max-width: 1120px;
         margin: 0 auto;
+        padding: 0 20px;
         .logo {
             float: left;
             a {
