@@ -80,6 +80,10 @@ export default class Main extends React.Component {
                                         <img src={require("../img/logo.png")} alt="" />
                                     </Link>
                                 </div>
+                                <div className="btn-group">
+                                    <input type="text" className="ipt-search"/>
+                                    <input type="button" className="btn-search" value={this.state.lang==='zh'?"搜索":"Search"}/>
+                                </div>
                                 <ul className="navbar-menu-pc">
                                     <li>
                                         <NavLink exact to="/" activeClassName="active">
