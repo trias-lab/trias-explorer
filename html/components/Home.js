@@ -1,7 +1,7 @@
 import React from "react"
 import $ from 'jquery'
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
-
+import echarts from 'echarts'
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -9,6 +9,60 @@ class Home extends React.Component {
             lang: this.props.intl.locale,
             blocksLatest:[]
         }
+        this.lineChartOption = {
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line',
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(161,252,58,0.5)'
+                        },{
+                            offset: 1,
+                            color: 'rgba(161,252,58, 0.1)'
+                        }], false),
+                        opacity:0.8,
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(161,252,58)',
+                    }
+                },
+            }]
+        };
+    }
+
+    initLineCharts(){
+        let self = this
+        this.chartLine1 = echarts.init(document.getElementById('lineChart1'));
+        this.chartLine1.setOption(this.lineChartOption, true);
+        this.chartLine2 = echarts.init(document.getElementById('lineChart2'));
+        this.chartLine2.setOption(this.lineChartOption, true);
+        /* Change the size of charts when the container size is changed */
+        setTimeout(function (){
+            window.onresize = function () {
+                self.chartLine1.resize();
+                self.chartLine2.resize();
+            }
+        },200)
+    }
+
+    updateLineCharts(){
+        // this.lineChartOption.series[0].data = this.state.chartSeries
+        // this.chartLine1 = echarts.init(document.getElementById('lineChart1'));
+        // this.chartLine1.setOption(this.lineChartOption, true);
+        // this.chartLine2 = echarts.init(document.getElementById('lineChart2'));
+        // this.chartLine2.setOption(this.lineChartOption, true);
     }
 
     getLatestBlocks(){
@@ -84,6 +138,7 @@ class Home extends React.Component {
     }
 
     componentDidMount(){
+        this.initLineCharts()
         this.getLatestBlocks()
         this.getLatestTrans()
     }
@@ -97,10 +152,14 @@ class Home extends React.Component {
                 </section>
                 <section className="row">
                     <div className="col col-12 col-sm-12 col-md-6 col-xl-6">
-                        <div id="lineChart1"></div>
+                        <div className="chart-title">
+                        </div>
+                        <div id="lineChart1" style={{width: "100%", height: "370px"}}></div>
                     </div>
                     <div className="col col-12 col-sm-12 col-md-6 col-xl-6">
-                        <div id="lineChart2"></div>
+                        <div className="chart-title">
+                        </div>
+                        <div id="lineChart2" style={{width: "100%", height: "370px"}}></div>
                     </div>
                 </section>
                 <section className="row">
@@ -120,7 +179,7 @@ class Home extends React.Component {
                             {
                                 this.state.blocksLatest && this.state.blocksLatest.map(function(item,index){
                                     return (
-                                        <li className="clearfix">
+                                        <li className="clearfix" key={"block-"+index}>
                                             <div className="name pull-left">
                                                 <img src="" alt=""/><span>{item.id}</span>
                                             </div>  
@@ -153,7 +212,7 @@ class Home extends React.Component {
                             {
                                 this.state.transLatest && this.state.transLatest.map(function(item,index){
                                     return (
-                                        <li>
+                                        <li  className="clearfix" key={"trans-"+index}>
                                             <div className="name pull-left">
                                                 <img src="" alt=""/><span>{item.id}</span>
                                             </div>                                            
