@@ -12,6 +12,7 @@ export default class BlockInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            addressID: this.props.match.params.addressID,
             nodeSearchKey: '',//节点列表搜索关键字
             totalItemsCount: 100,
             pageCount: 10,
