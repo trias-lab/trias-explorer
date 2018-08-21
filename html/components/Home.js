@@ -240,7 +240,7 @@ class Home extends React.Component {
                             <div className="list-head clearfix">
                                 <img src="" alt="" className="pull-left" />
                                 <p>Latest Blocks</p>
-                                <a href="/blocklist">View all <i className="fas fa-angle-right"></i></a>
+                                    <Link to="/blocklist">View all <i className="fas fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {
@@ -275,7 +275,7 @@ class Home extends React.Component {
                             <div className="list-head clearfix">
                                 <img src="" alt="" className="pull-left" />
                                 <p>Latest Transactions</p>
-                                <a href="/translist">View all <i className="fas fa-angle-right"></i></a>
+                                <Link to="/translist">View all <i className="fas fa-angle-right"></i></Link>
                             </div>
                             <ul>
                                 {
