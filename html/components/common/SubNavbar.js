@@ -62,7 +62,7 @@ class SubNavbar extends React.Component {
         if(path === '/blocklist'){
             this.setState({
                 navList: [
-                    {name:messages.home,path:"/"},
+                    {name:messages.home, path:"/"},
                     {name:messages.blocks, path:url}
                 ],
                 subNavbarTitle: messages.blocks
@@ -118,7 +118,7 @@ class SubNavbar extends React.Component {
                                 return (
                                 <span key={"nav-"+index}>
                                     <span className="angle"><i className="fas fa-angle-right"></i></span>
-                                    <NavLink exact to={{pathname:item.path,state:item.state}} activeClassName="active">{item.name}</NavLink>
+                                    <NavLink exact to={item.path} activeClassName="active">{item.name}</NavLink>
                                 </span>
                                 )
                             }else{  //first nav
