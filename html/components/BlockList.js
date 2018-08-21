@@ -11,7 +11,11 @@ export default class BlockList extends React.Component {
         }
     }
 
-    
+    /**
+     * Before a mounted component receives new props, reset some state.
+     * Determine whether the location is changed, then update the navigation bar based on the current URL.
+     * @param {Object} nextProps new props
+     */
     componentWillReceiveProps(nextProps){
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
