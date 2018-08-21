@@ -2,6 +2,7 @@ import React from "react"
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 import Home from "./Home"
 import Other from "./Other"
+import Footer from "./common/Footer"
 import DropdownList from './common/DropdownList'    //import drop-down list component
 // import ES6Promise from 'es6-promise'
 // ES6Promise.polyfill() //关键代码,让ie识别promise对象!
@@ -129,6 +130,7 @@ export default class Main extends React.Component {
                             <Route exact path="/" component={Home} />
                             <Route path="/other" component={Other} />
                         </main>
+                        <Footer/>
                     </div>
                 </Router>
             </IntlProvider>
