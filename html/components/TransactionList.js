@@ -12,6 +12,7 @@ export default class TransactionList extends React.Component {
     render() {
         return (
             <div className="translist-container">
+            TransactionList
             </div>
         )
     }

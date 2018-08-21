@@ -1,5 +1,6 @@
 import React from "react"
 import $ from 'jquery'
+import { Link } from 'react-router-dom'
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import echarts from 'echarts'
 class Home extends React.Component {
@@ -68,32 +69,32 @@ class Home extends React.Component {
     getLatestBlocks(){
         this.setState({
             blocksLatest:[{
-                id:'#2983792',
+                id:'2983792',
                 timestamp: '2018-08-17 19:11:19',
                 size: '8493 B',
                 reward: '12.93. BTC'
             },{
-                id:'#2983792',
+                id:'2983792',
                 timestamp: '2018-08-17 19:11:19',
                 size: '8493 B',
                 reward: '12.93. BTC'
             },{
-                id:'#2983792',
+                id:'2983792',
                 timestamp: '2018-08-17 19:11:19',
                 size: '8493 B',
                 reward: '12.93. BTC'
             },{
-                id:'#2983792',
+                id:'2983792',
                 timestamp: '2018-08-17 19:11:19',
                 size: '8493 B',
                 reward: '12.93. BTC'
             },{
-                id:'#2983792',
+                id:'2983792',
                 timestamp: '2018-08-17 19:11:19',
                 size: '8493 B',
                 reward: '12.93. BTC'
             },{
-                id:'#2983792',
+                id:'2983792',
                 timestamp: '2018-08-17 19:11:19',
                 size: '8493 B',
                 reward: '12.93. BTC'
@@ -104,32 +105,32 @@ class Home extends React.Component {
     getLatestTrans(){
         this.setState({
             transLatest:[{
-                id:'#OXABESG',
+                id:'OXABESG',
                 timestamp: '2018-08-17 19:11:19',
                 from: '0xcadhjkdsfiowe356',
                 to: '0xcadhjkdsfiowe356'
             },{
-                id:'#OXABESG',
+                id:'OXABESG',
                 timestamp: '2018-08-17 19:11:19',
                 from: '0xcadhjkdsfiowe356',
                 to: '0xcadhjkdsfiowe356'
             },{
-                id:'#OXABESG',
+                id:'OXABESG',
                 timestamp: '2018-08-17 19:11:19',
                 from: '0xcadhjkdsfiowe356',
                 to: '0xcadhjkdsfiowe356'
             },{
-                id:'#OXABESG',
+                id:'OXABESG',
                 timestamp: '2018-08-17 19:11:19',
                 from: '0xcadhjkdsfiowe356',
                 to: '0xcadhjkdsfiowe356'
             },{
-                id:'#OXABESG',
+                id:'OXABESG',
                 timestamp: '2018-08-17 19:11:19',
                 from: '0xcadhjkdsfiowe356',
                 to: '0xcadhjkdsfiowe356'
             },{
-                id:'#OXABESG',
+                id:'OXABESG',
                 timestamp: '2018-08-17 19:11:19',
                 from: '0xcadhjkdsfiowe356',
                 to: '0xcadhjkdsfiowe356'
@@ -180,22 +181,24 @@ class Home extends React.Component {
                                 this.state.blocksLatest && this.state.blocksLatest.map(function(item,index){
                                     return (
                                         <li className="clearfix" key={"block-"+index}>
-                                            <div className="name pull-left">
-                                                <img src="" alt=""/><span>{item.id}</span>
-                                            </div>  
-                                            <div className="info">
-                                                <p className="timestamp">{item.timestamp}</p>
-                                                <p className="other">
-                                                    <span>
-                                                        <span className="key">Size:</span>
-                                                        <span className="value">{item.size}</span>
-                                                    </span>
-                                                    <span>
-                                                        <span className="key">Reward:</span>
-                                                        <span className="value">{item.reward}</span>
-                                                    </span>
-                                                </p>
-                                            </div>
+                                            <Link to={"/blocklist/"+item.id}>
+                                                <div className="name pull-left">
+                                                    <img src="" alt=""/><span>{item.id}</span>
+                                                </div>  
+                                                <div className="info">
+                                                    <p className="timestamp">{item.timestamp}</p>
+                                                    <p className="other">
+                                                        <span>
+                                                            <span className="key">Size:</span>
+                                                            <span className="value">{item.size}</span>
+                                                        </span>
+                                                        <span>
+                                                            <span className="key">Reward:</span>
+                                                            <span className="value">{item.reward}</span>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </Link>
                                         </li>
                                     )
                                 })
@@ -213,22 +216,24 @@ class Home extends React.Component {
                                 this.state.transLatest && this.state.transLatest.map(function(item,index){
                                     return (
                                         <li  className="clearfix" key={"trans-"+index}>
-                                            <div className="name pull-left">
-                                                <img src="" alt=""/><span>{item.id}</span>
-                                            </div>                                            
-                                            <div className="info">
-                                                <p className="timestamp">{item.timestamp}</p>
-                                                <p className="other">
-                                                    <span>
-                                                        <span className="key">From:</span>
-                                                        <span className="value">{item.from}</span>
-                                                    </span>
-                                                    <span>
-                                                        <span className="key">To:</span>
-                                                        <span className="value">{item.to}</span>
-                                                    </span>
-                                                </p>
-                                            </div>
+                                            <Link to={"/translist/"+item.id}>
+                                                <div className="name pull-left">
+                                                    <img src="" alt=""/><span>{item.id}</span>
+                                                </div>                                            
+                                                <div className="info">
+                                                    <p className="timestamp">{item.timestamp}</p>
+                                                    <p className="other">
+                                                        <span>
+                                                            <span className="key">From:</span>
+                                                            <span className="value">{item.from}</span>
+                                                        </span>
+                                                        <span>
+                                                            <span className="key">To:</span>
+                                                            <span className="value">{item.to}</span>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </Link>
                                         </li>
                                     )
                                 })

@@ -12,6 +12,7 @@ export default class BlockList extends React.Component {
     render() {
         return (
             <div className="blocklist-container">
+            BlockList
             </div>
         )
     }
