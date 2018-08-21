@@ -42,7 +42,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app.dispatcher.QtsAuthentication'
+    'app.MyMiddleware.SecureRequiredMiddleware'
 
 ]
 
@@ -122,4 +122,12 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
+
+SECURE_REQUIRED_PATHS = (
+    '/',
+    '/admin/',
+    '/api/'
+)
+
+HTTPS_SUPPORT = False
 
