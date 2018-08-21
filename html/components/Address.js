@@ -16,7 +16,7 @@ export default class BlockInfo extends React.Component {
             nodeSearchKey: '',//节点列表搜索关键字
             totalItemsCount: 100,
             pageCount: 10,
-            tradeList: [],
+            transactionList: [],
             rowsPerPage: 10,
             currentPage: 1,
             infoList: [],
@@ -63,12 +63,11 @@ export default class BlockInfo extends React.Component {
                 address: '0x1111'
             },
             success: function (data) {
-                // self.setState({
-                //     tradeList: data.data,
-                //     totalItemsCount: data.total_item,
-                //     pageCount: data.total_page,
-                // })
-
+                self.setState({
+                    transactionList: data.return_data,
+                    totalItemsCount: data.size,
+                    pageCount: data.total_page,
+                })
             }
         })
     }
@@ -179,10 +178,10 @@ export default class BlockInfo extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-address-card"></i>
+                                    <i className="fas fa-envelope-open"></i>
                                 </div>
                                 <div className="text">
-                                    <p>HASH RATE</p>
+                                    <p>Received</p>
                                     <p>49.65 EH/s</p>
                                 </div>
                             </div>
@@ -190,10 +189,10 @@ export default class BlockInfo extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-address-card"></i>
+                                    <i className="fas fa-envelope"></i>
                                 </div>
                                 <div className="text">
-                                    <p>HASH RATE</p>
+                                    <p>Sent</p>
                                     <p>49.65 EH/s</p>
                                 </div>
                             </div>
@@ -201,10 +200,10 @@ export default class BlockInfo extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-address-card"></i>
+                                    <i className="fas fa-balance-scale"></i>
                                 </div>
                                 <div className="text">
-                                    <p>HASH RATE</p>
+                                    <p>Balance</p>
                                     <p>49.65 EH/s</p>
                                 </div>
                             </div>
@@ -212,20 +211,76 @@ export default class BlockInfo extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-address-card"></i>
+                                    <i className="fas fa-calendar-alt"></i>
                                 </div>
                                 <div className="text">
-                                    <p>HASH RATE</p>
+                                    <p>Date/Time</p>
                                     <p>49.65 EH/s</p>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section className="info-part" >
-
+                    <section className="info-part">
+                        <div className="title" >Advanced Info</div>
+                        <div className="info-content" >
+                        </div>
                     </section>
-                    <section className="list-part" >
-
+                    <section className="list-part">
+                        <div className="title">Transactions</div>
+                        <div className="item-content customTableWarp clearfix">
+                            {/* <table className="customTable">
+                                <thead>
+                                    <tr>
+                                        <th className=""><FormattedMessage id="termAction"/></th>
+                                        <FormattedMessage id="thActor" tagName="th"/>                                
+                                        <FormattedMessage id="thPermission" tagName="th"/>                             
+                                        <FormattedMessage id="thType" tagName="th"/>                             
+                                        <FormattedMessage id="thQuantity" tagName="th"/>                             
+                                        <FormattedMessage id="thAdmin" tagName="th"/>                             
+                                        <FormattedMessage id="thTimestamp" tagName="th"/>                             
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.transactionList && this.state.transactionList.map(function (i, index) {
+                                        return (
+                                            <tr className="" key={index}>
+                                                <td className="">
+                                                    <Link to={{
+                                                        pathname:"/nodes/actions/"+i.operating_id,
+                                                        state:{nodeid:self.state.nodeid, blockid:self.state.blockid, txhash: self.state.txhash}
+                                                        }}>
+                                                        {i.operating_id}
+                                                        </Link>
+                                                </td>
+                                                <td className="">
+                                                    {i.operator}
+                                                </td>
+                                                <td className="">{i.authority}</td>
+                                                <td className="">{i.type}</td>
+                                                <td className="">{i.quantity}</td>
+                                                <td className="">{i.admin}</td>
+                                                <td className="">{i.time}</td>
+                                            </tr>
+                                        )
+                                    }.bind(this))}
+                                    {
+                                        !this.state.transactionList.length && <tr className="" style={{ width: '100%', height: '70px', lineHeight: '70px', background: 'transparent', border: 'none', }}><td style={{ paddingLeft: '40px', width: '100%' }}>当前没有匹配的数据。</td></tr>
+                                    }
+                                </tbody>
+                            </table> */}
+                            <CustomPagination
+                                from={(this.state.currentPage - 1) * this.state.rowsPerPage}
+                                to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.actionList?this.state.actionList.length:0)}
+                                totalItemsCount={this.state.totalItemsCount}
+                                totalPagesCount={this.state.pageCount}
+                                currentPage={this.state.currentPage}
+                                onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
+                                onSelectPage={(e) => this.handleSelectPage(e)}
+                                onChangePageInput={(e) => this.onChangeInputPage(e)}
+                                onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
+                                onClickJumpButton={() => this.handleJumpPage()}
+                            />
+                        </div>
                     </section>
                 </div>
             </div>
