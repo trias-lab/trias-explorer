@@ -2,7 +2,6 @@ import React from "react"
 import $ from 'jquery'
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 
-/* Component for node status page */
 class Home extends React.Component {
     constructor(props) {
         super(props);
