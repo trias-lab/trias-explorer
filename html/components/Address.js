@@ -171,6 +171,61 @@ export default class BlockInfo extends React.Component {
         return (
             <div className='address-container'>
                 <div className="page-content">
+                    <section className="nav-part" >
+
+                    </section>
+                    <section className="graph-group" >
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-address-card"></i>
+                                </div>
+                                <div className="text">
+                                    <p>HASH RATE</p>
+                                    <p>49.65 EH/s</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-address-card"></i>
+                                </div>
+                                <div className="text">
+                                    <p>HASH RATE</p>
+                                    <p>49.65 EH/s</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-address-card"></i>
+                                </div>
+                                <div className="text">
+                                    <p>HASH RATE</p>
+                                    <p>49.65 EH/s</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-address-card"></i>
+                                </div>
+                                <div className="text">
+                                    <p>HASH RATE</p>
+                                    <p>49.65 EH/s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section className="info-part" >
+
+                    </section>
+                    <section className="list-part" >
+
+                    </section>
                 </div>
             </div>
         )
