@@ -72,7 +72,7 @@ class SubNavbar extends React.Component {
                 navList: [
                     {name:messages.home,path:"/"},
                     {name:messages.blocks, path:"/blocklist"},
-                    {name:messages.block+''+params.blockID, path:url}
+                    {name:messages.block+' '+params.blockID, path:url}
                 ],
                 subNavbarTitle: messages.blocks
             })
@@ -97,7 +97,7 @@ class SubNavbar extends React.Component {
             this.setState({
                 navList: [
                     {name:messages.home,path:"/"},
-                    {name:messages.address+''+params.addressID, path:url}
+                    {name:messages.address+' '+params.addressID, path:url}
                 ],
                 subNavbarTitle: messages.address
             })
