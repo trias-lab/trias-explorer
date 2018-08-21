@@ -108,31 +108,34 @@ class SubNavbar extends React.Component {
         
         return (
             <div className="sub-header">
-            {
-                this.state.subNavbarTitle && <h1>{this.state.subNavbarTitle}</h1>
-            }
-            <h2>
-                {this.state.navList.map(function(item,index){
-                    if(index){
-                        return (
-                        <span key={"nav-"+index}>
-                            <span className="angle"><i className="fas fa-angle-right"></i></span>
-                            <NavLink exact to={{pathname:item.path,state:item.state}} activeClassName="active">{item.name}</NavLink>
-                        </span>
-                        )
-                    }else{  //first nav
-                        return (
-                        <span key={"nav-"+index}>
-                            <NavLink exact to={item.path} activeClassName="active">{item.name}</NavLink>
-                        </span>
-                        )
+                <div className="center-box">
+                    {
+                        this.state.subNavbarTitle && <h1>{this.state.subNavbarTitle}</h1>
                     }
-                })}
-            </h2>
-            {
-                this.state.match.path === '/address/:addressID' && 
-                <div className="address-qrcode"><img src="" alt=""/></div>
-            }
+                    <h2>
+                        {this.state.navList.map(function(item,index){
+                            if(index){
+                                return (
+                                <span key={"nav-"+index}>
+                                    <span className="angle"><i className="fas fa-angle-right"></i></span>
+                                    <NavLink exact to={{pathname:item.path,state:item.state}} activeClassName="active">{item.name}</NavLink>
+                                </span>
+                                )
+                            }else{  //first nav
+                                return (
+                                <span key={"nav-"+index}>
+                                    <NavLink exact to={item.path} activeClassName="active">{item.name}</NavLink>
+                                </span>
+                                )
+                            }
+                        })}
+                    </h2>
+                    {
+                        this.state.match.path === '/address/:addressID' && 
+                        <div className="address-qrcode"><img src="" alt=""/></div>
+                    }
+                </div>
+            
         </div>
         )
     }
