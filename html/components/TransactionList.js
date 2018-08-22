@@ -153,13 +153,27 @@ class TransactionList extends React.Component {
 
                                             <tr key={index}>
                                                 <td className="td-trans-txHash">
-                                                    <Link to={"/translist/"+ item.tx_hash}><i className="fa fa-chart-pie"></i>
-                                                        <span>{item.tx_hash}</span></Link>
+                                                    <Link to={"/translist/"+ item.tx_hash}>
+                                                        <i className="fa fa-chart-pie"></i>
+                                                        <span>{item.tx_hash}</span>
+                                                    </Link>
                                                 </td>
-                                                <td className="td-trans-color">{item.block}</td>
-                                                <td className="td-trans-color">{item.from}</td>
+                                                <td className="td-trans-color">
+                                                    <Link to={"/block/"+ item.block}>
+                                                        <span>{item.block}</span>
+                                                    </Link>
+                                                </td>
+                                                <td className="td-trans-color">
+                                                    <Link to={"/address/"+ item.from}>
+                                                        <span>{item.from}</span>
+                                                    </Link>
+                                                </td>
                                                 <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
-                                                <td className="td-trans-color">{item.to}</td>
+                                                <td className="td-trans-color">
+                                                    <Link to={"/address/"+ item.to}>
+                                                        <span>{item.to}</span>
+                                                    </Link>
+                                                </td>
                                                 <td>{item.value}</td>
                                                 <td>{item.age}</td>
                                             </tr>

@@ -10,9 +10,9 @@ class BlockList extends React.Component {
         this.state = {
             lang: this.props.intl.locale,
             subNavbarMatch: this.props.match,   // Route  match props
-            totalItemsCount: 200, //total number = pageCount*rowsPerPage
+            totalItemsCount: 100, //total number = pageCount*rowsPerPage
             pageCount: 10, //total page
-            rowsPerPage: 20, //number each page
+            rowsPerPage: 10, //number each page
             currentPage: 1, //current page number
             blockList:false,//init block list
         }
@@ -129,7 +129,10 @@ class BlockList extends React.Component {
                 </div>
                 { this.state.blockList.length > 0 &&
                     <div className="list-table-block">
-                        <h3 className="list-title"> <i className="fa fa-chart-pie"></i>block</h3>
+                        <h3 className="list-title">
+                            <i className="fa fa-chart-pie"></i>
+                            <FormattedMessage id="block" tagName="span"/>
+                        </h3>
                         <div className="block-table-list">
                             <div className="table-list">
                                 <table>
@@ -150,7 +153,7 @@ class BlockList extends React.Component {
 
                                                 <tr key={index}>
                                                     <td className="td-block-height">
-                                                        <Link to={"/blocklist/:"+ item.block_hash}><i className="fa fa-chart-pie"></i>{item.height}</Link>
+                                                        <Link to={"/blocklist/"+ item.block_hash}><i className="fa fa-chart-pie"></i>{item.height}</Link>
                                                     </td>
                                                     <td>{item.tx_count}</td>
                                                     <td>{item.size}</td>
