@@ -265,7 +265,6 @@ export default class BlockDetail extends React.Component {
                                             {
                                                 i.output &&
                                                 <Qrcode id={'output-'+index} text={i.output} size="70" />
-                                                // console.log(this.state.detailInfo)
                                             }
                                             <span>
                                                 <FormattedMessage id="address"/>
@@ -277,7 +276,6 @@ export default class BlockDetail extends React.Component {
                                             {
                                                 i.input &&
                                                 <Qrcode id={'input-'+index} text={i.input} size="70" />
-                                                // console.log(this.state.detailInfo)
                                             }
                                             <span>
                                             <FormattedMessage id="address"/>
