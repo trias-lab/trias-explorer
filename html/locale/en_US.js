@@ -8,6 +8,7 @@ const en_US = {
     block: "Block",
     blocks: "Blocks",
     transaction: "Transaction",
+    transactionCount: "Transactions",
     transactions: "Transactions",
     address: "Address",
     email: "Email:",
@@ -18,7 +19,19 @@ const en_US = {
     nullData:'no data',
     height:"Height",
     totalFees:"Total Fees",
-    dateAndTime: "Date / Time"
+    dateAndTime: "Date / Time",
+    confirmations: "Confirmations",
+    size: "Size",
+    version: "Version",
+    txCount:"Tx Count",
+    difficulty: "Difficulty",
+    bits: "Bits",
+    nonce: "Nonce",
+    time: "Time",
+    blockHash: "Block Hash",
+    prevBlock: "Prev Block",
+    nextBlock: "Next Block",
+    merkleRoot: "Merkle Root"
 }
 
 export default en_US;

@@ -8,6 +8,7 @@ const zh_CN = {
     block: "区块",
     blocks: "区块列表",
     transaction: "交易",
+    transactionCount: "交易数",
     transactions: "交易列表",
     address: "账户地址",
     email: "邮箱：",
@@ -18,7 +19,19 @@ const zh_CN = {
     nullData:'暂无数据',
     height:"区块高度",
     totalFees:"总收益",
-    dateAndTime: "时间"
+    dateAndTime: "时间",
+    confirmations: "Confirmations",
+    size: "Size",
+    version: "Version",
+    txCount:"Tx Count",
+    difficulty: "Difficulty",
+    bits: "Bits",
+    nonce: "Nonce",
+    time: "Time",
+    blockHash: "Block Hash",
+    prevBlock: "Prev Block",
+    nextBlock: "Next Block",
+    merkleRoot: "Merkle Root"
 }
 
 export default zh_CN;
