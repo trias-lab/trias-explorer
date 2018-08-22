@@ -16,6 +16,9 @@ const zh_CN = {
     paginationPageInput: "输入",
     paginationJumpBtn: "跳转",
     nullData:'暂无数据',
+    height:"区块高度",
+    totalFees:"总收益",
+    dateAndTime: "时间"
 }
 
 export default zh_CN;

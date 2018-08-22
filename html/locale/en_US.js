@@ -16,6 +16,9 @@ const en_US = {
     paginationPageInput: "Enter",
     paginationJumpBtn: "GO",
     nullData:'no data',
+    height:"Height",
+    totalFees:"Total Fees",
+    dateAndTime: "Date / Time"
 }
 
 export default en_US;
