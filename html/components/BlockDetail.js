@@ -3,7 +3,7 @@ import $ from 'jquery'
 import CustomPagination from "./common/CustomPagination"
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
-
+import Qrcode from "./common/Qrcode"
 export default class BlockDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -262,7 +262,11 @@ export default class BlockDetail extends React.Component {
                                     </div>
                                     <div className="address-bar">
                                         <div className="item-a">
-                                            <i className="fas fa-qrcode"></i>
+                                            {
+                                                i.output &&
+                                                <Qrcode id={'output-'+index} text={i.output} size="70" />
+                                                // console.log(this.state.detailInfo)
+                                            }
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
@@ -270,7 +274,11 @@ export default class BlockDetail extends React.Component {
                                             </span>
                                         </div>
                                         <div className="item-b">
-                                            <i className="fas fa-qrcode"></i>
+                                            {
+                                                i.input &&
+                                                <Qrcode id={'input-'+index} text={i.input} size="70" />
+                                                // console.log(this.state.detailInfo)
+                                            }
                                             <span>
                                             <FormattedMessage id="address"/>
                                                 <br />
