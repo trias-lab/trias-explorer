@@ -21,7 +21,7 @@ export default class BlockInfo extends React.Component {
             transactionList: [],
             rowsPerPage: 10,
             currentPage: 1,
-            infoList: [],
+            detailInfo: [],
             // nodeid: this.props.location.state.nodeid,
             // blockid: this.props.match.params.blockid,
         }
@@ -151,25 +151,18 @@ export default class BlockInfo extends React.Component {
                 address: '0x1111'
             },
             success: function (data) {
-                // self.setState({
-                //     infoList: data.data,
-                //     node_ip: data.block_title
-                // })
+                self.setState({
+                    detailInfo: data.return_data,
+                })
                 console.log(data);
             }
         })
     }
     render() {
-        // var self = this
-        // var cutomInfoHeader = this.state.infoList.map(item =>
-        //     <div key={item[1]} className='cutomUglily-row'>
-        //         <div className='cutomUglily-title'>{item[0]} </div>
-        //         <div className='cutomUglily-content'>{item[1]}</div>
-        //     </div>
-        // )
         return (
             <div className='address-container'>
                 <SubNavbar match={this.state.subNavbarMatch}/>
+                {/* <SubNavbar match={this.state.detailInfo.address}/> */}
                 <div className="page-content">
                     <section className="graph-group" >
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
@@ -179,7 +172,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Received</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.received}</p>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +183,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Sent</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.sent}</p>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +194,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Balance</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.balance}</p>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +205,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Date/Time</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.time}</p>
                                 </div>
                             </div>
                         </div>
@@ -223,29 +216,29 @@ export default class BlockInfo extends React.Component {
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr">Address</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.address}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Received</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.received}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Sent</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.sent}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Balance</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.balance}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr">Tx Count</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.tx_count}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Date/Time</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
                             </div>
                         </div>
