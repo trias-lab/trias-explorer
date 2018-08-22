@@ -429,3 +429,65 @@ body {
     }
 }
 /* styles for common sub navbar --------------------------end */
+
+
+@media screen and (max-width: 768px) {
+    .header{
+        width: 100vw;
+        padding: 19px 20px;
+        & > div{
+            height: 42px;
+            padding: 0;
+            .logo > a{
+                height: 44px;
+                width: 100px;
+                img{
+                    height: 44px;
+                    margin-top: -3px;
+                }
+            } 
+            ul.navbar-menu-pc{
+                display: none;
+            }
+            .navbar-menu-mobile{
+                display: inline-block;
+            }
+        }
+    }
+    .common-footer{
+        background: url('../img//mobile/bg_footer_m@2x.jpg') no-repeat;
+        .center-box{
+            max-width: none;
+        }
+        .contacts{
+            height: 160px;
+            line-height: 50px;
+            padding-top: 30px;
+            padding: 30px 18px 0 18px;
+            .telegram-button, >a{
+                margin: 0 18px;
+            }
+            .toggle-button .toggle-box{
+                top: 50px;
+            }
+        }
+        .info{
+            padding-bottom: 24px;
+            .intro, .links{
+                height: auto;
+                margin-bottom: 40px;
+                float: none!important;
+                display: block;
+            }
+            .links{
+                padding-top: 0;
+            }
+            hr{
+                margin-top: 24px;                
+            }
+            span{
+                float: none;
+            }
+        }     
+    }
+}
