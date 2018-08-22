@@ -119,7 +119,7 @@ class CustomPagination extends React.Component {
                         maxButtons={7}
                         activePage={this.state.currentPage}
                         onSelect={this.props.onSelectPage.bind(this)} />
-                    <div className="pageCount">
+                    {/* <div className="pageCount">
                         <FormattedMessage id='paginationPageInput'>
                             {(txt) => (
                                 <input
@@ -141,7 +141,7 @@ class CustomPagination extends React.Component {
                                 value={txt} />
                             )}
                         </FormattedMessage>
-                    </div>
+                    </div> */}
                 </div>                            
             </div>
         )
