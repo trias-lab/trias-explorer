@@ -162,12 +162,14 @@ export default class Address extends React.Component {
             <div className='address-container'>
                 <SubNavbar match={this.state.subNavbarMatch}/>
                 {/* <SubNavbar match={this.state.detailInfo.address}/> */}
-                {
-                    this.state.detailInfo.address &&
-                    <Qrcode id='2' text={this.state.detailInfo.address} size="70" />
-                    // console.log(this.state.detailInfo)
-                }
                 <div className="page-content">
+                    <div className="qrcode-layer">
+                        {
+                            this.state.detailInfo.address &&
+                            <Qrcode id='2' text={this.state.detailInfo.address} size="70" />
+                            // console.log(this.state.detailInfo)
+                        }
+                    </div>
                     <section className="graph-group" >
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
