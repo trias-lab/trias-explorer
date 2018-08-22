@@ -93,7 +93,7 @@ class Footer extends React.Component {
             <div className="info">
                 <div className="center-box clearfix">
                     <div className="intro pull-left">
-                        <img src={require('../../img/logo_black@2x.png')} alt=""/>
+                        <img src={require('../../img/logo.png')} alt=""/>
                         <FormattedMessage id="footerIntro" tagName="p"/>
                     </div>
                     <div className="links pull-right">
