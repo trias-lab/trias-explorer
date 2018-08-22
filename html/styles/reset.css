@@ -58,21 +58,6 @@ a:focus {
 	outline: none;
     outline-offset: 0;
 }
-.pull-right {
-    float: right;
-}
-.pull-left {
-    float: left;
-}
-.hide {
-    display: none;
-}
-.show {
-    display: block;
-}
-.invisible {
-    visibility: hidden;
-}
 .clearfix:before,
 .clearfix:after {
   display: table;
