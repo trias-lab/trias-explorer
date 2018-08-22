@@ -17,7 +17,6 @@ const en_US = {
     paginationPageInput: "Enter",
     paginationJumpBtn: "GO",
     nullData:'no data',
-<<<<<<< HEAD
 
     homeItemTit:"HASH RATE",
     difficulty:"difficulty",
@@ -33,7 +32,6 @@ const en_US = {
     latestBlocks:"Latest Blocks",
     latestTransactions :"Latest Transactions",
     viewAll:' View all ',
-=======
     height:"Height",
     totalFees:"Total Fees",
     dateAndTime: "Date / Time",
@@ -49,7 +47,6 @@ const en_US = {
     prevBlock: "Prev Block",
     nextBlock: "Next Block",
     merkleRoot: "Merkle Root"
->>>>>>> 7c9221514fa0655f78a763a039f2274662521a3a
 }
 
 export default en_US;

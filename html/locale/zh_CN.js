@@ -17,7 +17,6 @@ const zh_CN = {
     paginationPageInput: "输入",
     paginationJumpBtn: "跳转",
     nullData:'暂无数据',
-<<<<<<< HEAD
 
     homeItemTit:"哈希率",
     difficulty:"难易度",
@@ -34,7 +33,6 @@ const zh_CN = {
 
     latestTransactions :"最新交易",
     viewAll:'查看全部 ',
-=======
     height:"区块高度",
     totalFees:"总收益",
     dateAndTime: "时间",
@@ -50,7 +48,6 @@ const zh_CN = {
     prevBlock: "前一个块",
     nextBlock: "后一个块",
     merkleRoot: "Merkle Root"
->>>>>>> 7c9221514fa0655f78a763a039f2274662521a3a
 }
 
 export default zh_CN;
