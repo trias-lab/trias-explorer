@@ -159,7 +159,7 @@ export default class BlockDetail extends React.Component {
                     </section>
                     <section className="info-part">
                         <div className="title" >Advanced Info</div>
-                        <div className="info-content">
+                        <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="height" /></span>
@@ -170,21 +170,49 @@ export default class BlockDetail extends React.Component {
                                     <span className="value">{this.state.detailInfo.received}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Sent</span>
+                                    <span className="attr"><FormattedMessage id="size" /></span>
                                     <span className="value">{this.state.detailInfo.sent}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Balance</span>
+                                    <span className="attr"><FormattedMessage id="txCount" /></span>
+                                    <span className="value">{this.state.detailInfo.balance}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="version" /></span>
+                                    <span className="value">{this.state.detailInfo.address}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="difficulty" /></span>
+                                    <span className="value">{this.state.detailInfo.received}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="bits" /></span>
+                                    <span className="value">{this.state.detailInfo.sent}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="nonce" /></span>
+                                    <span className="value">{this.state.detailInfo.balance}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="time" /></span>
                                     <span className="value">{this.state.detailInfo.balance}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">Tx Count</span>
+                                    <span className="attr"><FormattedMessage id="blockHash" /></span>
                                     <span className="value">{this.state.detailInfo.tx_count}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Date/Time</span>
+                                    <span className="attr"><FormattedMessage id="prevBlock" /></span>
+                                    <span className="value">{this.state.detailInfo.time}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="nextBlock" /></span>
+                                    <span className="value">{this.state.detailInfo.tx_count}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="merkleRoot" /></span>
                                     <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
                             </div>
