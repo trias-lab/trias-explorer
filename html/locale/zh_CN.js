@@ -8,6 +8,7 @@ const zh_CN = {
     block: "区块",
     blocks: "区块列表",
     transaction: "交易",
+    transactionCount: "交易数",
     transactions: "交易列表",
     address: "账户地址",
     email: "邮箱：",
@@ -16,6 +17,7 @@ const zh_CN = {
     paginationPageInput: "输入",
     paginationJumpBtn: "跳转",
     nullData:'暂无数据',
+<<<<<<< HEAD
 
     homeItemTit:"哈希率",
     difficulty:"难易度",
@@ -32,6 +34,23 @@ const zh_CN = {
 
     latestTransactions :"最新交易",
     viewAll:'查看全部 ',
+=======
+    height:"区块高度",
+    totalFees:"总收益",
+    dateAndTime: "时间",
+    confirmations: "确认数",
+    size: "大小",
+    version: "版本",
+    txCount:"交易数",
+    difficulty: "难度",
+    bits: "Bits",
+    nonce: "Nonce",
+    time: "时间",
+    blockHash: "块哈希",
+    prevBlock: "前一个块",
+    nextBlock: "后一个块",
+    merkleRoot: "Merkle Root"
+>>>>>>> 7c9221514fa0655f78a763a039f2274662521a3a
 }
 
 export default zh_CN;

@@ -212,7 +212,7 @@ export default class BlockInfo extends React.Component {
                     </section>
                     <section className="info-part">
                         <div className="title" >Advanced Info</div>
-                        <div className="info-content">
+                        <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr">Address</span>
