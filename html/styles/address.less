@@ -1,5 +1,5 @@
 .address-container {
-    padding-top: 76px;
+    // padding-top: 76px;
     // padding-bottom: 464px;
     .page-content {
         max-width: 1092px;
@@ -114,6 +114,7 @@
                     span {
                         font-family:MoskMedium500;
                         color:rgba(187,235,186,1);
+                        margin-right: 4px;
                     }
                 }
                 .detail-group {
@@ -144,15 +145,19 @@
                     }
                 }
                 .address-bar {
-                    padding: 20px 44px;
+                    // padding: 0px 44px;
                     & > div {
                         display: inline-block;
+                        padding: 20px 0px;
+                        padding-left: 44px;
                         // padding: 0 39px 0 15px;
+                        position: relative;
+                        // overflow: hidden;
                         i {
                             font-size:70px;
                             // color:rgba(254,254,254,1);
                             line-height:70px;
-                            float: left;
+                            // position: absolute;
                         }
                         span {
                             font-size:15px;
@@ -163,7 +168,8 @@
                             width: 60%;
                             line-height:24px;
                             word-wrap: break-word;
-                            float: left;
+                            position: absolute;
+                            min-width: 246px ;
                             b {
                                 font-family:MoskMedium500;
                                 font-size:15px;
@@ -174,9 +180,13 @@
                     }
                     .item-a {
                         width: 50%;
+                        background: url('../img/bg_txArrow@2x.png') no-repeat;
+                        background-size: 100% 100%;
+                        min-width: 379px;
                     }
                     .item-b {
                         width: 49%;
+                        min-width: 371px;
                     }
                 }
             }
