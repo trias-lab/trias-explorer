@@ -1,3 +1,5 @@
+@greenlight:rgba(93,184,92,1);
+
 input {
     outline: none;
 }
@@ -12,7 +14,7 @@ input[type="text"] {
     border:1px solid rgba(137,139,170,1);
     background: transparent;
     &:focus {
-        box-shadow:0px 0px 4px 1px rgba(93,184,92,1);
+        box-shadow:0px 0px 4px 1px @greenlight;
         border:1px solid rgba(137,139,170,1);
         outline: none;
     }
@@ -20,11 +22,11 @@ input[type="text"] {
 
 input[type="button"] {
     border-radius:4px;
-    border:1px solid rgba(93,184,92,1);
+    border:1px solid @greenlight;
     background: transparent;
     font-size:16px;
     font-family:MoskMedium500;
-    color:rgba(93,184,92,1);
+    color:@greenlight;
     line-height:19px;
     &:hover {
         background:rgba(93,184,92,0.16);
@@ -74,39 +76,36 @@ input[type="button"] {
     }
     .pagination-right {
         float: right;
-        line-height: 38px;
+        line-height: 42px;
     }
 }
 
 .pagination {
-    color: #eee;
-    vertical-align: middle; // background-color: #2e323c;
-    // border-radius: 20px;
-    // padding-top: 4px;
+    color: @greenlight;
+    vertical-align: middle;
     margin: 0;
-    height: 38px;
+    height: 42px;
     float: left;
 }
 
 /*页码框*/
-.pageNum {
+input[type="text"].pageNum {
     vertical-align: middle;
     border-radius: 4px;
-    padding: 0 8px;
+    padding: 0 16px;
     width: 64px;
-    height: 38px;
+    height: 42px;
     border-radius: 4px;
-    border: 1px solid #444851;
+    border: 1px solid #cbd0d3;
     background: transparent;
     color: @text;
-    font-size: 12px;
 }
 
 .searchNum {
     cursor: pointer;
     margin-left: 8px;
     width: 56px;
-    height: 38px;
+    height: 42px;
     background: #2e323c;
     border-radius: 4px;
     border: 1px solid #444851;
@@ -116,10 +115,8 @@ input[type="button"] {
 }
 
 .pageCount {
-    display: inline-block; // margin: 20px 0;
-    margin-left: 24px; // width:128px;
-    height: 38px; // border-radius: 20px;
-    // background-color: #2e323c;
+    margin-left: 24px;
+    height: 42px; 
     float: right;
     .totalPages {
         margin-left: 8px;
@@ -128,46 +125,42 @@ input[type="button"] {
 }
 
 .pagination>li {
-    display: inline-block; // background: #2e323c;
-    // width: 40px;
-    height: 38px;
+    display: inline-block; 
+    height: 42px;
     vertical-align: middle;
-    &:nth-child(2) {
-        margin-left: 16px;
-    }
-    &:nth-last-child(2) {
-        margin-right: 16px;
-    }
 }
 
 .pagination>li>a {
-    border-radius: 4px;
     float: none;
-    padding: 0;
     display: inline-block;
     vertical-align: middle;
-    line-height: 20px;
     text-decoration: none;
-    color: #A1A6AD;
-    padding-left: 6px;
-    padding-right: 6px;
-    height: 20px;
+    font-size:16px;
+    font-family:MoskMedium500;
+    color:@greenlight;
+    line-height:18px;
+    padding: 10px 16px;
+    height: 42px;
     background-color: transparent;
     border: none;
-    font-size: 12px;
     text-align: center;
-    border: 1px solid transparent;
+    border: 1px solid #cbd0d3
+}
+.pagination>li+li>a,
+.pagination>li+li>a:hover,
+.pagination>li+li>a:focus{
+    border-left: 0;
+    border:1px solid rgba(203,208,211,1);
 }
 
 .pagination>li>a>span {
     font-size: 33px; // color: #32a1ff;
-    line-height: 29px;
+    line-height: 14px;
 }
 
 .pagination>li>a>span[aria-label='More'] {
-    font-size: 12px;
-    color: #a1a6ad;
-    line-height: 18px;
+    font-size: 16px;
+    color: @greenlight;
 }
 
 .pagination>.active>a,
@@ -177,27 +170,33 @@ input[type="button"] {
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
     z-index: 3;
-    color: #DAE1E9;
+    color:rgba(255,255,255,1);
     cursor: default;
-    background: #274108;
-    border-radius: 4px;
-    border: 1px solid #A1FC3A;
-    line-height: 18px;
+    background:@greenlight;
+    border:1px solid rgba(203,208,211,1);
+}
+
+.pagination{
+    >.disabled{
+        >a,>a:hover{
+            border:0;
+            border-left:1px solid rgba(203,208,211,1);
+        }
+    }
 }
 
 .pagination>li>a:hover,
 .pagination>li>span:hover {
     z-index: 2;
-    background: rgba(71, 72, 86, 1);
-    border: 1px solid transparent;
+    background:rgba(246,247,249,1);
     color: rgba(161, 166, 173, 1);
+    border-color:#cbd0d3;
 }
 
 .pagination>li>a:focus,
 .pagination>li>span:focus {
     z-index: 2;
-    background: rgba(41, 42, 50, 1);
-    border: 1px solid transparent;
+    background:rgba(246,247,249,1);
     color: rgba(161, 166, 173, 1);
 }
 
@@ -205,30 +204,21 @@ input[type="button"] {
 .pagination>li:last-child {
     a {
         width: 38px;
-        height: 38px;
-        background: #2e323e;
-        border-radius: 4px;
-        border: 1px solid #444851;
-        color: rgba(218, 225, 233, 1);
-        &:hover {
-            background: rgba(57, 62, 76, 1);
-            border: 1px solid rgba(68, 72, 81, 1);
-        }
-        &.focus {
-            background: rgba(37, 40, 48, 1);
-            border: 1px solid rgba(68, 72, 81, 1);
-        }
+        height: 42px;
+        font-size:16px;
+        font-family:MoskMedium500;
+        color:@greenlight;
+        border:1px solid rgba(203,208,211,1);
     }
     &.disabled {
         &>a,
         &>a:hover,
         &>a:focus {
-            background: rgba(32, 33, 41, 1);
-            border: 1px solid rgba(68, 72, 81, 1);
-            color: rgba(108, 118, 131, 1);
+            color:rgba(203,208,211,1);
         }
     }
 }
+
 
 /* 自定义分页样式------------------------------------------------end*/
 
@@ -246,7 +236,7 @@ input[type="button"] {
         width: 36px;
         text-align: center;
         z-index: 6;
-        color:rgba(93,184,92,1);
+        color:@greenlight;
         border-left: 1px solid rgba(203,208,211,1);
         cursor: pointer;
         i{
@@ -299,7 +289,7 @@ input[type="button"] {
                     background:rgba(246,247,249,1);
                 }
                 &.active {
-                    background:rgba(93,184,92,1);
+                    background:@greenlight;
                 }
                 
                 span:hover {
