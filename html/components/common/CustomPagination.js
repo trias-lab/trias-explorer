@@ -109,8 +109,8 @@ class CustomPagination extends React.Component {
                 </div>
                 <div className="pagination-right clearfix">
                     <Pagination
-                        prev={true}
-                        next={true}
+                        prev="Previous"
+                        next="Next"
                         first={false}
                         last={false}
                         ellipsis={true}
