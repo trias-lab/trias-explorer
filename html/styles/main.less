@@ -6,7 +6,7 @@
 @import "./common";
 @import "./home";
 @import "./address";
-
+@import "./blockList";
 @background: #fff;
 @text: #000;
 
@@ -57,6 +57,26 @@ body {
         }
         .btn-group{
             display: inline-block;
+            line-height: 76px;
+            margin-left: 54px;
+            .ipt-search{
+                width:353px;
+                height:38px;
+                border-radius:4px;
+                border:1px solid rgba(137,139,170,1);
+                margin-right: 8px;
+                background: transparent;
+            }
+            .btn-search{
+                width:83px;
+                height:38px;
+                border-radius:4px;
+                border:1px solid rgba(93,184,92,1);
+                font-size:16px;
+                font-family:MoskMedium500;
+                color:rgba(93,184,92,1);
+                line-height:19px;
+            }
         }
         >ul.navbar-menu-pc {
             float: right;
@@ -378,3 +398,46 @@ body {
         }
     }
 }
+
+/* styles for common sub navbar --------------------------start */
+.sub-header{
+    height:268px;
+    background: url(../img/bg_top.jpg) no-repeat;
+    background-size: 100vw 268px;
+    background-size: cover;
+    .center-box{
+        padding-top: 84px;
+        max-width: 1080px;
+        margin: 0 auto;
+        h1{
+            font-size:30px;
+            font-family:MoskLight300;
+            color:rgba(20,42,63,1);
+            line-height:35px;
+        }
+        h2{
+            margin-top: 4px;
+            .angle{
+                font-size:16px;
+                font-family:FontAwesome5FreeSolid;
+                color:rgba(20,42,63,1);
+                line-height:24px;
+                margin-right: 6px;
+                margin-left: 6px;
+            }
+            a{
+                font-size:16px;
+                font-family:MoskBold700;
+                color:rgba(93,184,92,1);
+                line-height:24px;
+            }
+            a.active{
+                font-size:16px;
+                font-family:MoskLight300;
+                color:rgba(20,42,63,1);
+                line-height:24px;
+            }
+        }
+    }
+}
+/* styles for common sub navbar --------------------------end */

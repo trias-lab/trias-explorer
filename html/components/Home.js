@@ -282,7 +282,7 @@ class Home extends React.Component {
                                     <i className="fa fa-cubes" ></i>
                                 </div>
                                 <p>Latest Blocks</p>
-                                <a href="/blocklist">View all <i className="fa fa-angle-right"></i></a>
+                                    <Link to="/blocklist">View all <i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {
@@ -326,7 +326,7 @@ class Home extends React.Component {
                                     <i className="fa fa-handshake" ></i>
                                 </div>
                                 <p>Latest Transactions</p>
-                                <a href="/translist">View all <i className="fa fa-angle-right"></i></a>
+                                <Link to="/translist">View all <i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {

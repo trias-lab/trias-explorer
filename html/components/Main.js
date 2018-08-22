@@ -140,11 +140,12 @@ export default class Main extends React.Component {
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/address" component={Address} />
+                                <Route exact path="/translist" component={TransactionList} />
                                 <Route exact path="/translist/:transID" component={TransactionDetail} />
                                 <Route exact path="/blocklist" component={BlockList} />
                                 <Route exact path="/blocklist/:blockID" component={BlockDetail} />
                                 <Route exact path="/address/:addressID" component={Address} />
-                                <Redirect to="/" component={Home} /> {/* if no routes above is matched */}
+                                <Redirect to="/"/> {/* if no routes above is matched */}
                             </Switch>                            
                         </main>
                         <Footer/>
