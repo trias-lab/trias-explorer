@@ -229,8 +229,78 @@ input[type="button"] {
 
 /* 自定义分页样式------------------------------------------------end*/
 
-/*自定义下拉列表组件的样式--------------------------------------------------------------------start*/
+/* Styles for DropdownList component--------------------------------------------------------------------start*/
 .my-dropdown-list {
+    position: relative;
+    width: 126px;
+    display: inline-block;
+    font-size: 12px; 
+    background: #2E323C;
+    border-radius: 4px;
+    .select-img {
+        position: absolute;
+        right: 16px;
+        top: 11px;
+        z-index: 6;
+        font-size: 16px;
+        color: #DAE1E9;
+    }
+    .item-selected {
+        width: 126px;
+        height: 38px;
+        border-radius: 4px;
+        background-color: transparent;
+        cursor: default;
+        border: 1px solid #444851;
+        padding: 10px 16px;
+        font-size: 12px;
+        color: #DAE1E9;
+        line-height: 20px;
+        &:hover {
+            border: 1px solid rgba(161, 252, 58, 1);
+        }
+    }
+    .select-img:hover+.item-selected {
+        border-color: rgba(161, 252, 58, 1);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(161, 252, 58, 0.6);
+    } 
+    .list-block {
+        position: absolute;
+        width: 126px;
+        border: 1px solid #444851;
+        border-top: 0;
+        border-radius: 4px;
+        background-color: #202129;
+        color: #DAE1E9;
+        z-index: 8;
+        ul {
+            margin-bottom: 6px;
+            li {
+                padding: 7px 16px;
+                cursor: pointer;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 1);
+                line-height: 20px;
+                &.active {
+                    background: rgba(39, 65, 8, 1);
+                    border-top: 1px solid rgba(161, 252, 58, 1);
+                    border-bottom: 1px solid rgba(161, 252, 58, 1);
+                }
+                &:hover {
+                    background: rgba(40, 44, 53, 1);
+                }
+                span:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+/* Styles for DropdownList component--------------------------------------------------------------------end*/
+
+/* Styles for ToggleList component--------------------------------------------------------------------start*/
+.my-dropdown-list.toggle-list{
     position: relative;
     display: inline-block;
     background: transparent;//当前已选中的选项
@@ -290,8 +360,8 @@ input[type="button"] {
         }
     }
 }
+/* Styles for ToggleList component--------------------------------------------------------------------end*/
 
-/*自定义下拉列表--------------------------------------------------------------------end*/
 
 //清除浮动
 .clearfix:before,

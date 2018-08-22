@@ -12,7 +12,7 @@ import en_US from "../locale/en_US"     // import defined messages in English
 addLocaleData([...en, ...zh]);  // load React Intl's locale data for multiple languages
 import $ from 'jquery'
 
-import DropdownList from './common/DropdownList'    //import drop-down list component
+import ToggleList from './common/ToggleList'    //import drop-down list component
 import Home from "./Home"
 import Other from "./Other"
 import Footer from "./common/Footer"
@@ -107,7 +107,7 @@ export default class Main extends React.Component {
                                         </a>
                                     </li>                                  
                                     <li className="lang">
-                                    <DropdownList
+                                    <ToggleList
                                         listID="langlist"
                                         itemsToSelect={this.languageList}
                                         name={<i className="fas fa-globe-americas"></i>} />
