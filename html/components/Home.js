@@ -148,8 +148,10 @@ class Home extends React.Component {
         return (
             <div>
                 <section className="row text-center main-title ">
+                  <div>
                     <FormattedMessage id="title" tagName="h1" />
                     <p><i className="fa fa-thumbs-up"></i> by Trias-lab Foundation</p>
+                  </div>
                 </section>
 
                 <div className="home-page public-content">
@@ -166,7 +168,7 @@ class Home extends React.Component {
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-line-chart"></i>
+                                    <i className="fa fa-calculator"></i>
                                 </div>
                                 <p className='item-tit'> HASH RATE</p>
                                 <p className='item-pre'> 49.65 EH/s</p>
@@ -175,7 +177,7 @@ class Home extends React.Component {
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-line-chart"></i>
+                                    <i className="fa fa-money-bill-wave"></i>
                                 </div>
                                 <p className='item-tit'> HASH RATE</p>
                                 <p className='item-pre'> 49.65 EH/s</p>
@@ -184,7 +186,7 @@ class Home extends React.Component {
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-line-chart"></i>
+                                    <i className="fa fa-cube"></i>
                                 </div>
                                 <p className='item-tit'> HASH RATE</p>
                                 <p className='item-pre'> 49.65 EH/s</p>
@@ -193,7 +195,7 @@ class Home extends React.Component {
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-line-chart"></i>
+                                    <i className="fa fa-dolly-flatbed"></i>
                                 </div>
                                 <p className='item-tit'> HASH RATE</p>
                                 <p className='item-pre'> 49.65 EH/s</p>
@@ -202,7 +204,7 @@ class Home extends React.Component {
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-line-chart"></i>
+                                    <i className="fa fa-handshake"></i>
                                 </div>
                                 <p className='item-tit'> HASH RATE</p>
                                 <p className='item-pre'> 49.65 EH/s</p>
@@ -211,19 +213,57 @@ class Home extends React.Component {
                     </section>
 
                     <section className="row">
-                        <div className="col col-12 col-sm-12 col-md-6 col-xl-6">
+                        <div className="col col-xs-12 col-sm-12 col-md-6 col-xl-6">
                             <div className='home-echarts'>
-                                <div className="chart-title">
-                                    Current best transaction fees
+                                <div className="chart-title row">
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        <i className="fa fa-line-chart"></i>Current best transaction fees
+                                    </div>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        <i className="fa fa-line-chart"></i>24h Tx Rate
+                                     </div>
+                                </div>
+                                <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        0.00003 BTC/Gas <i className="fa fa-arrow-alt-circle-up"></i>
+                                    </div>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        2.35 txs/s
+                                    </div>
+                                </div>
+
+                                <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
+                                    <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
+                                        <i className="fa fa-chart-area"></i>14 Days Transactions History
+                                    </div>
                                 </div>
                                 <div id="lineChart1" style={{ width: "100%", height: "370px" }}></div>
                             </div>
 
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-6 col-xl-6">
+                        <div className="col col-xs-12 col-sm-12 col-md-6 col-xl-6">
                             <div className='home-echarts'>
-                                <div className="chart-title">
-                                    Unconfirmed Txs (count)
+                                <div className="chart-title row">
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        <i className="fa fa-line-chart"></i>Current best transaction fees
+                                     </div>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        <i className="fa fa-line-chart"></i>24h Tx Rate
+                                     </div>
+                                </div>
+                                <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        0.00003 BTC/Gas <i className="fa fa-arrow-alt-circle-up"></i>
+                                    </div>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                        2.35 txs/s
+                                     </div>
+                                </div>
+
+                                <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
+                                    <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
+                                        <i className="fa fa-chart-area"></i>14 Days Transactions History
+                                     </div>
                                 </div>
                                 <div id="lineChart2" style={{ width: "100%", height: "370px" }}></div>
                             </div>
@@ -236,11 +276,13 @@ class Home extends React.Component {
                         </div>
                     </section>
                     <section className="row home-page-list">
-                        <div className="col col-12 col-sm-12 col-md-6 col-xl-6 blocks-col latest-list">
+                        <div className="col  col-xs-12  col-sm-12 col-md-6 col-xl-6 blocks-col latest-list">
                             <div className="list-head clearfix">
-                                <img src="" alt="" className="pull-left" />
+                                <div className="latest-tit pull-left">
+                                    <i className="fa fa-cubes" ></i>
+                                </div>
                                 <p>Latest Blocks</p>
-                                    <Link to="/blocklist">View all <i className="fas fa-angle-right"></i></Link>
+                                    <Link to="/blocklist">View all <i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {
@@ -248,21 +290,27 @@ class Home extends React.Component {
                                         return (
                                             <li className="clearfix" key={"block-" + index}>
                                                 <Link to={"/blocklist/" + item.id}>
-                                                    <div className="name pull-left">
-                                                        <img src="" alt="" /><span>{item.id}</span>
+
+                                                    <div className="col col-xs-4 col-sm-4 col-md-4 col-xl-4">
+                                                        <div className="name pull-left">
+                                                            <i className="fa fa-line-chart">{item.id}</i>
+                                                            <img src="" alt="" /><span></span>
+                                                        </div>
                                                     </div>
-                                                    <div className="info">
-                                                        <p className="timestamp">{item.timestamp}</p>
-                                                        <p className="other">
-                                                            <span>
-                                                                <span className="key">Size:</span>
-                                                                <span className="value">{item.size}</span>
-                                                            </span>
-                                                            <span>
-                                                                <span className="key">Reward:</span>
-                                                                <span className="value">{item.reward}</span>
-                                                            </span>
-                                                        </p>
+                                                    <div className="col col-xs-8 col-sm-8 col-md-8 col-xl-8">
+                                                        <div className="info">
+                                                            <p className="timestamp">{item.timestamp}</p>
+                                                            <p className="other">
+                                                                <span>
+                                                                    <span className="key">Size:</span>
+                                                                    <span className="value">{item.size}</span>
+                                                                </span>
+                                                                <span>
+                                                                    <span className="key">Reward:</span>
+                                                                    <span className="value">{item.reward}</span>
+                                                                </span>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </Link>
                                             </li>
@@ -271,33 +319,41 @@ class Home extends React.Component {
                                 }
                             </ul>
                         </div>
+
                         <div className="col col-12 col-sm-12 col-md-6 col-xl-6 trans-col latest-list">
                             <div className="list-head clearfix">
-                                <img src="" alt="" className="pull-left" />
+                                <div className="latest-tit pull-left">
+                                    <i className="fa fa-handshake" ></i>
+                                </div>
                                 <p>Latest Transactions</p>
-                                <Link to="/translist">View all <i className="fas fa-angle-right"></i></Link>
+                                <Link to="/translist">View all <i className="fa fa-angle-right"></i></Link>
                             </div>
-                            <ul>
+                            <ul className='block-list'>
                                 {
                                     this.state.transLatest && this.state.transLatest.map(function (item, index) {
                                         return (
                                             <li className="clearfix" key={"trans-" + index}>
                                                 <Link to={"/translist/" + item.id}>
-                                                    <div className="name pull-left">
-                                                        <img src="" alt="" /><span>{item.id}</span>
+                                                    <div className="col col-xs-4 col-sm-4 col-md-4 col-xl-4">
+                                                        <div className="name pull-left">
+                                                            <i className="fa fa-line-chart">{item.id}</i>
+                                                            <img src="" alt="" /><span></span>
+                                                        </div>
                                                     </div>
-                                                    <div className="info">
-                                                        <p className="timestamp">{item.timestamp}</p>
-                                                        <p className="other">
-                                                            <span>
-                                                                <span className="key">From:</span>
-                                                                <span className="value">{item.from}</span>
-                                                            </span>
-                                                            <span>
-                                                                <span className="key">To:</span>
-                                                                <span className="value">{item.to}</span>
-                                                            </span>
-                                                        </p>
+                                                    <div className="col col-xs-8 col-sm-8 col-md-8 col-xl-8">
+                                                        <div className="info">
+                                                            <p className="timestamp">{item.timestamp}</p>
+                                                            <p className="other">
+                                                                <span>
+                                                                    <span className="key">Size:</span>
+                                                                    <span className="value">{item.size}</span>
+                                                                </span>
+                                                                <span>
+                                                                    <span className="key">Reward:</span>
+                                                                    <span className="value">{item.reward}</span>
+                                                                </span>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </Link>
                                             </li>

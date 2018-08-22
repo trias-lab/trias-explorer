@@ -42,8 +42,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'app.MyMiddleware.SecureRequiredMiddleware',
-    # 'app.MyMiddleware.AccessRestrictionsMiddleware'
+    'app.MyMiddleware.SecureRequiredMiddleware'
 
 ]
 
@@ -95,7 +94,6 @@ DATABASES = {
     }
 }
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
