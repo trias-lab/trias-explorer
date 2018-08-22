@@ -1,5 +1,9 @@
 const en_US = {
     home: "Home", 
+    wallet: "Wallet",
+    monitor: "Monitor",
+    iptSearchPlaceholder: "Search by Address / TxHash / Height",
+    btnSearch: "Search",
     title: "Trias Blockchain Explorer",
     block: "Block",
     blocks: "Blocks",

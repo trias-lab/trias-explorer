@@ -87,20 +87,25 @@ export default class Main extends React.Component {
                                     </Link>
                                 </div>
                                 <div className="btn-group">
-                                    <input type="text" className="ipt-search"/>
-                                    <input type="button" className="btn-search" value={this.state.lang==='zh'?"搜索":"Search"}/>
+                                    <input type="text" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
+                                    <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch}/>
                                 </div>
                                 <ul className="navbar-menu-pc">
                                     <li>
-                                        <NavLink exact to="/" activeClassName="active">
-                                            <FormattedMessage id="home" />
-                                        </NavLink>
+                                        <a href="/" target="blank">
+                                            <FormattedMessage id="wallet" />
+                                        </a>
                                     </li>
                                     <li>
-                                        <NavLink exact to="/other" activeClassName="active">
-                                            other
+                                        <NavLink exact to="/blocklist">
+                                            <FormattedMessage id="block" />
                                         </NavLink>
-                                    </li>                                   
+                                    </li>  
+                                    <li>
+                                        <a href="https://explorer.trias.one/" target="blank">
+                                            <FormattedMessage id="monitor" />
+                                        </a>
+                                    </li>                                  
                                     <li className="lang">
                                     <DropdownList
                                         listID="langlist"
@@ -126,12 +131,15 @@ export default class Main extends React.Component {
                                     <div className="icon-bar"></div>
                                     <div className="icon-bar"></div>
                                     <div className="dropdown-list-box">
-                                        <NavLink exact to="/" onClick={()=> this.hideAllDropdownList()} >
-                                            <FormattedMessage id="home" />
+                                        <a href="/" target="blank">
+                                            <FormattedMessage id="wallet" />
+                                        </a>
+                                        <NavLink exact to="/blocklist">
+                                            <FormattedMessage id="block" />
                                         </NavLink>
-                                        <NavLink exact to="/other" onClick={()=> this.hideAllDropdownList()} >
-                                            other11 1212121
-                                        </NavLink>                        
+                                        <a href="https://explorer.trias.one/" target="blank">
+                                            <FormattedMessage id="monitor" />
+                                        </a>                       
                                     </div>
                                 </div>                
                             </div>                
