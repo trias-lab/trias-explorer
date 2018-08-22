@@ -3,6 +3,8 @@ input {
 }
 
 input[type="text"] {
+    padding: 9px 16px;
+    color: #f6f6f6;
     &:focus {
         border: 1px solid rgba(161, 252, 58, 1);
         outline: none;
@@ -16,6 +18,25 @@ input[type="button"] {
     &:focus {
         background: rgba(37, 40, 48, 1);
     }
+}
+
+.input::-webkit-input-placeholder {
+    font-size:16px;
+    font-family:MoskLight300;
+    color:rgba(163,173,183,1);
+    line-height:19px;
+}
+.input:-moz-placeholder {
+    font-size:16px;
+    font-family:MoskLight300;
+    color:rgba(163,173,183,1);
+    line-height:19px;
+}
+.input:-ms-input-placeholder {
+    font-size:16px;
+    font-family:MoskLight300;
+    color:rgba(163,173,183,1);
+    line-height:19px;
 }
 
 /* 自定义分页样式------------------------------------------------start*/
