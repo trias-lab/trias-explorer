@@ -42,7 +42,9 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app.MyMiddleware.SecureRequiredMiddleware'
+    # 'app.dispatcher.SecureRequiredMiddleware',
+    # 'app.dispatcher.AccessRestrictionsMiddleware',
+    'app.dispatcher.QtsAuthentication'
 
 ]
 
