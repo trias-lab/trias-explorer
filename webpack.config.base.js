@@ -8,7 +8,7 @@ module.exports = {
   entry: {
     // Add as many entry points as you have container-react-components here
     app: './html/app.js',
-    vendors: ['react']
+    vendors: ['react','./html/js/qrcode.js']
   },
 
   output: {

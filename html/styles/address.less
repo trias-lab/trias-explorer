@@ -147,6 +147,11 @@
                 }
                 .address-bar {
                     // padding: 0px 44px;
+                    .qr {
+                        width:70px;
+                        height:70px;
+                        // margin-top:15px;
+                    }
                     & > div {
                         display: inline-block;
                         padding: 20px 0px;
@@ -154,12 +159,6 @@
                         // padding: 0 39px 0 15px;
                         position: relative;
                         // overflow: hidden;
-                        i {
-                            font-size:70px;
-                            // color:rgba(254,254,254,1);
-                            line-height:70px;
-                            // position: absolute;
-                        }
                         >span {
                             font-size:15px;
                             font-family:MoskLight300;
@@ -196,5 +195,15 @@
             }
             
         }
+    }
+}
+
+.qrcode-container {
+    display: inline-block;
+    .qr {
+        width:70px;
+        height:70px;
+        // margin-top:15px;
+        display: inline-block;
     }
 }

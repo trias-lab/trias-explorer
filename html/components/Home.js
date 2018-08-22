@@ -132,7 +132,7 @@ class Home extends React.Component {
         this.lineChartOption2.series[0].data = hash_rate_growth_value;　　//设置图表二的日期对应的值显示
         this.chartLine2 = echarts.init(document.getElementById('lineChart2')); //echarts init折线图
         this.chartLine2.setOption(this.lineChartOption2, true);    　//设定值
-        
+
         //页面缩放echarts折线图重新绘制
         setTimeout(function () {
             window.onresize = function () {
@@ -199,7 +199,7 @@ class Home extends React.Component {
             success: function (data) {
                 if (data.code == 200) {
                     self.setState({
-                        hash_rate: data.return_data.hash_rate,　　　
+                        hash_rate: data.return_data.hash_rate,
                         difficulty: data.return_data.difficulty,
                         mining_earnings: data.return_data.mining_earnings,
                         last_block: data.return_data.last_block,
@@ -246,7 +246,13 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-line-chart"></i>
                                 </div>
-                                <p className='item-tit'> HASH RATE</p>
+                                <FormattedMessage id="homeItemTit">
+                                    {(txt) => (
+                                        <p className='item-tit'>
+                                            {txt}
+                                        </p>
+                                    )}
+                                </FormattedMessage>
                                 <p className='item-pre'> {this.state.hash_rate}EH/s</p>
                             </div>
                         </div>
@@ -255,7 +261,11 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-calculator"></i>
                                 </div>
-                                <p className='item-tit'> Difficulty</p>
+                                <FormattedMessage id="difficulty">
+                                {(txt) => (
+                                    <p className='item-tit'> {txt}</p>
+                                )}
+                                 </FormattedMessage>
                                 <p className='item-pre'> {this.state.difficulty} EH/s</p>
                             </div>
                         </div>
@@ -264,7 +274,11 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-money-bill-wave"></i>
                                 </div>
-                                <p className='item-tit'> Mining Earnings</p>
+                                <FormattedMessage id="miningEarnings">
+                                {(txt) => (
+                                    <p className='item-tit'> {txt}</p>
+                                )}
+                                 </FormattedMessage>
                                 <p className='item-pre'> {this.state.mining_earnings} EH/s</p>
                             </div>
                         </div>
@@ -273,7 +287,11 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-cube"></i>
                                 </div>
-                                <p className='item-tit'> Last Block</p>
+                                <FormattedMessage id="lastBlock">
+                                {(txt) => (
+                                    <p className='item-tit'> {txt}</p>
+                                )}
+                                 </FormattedMessage>
                                 <p className='item-pre'> {this.state.last_block}</p>
                             </div>
                         </div>
@@ -282,7 +300,11 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-dolly-flatbed"></i>
                                 </div>
-                                <p className='item-tit'> Total Supply</p>
+                                <FormattedMessage id="totalSupply">
+                                {(txt) => (
+                                    <p className='item-tit'> {txt}</p>
+                                )}
+                                 </FormattedMessage>
                                 <p className='item-pre'> {this.state.total_supply}</p>
                             </div>
                         </div>
@@ -291,7 +313,11 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-handshake"></i>
                                 </div>
-                                <p className='item-tit'> Transactions</p>
+                                <FormattedMessage id="transaction">
+                                {(txt) => (
+                                    <p className='item-tit'> {txt}</p>
+                                )}
+                                 </FormattedMessage>
                                 <p className='item-pre'> {this.state.transactions} M</p>
                             </div>
                         </div>
@@ -302,10 +328,11 @@ class Home extends React.Component {
                             <div className='home-echarts'>
                                 <div className="chart-title row">
                                     <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>Current best transaction fees
+                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>    <FormattedMessage id="currentBest" />
+                                       
                                     </div>
                                     <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>24h Tx Rate
+                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>  <FormattedMessage id="rate24" />
                                      </div>
                                 </div>
                                 <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
@@ -319,7 +346,7 @@ class Home extends React.Component {
 
                                 <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
-                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>14 Days Transactions History
+                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i> <FormattedMessage id="history14" />
                                     </div>
                                 </div>
                                 <div id="lineChart1" style={{ width: "100%", height: "370px" }}></div>
@@ -330,10 +357,10 @@ class Home extends React.Component {
                             <div className='home-echarts'>
                                 <div className="chart-title row">
                                     <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>Current best transaction fees
+                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i><FormattedMessage id="unconfirmedTxs" />
                                      </div>
                                     <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>24h Tx Rate
+                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i><FormattedMessage id="transactionAccelerator" />
                                      </div>
                                 </div>
                                 <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
@@ -346,7 +373,7 @@ class Home extends React.Component {
                                 </div>
                                 <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
-                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>HashRate Growth
+                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i><FormattedMessage id="hashRate" />
                                      </div>
                                 </div>
                                 <div id="lineChart2" style={{ width: "100%", height: "370px" }}></div>
@@ -366,8 +393,8 @@ class Home extends React.Component {
                                 <div className="latest-tit pull-left">
                                     <i className="fa fa-cubes" ></i>
                                 </div>
-                                <p>Latest Blocks</p>
-                                <Link to="/blocklist">View all <i className="fa fa-angle-right"></i></Link>
+                                <FormattedMessage id="latestBlocks"　tagName='p' />
+                                <Link to="/blocklist"><FormattedMessage id="viewAll"/><i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {
@@ -412,8 +439,8 @@ class Home extends React.Component {
                                 <div className="latest-tit pull-left">
                                     <i className="fa fa-handshake" ></i>
                                 </div>
-                                <p>Latest Transactions</p>
-                                <Link to="/translist">View all <i className="fa fa-angle-right"></i></Link>
+                                <FormattedMessage id="latestTransactions"　tagName='p' />
+                                <Link to="/translist">  <FormattedMessage id="viewAll"/><i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {

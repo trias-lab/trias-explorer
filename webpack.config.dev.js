@@ -7,14 +7,12 @@ var config = require('./webpack.config.base.js');
 
 config.devtool = "source-map";
 
-config.entry = {
-  app: [
+config.entry.app =  [
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
     './html/app',
-  ],
-};
+];
 
 config.devServer = {
   // contentBase: '/static/bundles',
