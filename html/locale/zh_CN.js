@@ -15,6 +15,7 @@ const zh_CN = {
     paginationItemsCountP: '显示 {from}-{to} 项条目，共 {count} 项条目。',
     paginationPageInput: "输入",
     paginationJumpBtn: "跳转",
+    nullData:'暂无数据',
 }
 
 export default zh_CN;

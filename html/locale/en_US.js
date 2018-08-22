@@ -15,6 +15,7 @@ const en_US = {
     paginationItemsCountP: 'Showing {from} to {to} of {count} items',
     paginationPageInput: "Enter",
     paginationJumpBtn: "GO",
+    nullData:'no data',
 }
 
 export default en_US;
