@@ -17,12 +17,12 @@ def address_info(request):
         return JsonResponse({"code": 201, "message": "Need Address ID"})
 
     data = {
-            "received": "675,347.32077952 BTC",
-            "sent": "675,347.32077952 BTC",
-            "balance": "0.0 BTC",
+            "received": 675347.32077952,
+            "sent": 675347.32077952,
+            "balance": 0.0,
             "time": "2018-08-17 13:36:26",
             "address": "1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q",
-            "tx_count": "114,138",
+            "tx_count": 114138,
         }
 
     return JsonResponse({"code": 200, "size": 20, "return_data": data})
@@ -56,9 +56,9 @@ def address_transactions(request):
 
     transactions =  [
         {
-            "amount_transacted": "0.44662462 BTC",
-            "fees": "0.00090000 BTC",
-            "fees_rate": "791 Satoshis/vByte",
+            "amount_transacted": 0.44662462,
+            "fees": 0.00090000,
+            "fees_rate": 791,
             "time": "2018-08-17 13:36:26",
             "input": "bc1qwqdg6squsna38e46...ulcc7kytlcckxswvvzej",
             "output": "3EGxfveUFuSk346WbnCoZWVyhLEdPazry6",
