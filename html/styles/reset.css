@@ -56,7 +56,7 @@ a {
 }
 a:focus {
 	outline: none;
-	outline-offset: 0;
+    outline-offset: 0;
 }
 .pull-right {
     float: right;

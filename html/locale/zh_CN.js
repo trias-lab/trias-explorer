@@ -1,5 +1,9 @@
 const zh_CN = {
     home: "首页", 
+    wallet: "钱包",
+    monitor: "Monitor",
+    iptSearchPlaceholder: "搜索账户地址/ TxHash /区块高度",
+    btnSearch: "搜索",
     title: "Trias 区块链浏览器",
     block: "区块",
     blocks: "区块列表",
@@ -11,6 +15,7 @@ const zh_CN = {
     paginationItemsCountP: '显示 {from}-{to} 项条目，共 {count} 项条目。',
     paginationPageInput: "输入",
     paginationJumpBtn: "跳转",
+    nullData:'暂无数据',
 }
 
 export default zh_CN;

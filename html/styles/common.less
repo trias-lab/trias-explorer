@@ -3,19 +3,45 @@ input {
 }
 
 input[type="text"] {
+    padding: 9px 16px;
+    font-size:16px;
+    font-family:MoskLight300;
+    color:rgba(254,254,254,1);
+    line-height:19px;
+    border-radius:4px;
+    border:1px solid rgba(137,139,170,1);
+    background: transparent;
     &:focus {
-        border: 1px solid rgba(161, 252, 58, 1);
+        box-shadow:0px 0px 4px 1px rgba(93,184,92,1);
+        border:1px solid rgba(137,139,170,1);
         outline: none;
     }
 }
 
 input[type="button"] {
+    border-radius:4px;
+    border:1px solid rgba(93,184,92,1);
+    background: transparent;
+    font-size:16px;
+    font-family:MoskMedium500;
+    color:rgba(93,184,92,1);
+    line-height:19px;
     &:hover {
-        background: rgba(57, 62, 76, 1);
+        background:rgba(93,184,92,0.16);
     }
     &:focus {
-        background: rgba(37, 40, 48, 1);
+        background:rgba(93,184,92,0.1);
     }
+}
+
+.input::-webkit-input-placeholder {
+    color:rgba(163,173,183,1);
+}
+.input:-moz-placeholder {
+    color:rgba(163,173,183,1);
+}
+.input:-ms-input-placeholder {
+    color:rgba(163,173,183,1);
 }
 
 /* 自定义分页样式------------------------------------------------start*/
@@ -29,18 +55,21 @@ input[type="button"] {
     .rowsPerPage {
         float: left;
         .my-dropdown-list {
-            width: 106px;
+            width: 108px;
             .item-selected {
-                width: 106px;
+                width: 108px;
             }
             .list-block {
-                width: 106px;
+                width: 140px;
             }
         }
         p.itemsCount {
             display: inline-block;
             margin-left: 8px;
-            color: rgba(161, 166, 173, 1);
+            font-size:16px;
+            font-family:MoskLight300;
+            color:rgba(20,42,63,1);
+            line-height:24px;
         }
     }
     .pagination-right {
@@ -203,14 +232,95 @@ input[type="button"] {
 
 /* 自定义分页样式------------------------------------------------end*/
 
-/*自定义下拉列表组件的样式--------------------------------------------------------------------start*/
+/* Styles for DropdownList component--------------------------------------------------------------------start*/
 .my-dropdown-list {
     position: relative;
+    width: 126px;
     display: inline-block;
-    background: transparent;//当前已选中的选项
+    font-size: 16px; 
+    border-radius: 4px;
+    color:rgba(20,42,63,1);
+    .select-img {
+        position: absolute;
+        right: 0;
+        width: 36px;
+        text-align: center;
+        z-index: 6;
+        color:rgba(93,184,92,1);
+        border-left: 1px solid rgba(203,208,211,1);
+        cursor: pointer;
+        i{
+            line-height: 42px;
+        }
+    }
+    .item-selected {
+        width: 126px;
+        height: 42px;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+        border:1px solid rgba(203,208,211,1);
+        padding: 10px 16px;
+        font-size: 12px;
+        line-height: 20px;
+        color: rgba(20,42,63,1);
+        &:hover,&:focus{
+            box-shadow: none;
+            border:1px solid rgba(203,208,211,1);
+        }
+    }
+    .list-block {
+        position: absolute;
+        width: 126px;
+        background:rgba(255,255,255,1);
+        border:1px solid rgba(203,208,211,1);
+        border-radius: 4px;
+        top: 50px;
+        z-index: 8;
+        ul {
+            margin-bottom: 6px;
+            li {
+                padding: 7px 16px;
+                cursor: pointer;
+                font-size: 14px;
+                color:rgba(20,42,63,1);
+                line-height: 20px;
+                border:1px solid transparent;
+                &:first-child{
+                    border-radius: 4px 4px 0 0;
+                }
+                &:last-child{
+                    border-radius: 0 0 4px 4px;
+                }
+                &:not(:first-child){
+                    border-top: 1px solid rgba(203,208,211,1);
+                }
+                &:hover {
+                    background:rgba(246,247,249,1);
+                }
+                &.active {
+                    background:rgba(93,184,92,1);
+                }
+                
+                span:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+/* Styles for DropdownList component--------------------------------------------------------------------end*/
+
+/* Styles for ToggleList component--------------------------------------------------------------------start*/
+.my-dropdown-list.toggle-list{
+    position: relative;
+    display: inline-block;
+    background: transparent; //当前已选中的选项
     cursor: pointer;
     .item-selected {
         border: none;
+        background-color: transparent;
         font-size: 16px;
         font-family: MoskMedium500;
         color: #f6f6f6;
@@ -231,10 +341,11 @@ input[type="button"] {
         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.80);
         border-radius: 4px;
         padding: 16px 24px;
+        border: none;
         ul {
             margin-bottom: 6px;
             li {
-                // padding: 16px 0px;
+                border-top: none;
                 cursor: pointer;
                 font-size: 14px;
                 color: rgba(255, 255, 255, 1);
@@ -264,8 +375,8 @@ input[type="button"] {
         }
     }
 }
+/* Styles for ToggleList component--------------------------------------------------------------------end*/
 
-/*自定义下拉列表--------------------------------------------------------------------end*/
 
 //清除浮动
 .clearfix:before,

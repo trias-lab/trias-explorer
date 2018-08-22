@@ -1,5 +1,9 @@
 const en_US = {
     home: "Home", 
+    wallet: "Wallet",
+    monitor: "Monitor",
+    iptSearchPlaceholder: "Search by Address / TxHash / Height",
+    btnSearch: "Search",
     title: "Trias Blockchain Explorer",
     block: "Block",
     blocks: "Blocks",
@@ -11,6 +15,7 @@ const en_US = {
     paginationItemsCountP: 'Showing {from} to {to} of {count} items',
     paginationPageInput: "Enter",
     paginationJumpBtn: "GO",
+    nullData:'no data',
 }
 
 export default en_US;
