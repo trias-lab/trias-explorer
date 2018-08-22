@@ -4,39 +4,44 @@ input {
 
 input[type="text"] {
     padding: 9px 16px;
-    color: #f6f6f6;
+    font-size:16px;
+    font-family:MoskLight300;
+    color:rgba(254,254,254,1);
+    line-height:19px;
+    border-radius:4px;
+    border:1px solid rgba(137,139,170,1);
+    background: transparent;
     &:focus {
-        border: 1px solid rgba(161, 252, 58, 1);
+        box-shadow:0px 0px 4px 1px rgba(93,184,92,1);
+        border:1px solid rgba(137,139,170,1);
         outline: none;
     }
 }
 
 input[type="button"] {
+    border-radius:4px;
+    border:1px solid rgba(93,184,92,1);
+    background: transparent;
+    font-size:16px;
+    font-family:MoskMedium500;
+    color:rgba(93,184,92,1);
+    line-height:19px;
     &:hover {
-        background: rgba(57, 62, 76, 1);
+        background:rgba(93,184,92,0.16);
     }
     &:focus {
-        background: rgba(37, 40, 48, 1);
+        background:rgba(93,184,92,0.1);
     }
 }
 
 .input::-webkit-input-placeholder {
-    font-size:16px;
-    font-family:MoskLight300;
     color:rgba(163,173,183,1);
-    line-height:19px;
 }
 .input:-moz-placeholder {
-    font-size:16px;
-    font-family:MoskLight300;
     color:rgba(163,173,183,1);
-    line-height:19px;
 }
 .input:-ms-input-placeholder {
-    font-size:16px;
-    font-family:MoskLight300;
     color:rgba(163,173,183,1);
-    line-height:19px;
 }
 
 /* 自定义分页样式------------------------------------------------start*/

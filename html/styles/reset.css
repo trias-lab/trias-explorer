@@ -54,11 +54,9 @@ table {
 a {
     text-decoration: none;
 }
-a:hover,
 a:focus {
 	outline: none;
     outline-offset: 0;
-    text-decoration: none;
 }
 .pull-right {
     float: right;
