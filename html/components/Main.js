@@ -72,8 +72,29 @@ export default class Main extends React.Component {
         // })
     }
 
+    componentDidMount() {
+        var self = this
+        /* For mobile devices, when the mouse click the navigation button in header */
+        $('.navbar-menu-mobile').click(function () {      
+            if ($(this).find(".dropdown-list-box").css('display') == "none") { //如果下拉列表未显示
+                self.hideAllDropdownList();
+                $(this).addClass('open')
+            } else { // if expanded 
+                $(this).removeClass('open')
+            }
+        });
+    
+        // when mouse clicked somewhere else, collapse the dropdown-list automatically
+        $('main').click(function () {
+            if(document.body.clientWidth < 768 && $('.navbar-menu-mobile').css('display') !== 'none'){
+                $('.navbar-menu-mobile').removeClass('open')
+            }
+        })
+    }
+
     /**
-     * 移动端折叠所有下拉列表
+     * For mibile devices, collapse all the dropdown-list in header
+     * 
      */
     hideAllDropdownList(){
         $(".navbar-menu-mobile").removeClass('open')
@@ -164,7 +185,8 @@ export default class Main extends React.Component {
                                             </a>                       
                                         </div>
                                     </div>                
-                                </div>                
+                                </div>
+                                <input type="text" className="ipt-search mobile" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>              
                             </header>
                             <main>
                                 <Switch>

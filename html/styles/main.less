@@ -60,7 +60,7 @@ body {
             line-height: 76px;
             margin-left: 54px;
             .ipt-search{
-                width:353px;
+                width:25vw;
                 height:38px;
                 margin-right: 8px;
             }
@@ -223,7 +223,10 @@ body {
                 }
             }
         }
-    }    
+    }
+    .mobile{
+        display: none;
+    }     
 }
 
 
@@ -429,15 +432,17 @@ body {
     }
 }
 /* styles for common sub navbar --------------------------end */
-
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .header{
+        height: 153px;        
         width: 100vw;
         padding: 19px 20px;
-        & > div{
+        >div{
             height: 42px;
             padding: 0;
+            .btn-group{
+                display: none;
+            }
             .logo > a{
                 height: 44px;
                 width: 100px;
@@ -453,7 +458,19 @@ body {
                 display: inline-block;
             }
         }
+        .ipt-search.mobile{
+            display: inline-block;
+            width:calc(~"100vw - 40px");
+            margin: 24px auto 0;
+        }      
     }
+
+    #app main{
+        padding-top: 143px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .common-footer{
         background: url('../img//mobile/bg_footer_m@2x.jpg') no-repeat;
         .center-box{
