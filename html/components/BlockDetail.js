@@ -228,7 +228,7 @@ export default class BlockDetail extends React.Component {
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">
-                                            <i class="fas fa-handshake"></i>
+                                            <i className="fas fa-handshake"></i>
                                             <span>
                                                 <FormattedMessage id="amount"/>
                                                 <br />
