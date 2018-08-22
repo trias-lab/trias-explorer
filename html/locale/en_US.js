@@ -31,7 +31,12 @@ const en_US = {
     blockHash: "Block Hash",
     prevBlock: "Prev Block",
     nextBlock: "Next Block",
-    merkleRoot: "Merkle Root"
+    merkleRoot: "Merkle Root",
+    advancedInfo:"Advanced Info",
+    txHash:"txHash",
+    amount:"Amount",
+    fees:"Fees",
+    status:"Status"
 }
 
 export default en_US;

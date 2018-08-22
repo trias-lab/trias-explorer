@@ -115,7 +115,7 @@ export default class BlockDetail extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope-open"></i>
+                                    <i className="fas fa-cube"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="height" tagName="p"/>
@@ -126,7 +126,7 @@ export default class BlockDetail extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope"></i>
+                                    <i className="fas fa-handshake"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="transactionCount" tagName="p"/>
@@ -137,7 +137,7 @@ export default class BlockDetail extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-balance-scale"></i>
+                                    <i className="fas fa-money-bill-wave"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="totalFees" tagName="p"/>
@@ -158,7 +158,7 @@ export default class BlockDetail extends React.Component {
                         </div>
                     </section>
                     <section className="info-part">
-                        <div className="title" >Advanced Info</div>
+                        <div className="title"><FormattedMessage id="advancedInfo"/></div>
                         <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
@@ -219,18 +219,18 @@ export default class BlockDetail extends React.Component {
                         </div>
                     </section>
                     <section className="list-part">
-                        <div className="title">Transactions</div>
+                        <div className="title"><FormattedMessage id="transactions"/></div>
                         {this.state.transactionList && this.state.transactionList.length>0 ? this.state.transactionList.map(function (i, index) {
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
-                                        <span>Txhash:</span>{i.tx_hash}
+                                        <span><FormattedMessage id="txHash"/>:</span>{i.tx_hash}
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">
                                             <i class="fas fa-handshake"></i>
                                             <span>
-                                                Amount
+                                                <FormattedMessage id="amount"/>
                                                 <br />
                                                 <b>{i.amount_transacted}</b>
                                             </span>
@@ -238,7 +238,7 @@ export default class BlockDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-money-bill-wave"></i>
                                             <span>
-                                                Fees
+                                                <FormattedMessage id="fees"/>
                                                 <br />
                                                 <b>{i.fees}</b>
                                             </span>
@@ -246,7 +246,7 @@ export default class BlockDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-calendar-alt"></i>
                                             <span>
-                                                Time
+                                                <FormattedMessage id="time"/>
                                                 <br />
                                                 <b>{i.time}</b>
                                             </span>
@@ -254,9 +254,9 @@ export default class BlockDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-fingerprint"></i>
                                             <span>
-                                                Status
+                                                <FormattedMessage id="status"/>
                                                 <br />
-                                                <b>{i.confirmations} Confirmation</b>
+                                                <b>{i.confirmations} <FormattedMessage id="confirmations" /></b>
                                             </span>
                                         </div>
                                     </div>
@@ -264,7 +264,7 @@ export default class BlockDetail extends React.Component {
                                         <div className="item-a">
                                             <i className="fas fa-qrcode"></i>
                                             <span>
-                                                Address
+                                                <FormattedMessage id="address"/>
                                                 <br />
                                                 <b>{i.output}</b>
                                             </span>
@@ -272,7 +272,7 @@ export default class BlockDetail extends React.Component {
                                         <div className="item-b">
                                             <i className="fas fa-qrcode"></i>
                                             <span>
-                                                Address
+                                            <FormattedMessage id="address"/>
                                                 <br />
                                                 <b>{i.input}</b>
                                             </span>

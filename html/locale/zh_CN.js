@@ -31,7 +31,12 @@ const zh_CN = {
     blockHash: "块哈希",
     prevBlock: "前一个块",
     nextBlock: "后一个块",
-    merkleRoot: "Merkle Root"
+    merkleRoot: "Merkle Root",
+    advancedInfo:"高级信息",
+    txHash:"交易哈希",
+    amount:"数量",
+    fees:"费用",
+    status:"状态"
 }
 
 export default zh_CN;
