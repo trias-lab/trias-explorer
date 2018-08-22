@@ -129,7 +129,7 @@ class TransactionList extends React.Component {
                 { this.state.transList.length > 0 &&
                 <div className="list-table-block">
                     <h3 className="list-title">
-                        <i className="fa fa-chart-pie"></i>
+                        <i className="fa fa-handshake"></i>
                         <FormattedMessage id="transaction" tagName="span"/>
                     </h3>
                     <div className="block-table-list">
@@ -154,7 +154,7 @@ class TransactionList extends React.Component {
                                             <tr key={index}>
                                                 <td className="td-trans-txHash">
                                                     <Link to={"/translist/"+ item.tx_hash}>
-                                                        <i className="fa fa-chart-pie"></i>
+                                                        <i className="fa fa-handshake"></i>
                                                         <span>{item.tx_hash}</span>
                                                     </Link>
                                                 </td>

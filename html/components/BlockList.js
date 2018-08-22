@@ -130,7 +130,7 @@ class BlockList extends React.Component {
                 { this.state.blockList.length > 0 &&
                     <div className="list-table-block">
                         <h3 className="list-title">
-                            <i className="fa fa-chart-pie"></i>
+                            <i className="fa fa-cubes"></i>
                             <FormattedMessage id="block" tagName="span"/>
                         </h3>
                         <div className="block-table-list">
@@ -153,7 +153,7 @@ class BlockList extends React.Component {
 
                                                 <tr key={index}>
                                                     <td className="td-block-height">
-                                                        <Link to={"/blocklist/"+ item.block_hash}><i className="fa fa-chart-pie"></i>{item.height}</Link>
+                                                        <Link to={"/blocklist/"+ item.block_hash}><i className="fa fa-cube"></i>{item.height}</Link>
                                                     </td>
                                                     <td>{item.tx_count}</td>
                                                     <td>{item.size}</td>
