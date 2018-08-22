@@ -16,6 +16,21 @@ const en_US = {
     paginationPageInput: "Enter",
     paginationJumpBtn: "GO",
     nullData:'no data',
+
+    homeItemTit:"HASH RATE",
+    difficulty:"difficulty",
+    miningEarnings:" Mining Earnings",
+    lastBlock:"Last Block",
+    totalSupply:" Total Supply",
+    currentBest:"Current best transaction fees",
+    rate24:'24h Tx Rate',
+    history14:"14 Days Transactions History",
+    unconfirmedTxs:"Unconfirmed Txs (count)",
+    transactionAccelerator:"Transaction Accelerator",
+    hashRate:"HashRate Growth",
+    latestBlocks:"Latest Blocks",
+    latestTransactions :"Latest Transactions",
+    viewAll:' View all ',
 }
 
 export default en_US;
