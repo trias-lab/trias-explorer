@@ -159,7 +159,7 @@ class TransactionList extends React.Component {
                                                     </Link>
                                                 </td>
                                                 <td className="td-trans-color">
-                                                    <Link to={"/block/"+ item.block}>
+                                                    <Link to={"/blocklist/"+ item.block}>
                                                         <span>{item.block}</span>
                                                     </Link>
                                                 </td>
