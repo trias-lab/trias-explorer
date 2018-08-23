@@ -17,6 +17,8 @@ const zh_CN = {
     paginationPageInput: "输入",
     paginationJumpBtn: "跳转",
     nullData:'暂无数据',
+    notFoundMessage:"没有找到匹配的内容！",
+    notFoundHint:"试试搜索其他内容。",
 
     homeItemTit:"总算力",
     difficulty:"难易度",

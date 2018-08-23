@@ -21,6 +21,7 @@ import BlockDetail from "./BlockDetail"
 import TransactionList from "./TransactionList"
 import TransactionDetail from "./TransactionDetail"
 import Address from "./Address"
+import NotFound from "./NotFound"
 
 /**
  * Scroll the window up on every navigation.
@@ -59,17 +60,6 @@ export default class Main extends React.Component {
         this.setState({
             lang: lang
         })
-        // $.ajax({
-        //     url:"/api/language/language",
-        //     type: "POST",
-        //     dataType: "json",
-        //     data:{
-        //         language: lang === 'en'?1:0
-        //     },
-        //     success: function(data){
-        //         console.log(data)
-        //     }
-        // })
     }
 
     componentDidMount() {
@@ -91,8 +81,29 @@ export default class Main extends React.Component {
         }else{
             keyword = $('#searchMobile').val()
         }
-        console.log(keyword)
-        // TODO:
+        if(keyword){
+            $.ajax({
+                url: '/api/search',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    key: keyword
+                },
+                success: function (data) {
+                    if(data.code==200){
+                        if(data.data_type==="address"){
+                            window.location.href="/address/"+data.address
+                        }else if(data.data_type==="transaction"){
+                            window.location.href="/translist/"+data.tx_hash
+                        }else if(data.data_type==="block"){
+                            window.location.href="/blocklist/"+data.block_hash
+                        }
+                    }else{
+                        window.location.href="/notfound/"+keyword
+                    }                
+                }
+            })
+        }        
     }
 
     /**
@@ -202,6 +213,7 @@ export default class Main extends React.Component {
                                     <Route exact path="/blocklist" component={BlockList} />
                                     <Route exact path="/blocklist/:blockID" component={BlockDetail} />
                                     <Route exact path="/address/:addressID" component={Address} />
+                                    <Route exact path="/notfound/:keyword" component={NotFound} />
                                     <Redirect to="/"/> {/* if no routes above is matched */}
                                 </Switch>                            
                             </main>

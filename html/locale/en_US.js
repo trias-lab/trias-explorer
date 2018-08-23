@@ -16,7 +16,9 @@ const en_US = {
     paginationItemsCountP: 'Showing {from} to {to} of {count} items',
     paginationPageInput: "Enter",
     paginationJumpBtn: "GO",
-    nullData:'no data',
+    nullData:'No data',
+    notFoundMessage:"Oops, nothing matches your string!",
+    notFoundHint:"Try search other things instead.",
 
     homeItemTit:"HASH RATE",
     difficulty:"difficulty",
