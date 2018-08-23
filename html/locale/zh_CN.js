@@ -52,7 +52,10 @@ const zh_CN = {
     txHash:"交易哈希",
     amount:"数量",
     fees:"费用",
-    status:"状态"
+    status:"状态",
+    received:'Received',
+    sent:'Sent',
+    balance:'Balance',
 }
 
 export default zh_CN;

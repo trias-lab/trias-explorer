@@ -52,7 +52,9 @@ const en_US = {
     amount:"Amount",
     fees:"Fees",
     status:"Status",
-    
+    received:'Received',
+    sent:'Sent',
+    balance:'Balance',
 }
 
 export default en_US;
