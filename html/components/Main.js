@@ -74,35 +74,10 @@ export default class Main extends React.Component {
 
     componentDidMount() {
         var self = this
-        /* For mobile devices, when the mouse click the navigation button in header */
-        $('.navbar-menu-mobile').click(function () {      
-            if ($(this).find(".dropdown-list-box").css('display') == "none") { //如果下拉列表未显示
-                self.hideAllDropdownList();
-                $(this).addClass('open')
-            } else { // if expanded 
-                $(this).removeClass('open')
-            }
-        });
-    
-        // when mouse clicked somewhere else, collapse the dropdown-list automatically
-        $('main').click(function () {
-            if(document.body.clientWidth < 768 && $('.navbar-menu-mobile').css('display') !== 'none'){
-                $('.navbar-menu-mobile').removeClass('open')
-            }
-        })
-
         // Bind search event of search input for mobile devices
         $('#formSearch').bind('search', function () {
             // TODO:
           });
-    }
-
-    /**
-     * For mibile devices, collapse all the dropdown-list in header
-     * 
-     */
-    hideAllDropdownList(){
-        $(".navbar-menu-mobile").removeClass('open')
     }
 
     render() {
@@ -120,6 +95,14 @@ export default class Main extends React.Component {
                 <i className="fas fa-globe-americas"></i>
                 English
             </span>
+        }]
+
+        this.navlistMobile = [{
+            ele: <a href="/" target="blank"><FormattedMessage id="wallet" /></a>
+        }, {
+            ele:  <NavLink exact to="/blocklist"><FormattedMessage id="block" /></NavLink>
+        },{
+            ele: <a href="https://explorer.trias.one/" target="blank"><FormattedMessage id="monitor" /></a>
         }]
 
         return (
@@ -154,42 +137,29 @@ export default class Main extends React.Component {
                                                 <FormattedMessage id="monitor" />
                                             </a>
                                         </li>                                  
-                                        <li className="lang">
+                                        <li>
                                         <ToggleList
+                                            className="lang"
                                             listID="langlist"
                                             itemsToSelect={this.languageList}
-                                            name={<i className="fas fa-globe-americas"></i>} />
+                                            name={<span><i className="fas fa-globe-americas"></i><i className="fas fa-angle-down"></i></span>} />
                                         </li>
                                     </ul>
-                                    <div className="dropdown-list navbar-menu-mobile lang">
-                                        <i className="fas fa-globe-americas"></i>
-                                        <div className="dropdown-list-box">
-                                            <a href="javascript:void(0)" onClick={()=>this.changeLanguage('zh')} className={this.state.lang==='zh'?'active':''}>
-                                                <i className="fas fa-globe-americas"></i>
-                                                中文
-                                            </a>
-                                            <a href="javascript:void(0)" onClick={()=>this.changeLanguage('en')} className={this.state.lang==='en'?'active':''}>
-                                                <i className="fas fa-globe-americas"></i>
-                                                English
-                                            </a>                          
-                                        </div>
-                                    </div>
-                                    <div className="dropdown-list navbar-menu-mobile">
-                                        <div className="icon-bar"></div>
-                                        <div className="icon-bar"></div>
-                                        <div className="icon-bar"></div>
-                                        <div className="dropdown-list-box">
-                                            <a href="/" target="blank">
-                                                <FormattedMessage id="wallet" />
-                                            </a>
-                                            <NavLink exact to="/blocklist">
-                                                <FormattedMessage id="block" />
-                                            </NavLink>
-                                            <a href="https://explorer.trias.one/" target="blank">
-                                                <FormattedMessage id="monitor" />
-                                            </a>                       
-                                        </div>
-                                    </div>                
+                                    <ToggleList
+                                        className="lang mobile"
+                                        listID="langlistMobile"
+                                        itemsToSelect={this.languageList}
+                                        name={<i className="fas fa-globe-americas"></i>} />
+                                    <ToggleList
+                                        className="navlist mobile"
+                                        listID="navlistMobile"
+                                        itemsToSelect={this.navlistMobile}
+                                        name={<span>
+                                                <div className="icon-bar"></div>
+                                                <div className="icon-bar"></div>
+                                                <div className="icon-bar"></div>
+                                            </span>} 
+                                        />
                                 </div>
                                 <form id="formSearch" className="mobile">
                                     <input type="search" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
