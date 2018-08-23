@@ -1,6 +1,7 @@
 import React from "react"
 import $ from 'jquery'
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
 export default class TransactionDetail extends React.Component {
@@ -208,7 +209,9 @@ export default class TransactionDetail extends React.Component {
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
+                                        <Link to={"/translist/"+i.tx_hash}>
                                         <span>Txhash:</span>{i.tx_hash}
+                                        </Link>
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">
@@ -253,7 +256,9 @@ export default class TransactionDetail extends React.Component {
                                             <span>
                                                 Address
                                                 <br />
-                                                <b>{i.output}</b>
+                                                <Link to={'/address/'+i.output}>
+                                                    <b>{i.output}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                         <div className="item-b">
@@ -264,7 +269,9 @@ export default class TransactionDetail extends React.Component {
                                             <span>
                                                 Address
                                                 <br />
-                                                <b>{i.input}</b>
+                                                <Link to={'/address/'+i.input}>
+                                                    <b>{i.input}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                     </div>
@@ -306,7 +313,9 @@ export default class TransactionDetail extends React.Component {
                                     <div className="eventLog-list" key={index}>
                                         <p>
                                             <span className="log-title">Address</span>
-                                            <span className="log-value">{log.address}</span>
+                                            <span className="log-value">
+                                                <Link to={'/address/'+log.address}>{log.address}</Link>
+                                            </span>
                                         </p>
                                         <p>
                                             <span className="log-title">Name</span>
