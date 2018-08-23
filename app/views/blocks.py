@@ -3,6 +3,11 @@ blocks message
 """
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from app.utils.block_util import url_data, stamp2datetime, hex2int
+from app.utils.localconfig import JsonConfiguration
+
+jc = JsonConfiguration()
+url = "http://%s:%s" % (jc.ip, jc.port)
 
 
 def all_blocks(request):
@@ -57,23 +62,25 @@ def block_info(request):
     if not block_hash:
         return JsonResponse({"code": 201, "message": "Need Block Hash"})
 
+    block_info = url_data(url, "eth_getBlockByHash", [block_hash, True]).get('result')
+
     data = {
-                "height": 537141,
-                "transactions": 79,
+                "height": hex2int(block_info['number']),
+                "transactions": len(block_info['transactions']),
                 "total_fees": 2891.89,
-                "time": "2018-08-17 17:38:48",
+                "time": stamp2datetime(hex2int(block_info['timestamp'])),
                 "confirmations": 2,
-                "size": 291986,
+                "size": hex2int(block_info['size']),
                 "stripped_size": 642968,
                 "weight": 2720890,
-                "tx_count": 1711,
+                "tx_count": len(block_info['transactions']),
                 "version": "0x200000000",
-                "difficulty": 8.15,
+                "difficulty": hex2int(block_info['difficulty']),
                 "bits": "0x33e3e3e3e3",
-                "nonce": "0x78h7g",
+                "nonce": block_info['nonce'],
                 "relayed_by": 2720890,
-                "block_hash": "bb337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901bb",
-                "prev_block": "cb337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901bb",
+                "block_hash": block_hash,
+                "prev_block": block_info['parentHash'],
                 "next_block": "N/A",
                 "merkle_root": "c58c42f0040b575dfb56ae7be218b14ea606a2d7fa6edf7814df791320e11602"
                 }

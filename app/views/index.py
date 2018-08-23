@@ -4,6 +4,11 @@ index message
 import datetime
 import random
 from django.http import JsonResponse
+from app.utils.block_util import url_data, stamp2datetime, hex2int
+from app.utils.localconfig import JsonConfiguration
+
+jc = JsonConfiguration()
+url = "http://%s:%s" % (jc.ip, jc.port)
 
 
 def index_base_info(request):
@@ -20,15 +25,19 @@ def index_base_info(request):
 
     for i in range(14):
         today = datetime.date.today()
-        x = str((today - datetime.timedelta(days=i)).strftime('%-m/%-d'))
+        x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
         hash_rate_growth[x] = hash_rate_growth_data[i]
         transactions_history[x] = transactions_data[i]
 
+    hash_rate = url_data(url, "eth_hashrate", []).get('result', 0)
+    last_block = url_data(url, "eth_blockNumber", [])['result']
+    last_block_info = url_data(url, "eth_getBlockByNumber", [last_block, True])['result']
+
     data = {
-                "hash_rate": 49.65,
-                "difficulty": 6.39,
+                "hash_rate": hash_rate,
+                "difficulty": hex2int(last_block_info['totalDifficulty']),
                 "mining_earnings": 0.3936,
-                "last_block": 6179925,
+                "last_block": hex2int(last_block),
                 "total_supply": 358183.16,
                 "transactions": 8923.10,
                 "transaction_fees": 0.00003,
@@ -50,13 +59,16 @@ def index_latest_blocks(request):
     """
 
     data = []
+    last_block = url_data(url, "eth_blockNumber", [])['result']
     for i in range(20):
+        block_num = int(last_block, 16) - i
+        block_info = url_data(url, "eth_getBlockByNumber", [hex(block_num), True])['result']
         data.append({
-            "height": random.randint(1543335, 2983792),
-            "size": random.randint(6666, 8555),
-            "rewards": round(random.randint(10, 20) / 3, 2),
-            "time": str(datetime.datetime.now() - datetime.timedelta(days=i)),
-            "block_hash": "bb337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901bb"
+            "height": block_num,
+            "size": int(block_info['size'], 16),
+            "rewards": 3,
+            "time": stamp2datetime(int(block_info['timestamp'], 16)),
+            "block_hash": block_info['hash']
         })
 
     return JsonResponse({"code": 200, "size": 20, "return_data": data})
