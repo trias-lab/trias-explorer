@@ -55,9 +55,9 @@ const zh_CN = {
     amount:"数量",
     fees:"费用",
     status:"状态",
-    received:'Received',
-    sent:'Sent',
-    balance:'Balance',
+    received:'入账',
+    sent:'出帐',
+    balance:'余额',
 }
 
 export default zh_CN;
