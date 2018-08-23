@@ -242,7 +242,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <section className="row text-center main-title ">
+                <section className="text-center main-title ">
                     <div>
                         <FormattedMessage id="title" tagName="h1" />
                         <p><i className="fa fa-thumbs-up"></i> by Trias-lab Foundation</p>
