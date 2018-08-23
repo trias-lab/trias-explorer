@@ -76,8 +76,33 @@ export default class Main extends React.Component {
         var self = this
         // Bind search event of search input for mobile devices
         $('#formSearch').bind('search', function () {
-            // TODO:
-          });
+            console.log('search')
+            self.search()
+        });
+    }
+
+    /**
+     * Search transaction/block/address by txHash/block hash/address
+     */
+    search(){
+        let keyword = ''
+        if($('.mobile').css('display') === 'none'){
+            keyword = $('#searchPC').val()
+        }else{
+            keyword = $('#searchMobile').val()
+        }
+        console.log(keyword)
+        // TODO:
+    }
+
+    /**
+     * Keydown event handler for the search input
+     * @param {*} e 
+     */
+    handleKeyDown(e){
+        if (e.keyCode === 13) {           // Enter key
+            this.search()
+        }
     }
 
     render() {
@@ -118,8 +143,10 @@ export default class Main extends React.Component {
                                         </Link>
                                     </div>
                                     <div className="btn-group">
-                                        <input type="text" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
-                                        <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch}/>
+                                        <input id="searchPC" type="text" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}
+                                            onKeyDown={(e) => this.handleKeyDown(e)}/>
+                                        <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch} 
+                                            onClick={this.search.bind(this)} />
                                     </div>
                                     <ul className="navbar-menu-pc">
                                         <li>
@@ -162,7 +189,8 @@ export default class Main extends React.Component {
                                         />
                                 </div>
                                 <form id="formSearch" className="mobile">
-                                    <input type="search" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
+                                    <input type="text" name="test" style={{display:'none'}}/>
+                                    <input id="searchMobile" type="search" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
                                     <span className="search-icon"><i className="fas fa-search"></i></span>
                                 </form>                                              
                             </header>
