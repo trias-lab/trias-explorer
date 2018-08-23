@@ -299,7 +299,9 @@ export default class Address extends React.Component {
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
-                                                <b>{i.output}</b>
+                                                <Link to={"/address/"+ i.output}>
+                                                    <b>{i.output}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                         <div className="item-b">
@@ -310,7 +312,9 @@ export default class Address extends React.Component {
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
-                                                <b>{i.input}</b>
+                                                <Link to={"/address/"+ i.input}>
+                                                    <b>{i.input}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                     </div>
