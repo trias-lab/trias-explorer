@@ -43,7 +43,7 @@ def all_blocks(request):
         page = 1
     data = pag.page(page).object_list
 
-    return JsonResponse({"code": 200, "size": size, "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 def block_info(request):
@@ -78,7 +78,7 @@ def block_info(request):
                 "merkle_root": "c58c42f0040b575dfb56ae7be218b14ea606a2d7fa6edf7814df791320e11602"
                 }
 
-    return JsonResponse({"code": 200, "size": 20, "return_data": data})
+    return JsonResponse({"code": 200, "return_data": data})
 
 
 def block_transactions(request):
@@ -137,7 +137,7 @@ def block_transactions(request):
         page = 1
     data = pag.page(page).object_list
 
-    return JsonResponse({"code": 200, "size": size, "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 

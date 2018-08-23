@@ -43,7 +43,7 @@ def all_transactions(request):
         page = 1
     data = pag.page(page).object_list
 
-    return JsonResponse({"code": 200, "size": size, "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 def transaction_info(request):
@@ -102,4 +102,4 @@ def transaction_info(request):
             ]
         }
 
-    return JsonResponse({"code": 200, "size": 20, "return_data": data})
+    return JsonResponse({"code": 200, "return_data": data})
