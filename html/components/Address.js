@@ -60,7 +60,7 @@ export default class Address extends React.Component {
             data: {
                 curr_page: currentPage,
                 page_size: rowsPerPage,
-                address: '0x1111'
+                address: self.state.addressID
             },
             success: function (data) {
                 self.setState({
@@ -147,8 +147,7 @@ export default class Address extends React.Component {
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                // address: self.state.blockid
-                address: '0x1111'
+                address: self.state.addressID
             },
             success: function (data) {
                 self.setState({
