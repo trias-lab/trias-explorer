@@ -4,13 +4,16 @@ import CustomPagination from "./common/CustomPagination"
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
+
+/**
+ * Component for main part of block details page.
+ */
 export default class BlockDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             subNavbarMatch: this.props.match,
-            addressID: this.props.match.params.addressID,
-            nodeSearchKey: '',//节点列表搜索关键字
+            blockID: this.props.match.params.blockID,
             totalItemsCount: 100,
             pageCount: 10,
             transactionList: [],
@@ -36,28 +39,34 @@ export default class BlockDetail extends React.Component {
                 subNavbarMatch: nextProps.match
             })
         }
+        if(this.state.blockID !== nextProps.match.params.blockID){
+            this.setState({
+                blockID: nextProps.match.params.blockID
+            })
+        }
     }
 
     /**
-     * 获取列表数据
+     * Get transactions list
      * @param {int} currentPage 
      * @param {int} rowsPerPage 
      */
     getList(currentPage, rowsPerPage) {
         var self = this
         $.ajax({
-            url: '/api/address_transactions/',
+            url: '/api/block_transactions/',
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                curr_page: currentPage,
-                page_size: rowsPerPage,
-                address: '0x1111'
+                block_hash: self.state.blockID,
+                size: rowsPerPage,
+                page_size: currentPage,
+                sort:0
             },
             success: function (data) {
                 self.setState({
                     transactionList: data.return_data,
-                    totalItemsCount: data.size,
+                    totalItemsCount: data.total_size,
                     pageCount: data.total_page,
                 })
             }
@@ -65,43 +74,45 @@ export default class BlockDetail extends React.Component {
     }
 
     /**
-     * 设置列表每页最多显示行数
-     * @param {int} num 行数 
+     * Update maximum number of rows per page
+     * @param {int} num new value
      */
     setRowsPerPage(num) {
         this.setState({
             rowsPerPage: num
         })
+        // get new data and update state.
         this.getList(this.state.currentPage, num)
-        //console.log(num)
     }
 
     /**
-     * 选择页码的监听
+     * On select page number by clicking buttons in the pagination
+     * @param {int} pagenum new page number
      */
     handleSelectPage(pagenum) {
         this.setState({
             currentPage: pagenum
         })
+        // get new data and update state.
         this.getList(pagenum, this.state.rowsPerPage)
-        //console.log(pagenum)
     }
 
+    /**
+     * Get details of current block
+     */
     getInfo() {
         var self = this
         $.ajax({
-            url: '/api/address/',
+            url: '/api/block_info/',
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                // address: self.state.blockid
-                address: '0x1111'
+                block_hash: self.state.blockID
             },
             success: function (data) {
                 self.setState({
                     detailInfo: data.return_data,
                 })
-                console.log(data);
             }
         })
     }
@@ -119,7 +130,7 @@ export default class BlockDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="height" tagName="p"/>
-                                    <p>{this.state.detailInfo.received}</p>
+                                    <p>{this.state.detailInfo.height}</p>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +141,7 @@ export default class BlockDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="transactionCount" tagName="p"/>
-                                    <p>{this.state.detailInfo.sent}</p>
+                                    <p>{this.state.detailInfo.transactions}</p>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +152,7 @@ export default class BlockDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="totalFees" tagName="p"/>
-                                    <p>{this.state.detailInfo.balance}</p>
+                                    <p>{this.state.detailInfo.total_fees}</p>
                                 </div>
                             </div>
                         </div>
@@ -163,57 +174,57 @@ export default class BlockDetail extends React.Component {
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="height" /></span>
-                                    <span className="value">{this.state.detailInfo.address}</span>
+                                    <span className="value">{this.state.detailInfo.height}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="confirmations" /></span>
-                                    <span className="value">{this.state.detailInfo.received}</span>
+                                    <span className="value">{this.state.detailInfo.confirmations}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="size" /></span>
-                                    <span className="value">{this.state.detailInfo.sent}</span>
+                                    <span className="value">{this.state.detailInfo.size} Bytes</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="txCount" /></span>
-                                    <span className="value">{this.state.detailInfo.balance}</span>
+                                    <span className="value">{this.state.detailInfo.tx_count}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="version" /></span>
-                                    <span className="value">{this.state.detailInfo.address}</span>
+                                    <span className="value">{this.state.detailInfo.version}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="difficulty" /></span>
-                                    <span className="value">{this.state.detailInfo.received}</span>
+                                    <span className="value">{this.state.detailInfo.difficulty}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="bits" /></span>
-                                    <span className="value">{this.state.detailInfo.sent}</span>
+                                    <span className="value">{this.state.detailInfo.bits}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="nonce" /></span>
-                                    <span className="value">{this.state.detailInfo.balance}</span>
+                                    <span className="value">{this.state.detailInfo.nonce}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="time" /></span>
-                                    <span className="value">{this.state.detailInfo.balance}</span>
+                                    <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="blockHash" /></span>
-                                    <span className="value">{this.state.detailInfo.tx_count}</span>
+                                    <span className="value">{this.state.detailInfo.block_hash}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="prevBlock" /></span>
-                                    <span className="value">{this.state.detailInfo.time}</span>
+                                    <span className="value">{this.state.detailInfo.prev_block}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="nextBlock" /></span>
-                                    <span className="value">{this.state.detailInfo.tx_count}</span>
+                                    <span className="value">{this.state.detailInfo.next_block}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="merkleRoot" /></span>
-                                    <span className="value">{this.state.detailInfo.time}</span>
+                                    <span className="value">{this.state.detailInfo.merkle_root}</span>
                                 </p>
                             </div>
                         </div>
@@ -285,15 +296,14 @@ export default class BlockDetail extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                            )
-                        }.bind(this)):
-                        <div className="nullData">
-                            <FormattedMessage id="nullData" tagName="p"/>
-                        </div>
-                    }                      
+                            )}.bind(this)):
+                            <div className="nullData">
+                                <FormattedMessage id="nullData" tagName="p"/>
+                            </div>
+                        }                      
                         <CustomPagination
                             from={(this.state.currentPage - 1) * this.state.rowsPerPage}
-                            to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.actionList?this.state.actionList.length:0)}
+                            to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
                             totalItemsCount={this.state.totalItemsCount}
                             totalPagesCount={this.state.pageCount}
                             currentPage={this.state.currentPage}
