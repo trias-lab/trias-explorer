@@ -169,7 +169,6 @@ export default class Main extends React.Component {
                             <main>
                                 <Switch>
                                     <Route exact path="/" component={Home} />
-                                    <Route exact path="/address" component={Address} />
                                     <Route exact path="/translist" component={TransactionList} />
                                     <Route exact path="/translist/:transID" component={TransactionDetail} />
                                     <Route exact path="/blocklist" component={BlockList} />

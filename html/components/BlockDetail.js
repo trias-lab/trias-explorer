@@ -4,6 +4,7 @@ import CustomPagination from "./common/CustomPagination"
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
+import { Link } from 'react-router-dom'
 export default class BlockDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -269,7 +270,9 @@ export default class BlockDetail extends React.Component {
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
-                                                <b>{i.output}</b>
+                                                <Link to={"/address/"+ i.output}>
+                                                    <b>{i.output}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                         <div className="item-b">
@@ -280,7 +283,9 @@ export default class BlockDetail extends React.Component {
                                             <span>
                                             <FormattedMessage id="address"/>
                                                 <br />
-                                                <b>{i.input}</b>
+                                                <Link to={"/address/"+ i.input}>
+                                                    <b>{i.input}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                     </div>
