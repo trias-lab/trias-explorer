@@ -51,7 +51,8 @@ const en_US = {
     txHash:"txHash",
     amount:"Amount",
     fees:"Fees",
-    status:"Status"
+    status:"Status",
+    
 }
 
 export default en_US;
