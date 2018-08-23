@@ -37,12 +37,11 @@ export default class BlockDetail extends React.Component {
     componentWillReceiveProps(nextProps){
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
-                subNavbarMatch: nextProps.match
-            })
-        }
-        if(this.state.blockID !== nextProps.match.params.blockID){
-            this.setState({
+                subNavbarMatch: nextProps.match,
                 blockID: nextProps.match.params.blockID
+            },()=>{
+                this.getList(this.state.currentPage, this.state.rowsPerPage);
+                this.getInfo();
             })
         }
     }
@@ -217,11 +216,27 @@ export default class BlockDetail extends React.Component {
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="prevBlock" /></span>
-                                    <span className="value">{this.state.detailInfo.prev_block}</span>
+                                    <span className="value">
+                                    {
+                                        this.state.detailInfo.prev_block && this.state.detailInfo.prev_block!=='N/A' ?
+                                        <Link to={"/blocklist/"+this.state.detailInfo.prev_block}>
+                                            {this.state.detailInfo.prev_block}
+                                        </Link>:
+                                        this.state.detailInfo.prev_block
+                                    }   
+                                    </span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="nextBlock" /></span>
-                                    <span className="value">{this.state.detailInfo.next_block}</span>
+                                    <span className="value">
+                                    {
+                                        this.state.detailInfo.next_block && this.state.detailInfo.next_block!=='N/A' ?
+                                        <Link to={"/blocklist/"+this.state.detailInfo.next_block}>
+                                            {this.state.detailInfo.next_block}
+                                        </Link>:
+                                        this.state.detailInfo.next_block
+                                    }                                        
+                                    </span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="merkleRoot" /></span>
@@ -236,7 +251,10 @@ export default class BlockDetail extends React.Component {
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
-                                        <span><FormattedMessage id="txHash"/>:</span>{i.tx_hash}
+                                        <span><FormattedMessage id="txHash"/>:</span>
+                                        <Link to={"/translist/"+i.tx_hash}>
+                                            {i.tx_hash}
+                                        </Link>
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">

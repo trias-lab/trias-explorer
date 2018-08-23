@@ -176,7 +176,7 @@ export default class Address extends React.Component {
                                     <i className="fas fa-envelope-open"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Received</p>
+                                    <FormattedMessage id="received" tagName="p"/>
                                     <p>{this.state.detailInfo.received}</p>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@ export default class Address extends React.Component {
                                     <i className="fas fa-envelope"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Sent</p>
+                                    <FormattedMessage id="sent" tagName="p"/>
                                     <p>{this.state.detailInfo.sent}</p>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@ export default class Address extends React.Component {
                                     <i className="fas fa-balance-scale"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Balance</p>
+                                    <FormattedMessage id="balance" tagName="p"/>
                                     <p>{this.state.detailInfo.balance}</p>
                                 </div>
                             </div>
@@ -209,58 +209,58 @@ export default class Address extends React.Component {
                                     <i className="fas fa-calendar-alt"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Date/Time</p>
+                                    <FormattedMessage id="dateAndTime" tagName="p"/>
                                     <p>{this.state.detailInfo.time}</p>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <section className="info-part">
-                        <div className="title" >Advanced Info</div>
+                        <div className="title" ><FormattedMessage id="advancedInfo"/></div>
                         <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">Address</span>
+                                    <span className="attr"><FormattedMessage id="address"/></span>
                                     <span className="value">{this.state.detailInfo.address}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Received</span>
+                                    <span className="attr"><FormattedMessage id="received"/></span>
                                     <span className="value">{this.state.detailInfo.received}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Sent</span>
+                                    <span className="attr"><FormattedMessage id="sent"/></span>
                                     <span className="value">{this.state.detailInfo.sent}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Balance</span>
+                                    <span className="attr"><FormattedMessage id="balance"/></span>
                                     <span className="value">{this.state.detailInfo.balance}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">Tx Count</span>
+                                    <span className="attr"><FormattedMessage id="txCount" /></span>
                                     <span className="value">{this.state.detailInfo.tx_count}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Date/Time</span>
+                                    <span className="attr"><FormattedMessage id="time" /></span>
                                     <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
                             </div>
                         </div>
                     </section>
                     <section className="list-part">
-                        <div className="title">Transactions</div>
+                        <div className="title"><FormattedMessage id="transactions"/></div>
                         {this.state.transactionList && this.state.transactionList.map(function (i, index) {
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
-                                        <span>Txhash:</span>{i.tx_hash}
+                                        <span><FormattedMessage id="txHash"/>:</span>{i.tx_hash}
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">
                                             <i className="fas fa-handshake"></i>
                                             <span>
-                                                Amount
+                                                <FormattedMessage id="amount"/>
                                                 <br />
                                                 <b>{i.amount_transacted}</b>
                                             </span>
@@ -268,7 +268,7 @@ export default class Address extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-money-bill-wave"></i>
                                             <span>
-                                                Fees
+                                                <FormattedMessage id="fees"/>
                                                 <br />
                                                 <b>{i.fees}</b>
                                             </span>
@@ -276,7 +276,7 @@ export default class Address extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-calendar-alt"></i>
                                             <span>
-                                                Time
+                                                <FormattedMessage id="time"/>
                                                 <br />
                                                 <b>{i.time}</b>
                                             </span>
@@ -284,7 +284,7 @@ export default class Address extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-fingerprint"></i>
                                             <span>
-                                                Status
+                                                <FormattedMessage id="status"/>
                                                 <br />
                                                 <b>{i.confirmations} Confirmation</b>
                                             </span>
@@ -297,9 +297,11 @@ export default class Address extends React.Component {
                                                 <Qrcode id={index} text={i.output} size="70" />
                                             }
                                             <span>
-                                                Address
+                                                <FormattedMessage id="address"/>
                                                 <br />
-                                                <b>{i.output}</b>
+                                                <Link to={"/address/"+ i.output}>
+                                                    <b>{i.output}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                         <div className="item-b">
@@ -308,9 +310,11 @@ export default class Address extends React.Component {
                                                 <Qrcode id={index + "a"} text={i.input} size="70" />
                                             }
                                             <span>
-                                                Address
+                                                <FormattedMessage id="address"/>
                                                 <br />
-                                                <b>{i.input}</b>
+                                                <Link to={"/address/"+ i.input}>
+                                                    <b>{i.input}</b>
+                                                </Link>
                                             </span>
                                         </div>
                                     </div>

@@ -18,7 +18,7 @@ const zh_CN = {
     paginationJumpBtn: "跳转",
     nullData:'暂无数据',
 
-    homeItemTit:"哈希率",
+    homeItemTit:"总算力",
     difficulty:"难易度",
     miningEarnings:"挖掘收益",
     lastBlock:"最后一个区块",
@@ -28,7 +28,7 @@ const zh_CN = {
     history14:"14天交易历史",
     unconfirmedTxs:"未经证实的Tx（计数）",
     transactionAccelerator :"交易加速器",
-    hashRate:"HashRate增长",
+    hashRate:"总算力增长",
     latestBlocks:"最新的块",
 
     latestTransactions :"最新交易",
@@ -52,7 +52,10 @@ const zh_CN = {
     txHash:"交易哈希",
     amount:"数量",
     fees:"费用",
-    status:"状态"
+    status:"状态",
+    received:'Received',
+    sent:'Sent',
+    balance:'Balance',
 }
 
 export default zh_CN;
