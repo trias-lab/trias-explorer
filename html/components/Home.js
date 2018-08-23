@@ -407,7 +407,7 @@ class Home extends React.Component {
                                     this.state.blocksLatest && this.state.blocksLatest.map(function (item, index) {
                                         return (
                                             <li className="clearfix" key={"block-" + index}>
-                                                <Link to={"/blocklist/" + item.height}>
+                                                <Link to={"/blocklist/" + item.block_hash}>
 
                                                     <div className="col col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                                         <div className="name pull-left">
