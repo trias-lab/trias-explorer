@@ -176,7 +176,7 @@ export default class Address extends React.Component {
                                     <i className="fas fa-envelope-open"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Received</p>
+                                    <FormattedMessage id="received" tagName="p"/>
                                     <p>{this.state.detailInfo.received}</p>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@ export default class Address extends React.Component {
                                     <i className="fas fa-envelope"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Sent</p>
+                                    <FormattedMessage id="sent" tagName="p"/>
                                     <p>{this.state.detailInfo.sent}</p>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@ export default class Address extends React.Component {
                                     <i className="fas fa-balance-scale"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Balance</p>
+                                    <FormattedMessage id="balance" tagName="p"/>
                                     <p>{this.state.detailInfo.balance}</p>
                                 </div>
                             </div>
@@ -224,15 +224,15 @@ export default class Address extends React.Component {
                                     <span className="value">{this.state.detailInfo.address}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Received</span>
+                                    <span className="attr"><FormattedMessage id="received"/></span>
                                     <span className="value">{this.state.detailInfo.received}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Sent</span>
+                                    <span className="attr"><FormattedMessage id="sent"/></span>
                                     <span className="value">{this.state.detailInfo.sent}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Balance</span>
+                                    <span className="attr"><FormattedMessage id="balance"/></span>
                                     <span className="value">{this.state.detailInfo.balance}</span>
                                 </p>
                             </div>
