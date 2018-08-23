@@ -90,6 +90,11 @@ export default class Main extends React.Component {
                 $('.navbar-menu-mobile').removeClass('open')
             }
         })
+
+        // Bind search event of search input for mobile devices
+        $('#formSearch').bind('search', function () {
+            // TODO:
+          });
     }
 
     /**
@@ -186,7 +191,10 @@ export default class Main extends React.Component {
                                         </div>
                                     </div>                
                                 </div>
-                                <input type="text" className="ipt-search mobile" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>              
+                                <form id="formSearch" className="mobile">
+                                    <input type="search" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
+                                    <span className="search-icon"><i className="fas fa-search"></i></span>
+                                </form>                                              
                             </header>
                             <main>
                                 <Switch>
