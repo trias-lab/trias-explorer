@@ -13,4 +13,5 @@ class JsonConfiguration:
             rec = conf.read()
         records = json.loads(rec)
 
-        self.node_list = records["node_list"]
+        self.ip = records["ip"]
+        self.port = records["port"]
