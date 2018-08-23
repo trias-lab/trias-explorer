@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^api/index_base_info/', index.index_base_info),  # Trias Blockchain BaseInfo
     url(r'^api/index_latest_blocks/', index.index_latest_blocks),  # Latest Blocks 20 Numbers
     url(r'^api/index_recent_transactions/', index.index_recent_transactions),  # Recent Transactions 20 Numbers
+    url(r'^api/search/', index.serach),  # Search From number/blockHash/txHash/address
 
     url(r'^api/all_blocks/', blocks.all_blocks),  # Blocks List
     url(r'^api/block_info/', blocks.block_info),  # Block Detail Info

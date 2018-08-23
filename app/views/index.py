@@ -93,3 +93,31 @@ def index_recent_transactions(request):
     return JsonResponse({"code": 200, "size": 20, "return_data": data})
 
 
+def serach(request):
+    """
+    Search From number/blockHash/txHash/address
+    :param key: tags
+    :return:
+    """
+
+    key = request.GET.get('key')
+    if not key:
+        return JsonResponse({"code": 201, "message": ''})
+
+    isBlock = url_data(url, "eth_getBlockByNumber", [key, True]).get('result')
+    if isBlock:
+        return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock['hash']})
+
+    isBlock = url_data(url, "eth_getBlockByHash", [key, True]).get('result')
+    if isBlock:
+        return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock['hash']})
+
+    isTx = url_data(url, "eth_getTransactionByHash", [key]).get('result')
+    if isTx:
+        return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": isTx['hash']})
+
+    isAddress = url_data(url, "eth_getBalance", [key, "latest"]).get('result', '0x0')
+    if hex2int(isAddress):
+        return JsonResponse({"code": 200, "data_type": "address", "address": key})
+
+    return JsonResponse({"code": 201, "message": ''})
