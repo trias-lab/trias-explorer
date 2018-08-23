@@ -45,7 +45,10 @@ export default class ToggleList extends React.Component {
                     } 
                     elem = elem.parentNode; 
                 }
-                $('#' + self.props.listID + ' .item-selected>a>i:last-child').toggleClass('fa-angle-down').toggleClass('fa-angle-up')
+                // if there is a angle icon in the toggle button, toggle it up
+                if($('#' + self.props.listID + ' .item-selected>a').find('.fa-angle-down').length >0){
+                    $('#' + self.props.listID + ' .item-selected>a i.fa-angle-down').toggleClass('fa-angle-down').toggleClass('fa-angle-up')
+                }
                 self.setState({ // collapse drop-down list
                     showListBlock:false
                 })
@@ -72,7 +75,12 @@ export default class ToggleList extends React.Component {
      * Collapse or expand the drop-down list
      */
     changeListState(){
-        $('#' + this.props.listID + ' .item-selected>a>i:last-child').toggleClass('fa-angle-down').toggleClass('fa-angle-up')
+        // if there is a angle icon in the toggle button, toggle it up or down
+        if($('#' + this.props.listID + ' .item-selected>a').find('.fa-angle-down').length >0){
+            $('#' + this.props.listID + ' .item-selected>a i.fa-angle-down').toggleClass('fa-angle-down').toggleClass('fa-angle-up')
+        }else if($('#' + this.props.listID + ' .item-selected>a').find('.fa-angle-up').length >0){
+            $('#' + this.props.listID + ' .item-selected>a i.fa-angle-up').toggleClass('fa-angle-up').toggleClass('fa-angle-down')
+        }
         this.setState({
             showListBlock:!this.state.showListBlock
         })
@@ -97,9 +105,9 @@ export default class ToggleList extends React.Component {
             }
         );
         return (
-        <div className="my-dropdown-list toggle-list" id={this.props.listID}>
+        <div className={"my-dropdown-list toggle-list "+ (this.props.className|| '')} id={this.props.listID}>
             <div className="item-selected">
-                <a onClick={this.changeListState.bind(this)}>{this.state.name}<i className="fas fa-angle-down"></i></a>
+                <a onClick={this.changeListState.bind(this)}>{this.state.name}</a>
             </div>
             {/* Collapse or expand the drop-down list according to this.state.showListBlock; if there is no option, then always hide the option box. */}
             <div className={(this.state.showListBlock && listToShow.length>0)?"list-block":"hide list-block"} onClick={()=>{this.changeListState()}}>

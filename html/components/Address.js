@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom'
 import CustomPagination from "./common/CustomPagination"
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
-export default class BlockInfo extends React.Component {
+import Qrcode from "./common/Qrcode"
+export default class Address extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +22,7 @@ export default class BlockInfo extends React.Component {
             transactionList: [],
             rowsPerPage: 10,
             currentPage: 1,
-            infoList: [],
+            detailInfo: [],
             // nodeid: this.props.location.state.nodeid,
             // blockid: this.props.match.params.blockid,
         }
@@ -59,7 +60,7 @@ export default class BlockInfo extends React.Component {
             data: {
                 curr_page: currentPage,
                 page_size: rowsPerPage,
-                address: '0x1111'
+                address: self.state.addressID
             },
             success: function (data) {
                 self.setState({
@@ -137,7 +138,6 @@ export default class BlockInfo extends React.Component {
             currentPage: pagenum
         })
         this.getList(pagenum, this.state.rowsPerPage)
-        //console.log('jump')
     }
 
     getInfo() {
@@ -147,30 +147,28 @@ export default class BlockInfo extends React.Component {
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                // address: self.state.blockid
-                address: '0x1111'
+                address: self.state.addressID
             },
             success: function (data) {
-                // self.setState({
-                //     infoList: data.data,
-                //     node_ip: data.block_title
-                // })
-                console.log(data);
+                self.setState({
+                    detailInfo: data.return_data,
+                })
             }
         })
     }
     render() {
-        // var self = this
-        // var cutomInfoHeader = this.state.infoList.map(item =>
-        //     <div key={item[1]} className='cutomUglily-row'>
-        //         <div className='cutomUglily-title'>{item[0]} </div>
-        //         <div className='cutomUglily-content'>{item[1]}</div>
-        //     </div>
-        // )
         return (
             <div className='address-container'>
                 <SubNavbar match={this.state.subNavbarMatch}/>
+                {/* <SubNavbar match={this.state.detailInfo.address}/> */}
                 <div className="page-content">
+                    <div className="qrcode-layer">
+                        {
+                            this.state.detailInfo.address &&
+                            <Qrcode id='2' text={this.state.detailInfo.address} size="70" />
+                            // console.log(this.state.detailInfo)
+                        }
+                    </div>
                     <section className="graph-group" >
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
@@ -179,7 +177,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Received</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.received}</p>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +188,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Sent</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.sent}</p>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +199,7 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Balance</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.balance}</p>
                                 </div>
                             </div>
                         </div>
@@ -212,40 +210,40 @@ export default class BlockInfo extends React.Component {
                                 </div>
                                 <div className="text">
                                     <p>Date/Time</p>
-                                    <p>49.65 EH/s</p>
+                                    <p>{this.state.detailInfo.time}</p>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <section className="info-part">
                         <div className="title" >Advanced Info</div>
-                        <div className="info-content">
+                        <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr">Address</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.address}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Received</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.received}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Sent</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.sent}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Balance</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.balance}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr">Tx Count</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.tx_count}</span>
                                 </p>
                                 <p>
                                     <span className="attr">Date/Time</span>
-                                    <span className="value">1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q</span>
+                                    <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
                             </div>
                         </div>
@@ -260,7 +258,7 @@ export default class BlockInfo extends React.Component {
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">
-                                            <i class="fas fa-handshake"></i>
+                                            <i className="fas fa-handshake"></i>
                                             <span>
                                                 Amount
                                                 <br />
@@ -294,7 +292,10 @@ export default class BlockInfo extends React.Component {
                                     </div>
                                     <div className="address-bar">
                                         <div className="item-a">
-                                            <i className="fas fa-qrcode"></i>
+                                            {
+                                                i.output &&
+                                                <Qrcode id={index} text={i.output} size="70" />
+                                            }
                                             <span>
                                                 Address
                                                 <br />
@@ -302,7 +303,10 @@ export default class BlockInfo extends React.Component {
                                             </span>
                                         </div>
                                         <div className="item-b">
-                                            <i className="fas fa-qrcode"></i>
+                                            {
+                                                i.input &&
+                                                <Qrcode id={index + "a"} text={i.input} size="70" />
+                                            }
                                             <span>
                                                 Address
                                                 <br />
@@ -314,50 +318,8 @@ export default class BlockInfo extends React.Component {
                             )
                         }.bind(this))}
                         {
-                            !this.state.transactionList.length && <tr className="" style={{ width: '100%', height: '70px', lineHeight: '70px', background: 'transparent', border: 'none', }}><td style={{ paddingLeft: '40px', width: '100%' }}>当前没有匹配的数据。</td></tr>
+                            !this.state.transactionList.length && <div className="" style={{ width: '100%', height: '70px', lineHeight: '70px', background: 'transparent', border: 'none', }}>当前没有匹配的数据。</div>
                         }
-                       
-                        <div className="item-content customTableWarp clearfix">
-                            {/* <table className="customTable">
-                                <thead>
-                                    <tr>
-                                        <th className=""><FormattedMessage id="termAction"/></th>
-                                        <FormattedMessage id="thActor" tagName="th"/>                                
-                                        <FormattedMessage id="thPermission" tagName="th"/>                             
-                                        <FormattedMessage id="thType" tagName="th"/>                             
-                                        <FormattedMessage id="thQuantity" tagName="th"/>                             
-                                        <FormattedMessage id="thAdmin" tagName="th"/>                             
-                                        <FormattedMessage id="thTimestamp" tagName="th"/>                             
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.transactionList && this.state.transactionList.map(function (i, index) {
-                                        return (
-                                            <tr className="" key={index}>
-                                                <td className="">
-                                                    <Link to={{
-                                                        pathname:"/nodes/actions/"+i.operating_id,
-                                                        state:{nodeid:self.state.nodeid, blockid:self.state.blockid, txhash: self.state.txhash}
-                                                        }}>
-                                                        {i.operating_id}
-                                                        </Link>
-                                                </td>
-                                                <td className="">
-                                                    {i.operator}
-                                                </td>
-                                                <td className="">{i.authority}</td>
-                                                <td className="">{i.type}</td>
-                                                <td className="">{i.quantity}</td>
-                                                <td className="">{i.admin}</td>
-                                                <td className="">{i.time}</td>
-                                            </tr>
-                                        )
-                                    }.bind(this))}
-                                    {
-                                        !this.state.transactionList.length && <tr className="" style={{ width: '100%', height: '70px', lineHeight: '70px', background: 'transparent', border: 'none', }}><td style={{ paddingLeft: '40px', width: '100%' }}>当前没有匹配的数据。</td></tr>
-                                    }
-                                </tbody>
-                            </table> */}
                             <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
                                 to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.actionList?this.state.actionList.length:0)}
@@ -370,7 +332,6 @@ export default class BlockInfo extends React.Component {
                                 onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
                                 onClickJumpButton={() => this.handleJumpPage()}
                             />
-                        </div>
                     </section>
                 </div>
             </div>

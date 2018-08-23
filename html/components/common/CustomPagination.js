@@ -109,8 +109,8 @@ class CustomPagination extends React.Component {
                 </div>
                 <div className="pagination-right clearfix">
                     <Pagination
-                        prev={true}
-                        next={true}
+                        prev="Previous"
+                        next="Next"
                         first={false}
                         last={false}
                         ellipsis={true}
@@ -119,7 +119,7 @@ class CustomPagination extends React.Component {
                         maxButtons={7}
                         activePage={this.state.currentPage}
                         onSelect={this.props.onSelectPage.bind(this)} />
-                    <div className="pageCount">
+                    {/* <div className="pageCount">
                         <FormattedMessage id='paginationPageInput'>
                             {(txt) => (
                                 <input
@@ -141,7 +141,7 @@ class CustomPagination extends React.Component {
                                 value={txt} />
                             )}
                         </FormattedMessage>
-                    </div>
+                    </div> */}
                 </div>                            
             </div>
         )
