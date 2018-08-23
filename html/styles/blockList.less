@@ -107,3 +107,117 @@
     font-size: 16px;
     font-family:MoskMedium500;
 }
+
+.info-content span.trans-table-value{
+    display: inline-block;
+    width: 284px;
+    word-wrap: break-word;
+    text-align: right;
+}
+.data-code{
+    max-width:1080px;
+    background:rgba(255,255,255,1);
+    border-radius:4px;
+    border:1px solid rgba(162,162,162,1);
+    padding:18px 22px;
+    margin-bottom: 48px;
+    p{
+        font-size:16px;
+        font-family:MoskLight300;
+        color:rgba(20,42,63,1);
+        line-height:24px;
+    }
+    p.input-list0{
+        margin-bottom: 24px;
+    }
+}
+.eventLog-list{
+    width:1080px;
+    background:rgba(255,255,255,1);
+    border-radius:4px;
+    border:1px solid rgba(162,162,162,1);
+    padding:18px 22px;
+    margin-bottom: 48px;
+    p{
+        border-bottom: 1px solid rgba(203,208,211,1);
+        line-height: 40px;
+        span{
+            display: inline-block;
+            line-height: 24px;
+        }
+        .log-title{
+            width: 160px;
+            font-size:15px;
+            font-family:MoskLight300;
+            color:rgba(22,25,27,1);
+            vertical-align: top;
+        }
+        .log-value{
+            font-size:15px;
+            font-family:MoskMedium500;
+            color:rgba(22,25,27,1);
+            .fa-arrow-alt-circle-right{
+                font-size:15px;
+                color:rgba(145,153,158,1);
+                margin:0 8px;
+            }
+        }
+        .event-log-filter{
+            display: inline-block;
+        }
+
+    }
+    p:nth-child(1) .log-value{
+        font-family:MoskMedium500;
+        color:rgba(93,184,92,1);
+    }
+}
+.event-log-filter{
+    position: relative;
+    z-index: 9;
+    cursor: pointer;
+    .ipt-box{
+        width:64px;
+        height:24px;
+        border-radius:2px;
+        background:rgba(255,255,255,1);
+        border:1px solid rgba(203,208,211,1);
+        input{
+            display: inline-block;
+            width: 50px;
+            height:20px;
+            line-height: 20px;
+            border: none;
+            padding-left: 4px;
+            font-size:12px;
+            font-family:MoskMedium500;
+            color:rgba(22,25,27,1);
+            cursor: pointer;
+            background: transparent;
+        }
+        i{
+            font-size: 12px;
+        }
+    }
+    .ipt-box-hover{
+        background: rgba(246,247,249,1);;
+    }
+    .drop-list{
+        width: 100px;
+        position: absolute;
+        z-index: 9;
+        background:rgba(255,255,255,1);
+        border-radius:2px;
+        border:1px solid rgba(203,208,211,1);
+        li{
+            font-size:15px;
+            font-family:MoskMedium500;
+            color:rgba(22,25,27,1);
+            line-height:24px;
+            padding:0 8px;
+        }
+        li:hover{
+            background:rgba(246,247,249,1);
+        }
+    }
+}

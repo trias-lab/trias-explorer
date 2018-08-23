@@ -2,20 +2,16 @@ import React from "react"
 import $ from 'jquery'
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
+import Qrcode from "./common/Qrcode"
 export default class TransactionDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             transID: this.props.match.params.transID,
             subNavbarMatch: this.props.match,
-            detailInfo: [],
-            transactionList:[{
-                address: "1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q",
-                balance: 0,
-                received: 675347.32077952,
-                sent: 675347.32077952,
-                time: "2018-08-17 13:36:26",
-                tx_count: 114138}],
+            detailInfo: {},
+            transactionList:[],
+            eventLogList:[],
         }
     }
 
@@ -32,6 +28,75 @@ export default class TransactionDetail extends React.Component {
         }
     }
 
+    /*
+    * get trans details data
+    * */
+
+    getTransDetailData(){
+        var self = this
+        $.ajax({
+            url: '/api/transaction_info/',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                tx_hash:self.props.match.params.transID
+            },
+            success: function (data) {
+                let transData =  data['return_data']
+                if(data.code==200){
+                    self.setState({
+                        detailInfo:{
+                            amount_transacted: transData.amount_transacted,
+                            confirmations: transData.confirmations,
+                            fees: transData.fees,
+                            fees_rate: transData.fees_rate,
+                            input: transData.input,
+                            output: transData.output,
+                            time: transData.time,
+                            tx_hash: transData.tx_hash,
+                            tx_receipt_status:transData.tx_receipt_status,
+                            block_height:transData.block_height,
+                            value:transData.value,
+                            gas_limit:transData.gas_limit,
+                            gas_used:transData.gas_used,
+                            gas_price:transData.gas_price,
+                            actual_tx_cost:transData.actual_tx_cost,
+                            fee:transData.fee,
+                            nonce:transData.nonce,
+                            position:transData.position,
+                            input_data:transData.input_data.replace(/\n/g,'#').split('#'),
+                        },
+                        transactionList:[{
+                            amount_transacted: transData.amount_transacted,
+                            confirmations: transData.confirmations,
+                            fees: transData.fees,
+                            fees_rate: transData.fees_rate,
+                            input: transData.input,
+                            output: transData.output,
+                            time: transData.time,
+                            tx_hash: transData.tx_hash,
+                        }],
+                        eventLogList:transData.receipt,
+                    })
+                }
+                // console.log(data);
+            }
+        })
+    }
+
+    /*
+    * eventLog : data type change(filter)
+    * @param {string} filter : from Filter component dropList click
+    * */
+
+    handleFilter(filter){
+        console.log(filter)
+    }
+
+    componentWillMount(){
+        this.getTransDetailData();
+    }
+
     render() {
         return (
             <div className="address-container">
@@ -42,33 +107,33 @@ export default class TransactionDetail extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope-open"></i>
+                                    <i className="fas fa-ticket-alt"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Received</p>
-                                    <p>{this.state.detailInfo.received}</p>
+                                    <p>Amount Transacted</p>
+                                    <p>{this.state.detailInfo.amount_transacted}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope"></i>
+                                    <i className="fas fa-money-bill-wave"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Sent</p>
-                                    <p>{this.state.detailInfo.sent}</p>
+                                    <p>Fees</p>
+                                    <p>{this.state.detailInfo.fees}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-balance-scale"></i>
+                                    <i className="fas fa-lock"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Balance</p>
-                                    <p>{this.state.detailInfo.balance}</p>
+                                    <p>Confirmations</p>
+                                    <p>{this.state.detailInfo.confirmations}</p>
                                 </div>
                             </div>
                         </div>
@@ -89,36 +154,56 @@ export default class TransactionDetail extends React.Component {
                         <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">Address</span>
-                                    <span className="value">{this.state.detailInfo.address}</span>
+                                    <span className="attr">TxHash:</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Received</span>
-                                    <span className="value">{this.state.detailInfo.received}</span>
+                                    <span className="attr">TxReceipt Status</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Sent</span>
-                                    <span className="value">{this.state.detailInfo.sent}</span>
+                                    <span className="attr">Block_Height</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Balance</span>
-                                    <span className="value">{this.state.detailInfo.balance}</span>
+                                    <span className="attr">From</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.input}</span>
+                                </p>
+                                <p>
+                                    <span className="attr">To</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.output}</span>
+                                </p>
+                                <p>
+                                    <span className="attr">Value</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.value}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">Tx Count</span>
-                                    <span className="value">{this.state.detailInfo.tx_count}</span>
+                                    <span className="attr">Gas Limit</span>
+                                    <span className="value">{this.state.detailInfo.gas_limit}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Date/Time</span>
-                                    <span className="value">{this.state.detailInfo.time}</span>
+                                    <span className="attr">Gas Used By Txn</span>
+                                    <span className="value">{this.state.detailInfo.gas_used}</span>
+                                </p>
+                                <p>
+                                    <span className="attr">Gas Price</span>
+                                    <span className="value">{this.state.detailInfo.gas_limit}</span>
+                                </p>
+                                <p>
+                                    <span className="attr">Actual Tx Cost/Fee</span>
+                                    <span className="value">{this.state.detailInfo.actual_tx_cost}&nbsp;{this.state.detailInfo.fee}</span>
+                                </p>
+                                <p>
+                                    <span className="attr">Nonce & { `Position` }</span>
+                                    <span className="value">{this.state.detailInfo.nonce} & {this.state.detailInfo.position}</span>
                                 </p>
                             </div>
                         </div>
                     </section>
                     <section className="list-part">
-                        <div className="title">Transactions</div>
+                        <div className="title">Summary</div>
                         {this.state.transactionList && this.state.transactionList.map(function (i, index) {
                             return (
                                 <div className="list-item" key={index}>
@@ -161,7 +246,10 @@ export default class TransactionDetail extends React.Component {
                                     </div>
                                     <div className="address-bar">
                                         <div className="item-a">
-                                            <i className="fas fa-qrcode"></i>
+                                            {
+                                                i.output &&
+                                                <Qrcode id={index} text={i.output} size="70" />
+                                            }
                                             <span>
                                                 Address
                                                 <br />
@@ -169,7 +257,10 @@ export default class TransactionDetail extends React.Component {
                                             </span>
                                         </div>
                                         <div className="item-b">
-                                            <i className="fas fa-qrcode"></i>
+                                            {
+                                                i.input &&
+                                                <Qrcode id={index + "a"} text={i.input} size="70" />
+                                            }
                                             <span>
                                                 Address
                                                 <br />
@@ -181,10 +272,124 @@ export default class TransactionDetail extends React.Component {
                             )
                         }.bind(this))}
                         {
-                            !this.state.transactionList.length && <tr className="" style={{ width: '100%', height: '70px', lineHeight: '70px', background: 'transparent', border: 'none', }}><td style={{ paddingLeft: '40px', width: '100%' }}>当前没有匹配的数据。</td></tr>
+                            (!this.state.transactionList.length || this.state.transactionList.length==0) &&
+                            <div className="nullData">
+                                <FormattedMessage id="nullData" tagName="p"/>
+                            </div>
                         }
                     </section>
+                    <section className="input-data">
+                        <div className="title">Input Data</div>
+                        {
+                            this.state.detailInfo.input_data &&
+                            <div className="data-code">
+                                {this.state.detailInfo.input_data.map(function (item,index) {
+                                    return(
+                                        <p key={index} className={"input-list"+index}>{item}</p>
+                                    )
+                                }.bind(this))}
+                            </div>
+                        }
+                        {
+                            !this.state.detailInfo.input_data &&
+                            <div className="nullData">
+                                <FormattedMessage id="nullData" tagName="p"/>
+                            </div>
+                        }
+
+                    </section>
+                    <section className="event-log">
+                        <div className="title">Event Logs (3)</div>
+                        {
+                            this.state.eventLogList && this.state.eventLogList.map(function(log,index){
+                                return(
+                                    <div className="eventLog-list" key={index}>
+                                        <p>
+                                            <span className="log-title">Address</span>
+                                            <span className="log-value">{log.address}</span>
+                                        </p>
+                                        <p>
+                                            <span className="log-title">Name</span>
+                                            <span className="log-value">{log.name}</span>
+                                        </p>
+                                        <p>
+                                            <span className="log-title">Topics</span>
+                                            <span className="log-value">[0] : {log.topics[0]} <br/> [1] : {log.topics[1]}</span>
+                                        </p>
+                                        <p>
+                                            <span className="log-title">Data</span>
+                                            <span className="log-value">
+                                                <Filter
+                                                    dropList = {['Hex','Number','Text','Address']}
+                                                    defaultValue = {'Hex'}
+                                                    handleFilter = {this.handleFilter.bind(this)}
+                                                />
+                                                <i className="fa fa-arrow-alt-circle-right"></i>
+                                                {log.data}</span>
+                                        </p>
+                                    </div>
+                                )
+                            }.bind(this))
+                        }
+                        {
+                            (!this.state.eventLogList.length || this.state.eventLogList.length==0) &&
+                            <div className="nullData">
+                                <FormattedMessage id="nullData" tagName="p"/>
+                            </div>
+                        }
+
+                    </section>
                 </div>
+
+            </div>
+        )
+    }
+}
+
+class Filter extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            showDropList:false,
+            dropList:this.props.dropList || [this.props.defaultValue],
+            defaultValue:this.props.defaultValue || '',
+        }
+    }
+    handleToggleList(){
+        this.setState({
+            showDropList:!this.state.showDropList
+        })
+    }
+    handleSelectItem(dropList){
+        this.setState({
+            showDropList:false,
+            defaultValue:dropList,
+        })
+        //Triggers the parent component event , transfer parameters: @param {string} dropList
+        this.props.handleFilter(dropList)
+    }
+    componentWillMount(){
+
+    }
+    render(){
+        let liList = this.state.dropList.map(function(dropList,index){
+            return(
+                <li key={index} onClick={this.handleSelectItem.bind(this,dropList)}>{dropList}</li>
+            )
+        }.bind(this))
+        return(
+            <div className="event-log-filter">
+                <div className={this.state.showDropList?'ipt-box ipt-box-hover':"ipt-box"}
+                     onClick={this.handleToggleList.bind(this)}>
+                    <input value={this.state.defaultValue} readOnly={true}/>
+                    <i className="fa fa-caret-down"></i>
+                </div>
+                {
+                    this.state.showDropList &&
+                    <ul className="drop-list">
+                        {liList}
+                    </ul>
+                }
 
             </div>
         )
