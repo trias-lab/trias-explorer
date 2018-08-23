@@ -12,6 +12,11 @@ class Home extends React.Component {
             transLatest: [],
         }
         this.lineChartOption1 = {
+            tooltip: {
+                trigger: 'axis',
+                
+                formatter: '{b0}:<br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
+            },
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
@@ -44,7 +49,8 @@ class Home extends React.Component {
                 },
                 emphasis: {
                     label: true
-                }
+                },
+                
             }]
         };
 
