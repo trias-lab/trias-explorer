@@ -252,7 +252,7 @@ export default class BlockDetail extends React.Component {
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
                                         <span><FormattedMessage id="txHash"/>:</span>
-                                        <Link to={"/blocklist/"+i.tx_hash}>
+                                        <Link to={"/translist/"+i.tx_hash}>
                                             {i.tx_hash}
                                         </Link>
                                     </p>
