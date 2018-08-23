@@ -55,7 +55,8 @@ def index_latest_blocks(request):
             "height": random.randint(1543335, 2983792),
             "size": random.randint(6666, 8555),
             "rewards": round(random.randint(10, 20) / 3, 2),
-            "time": str(datetime.datetime.now() - datetime.timedelta(days=i))
+            "time": str(datetime.datetime.now() - datetime.timedelta(days=i)),
+            "block_hash": "bb337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901bb"
         })
 
     return JsonResponse({"code": 200, "size": 20, "return_data": data})
