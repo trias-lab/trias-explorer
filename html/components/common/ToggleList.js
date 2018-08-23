@@ -46,8 +46,8 @@ export default class ToggleList extends React.Component {
                     elem = elem.parentNode; 
                 }
                 // if there is a angle icon in the toggle button, toggle it up
-                if($('#' + this.props.listID + ' .item-selected>a').find('.fa-angle-down').length >0){
-                    $('#' + this.props.listID + ' .item-selected>a i.fa-angle-down').toggleClass('fa-angle-down').toggleClass('fa-angle-up')
+                if($('#' + self.props.listID + ' .item-selected>a').find('.fa-angle-down').length >0){
+                    $('#' + self.props.listID + ' .item-selected>a i.fa-angle-down').toggleClass('fa-angle-down').toggleClass('fa-angle-up')
                 }
                 self.setState({ // collapse drop-down list
                     showListBlock:false
