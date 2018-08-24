@@ -33,10 +33,9 @@ def index_base_info(request):
     hash_rate = url_data(url, "eth_hashrate", []).get('result', '0x0')
     last_block = url_data(url, "eth_blockNumber", [])['result']
     last_block_info = url_data(url, "eth_getBlockByNumber", [last_block, True])['result']
-
     data = {
                 "hash_rate": hex2int(hash_rate),
-                "difficulty": hex2int(last_block_info['totalDifficulty']),
+                "difficulty": str(hex2int(last_block_info['totalDifficulty'])),
                 "mining_earnings": 0.3936,
                 "last_block": hex2int(last_block),
                 "total_supply": 358183.16,
