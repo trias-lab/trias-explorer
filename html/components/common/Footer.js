@@ -98,9 +98,21 @@ class Footer extends React.Component {
                     </div>
                     <div className="links pull-right">
                         <div className="docs">
-                            <h2>linklinklink</h2>
+                            <FormattedMessage id="blockchainExplorer" tagName="h2"/>
                             <div className="link">
-                                I am a link.
+                                <a href="/" target="blank">
+                                    <FormattedMessage id="wallet" />
+                                </a>
+                            </div>
+                            <div className="link">
+                                <Link to="/blocklist">
+                                    <FormattedMessage id="block" />
+                                </Link>
+                            </div>
+                            <div className="link">
+                                <a href="https://explorer.trias.one/" target="blank">
+                                    <FormattedMessage id="monitor" />
+                                </a>
                             </div>
                         </div>
                         {/* <div className="about-us"></div> */}

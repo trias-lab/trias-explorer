@@ -5,6 +5,7 @@ const zh_CN = {
     iptSearchPlaceholder: "搜索账户地址/ TxHash /区块高度",
     btnSearch: "搜索",
     title: "Trias 区块链浏览器",
+    blockchainExplorer: "区块链浏览器",
     block: "区块",
     blocks: "区块列表",
     transaction: "交易",

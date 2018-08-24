@@ -5,6 +5,7 @@ const en_US = {
     iptSearchPlaceholder: "Search by Address / TxHash / Height",
     btnSearch: "Search",
     title: "Trias Blockchain Explorer",
+    blockchainExplorer: "Blockchain Explorer",
     block: "Block",
     blocks: "Blocks",
     transaction: "Transaction",
