@@ -222,3 +222,49 @@
         display: inline-block;
     }
 }
+
+@media screen and (max-width: 1000px){
+    .address-container .page-content{
+        padding: 0 20px;
+        .info-part .info-content{
+            padding: 24px 0;
+        }
+        .info-part .info-content .info-col:nth-child(1){
+            border: none;
+            >p:last-child{
+                border-bottom: none;
+            }
+        }
+        .info-part .info-content .info-col:nth-child(2){
+            p:nth-child(2n+1){
+                background: inherit;
+            }
+            p:nth-child(2n){
+                background: #f9fafb;
+            }
+        }
+        .graph-group{
+            .stats-col{
+                margin-bottom: 24px;
+            }
+        }
+        .list-part .list-item{
+            .item-title{
+                line-height: 32px;
+                a{
+                    word-break: break-all;
+                }
+            }
+            .address-bar{
+                .item-b,
+                .item-a{
+                    width: 100%;
+                    min-width: auto;
+                    span{
+                        min-width: auto;
+                    }
+                }
+            }            
+        } 
+    }
+}

@@ -358,8 +358,9 @@ body {
     background-size: 100vw 268px;
     background-size: cover;
     .center-box{
+        padding: 84px 20px 0;
         padding-top: 84px;
-        max-width: 1080px;
+        max-width: 1120px;
         margin: 0 auto;
         h1{
             font-size:30px;
@@ -382,6 +383,7 @@ body {
                 font-family:MoskBold700;
                 color:rgba(93,184,92,1);
                 line-height:24px;
+                word-break: break-all;
             }
             a.active{
                 font-size:16px;
@@ -436,6 +438,9 @@ body {
 
 /* styles for common sub navbar --------------------------end */
 @media screen and (max-width: 1000px) {
+    #app main{
+        padding-top: 143px;
+    }
     .header{
         height: 153px;        
         width: 100vw;
@@ -464,11 +469,7 @@ body {
         .mobile{
             display: block!important;
         }    
-    }
-
-    #app main{
-        padding-top: 143px;
-    }
+    }    
 }
 
 @media screen and (max-width: 768px) {
