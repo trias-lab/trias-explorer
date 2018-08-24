@@ -58,41 +58,7 @@ class BlockList extends React.Component {
         this.getBlockList(pagenum, this.state.rowsPerPage)
         //console.log(pagenum)
     }
-
-    /**
-     * input in page and jump
-     */
-    onChangeInputPage(e) {
-        var re = /^[0-9]+$/
-        var pagenum = e.target.value      //get put in page num
-        //如果输入的页码不为空,并且如果输入的页码不符合规范(不是正整数，或者大于最大页码)
-        if (pagenum != "" && (!re.test(pagenum) || pagenum == 0 || pagenum > this.state.pageCount)) {
-            $('#inputPageNum').val('');   //清空输入框的内容
-        }
-    }
-    /**
-     * enter page and jump
-     * @return {[type]} [description]
-     */
-    jumpPageKeyDown(e) {
-        if (e.keyCode === 13) {           //if enter key
-            this.handleJumpPage()
-        }
-    }
-
-    /**
-     * click select page
-     */
-    handleJumpPage() {
-        var pagenum = parseInt($('#inputPageNum').val())
-        this.setState({
-            currentPage: pagenum
-        })
-        this.getBlockList(pagenum, this.state.rowsPerPage)
-        //console.log('jump')
-    }
-
-
+    
     /*
     * get block list
     * */
@@ -166,20 +132,17 @@ class BlockList extends React.Component {
                                         }.bind(this))
                                     }
                                     </tbody>
-                                </table>
-                                <CustomPagination
-                                    from={(this.state.currentPage - 1) * this.state.rowsPerPage}
-                                    to={this.state.currentPage * this.state.rowsPerPage }
-                                    totalItemsCount={this.state.totalItemsCount}
-                                    totalPagesCount={this.state.pageCount}
-                                    currentPage={this.state.currentPage}
-                                    onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
-                                    onSelectPage={(e) => this.handleSelectPage(e)}
-                                    onChangePageInput={(e) => this.onChangeInputPage(e)}
-                                    onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
-                                    onClickJumpButton={() => this.handleJumpPage()}
-                                />
+                                </table>                                
                             </div>
+                            <CustomPagination
+                                from={(this.state.currentPage - 1) * this.state.rowsPerPage}
+                                to={this.state.currentPage * this.state.rowsPerPage }
+                                totalItemsCount={this.state.totalItemsCount}
+                                totalPagesCount={this.state.pageCount}
+                                currentPage={this.state.currentPage}
+                                onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
+                                onSelectPage={(e) => this.handleSelectPage(e)}
+                            />
                         </div>
                     </div>
                 }
