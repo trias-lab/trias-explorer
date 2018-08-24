@@ -138,12 +138,12 @@ class BlockList extends React.Component {
                                 <table>
                                     <thead>
                                     <tr>
-                                        <td>height</td>
-                                        <td>Tx Count</td>
-                                        <td>Size (bytes)</td>
-                                        <td>Avg Fee Per Tx</td>
-                                        <td>Reward</td>
-                                        <td>Time</td>
+                                        <FormattedMessage id="height" tagName="td"/>
+                                        <FormattedMessage id="txCount" tagName="td"/>
+                                        <td><FormattedMessage id="size"/> (bytes)</td>
+                                        <FormattedMessage id="avgFeePerTx" tagName="td"/>
+                                        <FormattedMessage id="reward" tagName="td"/>
+                                        <FormattedMessage id="time" tagName="td"/>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -137,13 +137,13 @@ class TransactionList extends React.Component {
                             <table>
                                 <thead>
                                 <tr>
-                                    <td>TxHash</td>
-                                    <td>Block</td>
+                                    <FormattedMessage id="txHash" tagName="td"/>
+                                    <FormattedMessage id="block" tagName="td"/>
                                     <td>From</td>
                                     <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
                                     <td>To</td>
-                                    <td>Value</td>
-                                    <td>Time</td>
+                                    <FormattedMessage id="value" tagName="td"/>
+                                    <FormattedMessage id="time" tagName="td"/>                                    
                                 </tr>
                                 </thead>
                                 <tbody>
