@@ -40,17 +40,17 @@ class Home extends React.Component {
                     normal: {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                             offset: 0,
-                            color: 'rgba(93,184,92,0.16)'
+                            color: '#5DB85C'
                         }, {
                             offset: 1,
-                            color: 'rgba(93,184,92,0.16)'
+                            color: '#5DB85C'
                         }], false),
-                        opacity: 0.8,
+                        opacity: 0.16,
                     }
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(161,252,58)',
+                        color: '#5DB85C',
                     }
                 },
                 emphasis: {
@@ -82,17 +82,17 @@ class Home extends React.Component {
                     normal: {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                             offset: 0,
-                            color: 'rgba(93,184,92,0.16)'
+                            color: '#5DB85C'
                         }, {
                             offset: 1,
-                            color: 'rgba(93,184,92,0.16)'
+                            color: '#5DB85C'
                         }], false),
-                        opacity: 0.8,
+                        opacity: 0.16,
                     }
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(161,252,58)',
+                        color: '#5DB85C',
                     }
                 },
                 emphasis: {
