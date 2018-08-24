@@ -110,8 +110,8 @@ class BlockList extends React.Component {
                 if(data.code==200){
                     self.setState({
                         blockList:data.return_data,
-                        totalItemsCount: self.state.rowsPerPage * data.total_page ,
                         pageCount: data.total_page,
+                        totalItemsCount:data.total_size,
                     })
                 }
                 // console.log(data);

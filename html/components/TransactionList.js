@@ -108,11 +108,11 @@ class TransactionList extends React.Component {
                 if(data.code==200){
                     self.setState({
                         transList:data.return_data,
-                        totalItemsCount: self.state.rowsPerPage * data.total_page ,
+                        totalItemsCount: data.total_size,
                         pageCount: data.total_page,
                     })
                 }
-                console.log(data);
+                // console.log(data);
             }
         })
     }
