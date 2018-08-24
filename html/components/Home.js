@@ -10,11 +10,18 @@ class Home extends React.Component {
             lang: this.props.intl.locale,
             blocksLatest: [],
             transLatest: [],
+            hash_rate: "未获取到数据",
+            difficulty: "未获取到数据",
+            mining_earnings: "未获取到数据",
+            last_block: "未获取到数据",
+            total_supply: "未获取到数据",
+            transactions: "未获取到数据",
+
         }
         this.lineChartOption1 = {
             tooltip: {
                 trigger: 'axis',
-                formatter: '{b0}:<br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
+                formatter: ' <span style="color:#9CA2AB;font-size:12px;">{b0} </span><br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
             },
             xAxis: {
                 type: 'category',
@@ -56,7 +63,7 @@ class Home extends React.Component {
         this.lineChartOption2 = {
             tooltip: {
                 trigger: 'axis',
-                formatter: '{b0}:<br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
+                formatter: ' <span style="color:#9CA2AB;font-size:12px;">{b0} </span> <br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
             },
             xAxis: {
                 type: 'category',
@@ -242,7 +249,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <section className="text-center main-title ">
+                <section className="row text-center main-title ">
                     <div>
                         <FormattedMessage id="title" tagName="h1" />
                         <p><i className="fa fa-thumbs-up"></i> by Trias-lab Foundation</p>
@@ -262,7 +269,7 @@ class Home extends React.Component {
                                         </p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre'> {this.state.hash_rate}EH/s</p>
+                                <p className='item-pre' title={this.state.hash_rate}> {this.state.hash_rate}EH/s</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -275,7 +282,7 @@ class Home extends React.Component {
                                     <p className='item-tit'> {txt}</p>
                                 )}
                                  </FormattedMessage>
-                                <p className='item-pre'> {this.state.difficulty} EH/s</p>
+                                <p className='item-pre' title={`${this.state.difficulty} T`}> {this.state.difficulty} T</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -288,7 +295,7 @@ class Home extends React.Component {
                                     <p className='item-tit'> {txt}</p>
                                 )}
                                  </FormattedMessage>
-                                <p className='item-pre'> {this.state.mining_earnings} EH/s</p>
+                                <p className='item-pre' title={`${this.state.mining_earnings} BTC`}> {this.state.mining_earnings} BTC</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -301,7 +308,7 @@ class Home extends React.Component {
                                     <p className='item-tit'> {txt}</p>
                                 )}
                                  </FormattedMessage>
-                                <p className='item-pre'> {this.state.last_block}</p>
+                                <p className='item-pre' title={`# ${this.state.last_block}`}> #{this.state.last_block}</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -314,7 +321,7 @@ class Home extends React.Component {
                                     <p className='item-tit'> {txt}</p>
                                 )}
                                  </FormattedMessage>
-                                <p className='item-pre'> {this.state.total_supply}</p>
+                                <p className='item-pre' title={this.state.total_supply}> {this.state.total_supply}</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -327,7 +334,7 @@ class Home extends React.Component {
                                     <p className='item-tit'> {txt}</p>
                                 )}
                                  </FormattedMessage>
-                                <p className='item-pre'> {this.state.transactions} M</p>
+                                <p className='item-pre' title={`${this.state.transactions}M`}> {this.state.transactions} M</p>
                             </div>
                         </div>
                     </section>
@@ -345,10 +352,10 @@ class Home extends React.Component {
                                      </div>
                                 </div>
                                 <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6" style={{ paddingLeft: '35px' }}>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px'}}>
                                         {this.state.transaction_fees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
                                     </div>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6" style={{ paddingLeft: '35px' }}>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px' }}>
                                         {this.state.tx_rate} txs/s
                                     </div>
                                 </div>
@@ -373,10 +380,10 @@ class Home extends React.Component {
                                      </div>
                                 </div>
                                 <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6" style={{ paddingLeft: '35px' }}>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px' }}>
                                         {this.state.unconfirmed_txs}
                                     </div>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6" style={{ paddingLeft: '35px' }}>
+                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px'}}>
                                         {this.state.tansaction_celerator} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
                                     </div>
                                 </div>
@@ -426,11 +433,11 @@ class Home extends React.Component {
                                                             <p className="other clearfix">
                                                                 <span style={{ width: '60%' }}>
                                                                     <span className="key">Size:</span>
-                                                                    <span className="value">{item.size}</span>
+                                                                    <span className="value"  title={item.size}>{item.size}</span>
                                                                 </span>
                                                                 <span style={{ width: '35%' }}>
                                                                     <span className="key keyReward">Reward:</span>
-                                                                    <span className="value valueReward">{item.rewards}</span>
+                                                                    <span className="value valueReward" title={item.rewards}>{item.rewards}</span>
                                                                 </span>
                                                             </p>
                                                         </div>
@@ -471,11 +478,11 @@ class Home extends React.Component {
                                                             <p className="other clearfix">
                                                                 <span style={{ width: '60%' }}>
                                                                     <span className="key">From:</span>
-                                                                    <span className="value">{item.from}</span>
+                                                                    <span className="value" title={item.from}>{item.from}</span>
                                                                 </span>
                                                                 <span style={{ width: '35%' }}>
                                                                     <span className="key">To:</span>
-                                                                    <span className="value">{item.to}</span>
+                                                                    <span className="value" title={item.to}>{item.to}</span>
                                                                 </span>
                                                             </p>
                                                         </div>
