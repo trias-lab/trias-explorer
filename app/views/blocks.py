@@ -7,7 +7,7 @@ from app.utils.block_util import url_data, stamp2datetime, hex2int
 from app.utils.localconfig import JsonConfiguration
 
 jc = JsonConfiguration()
-url = "http://%s:%s" % (jc.ip, jc.port)
+url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
 
 
 def all_blocks(request):

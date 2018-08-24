@@ -13,5 +13,7 @@ class JsonConfiguration:
             rec = conf.read()
         records = json.loads(rec)
 
-        self.ip = records["ip"]
-        self.port = records["port"]
+        self.eth_ip = records["eth_ip"]
+        self.eth_port = records["eth_port"]
+        self.mysql_ip = records["mysql_ip"]
+        self.mysql_port = records["mysql_port"]

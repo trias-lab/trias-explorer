@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import json
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -86,13 +87,20 @@ STATICFILES_DIRS = [
 ]
 
 CONF_JSON = STATICFILES_DIRS[1] + "/conf.json"
-
+with open(CONF_JSON, 'r') as conf:
+    rec = conf.read()
+records = json.loads(rec)
 
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': records['mysql_database'],
+        'USER': records["mysql_user"],
+        'PASSWORD': records["mysql_password"],
+        'HOST': records["mysql_ip"],
+        'PORT': records["mysql_port"],
+        'CONN_MAX_AGE': 180
     }
 }
 
