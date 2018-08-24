@@ -58,14 +58,14 @@ export default class Address extends React.Component {
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                curr_page: currentPage,
-                page_size: rowsPerPage,
+                page: currentPage,
+                size: rowsPerPage,
                 address: self.state.addressID
             },
             success: function (data) {
                 self.setState({
                     transactionList: data.return_data,
-                    totalItemsCount: data.size,
+                    totalItemsCount: data.total_size,
                     pageCount: data.total_page,
                 })
             }
@@ -326,7 +326,7 @@ export default class Address extends React.Component {
                         }
                             <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
-                                to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.actionList?this.state.actionList.length:0)}
+                                to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
                                 totalItemsCount={this.state.totalItemsCount}
                                 totalPagesCount={this.state.pageCount}
                                 currentPage={this.state.currentPage}
