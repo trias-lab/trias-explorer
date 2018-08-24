@@ -21,6 +21,9 @@ def all_blocks(request):
     size = request.GET.get("size", 50)
     page = request.GET.get("page", 1)
 
+    last_block = url_data(url, "eth_blockNumber", [])['result']
+    last_block_info = url_data(url, "eth_getBlockByNumber", [last_block, True])['result']
+
     try:
         size = int(size)
         page = int(page)
@@ -33,22 +36,22 @@ def all_blocks(request):
 
     total_data = [
                 {
-                    "block_hash": "bb337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901bb",
-                    "height": 22222,
+                    "block_hash": last_block_info['hash'],
+                    "height": hex2int(last_block),
                     "tx_count": 8493,
                     "size": 129322,
                     "avg_fee_per_tx": 0.000000332,
                     "time": "2018-08-17 17:38:48",
                     "reward": 12.5
                 }
-            ] * 500
+            ] * (hex2int(last_block)+1)
 
     pag = Paginator(total_data, size)
     if page > pag.num_pages:
         page = 1
     data = pag.page(page).object_list
 
-    return JsonResponse({"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200, "total_size": hex2int(last_block)+1, "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 def block_info(request):
