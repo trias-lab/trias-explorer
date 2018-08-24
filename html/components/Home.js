@@ -329,7 +329,7 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-handshake"></i>
                                 </div>
-                                <FormattedMessage id="transaction">
+                                <FormattedMessage id="transactionCount">
                                 {(txt) => (
                                     <p className='item-tit'> {txt}</p>
                                 )}

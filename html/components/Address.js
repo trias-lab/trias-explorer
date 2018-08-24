@@ -289,7 +289,7 @@ export default class Address extends React.Component {
                                             <span>
                                                 <FormattedMessage id="status"/>
                                                 <br />
-                                                <b>{i.confirmations} Confirmation</b>
+                                                <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
                                             </span>
                                         </div>
                                     </div>

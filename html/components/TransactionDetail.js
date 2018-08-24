@@ -132,7 +132,7 @@ export default class TransactionDetail extends React.Component {
                                     <i className="fas fa-lock"></i>
                                 </div>
                                 <div className="text">
-                                    <FormattedMessage id="confirmations" tagName="p"/>
+                                    <FormattedMessage id="confirmationsSum" tagName="p"/>
                                     <p>{this.state.detailInfo.confirmations}</p>
                                 </div>
                             </div>

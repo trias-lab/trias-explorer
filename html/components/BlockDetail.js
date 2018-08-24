@@ -177,7 +177,7 @@ export default class BlockDetail extends React.Component {
                                     <span className="value">{this.state.detailInfo.height}</span>
                                 </p>
                                 <p>
-                                    <span className="attr"><FormattedMessage id="confirmations" /></span>
+                                    <span className="attr"><FormattedMessage id="confirmationsSum" /></span>
                                     <span className="value">{this.state.detailInfo.confirmations}</span>
                                 </p>
                                 <p>
