@@ -106,7 +106,7 @@ def serach(request):
         return JsonResponse({"code": 201, "message": ''})
 
     try:
-        num = hex(key)
+        num = hex(int(key))
         isBlock = url_data(url, "eth_getBlockByNumber", [num, True]).get('result')
         if isBlock:
             return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock['hash']})
