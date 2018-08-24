@@ -54,7 +54,7 @@ def address_transactions(request):
         size = 3
         page = 1
 
-    transactions =  [
+    transactions = [
         {
             "amount_transacted": 0.44662462,
             "fees": 0.00090000,
