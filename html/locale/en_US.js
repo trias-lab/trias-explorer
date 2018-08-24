@@ -62,6 +62,19 @@ const en_US = {
     received:'Received',
     sent:'Sent',
     balance:'Balance',
+    amountTransacted:"Amount Transacted",
+    txReceiptStatus: "TxReceipt Status",
+    gasLimit: "Gas Limit",   
+    gasUsedByTxn:"Gas Used By Txn",
+    gasPrice: "Gas Price",
+    actualTxCostFee:"Actual Tx Cost/Fee",
+    noncePosition:"Nonce & {Position}",
+    summary: "Summary",
+    inputData: "Input Data",
+    eventLogs: "Event Logs ({num})",
+    name: "Name",
+    topics: "Topics",
+    data: "Data",
 }
 
 export default en_US;

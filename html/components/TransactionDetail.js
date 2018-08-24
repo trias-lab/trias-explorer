@@ -85,11 +85,10 @@ export default class TransactionDetail extends React.Component {
         })
     }
 
-    /*
-    * eventLog : data type change(filter)
-    * @param {string} filter : from Filter component dropList click
-    * */
-
+    /**
+     * eventLog : data type change(filter)
+     * @param {string} filter : from Filter component dropList click
+     */
     handleFilter(filter){
         console.log(filter)
     }
@@ -111,7 +110,7 @@ export default class TransactionDetail extends React.Component {
                                     <i className="fas fa-ticket-alt"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Amount Transacted</p>
+                                    <FormattedMessage id="amountTransacted" tagName="p"/>
                                     <p>{this.state.detailInfo.amount_transacted}</p>
                                 </div>
                             </div>
@@ -122,7 +121,7 @@ export default class TransactionDetail extends React.Component {
                                     <i className="fas fa-money-bill-wave"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Fees</p>
+                                    <FormattedMessage id="fees" tagName="p"/>
                                     <p>{this.state.detailInfo.fees}</p>
                                 </div>
                             </div>
@@ -133,7 +132,7 @@ export default class TransactionDetail extends React.Component {
                                     <i className="fas fa-lock"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Confirmations</p>
+                                    <FormattedMessage id="confirmations" tagName="p"/>
                                     <p>{this.state.detailInfo.confirmations}</p>
                                 </div>
                             </div>
@@ -144,26 +143,26 @@ export default class TransactionDetail extends React.Component {
                                     <i className="fas fa-calendar-alt"></i>
                                 </div>
                                 <div className="text">
-                                    <p>Date/Time</p>
+                                    <FormattedMessage id="dateAndTime" tagName="p"/>
                                     <p>{this.state.detailInfo.time}</p>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <section className="info-part">
-                        <div className="title" >Advanced Info</div>
+                        <div className="title" ><FormattedMessage id="advancedInfo"/></div>
                         <div className="info-content clearfix">
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">TxHash:</span>
+                                    <span className="attr"><FormattedMessage id="txHash"/>:</span>
                                     <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">TxReceipt Status</span>
+                                    <span className="attr"><FormattedMessage id="txReceiptStatus"/></span>
                                     <span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Block_Height</span>
+                                    <span className="attr"><FormattedMessage id="height"/></span>
                                     <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
                                 </p>
                                 <p>
@@ -175,49 +174,50 @@ export default class TransactionDetail extends React.Component {
                                     <span className="value trans-table-value">{this.state.detailInfo.output}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Value</span>
+                                    <span className="attr"><FormattedMessage id="value"/></span>
                                     <span className="value trans-table-value">{this.state.detailInfo.value}</span>
                                 </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
-                                    <span className="attr">Gas Limit</span>
+                                    <span className="attr"><FormattedMessage id="gasLimit"/></span>
                                     <span className="value">{this.state.detailInfo.gas_limit}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Gas Used By Txn</span>
+                                    <span className="attr"><FormattedMessage id="gasUsedByTxn"/></span>
                                     <span className="value">{this.state.detailInfo.gas_used}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Gas Price</span>
-                                    <span className="value">{this.state.detailInfo.gas_limit}</span>
+                                    <span className="attr"><FormattedMessage id="gasPrice"/></span>
+                                    <span className="value">{this.state.detailInfo.gas_price}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Actual Tx Cost/Fee</span>
+                                    <span className="attr"><FormattedMessage id="actualTxCostFee"/></span>
                                     <span className="value">{this.state.detailInfo.actual_tx_cost}&nbsp;{this.state.detailInfo.fee}</span>
                                 </p>
                                 <p>
-                                    <span className="attr">Nonce & { `Position` }</span>
-                                    <span className="value">{this.state.detailInfo.nonce} & {this.state.detailInfo.position}</span>
+                                    <span className="attr"><FormattedMessage id="noncePosition"/></span>
+                                    <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.position}{'}'}</span>
                                 </p>
                             </div>
                         </div>
                     </section>
                     <section className="list-part">
-                        <div className="title">Summary</div>
+                        <div className="title"><FormattedMessage id="summary"/></div>
                         {this.state.transactionList && this.state.transactionList.map(function (i, index) {
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
+                                        <span><FormattedMessage id="txHash"/>:</span>
                                         <Link to={"/translist/"+i.tx_hash}>
-                                        <span>Txhash:</span>{i.tx_hash}
+                                            {i.tx_hash}
                                         </Link>
                                     </p>
                                     <div className="detail-group">
                                         <div className="detail-item">
                                             <i className="fas fa-handshake"></i>
                                             <span>
-                                                Amount
+                                                <FormattedMessage id="amount"/>
                                                 <br />
                                                 <b>{i.amount_transacted}</b>
                                             </span>
@@ -225,7 +225,7 @@ export default class TransactionDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-money-bill-wave"></i>
                                             <span>
-                                                Fees
+                                                <FormattedMessage id="fees"/>
                                                 <br />
                                                 <b>{i.fees}</b>
                                             </span>
@@ -233,7 +233,7 @@ export default class TransactionDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-calendar-alt"></i>
                                             <span>
-                                                Time
+                                                <FormattedMessage id="time"/>
                                                 <br />
                                                 <b>{i.time}</b>
                                             </span>
@@ -241,9 +241,9 @@ export default class TransactionDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-fingerprint"></i>
                                             <span>
-                                                Status
+                                                <FormattedMessage id="status"/>
                                                 <br />
-                                                <b>{i.confirmations} Confirmation</b>
+                                                <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
                                             </span>
                                         </div>
                                     </div>
@@ -254,7 +254,7 @@ export default class TransactionDetail extends React.Component {
                                                 <Qrcode id={index} text={i.output} size="70" />
                                             }
                                             <span>
-                                                Address
+                                                <FormattedMessage id="address"/>
                                                 <br />
                                                 <Link to={'/address/'+i.output}>
                                                     <b>{i.output}</b>
@@ -267,7 +267,7 @@ export default class TransactionDetail extends React.Component {
                                                 <Qrcode id={index + "a"} text={i.input} size="70" />
                                             }
                                             <span>
-                                                Address
+                                                <FormattedMessage id="address"/>
                                                 <br />
                                                 <Link to={'/address/'+i.input}>
                                                     <b>{i.input}</b>
@@ -286,7 +286,7 @@ export default class TransactionDetail extends React.Component {
                         }
                     </section>
                     <section className="input-data">
-                        <div className="title">Input Data</div>
+                        <div className="title"><FormattedMessage id="inputData"/></div>
                         {
                             this.state.detailInfo.input_data &&
                             <div className="data-code">
@@ -306,27 +306,27 @@ export default class TransactionDetail extends React.Component {
 
                     </section>
                     <section className="event-log">
-                        <div className="title">Event Logs (3)</div>
+                        <div className="title"><FormattedMessage id="eventLogs" values={{num:this.state.eventLogList.length}}/></div>
                         {
                             this.state.eventLogList && this.state.eventLogList.map(function(log,index){
                                 return(
                                     <div className="eventLog-list" key={index}>
                                         <p>
-                                            <span className="log-title">Address</span>
+                                            <span className="log-title"><FormattedMessage id="address" /></span>
                                             <span className="log-value">
                                                 <Link to={'/address/'+log.address}>{log.address}</Link>
                                             </span>
                                         </p>
                                         <p>
-                                            <span className="log-title">Name</span>
+                                            <span className="log-title"><FormattedMessage id="name"/></span>
                                             <span className="log-value">{log.name}</span>
                                         </p>
                                         <p>
-                                            <span className="log-title">Topics</span>
+                                            <span className="log-title"><FormattedMessage id="topics" /></span>
                                             <span className="log-value">[0] : {log.topics[0]} <br/> [1] : {log.topics[1]}</span>
                                         </p>
                                         <p>
-                                            <span className="log-title">Data</span>
+                                            <span className="log-title"><FormattedMessage id="data"/></span>
                                             <span className="log-value">
                                                 <Filter
                                                     dropList = {['Hex','Number','Text','Address']}

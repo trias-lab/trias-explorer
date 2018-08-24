@@ -36,7 +36,7 @@ const zh_CN = {
     latestBlocks:"最新区块",
     latestTransactions :"最新交易",
     viewAll:'查看全部 ',
-    height:"高度",
+    height:"块高度",
     avgFeePerTx: "平均交易费用",
     reward: "块收益",
     value: "价值",
@@ -62,6 +62,19 @@ const zh_CN = {
     received:'入账',
     sent:'出帐',
     balance:'余额',
+    amountTransacted:"交易总额",
+    txReceiptStatus: "TxReceipt 状态",
+    gasLimit: "燃料总量",   
+    gasUsedByTxn:"燃料用量",
+    gasPrice: "燃料价格",
+    actualTxCostFee:"实际交易花费",
+    noncePosition:"Nonce & {Position}",
+    summary: "概要",
+    inputData: "输入数据",
+    eventLogs: "事件日志（{num}）",
+    name: "名称",
+    topics: "主题",
+    data: "数据",
 }
 
 export default zh_CN;
