@@ -6,23 +6,30 @@
 
 .home-page {
     position: relative;
-    top: -100px;
-    max-width: 1120px;
+    top: -90px;
+    max-width: 1104px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 12px;
 }
 
 .home-echarts {
     // background:rgba(255,255,255,1);
     border-radius: 4px;
     border: 1px solid rgba(161, 171, 177, 1);
-    margin-top: 24px;
+    // margin-top: 24px;
     .chart-title {
         padding: 14px 12px;
         font-size: 15px;
         font-family: MoskLight300;
         color: #717C88;
         line-height: 22px;
+    }
+    .chart-value{
+        font-size:20px;
+        font-family:MoskMedium500;
+        color:rgba(20,42,63,1);
+        line-height:32px;
+        padding-left: 35px;
     }
 }
 
@@ -44,7 +51,7 @@
         font-family: MoskLight300;
         color: #142A3F;
         line-height: 35px;
-        padding-top: 80px;
+        padding-top: 84px;
     }
     p {
         font-size: 16px;
@@ -142,7 +149,7 @@
                 i {
                     position: absolute;
                     bottom: 11px;
-                    right: 12px;
+                    left: 22px;
                 }
             }
             p {
@@ -167,11 +174,15 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             height: 678px;
-            padding: 28px 7px;
+            padding: 28px 11px;
             overflow: auto;
         }
         >ul>li {
-            height: 74px;
+            margin-bottom: 18px;
+            >a>div.col{
+                padding-left: 11px;
+                padding-right: 11px;
+            }
             .name {
                 height: 58px;
                 background: rgba(242, 245, 247, 1);
@@ -198,11 +209,11 @@
                         font-size: 15px;
                         font-family: MoskMedium500;
                         color: #16191b;
-                        margin-left: 14%;
+                        // margin-left: 14%;
                         line-height: 30px;
                         top: -6px;
                         display: block;
-                        width: 60%;
+                        width: 50%;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis
@@ -233,9 +244,10 @@
                         .key {
                             font-size: 15px;
                             font-family: MoskLight300;
-                            color: rgba(20, 42, 63, 1);
+                            color: #717C88;
                             line-height: 24px;
                             width: 20%;
+                            margin-right: 1%;
                             display: block;
                             float: left
                         }
@@ -244,7 +256,7 @@
                             font-family: MoskLight300;
                             color: rgba(20, 42, 63, 1);
                             line-height: 24px;
-                            width: 80%;
+                            width: 79%;
                             display: block;
                             float: left;
                             white-space: nowrap;
@@ -252,7 +264,8 @@
                             text-overflow: ellipsis
                         }
                         .keyReward {
-                            width: 50%;
+                            width: 49%;
+                            margin-right: 1%;
                         }
                         .valueReward {
                             width: 50%;
@@ -266,27 +279,61 @@
         }
     }
 }
-
-@media screen and (max-width: 768px) {
-    .home-page-list  .latest-list .other {
-        >span {
-            width: 100% !important;
-            margin: 0 !important;
-            >span {
-                width: 50% !important;
-            }
+@media screen and (max-width: 1080px){
+    .home-page {
+        top: -76px;
+        .row .col:nth-child(2) .home-echarts{
+            margin-top: 24px;
         }
     }
-    .home-page-list .name {
-        height: 65px !important;
-        >div {
-            bottom: 20px !important;
-            i {
-                width: 100% !important;
-                text-align: center;
-            }
-            span {
-                width: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+    .home-page-list .latest-list .block-list{
+        padding: 0;
+        padding-top:14px;
+        >li{
+            margin-bottom: 14px;
+            >a{
+                >div.col:nth-child(1){
+                    min-width: 162px;
+                    .name {
+                        height: 82px !important;
+                        >div {
+                            bottom: -11px !important;
+                            i {
+                                text-align: center;
+                            }
+                            span {
+                            }
+                        }
+                    }
+                }
+                >div.col:nth-child(2){
+                    max-width: calc(~"100% - 162px");
+                    padding-left: 0;
+                    .timestamp{
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .other {
+                        >span {
+                            width: 100% !important;
+                            margin: 0 !important;
+                            .key{
+                                width: auto;
+                                margin-right: 4px;
+                            }
+                            .value{
+                                width: 66%;
+                            }
+                            .valueReward{
+                                width: 50%;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

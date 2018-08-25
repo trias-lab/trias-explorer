@@ -404,27 +404,30 @@ class Home extends React.Component {
                     <section className="row">
                         <div className="col col-xs-12 col-sm-12 col-md-6 col-xl-6">
                             <div className='home-echarts'>
-                                <div className="chart-title row">
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>    <FormattedMessage id="currentBest" />
-                                       
+                                <div className="row">
+                                    <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
+                                        <p className="chart-title">
+                                            <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
+                                            <FormattedMessage id="currentBest" />
+                                        </p>
+                                        <p className="chart-value">
+                                            {this.state.transaction_fees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
+                                        </p>                                       
                                     </div>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>  <FormattedMessage id="rate24" />
+                                    <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
+                                        <p className="chart-title">
+                                            <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
+                                            <FormattedMessage id="rate24" />
+                                        </p>
+                                        <p className="chart-value">
+                                            {this.state.tx_rate} txs/s
+                                        </p>
                                      </div>
                                 </div>
-                                <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px'}}>
-                                        {this.state.transaction_fees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
-                                    </div>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px' }}>
-                                        {this.state.tx_rate} txs/s
-                                    </div>
-                                </div>
-
                                 <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
-                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i> <FormattedMessage id="history14" />
+                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>
+                                        <FormattedMessage id="history14" />
                                     </div>
                                 </div>
                                 <div id="lineChart1" style={{ width: "100%", height: "370px" }}></div>
@@ -433,21 +436,25 @@ class Home extends React.Component {
 
                         <div className="col col-xs-12 col-sm-12 col-md-6 col-xl-6">
                             <div className='home-echarts'>
-                                <div className="chart-title row">
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i><FormattedMessage id="unconfirmedTxs" />
+                                <div className="row">
+                                    <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
+                                        <p className="chart-title">
+                                            <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
+                                            <FormattedMessage id="unconfirmedTxs" />
+                                        </p>
+                                        <p className="chart-value">
+                                            {this.state.unconfirmed_txs}
+                                        </p>
                                      </div>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                        <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i><FormattedMessage id="transactionAccelerator" />
+                                    <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
+                                        <p className="chart-title">
+                                            <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
+                                            <FormattedMessage id="transactionAccelerator" />
+                                        </p>  
+                                        <p className="chart-value">
+                                            {this.state.tansaction_celerator} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
+                                        </p>                                      
                                      </div>
-                                </div>
-                                <div className="row" style={{ padding: '2px 12px', fontSize: '20px' }}>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px' }}>
-                                        {this.state.unconfirmed_txs}
-                                    </div>
-                                    <div className="col col-xs-6 col-sm-6 col-md-6 col-xl-6 textOverFlow" style={{ paddingLeft: '35px'}}>
-                                        {this.state.tansaction_celerator} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
-                                    </div>
                                 </div>
                                 <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
@@ -494,11 +501,11 @@ class Home extends React.Component {
                                                             <p className="timestamp">{item.time}</p>
                                                             <p className="other clearfix">
                                                                 <span style={{ width: '60%' }}>
-                                                                    <span className="key">Size:</span>
+                                                                    <span className="key"><FormattedMessage id="size"/>:</span>
                                                                     <span className="value"  title={item.size}>{item.size}</span>
                                                                 </span>
                                                                 <span style={{ width: '35%' }}>
-                                                                    <span className="key keyReward">Reward:</span>
+                                                                    <span className="key keyReward"><FormattedMessage id="reward"/>:</span>
                                                                     <span className="value valueReward" title={item.rewards}>{item.rewards}</span>
                                                                 </span>
                                                             </p>
