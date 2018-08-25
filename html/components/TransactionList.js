@@ -130,7 +130,7 @@ class TransactionList extends React.Component {
                 <div className="list-table-block">
                     <h3 className="list-title">
                         <i className="fa fa-handshake"></i>
-                        <FormattedMessage id="transaction" tagName="span"/>
+                        <FormattedMessage id="latestTransactions" tagName="span"/>
                     </h3>
                     <div className="block-table-list">
                         <div className="table-list">
