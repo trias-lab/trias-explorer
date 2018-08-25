@@ -19,16 +19,47 @@ class Home extends React.Component {
 
         }
         this.lineChartOption1 = {
+            grid:{
+                top: '28px',
+                left: '43px',
+                right: '13px',
+                bottom: '36px'
+            },
             tooltip: {
                 trigger: 'axis',
+                axisPointer:{
+                    type:'line',
+                    lineStyle:{
+                        color: '#68BD68',
+                        opacity: 0.5,
+                        width:2
+                    }
+                },
                 formatter: ' <span style="color:#9CA2AB;font-size:12px;">{b0} </span><br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
             },
             xAxis: {
                 type: 'category',
+                axisLine:{
+                    show: false
+                },
+                axisTick:{
+                    show:false
+                },
                 boundaryGap: false,
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
+                axisLine:{
+                    show: false
+                },
+                axisTick:{
+                    show:false
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#EDF0F2'
+                    }
+                },
                 type: 'value'
             },
             series: [{
@@ -61,16 +92,47 @@ class Home extends React.Component {
         };
 
         this.lineChartOption2 = {
+            grid:{
+                top: '28px',
+                left: '43px',
+                right: '13px',
+                bottom: '36px'
+            },
             tooltip: {
                 trigger: 'axis',
+                axisPointer:{
+                    type:'line',
+                    lineStyle:{
+                        color: '#68BD68',
+                        opacity: 0.5,
+                        width:2
+                    }
+                },
                 formatter: ' <span style="color:#9CA2AB;font-size:12px;">{b0} </span> <br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
             },
             xAxis: {
+                axisLine:{
+                    show: false
+                },
+                axisTick:{
+                    show:false
+                },
                 type: 'category',
                 boundaryGap: false,
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
+                axisLine:{
+                    show: false
+                },
+                axisTick:{
+                    show:false
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#EDF0F2'
+                    }
+                },
                 type: 'value'
             },
             series: [{
