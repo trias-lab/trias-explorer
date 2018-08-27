@@ -1,4 +1,5 @@
 import React from "react"
+import $ from 'jquery';
 import { Pagination } from 'react-bootstrap';   // import Pagination component
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import DropdownList from "./DropdownList";     // import custom drop-down list component
@@ -15,7 +16,6 @@ import DropdownList from "./DropdownList";     // import custom drop-down list c
  *  currentPage={this.currentPage}
  *  onChangeRowsPerPage={(num)=>this.setRowsPerPage(num)}
  *  onSelectPage={(e)=>this.handleSelectPage(e)}
- *  onChangePageInput={(e)=>this.onChangeInputPage(e)}
  *  onPageInputKeyDown={(e)=>this.jumpPageKeyDown(e)}
  *  onClickJumpButton={()=>this.handleJumpPage()}
  *  pageNumInputId="logsPage"
@@ -34,7 +34,6 @@ import DropdownList from "./DropdownList";     // import custom drop-down list c
  * - currentPage: current page number. 0 by default.
  * - onChangeRowsPerPage: handler for the change of maximum number of rows per page.
  * - onSelectPage: handler for the change of current page number by clicking buttons in the pagination.
- * - onChangePageInput: handler for the change of page number input.
  * - onPageInputKeyDown: event handler for the change event of the page number input area.
  * - onClickJumpButton: event handler for the keydown event of the page number input area.
  * (Optional:)
@@ -74,14 +73,26 @@ class CustomPagination extends React.Component {
         //     this.setState({
         //         lang: nextProps.intl.locale
         //     })
-        // }             
+        // }       
+    }
+
+    /**
+     * qhen input value of page number changed, check the format
+     */
+    onChangeInputPage(e) {
+        var re = /^[0-9]+$/
+        var pagenum = e.target.value      //get put in page num
+        // the value should be positive interger, and not exceed the maximum number of pages
+        if (pagenum != "" && (!re.test(pagenum) || pagenum == 0 || pagenum > this.state.totalPagesCount)) {
+            $('#'+this.state.pageNumInputId).val('');   // clear the input
+        }
     }
 
     render(){
         return (
             <div className="pagination-all clearfix">
                 {/* select the maximum number of rows per page*/}
-                <div className="rowsPerPage">
+                <div className="rowsPerPage pc">
                     <DropdownList
                         listID={this.state.dropdownListId}
                         itemsToSelect={this.props.rowsPerPageRange || [
@@ -107,7 +118,7 @@ class CustomPagination extends React.Component {
                         <FormattedMessage id='paginationItemsCountP' values={{from: this.state.from, to: this.state.to, count: this.state.totalItemsCount}} />
                     </p>
                 </div>
-                <div className="pagination-right clearfix">
+                <div className="pagination-right clearfix pc">
                     <Pagination
                         prev="Previous"
                         next="Next"
@@ -119,29 +130,34 @@ class CustomPagination extends React.Component {
                         maxButtons={7}
                         activePage={this.state.currentPage}
                         onSelect={this.props.onSelectPage.bind(this)} />
-                    {/* <div className="pageCount">
-                        <FormattedMessage id='paginationPageInput'>
-                            {(txt) => (
-                                <input
-                                className="pageNum"
-                                id={this.state.pageNumInputId}
-                                placeholder={txt}
-                                type="text"
-                                onChange={this.props.onChangePageInput.bind(this)}
-                                onKeyDown={this.props.onPageInputKeyDown.bind(this)}
-                            />
-                            )}
-                        </FormattedMessage>                        
-                        <span className='totalPages'>/{this.state.totalPagesCount}</span>       
-                        <FormattedMessage id='paginationJumpBtn' tagName="p">
-                            {(txt) => (
-                                <input type="button"
-                                className="searchNum"
-                                onClick={this.props.onClickJumpButton.bind(this)}
-                                value={txt} />
-                            )}
-                        </FormattedMessage>
-                    </div> */}
+                </div>
+                <div className="clearfix mobile">
+                    <input type="button" 
+                        disabled={this.state.currentPage===1}
+                        className="btn-prev" 
+                        onClick={() => this.props.onSelectPage(this.state.currentPage-1)} 
+                        value="Previous" />
+                    {/* Use the key prop to force rendering of an entirely new input */}
+                    <form action="javascript:return true;" id="pageNum" className="pageCount">
+                        {/* disable refresh of  whole page */}
+                        {/* <input type="text" name="test" style={{display:'none'}}/> */}
+                        <input
+                            className="pageNum"
+                            id={this.state.pageNumInputId}
+                            type="number"
+                            key={this.state.currentPage}
+                            defaultValue={this.state.currentPage}
+                            onChange={this.onChangeInputPage.bind(this)}
+                            onKeyDown={this.props.onPageInputKeyDown.bind(this)
+                            }
+                        />                       
+                        <span className='totalPages'> of {this.state.totalPagesCount}</span>
+                    </form>
+                    <input type="button" 
+                        disabled={this.state.currentPage===this.state.totalPagesCount} 
+                        className="btn-next" 
+                        onClick={() => this.props.onSelectPage(this.state.currentPage+1)} 
+                        value="Next"/>
                 </div>                            
             </div>
         )

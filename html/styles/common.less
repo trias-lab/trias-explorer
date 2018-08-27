@@ -4,6 +4,7 @@ input {
     outline: none;
 }
 
+input[type="number"],
 input[type="search"],
 input[type="text"] {
     padding: 9px 16px;
@@ -36,7 +37,12 @@ input[type="button"] {
         background:rgba(93,184,92,0.1);
     }
 }
-
+input[disabled]{
+    font-size:16px;
+    color:rgba(203,208,211,1);
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(203,208,211,1);
+}
 .input::-webkit-input-placeholder {
     color:rgba(163,173,183,1);
 }
@@ -91,7 +97,7 @@ input[type="button"] {
 }
 
 /*页码框*/
-input[type="text"].pageNum {
+input[type="number"].pageNum {
     vertical-align: middle;
     border-radius: 4px;
     padding: 0 16px;
@@ -223,6 +229,43 @@ input[type="text"].pageNum {
     }
 }
 
+
+.pagination-all{
+    padding: 0;
+    .mobile{
+        width: 100%;
+        .btn-prev{
+            width:90px;
+            height:42px;
+            background:rgba(255,255,255,1);
+            border-radius:4px 0 0 4px;
+            border:1px solid rgba(203,208,211,1);
+            float: left;
+        }
+        .pageCount{
+            float: none;
+            display: inline-block;
+            margin-left: 0;
+            .pageNum{
+                border-radius: 0;
+            }
+            .totalPages{
+                font-size:16px;
+                font-family:MoskLight300;
+                color:rgba(20,42,63,1);
+                line-height:24px;
+            }
+        }
+        .btn-next{
+            width:90px;
+            height:42px;
+            background:rgba(255,255,255,1);
+            border-radius:0 4px 4px 0;
+            border:1px solid rgba(203,208,211,1);
+            float: right;
+        }
+    }
+}
 
 /* 自定义分页样式------------------------------------------------end*/
 
@@ -454,4 +497,21 @@ input[type="text"].pageNum {
     .cutomUglily-row+.cutomUglily-row {
         border-top: none;
     }
+}
+
+
+.pc{
+    display: block;
+}
+.mobile{
+    display: none;
+}
+
+@media screen and (max-width: 768px){
+    .pc{
+        display: none;
+    }
+    .mobile{
+        display: block;
+    } 
 }
