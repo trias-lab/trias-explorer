@@ -109,17 +109,6 @@ export default class Address extends React.Component {
     }
 
     /**
-     * 跳转输入框的onChange监听
-     */
-    onChangeInputPage(e) {
-        var re = /^[0-9]+$/
-        var pagenum = e.target.value      //获取输入的页码
-        //如果输入的页码不为空,并且如果输入的页码不符合规范(不是正整数，或者大于最大页码)
-        if (pagenum != "" && (!re.test(pagenum) || pagenum == 0 || pagenum > this.state.pageCount)) {
-            $('#inputPageNum').val('');   //清空输入框的内容                       
-        }
-    }
-    /**
      * 跳转输入框的按键事件监听
      * @return {[type]} [description]
      */
@@ -334,10 +323,8 @@ export default class Address extends React.Component {
                                 totalPagesCount={this.state.pageCount}
                                 currentPage={this.state.currentPage}
                                 onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
-                                onSelectPage={(e) => this.handleSelectPage(e)}
-                                onChangePageInput={(e) => this.onChangeInputPage(e)}
+                                onSelectPage={(num) => this.handleSelectPage(cum)}
                                 onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
-                                onClickJumpButton={() => this.handleJumpPage()}
                             />
                     </section>
                 </div>

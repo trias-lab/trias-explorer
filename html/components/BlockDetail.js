@@ -98,6 +98,28 @@ export default class BlockDetail extends React.Component {
     }
 
     /**
+     * enter page and jump
+     * @return {[type]} [description]
+     */
+    jumpPageKeyDown(e) {
+        if (e.keyCode === 13) {           //if enter key
+            this.handleJumpPage()
+        }
+    }
+
+    /**
+     * click select page
+     */
+    handleJumpPage() {
+        var pagenum = parseInt($('#inputPageNum').val())
+        this.setState({
+            currentPage: pagenum
+        })
+        this.getList(pagenum, this.state.rowsPerPage)
+        //console.log('jump')
+    }
+
+    /**
      * Get details of current block
      */
     getInfo() {
@@ -331,7 +353,8 @@ export default class BlockDetail extends React.Component {
                             totalPagesCount={this.state.pageCount}
                             currentPage={this.state.currentPage}
                             onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
-                            onSelectPage={(e) => this.handleSelectPage(e)}
+                            onSelectPage={(num) => this.handleSelectPage(num)}
+                            onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
                         />
                     </section>
                 </div>               

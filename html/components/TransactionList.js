@@ -51,6 +51,7 @@ class TransactionList extends React.Component {
      * Select page number
      */
     handleSelectPage(pagenum) {
+        console.log(pagenum)
         this.setState({
             currentPage: pagenum
         })
@@ -58,17 +59,6 @@ class TransactionList extends React.Component {
         //console.log(pagenum)
     }
 
-    /**
-     * input in page and jump
-     */
-    onChangeInputPage(e) {
-        var re = /^[0-9]+$/
-        var pagenum = e.target.value      //get put in page num
-        //如果输入的页码不为空,并且如果输入的页码不符合规范(不是正整数，或者大于最大页码)
-        if (pagenum != "" && (!re.test(pagenum) || pagenum == 0 || pagenum > this.state.pageCount)) {
-            $('#inputPageNum').val('');   //清空输入框的内容
-        }
-    }
     /**
      * enter page and jump
      * @return {[type]} [description]
@@ -182,20 +172,18 @@ class TransactionList extends React.Component {
                                     }.bind(this))
                                 }
                                 </tbody>
-                            </table>
-                            <CustomPagination
+                            </table>                            
+                        </div>
+                        <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
                                 to={this.state.currentPage * this.state.rowsPerPage }
                                 totalItemsCount={this.state.totalItemsCount}
                                 totalPagesCount={this.state.pageCount}
                                 currentPage={this.state.currentPage}
                                 onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
-                                onSelectPage={(e) => this.handleSelectPage(e)}
-                                onChangePageInput={(e) => this.onChangeInputPage(e)}
+                                onSelectPage={(num) => this.handleSelectPage(num)}
                                 onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
-                                onClickJumpButton={() => this.handleJumpPage()}
                             />
-                        </div>
                     </div>
                 </div>
                 }
