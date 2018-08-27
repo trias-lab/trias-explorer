@@ -152,7 +152,7 @@ export default class BlockDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="height" tagName="p"/>
-                                    <p>{this.state.detailInfo.height}</p>
+                                    <p>{this.state.detailInfo.number}</p>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ export default class BlockDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="transactionCount" tagName="p"/>
-                                    <p>{this.state.detailInfo.transactions}</p>
+                                    <p>{this.state.detailInfo.transactionsCount}</p>
                                 </div>
                             </div>
                         </div>

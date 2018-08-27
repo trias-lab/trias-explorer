@@ -64,7 +64,7 @@ const en_US = {
     amountTransacted:"Amount Transacted",
     txReceiptStatus: "TxReceipt Status",
     gasLimit: "Gas Limit",   
-    gasUsed:"Gas Used By Txn",
+    gasUsed:"Gas Used",
     gasPrice: "Gas Price",
     actualTxCostFee:"Actual Tx Cost/Fee",
     summary: "Summary",
