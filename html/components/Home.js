@@ -277,20 +277,20 @@ class Home extends React.Component {
             success: function (data) {
                 if (data.code == 200) {
                     self.setState({
-                        hash_rate: data.return_data.hash_rate,
+                        hash_rate: data.return_data.HashRate,
                         difficulty: data.return_data.difficulty,
-                        mining_earnings: data.return_data.mining_earnings,
-                        last_block: data.return_data.last_block,
-                        total_supply: data.return_data.total_supply,
+                        mining_earnings: data.return_data.miningEarnings,
+                        last_block: data.return_data.lastBlock,
+                        total_supply: data.return_data.totalSupply,
                         transactions: data.return_data.transactions,
 
-                        transaction_fees: data.return_data.transaction_fees,
-                        tx_rate: data.return_data.tx_rate,
-                        hash_rate_growth: data.return_data.hash_rate_growth,
+                        transaction_fees: data.return_data.bestTransactionFee,
+                        tx_rate: data.return_data.transactionRate,
+                        hash_rate_growth: data.return_data.hashRateGrowth,
 
-                        unconfirmed_txs: data.return_data.unconfirmed_txs,
-                        tansaction_celerator: data.return_data.tansaction_celerator,
-                        transactions_history: data.return_data.transactions_history,
+                        unconfirmed_txs: data.return_data.unconfirmed,
+                        tansaction_celerator: data.return_data.transactionCelerator,
+                        transactions_history: data.return_data.transactionsHistory,
                     })
 
                     setTimeout(function () {
@@ -410,7 +410,7 @@ class Home extends React.Component {
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="currentBest" />
                                         </p>
-                                        <p className="chart-value">
+                                        <p className="chart-value" title={`${this.state.transaction_fees} BTC/Gas`}>
                                             {this.state.transaction_fees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
                                         </p>                                       
                                     </div>
@@ -419,7 +419,7 @@ class Home extends React.Component {
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="rate24" />
                                         </p>
-                                        <p className="chart-value">
+                                        <p className="chart-value"  title={`${this.state.tx_rate} txs/s`}>
                                             {this.state.tx_rate} txs/s
                                         </p>
                                      </div>
@@ -442,7 +442,7 @@ class Home extends React.Component {
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="unconfirmedTxs" />
                                         </p>
-                                        <p className="chart-value">
+                                        <p className="chart-value" title={`${this.state.unconfirmed_txs}`}>
                                             {this.state.unconfirmed_txs}
                                         </p>
                                      </div>
@@ -451,7 +451,7 @@ class Home extends React.Component {
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="transactionAccelerator" />
                                         </p>  
-                                        <p className="chart-value">
+                                        <p className="chart-value" title={`${this.state.tansaction_celerator} txs/s`}>
                                             {this.state.tansaction_celerator} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
                                         </p>                                      
                                      </div>
@@ -486,13 +486,13 @@ class Home extends React.Component {
                                     this.state.blocksLatest && this.state.blocksLatest.map(function (item, index) {
                                         return (
                                             <li className="clearfix" key={"block-" + index}>
-                                                <Link to={"/blocklist/" + item.block_hash}>
+                                                <Link to={"/blocklist/" + item.hash}>
 
                                                     <div className="col col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                                         <div className="name pull-left">
                                                             <div>
                                                                 <i className="fa fa-cube"></i>
-                                                                <span title={item.height}>{item.height}</span>
+                                                                <span title={item.number}>{item.number}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -506,7 +506,7 @@ class Home extends React.Component {
                                                                 </span>
                                                                 <span style={{ width: '35%' }}>
                                                                     <span className="key keyReward"><FormattedMessage id="reward"/>:</span>
-                                                                    <span className="value valueReward" title={item.rewards}>{item.rewards}</span>
+                                                                    <span className="value valueReward" title={item.blockReward}>{item.blockReward}</span>
                                                                 </span>
                                                             </p>
                                                         </div>
@@ -532,12 +532,12 @@ class Home extends React.Component {
                                     this.state.transLatest && this.state.transLatest.map(function (item, index) {
                                         return (
                                             <li className="clearfix" key={"trans-" + index}>
-                                                <Link to={"/translist/" + item.tx_hash}>
+                                                <Link to={"/translist/" + item.hash}>
                                                     <div className="col col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                                         <div className="name pull-left">
                                                             <div>
                                                                 <i className="fa fa-handshake"></i>
-                                                                <span title={item.tx_hash}>{item.tx_hash}</span>
+                                                                <span title={item.hash}>{item.hash}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -547,7 +547,7 @@ class Home extends React.Component {
                                                             <p className="other clearfix">
                                                                 <span style={{ width: '60%' }}>
                                                                     <span className="key">From:</span>
-                                                                    <span className="value" title={item.from}>{item.from}</span>
+                                                                    <span className="value" title={item.source}>{item.source}</span>
                                                                 </span>
                                                                 <span style={{ width: '35%' }}>
                                                                     <span className="key">To:</span>
