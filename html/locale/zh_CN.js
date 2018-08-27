@@ -69,7 +69,6 @@ const zh_CN = {
     gasUsedByTxn:"燃料用量",
     gasPrice: "燃料价格",
     actualTxCostFee:"实际交易花费",
-    noncePosition:"Nonce & {Position}",
     summary: "概要",
     inputData: "输入数据",
     eventLogs: "事件日志（{num}）",

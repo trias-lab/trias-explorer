@@ -167,11 +167,11 @@ export default class TransactionDetail extends React.Component {
                                 </p>
                                 <p>
                                     <span className="attr">From</span>
-                                    <span className="value trans-table-value">{this.state.detailInfo.input}</span>
+                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.input}</Link></span>
                                 </p>
                                 <p>
                                     <span className="attr">To</span>
-                                    <span className="value trans-table-value">{this.state.detailInfo.output}</span>
+                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.output}</Link></span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="value"/></span>
@@ -196,7 +196,7 @@ export default class TransactionDetail extends React.Component {
                                     <span className="value">{this.state.detailInfo.actual_tx_cost}&nbsp;{this.state.detailInfo.fee}</span>
                                 </p>
                                 <p>
-                                    <span className="attr"><FormattedMessage id="noncePosition"/></span>
+                                    <span className="attr">{'Nonce & {Position}'}</span>
                                     <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.position}{'}'}</span>
                                 </p>
                             </div>

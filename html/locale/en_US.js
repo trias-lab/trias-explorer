@@ -69,7 +69,6 @@ const en_US = {
     gasUsedByTxn:"Gas Used By Txn",
     gasPrice: "Gas Price",
     actualTxCostFee:"Actual Tx Cost/Fee",
-    noncePosition:"Nonce & {Position}",
     summary: "Summary",
     inputData: "Input Data",
     eventLogs: "Event Logs ({num})",
