@@ -14,7 +14,7 @@ export default class BlockDetail extends React.Component {
         super(props);
         this.state = {
             subNavbarMatch: this.props.match,
-            blockID: this.props.match.params.blockID,
+            blockHash: this.props.match.params.blockID,
             totalItemsCount: 100,
             pageCount: 10,
             transactionList: [],
@@ -38,7 +38,7 @@ export default class BlockDetail extends React.Component {
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
                 subNavbarMatch: nextProps.match,
-                blockID: nextProps.match.params.blockID
+                blockHash: nextProps.match.params.blockID
             },()=>{
                 this.getList(this.state.currentPage, this.state.rowsPerPage);
                 this.getInfo();
@@ -58,7 +58,7 @@ export default class BlockDetail extends React.Component {
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                block_hash: self.state.blockID,
+                block_hash: self.state.blockHash,
                 size: rowsPerPage,
                 page_size: currentPage,
                 sort:0
@@ -129,7 +129,7 @@ export default class BlockDetail extends React.Component {
             type: 'get',
             dataType: 'json',               //GET方式时,表单数据被转换成请求格式作为URL地址的参数进行传递
             data: {
-                block_hash: self.state.blockID
+                block_hash: self.state.blockHash
             },
             success: function (data) {
                 self.setState({
@@ -196,7 +196,7 @@ export default class BlockDetail extends React.Component {
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="height" /></span>
-                                    <span className="value">{this.state.detailInfo.height}</span>
+                                    <span className="value">{this.state.detailInfo.number}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="confirmationsSum" /></span>
@@ -208,7 +208,7 @@ export default class BlockDetail extends React.Component {
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="txCount" /></span>
-                                    <span className="value">{this.state.detailInfo.tx_count}</span>
+                                    <span className="value">{this.state.detailInfo.transactionsCount}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="difficulty" /></span>
@@ -234,17 +234,17 @@ export default class BlockDetail extends React.Component {
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="blockHash" /></span>
-                                    <span className="value">{this.state.detailInfo.block_hash}</span>
+                                    <span className="value">{this.state.blockHash}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="prevBlock" /></span>
                                     <span className="value">
                                     {
-                                        this.state.detailInfo.prev_block && this.state.detailInfo.prev_block!=='N/A' ?
-                                        <Link to={"/blocklist/"+this.state.detailInfo.prev_block}>
-                                            {this.state.detailInfo.prev_block}
+                                        this.state.detailInfo.parentHash && this.state.detailInfo.parentHash!=='N/A' ?
+                                        <Link to={"/blocklist/"+this.state.detailInfo.parentHash}>
+                                            {this.state.detailInfo.parentHash}
                                         </Link>:
-                                        this.state.detailInfo.prev_block
+                                        this.state.detailInfo.parentHash
                                     }   
                                     </span>
                                 </p>
@@ -252,11 +252,11 @@ export default class BlockDetail extends React.Component {
                                     <span className="attr"><FormattedMessage id="nextBlock" /></span>
                                     <span className="value">
                                     {
-                                        this.state.detailInfo.next_block && this.state.detailInfo.next_block!=='N/A' ?
-                                        <Link to={"/blocklist/"+this.state.detailInfo.next_block}>
-                                            {this.state.detailInfo.next_block}
+                                        this.state.detailInfo.nextHash && this.state.detailInfo.nextHash!=='N/A' ?
+                                        <Link to={"/blocklist/"+this.state.detailInfo.nextHash}>
+                                            {this.state.detailInfo.nextHash}
                                         </Link>:
-                                        this.state.detailInfo.next_block
+                                        this.state.detailInfo.nextHash
                                     }                                        
                                     </span>
                                 </p>
@@ -274,8 +274,8 @@ export default class BlockDetail extends React.Component {
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
                                         <span><FormattedMessage id="txHash"/>:</span>
-                                        <Link to={"/translist/"+i.tx_hash}>
-                                            {i.tx_hash}
+                                        <Link to={"/translist/"+i.hash}>
+                                            {i.hash}
                                         </Link>
                                     </p>
                                     <div className="detail-group">
@@ -284,7 +284,7 @@ export default class BlockDetail extends React.Component {
                                             <span>
                                                 <FormattedMessage id="amount"/>
                                                 <br />
-                                                <b>{i.amount_transacted}</b>
+                                                <b>{i.value}</b>
                                             </span>
                                         </div>
                                         <div className="detail-item">
@@ -292,10 +292,10 @@ export default class BlockDetail extends React.Component {
                                             <span>
                                                 <FormattedMessage id="fees"/>
                                                 <br />
-                                                <b>{i.fees}</b>
+                                                <b>{i.gas * i.gasPrice}</b>
                                             </span>
                                         </div>
-                                        <div className="detail-item">
+                                        {/* <div className="detail-item">
                                             <i className="fas fa-calendar-alt"></i>
                                             <span>
                                                 <FormattedMessage id="time"/>
@@ -310,32 +310,32 @@ export default class BlockDetail extends React.Component {
                                                 <br />
                                                 <b>{i.confirmations} <FormattedMessage id="confirmations" /></b>
                                             </span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="address-bar">
                                         <div className="item-a">
                                             {
-                                                i.output &&
-                                                <Qrcode id={'output-'+index} text={i.output} size="70" />
+                                                i.source &&
+                                                <Qrcode id={'output-'+index} text={i.source} size="70" />
                                             }
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
-                                                <Link to={"/address/"+ i.output}>
-                                                    <b>{i.output}</b>
+                                                <Link to={"/address/"+ i.source}>
+                                                    <b>{i.source}</b>
                                                 </Link>
                                             </span>
                                         </div>
                                         <div className="item-b">
                                             {
-                                                i.input &&
-                                                <Qrcode id={'input-'+index} text={i.input} size="70" />
+                                                i.to &&
+                                                <Qrcode id={'input-'+index} text={i.to} size="70" />
                                             }
                                             <span>
                                             <FormattedMessage id="address"/>
                                                 <br />
-                                                <Link to={"/address/"+ i.input}>
-                                                    <b>{i.input}</b>
+                                                <Link to={"/address/"+ i.to}>
+                                                    <b>{i.to}</b>
                                                 </Link>
                                             </span>
                                         </div>
