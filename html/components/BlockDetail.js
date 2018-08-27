@@ -292,7 +292,7 @@ export default class BlockDetail extends React.Component {
                                             <span>
                                                 <FormattedMessage id="fees"/>
                                                 <br />
-                                                <b>{i.gas * i.gasPrice}</b>
+                                                <b>{i.gasUsed * i.gasPrice}</b>
                                             </span>
                                         </div>
                                         {/* <div className="detail-item">
