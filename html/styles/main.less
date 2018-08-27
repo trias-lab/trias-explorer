@@ -33,8 +33,8 @@ body {
 .header {
     background: #01001a;
     position: fixed;
-    width: 100vw;
     z-index: 99999999;
+    width: 100%;
     height: 76px;
     transition: background-color .5s;
     &>div {
@@ -146,7 +146,7 @@ body {
                 height: 2px;
                 margin: 4px auto;
                 border-radius: 1px;
-                background-color: #888;
+                background-color: #DAE1E9;
             }
             .icon-bar:first-child{
                 margin-top: 2px;
@@ -178,7 +178,7 @@ body {
         }
         .ipt-search{
             padding-right: 48px;
-            width:calc(~"100vw - 40px");
+            width:100%;
         }
         .search-icon{
             position: absolute;
@@ -195,7 +195,7 @@ body {
 .common-footer{
     width: 100%;
     background: url('../img/bg_footer.jpg') no-repeat;
-    background-size: 100vw 458px;
+    background-size: 1005 458px;
     background-size: cover;
     line-height: 22px;
     font-family: MoskExtra-Light200;
@@ -355,7 +355,7 @@ body {
 .sub-header{
     height:268px;
     background: url(../img/bg_top.jpg) no-repeat;
-    background-size: 100vw 268px;
+    background-size: 100% 268px;
     background-size: cover;
     .center-box{
         padding: 84px 20px 0;
@@ -443,7 +443,7 @@ body {
     }
     .header{
         height: 137px;        
-        width: 100vw;
+        width: 100%;
         padding: 19px 20px;
         z-index: 99999999;
         >div{
@@ -474,6 +474,12 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+    #app main{
+        padding-top: 0;
+    }
+    .header{
+        position: relative;
+    }
     .common-footer{
         background: url('../img//mobile/bg_footer_m@2x.jpg') no-repeat;
         .center-box{

@@ -184,7 +184,7 @@ export default class TransactionDetail extends React.Component {
                                     <span className="value">{this.state.detailInfo.gas_limit}</span>
                                 </p>
                                 <p>
-                                    <span className="attr"><FormattedMessage id="gasUsedByTxn"/></span>
+                                    <span className="attr"><FormattedMessage id="gasUsed"/></span>
                                     <span className="value">{this.state.detailInfo.gas_used}</span>
                                 </p>
                                 <p>
