@@ -6,6 +6,7 @@ import random
 from django.http import JsonResponse
 from app.utils.block_util import url_data, stamp2datetime, hex2int
 from app.utils.localconfig import JsonConfiguration
+from app.models import Block, TransactionInfo, Address, AddressTx, IndexInfo
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -22,7 +23,6 @@ def index_base_info(request):
     hash_rate_growth_data = [3.37, 3.01, 2.24, 3.33, 1.44, 2,35, 2.13, 1.21, 2.45, 1.87, 3.44, 1.23, 2.44, 2.35]
     hash_rate_growth = {}
     transactions_history = {}
-    transactions_count = 0
 
     for i in range(14):
         today = datetime.date.today()
@@ -30,23 +30,14 @@ def index_base_info(request):
         hash_rate_growth[x] = hash_rate_growth_data[i]
         transactions_history[x] = transactions_data[i]
 
-    hash_rate = url_data(url, "eth_hashrate", []).get('result', '0x0')
-    last_block = url_data(url, "eth_blockNumber", [])['result']
-    last_block_info = url_data(url, "eth_getBlockByNumber", [last_block, True])['result']
-    data = {
-                "hash_rate": hex2int(hash_rate),
-                "difficulty": str(hex2int(last_block_info['totalDifficulty'])),
-                "mining_earnings": 0.3936,
-                "last_block": hex2int(last_block),
-                "total_supply": 358183.16,
-                "transactions": transactions_count,
-                "transaction_fees": 0.00003,
-                "tx_rate": 2.35,
-                "unconfirmed_txs": 1993,
-                "tansaction_celerator": 0.0003743,
-                "transactions_history": transactions_history,
-                "hash_rate_growth": hash_rate_growth
-                }
+    data = {}
+    index_info = list(IndexInfo.objects.all().values())
+    if index_info:
+        data = index_info[0]
+    data['transactionsHistory'] = transactions_history
+    data['hashRateGrowth'] = hash_rate_growth
+    data['transactionCelerator'] = 0.0003743
+    data['transactionRate'] = 2.35
 
     return JsonResponse({"code": 200, "return_data": data})
 
