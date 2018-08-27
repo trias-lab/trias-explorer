@@ -3,6 +3,8 @@ transactions message
 """
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from app.models import Block, TransactionInfo
+from app.utils.block_util import stamp2datetime
 
 
 def all_transactions(request):
@@ -38,12 +40,17 @@ def all_transactions(request):
                      }
             ] * 500
 
+    total_data = TransactionInfo.objects.all().order_by('-blockNumber')
+
     pag = Paginator(total_data, size)
     if page > pag.num_pages:
         page = 1
-    data = pag.page(page).object_list
+    data = list(pag.page(page).object_list.values('hash', 'source', 'to', 'value', 'blockNumber'))
+    for item in data:
+        number = item['blockNumber']
+        item['time'] = stamp2datetime(Block.objects.get(number=number).timestamp)
 
-    return JsonResponse({"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200, "total_size": total_data.count(), "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 def transaction_info(request):

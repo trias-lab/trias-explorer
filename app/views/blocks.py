@@ -65,9 +65,9 @@ def block_info(request):
 
     if block_info['confirmations'] > 0:
         next_block_number = number + 1
-        block_info['NextBlock'] = Block.objects.get(number=next_block_number).hash
+        block_info['nextHash'] = Block.objects.get(number=next_block_number).hash
     else:
-        block_info['NextBlock'] = 'N/A'
+        block_info['nextHash'] = 'N/A'
 
     return JsonResponse({"code": 200, "return_data": block_info})
 
