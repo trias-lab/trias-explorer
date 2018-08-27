@@ -318,7 +318,7 @@ class Home extends React.Component {
                     </div>
                 </section>
                 <div className="home-page public-content">
-                    <section className="row">
+                    <section className="clearfix">
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
@@ -401,10 +401,10 @@ class Home extends React.Component {
                         </div>
                     </section>
 
-                    <section className="row">
+                    <section className="clearfix">
                         <div className="col col-xs-12 col-sm-12 col-md-6 col-xl-6">
                             <div className='home-echarts'>
-                                <div className="row">
+                                <div className="clearfix">
                                     <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
@@ -424,7 +424,7 @@ class Home extends React.Component {
                                         </p>
                                      </div>
                                 </div>
-                                <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
+                                <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
                                         <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>
                                         <FormattedMessage id="history14" />
@@ -436,7 +436,7 @@ class Home extends React.Component {
 
                         <div className="col col-xs-12 col-sm-12 col-md-6 col-xl-6">
                             <div className='home-echarts'>
-                                <div className="row">
+                                <div className="clearfix">
                                     <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
@@ -456,7 +456,7 @@ class Home extends React.Component {
                                         </p>                                      
                                      </div>
                                 </div>
-                                <div className="row chart-title" style={{ padding: '24px 12px 0', }}>
+                                <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
                                         <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i><FormattedMessage id="hashRate" />
                                      </div>
@@ -466,13 +466,13 @@ class Home extends React.Component {
                         </div>
                     </section>
 
-                    <section className="row">
+                    <section>
                         <div className="col col-12 col-sm-12 col-md-6 col-xl-6">
                         </div>
                         <div className="col col-12 col-sm-12 col-md-6 col-xl-6">
                         </div>
                     </section>
-                    <section className="row home-page-list">
+                    <section className="home-page-list clearfix">
                         <div className="col  col-xs-12  col-sm-12 col-md-6 col-xl-6 blocks-col latest-list">
                             <div className="list-head clearfix">
                                 <div className="latest-tit pull-left">
