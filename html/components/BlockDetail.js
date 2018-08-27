@@ -211,16 +211,8 @@ export default class BlockDetail extends React.Component {
                                     <span className="value">{this.state.detailInfo.tx_count}</span>
                                 </p>
                                 <p>
-                                    <span className="attr"><FormattedMessage id="version" /></span>
-                                    <span className="value">{this.state.detailInfo.version}</span>
-                                </p>
-                                <p>
                                     <span className="attr"><FormattedMessage id="difficulty" /></span>
                                     <span className="value">{this.state.detailInfo.difficulty}</span>
-                                </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="bits" /></span>
-                                    <span className="value">{this.state.detailInfo.bits}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="nonce" /></span>
@@ -230,6 +222,14 @@ export default class BlockDetail extends React.Component {
                                     <span className="attr"><FormattedMessage id="time" /></span>
                                     <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="gasLimit" /></span>
+                                    <span className="value">{this.state.detailInfo.gasLimit}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="gasUsed" /></span>
+                                    <span className="value">{this.state.detailInfo.gasUsed}</span>
+                                </p>                           
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
@@ -261,8 +261,8 @@ export default class BlockDetail extends React.Component {
                                     </span>
                                 </p>
                                 <p>
-                                    <span className="attr"><FormattedMessage id="merkleRoot" /></span>
-                                    <span className="value">{this.state.detailInfo.merkle_root}</span>
+                                    <span className="attr"><FormattedMessage id="miner" /></span>
+                                    <span className="value"><Link to={'/address/'+this.state.detailInfo.miner}>{this.state.detailInfo.miner}</Link></span>
                                 </p>
                             </div>
                         </div>
