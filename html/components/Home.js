@@ -277,7 +277,7 @@ class Home extends React.Component {
             success: function (data) {
                 if (data.code == 200) {
                     self.setState({
-                        hash_rate: data.return_data.HashRate,
+                        hash_rate: data.return_data.hashRate,
                         difficulty: data.return_data.difficulty,
                         mining_earnings: data.return_data.miningEarnings,
                         last_block: data.return_data.lastBlock,
