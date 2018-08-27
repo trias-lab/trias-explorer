@@ -47,6 +47,7 @@ def save2db():
                     source = transaction_info['from']
                     to = transaction_info['to']
                     value = hex2int(transaction_info['value'])
+                    gasUsed = hex2int(url_data(url, "eth_getTransactionReceipt", [tx['hash']])['result']['gasUsed'])
                     tx = TransactionInfo.objects.create(
                              blockHash=blockHash,
                              blockNumber=i,
@@ -62,6 +63,7 @@ def save2db():
                              hash=transaction_info['hash'],
                              r=transaction_info['r'],
                              s=transaction_info['s'],
+                             gasUsed = gasUsed
                             )
 
                     if not Address.objects.filter(address=source).exists():
@@ -92,6 +94,14 @@ def save2db():
     IndexInfo.objects.update_or_create(id=1, defaults = {'hashRate': hashRate, 'difficulty': difficulty, 'unconfirmed': unconfirmed,
                              'transactions': transactions, 'miningEarnings': miningEarnings, 'totalSupply': totalSupply,
                              'bestTransactionFee': bestTransactionFee, 'lastBlock': int_last_block})
+
+    # all_transactions = TransactionInfo.objects.all()
+    # for item in all_transactions:
+    #     txHash = item.hash
+    #     item.gasUsed = hex2int(url_data(url, "eth_getTransactionReceipt", [txHash])['result']['gasUsed'])
+    #     item.save()
+
+
 
 
 

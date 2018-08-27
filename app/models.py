@@ -60,6 +60,7 @@ class TransactionInfo(models.Model):
     v = models.BigIntegerField()
     r = models.CharField(max_length=255)
     s = models.CharField(max_length=255)
+    gasUsed = models.BigIntegerField()
 
     class Meta:
         db_table = "transaction"
