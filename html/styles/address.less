@@ -225,7 +225,11 @@
 
 @media screen and (max-width: 1000px){
     .address-container .page-content{
-        padding: 0 20px;
+        padding: 0 6px;
+        margin-top: -76px;
+        .qrcode-layer {
+            right: 12px;
+        }
         .info-part .info-content{
             padding: 24px 0;
         }
@@ -261,9 +265,19 @@
                 .item-a{
                     width: 100%;
                     min-width: auto;
+                    padding-left: 12px;
                     span{
                         min-width: auto;
+                        width: 230px;
                     }
+                }
+                .item-a {
+                    background: url('../img/mobile/bg_txArrow_m@2x.png') no-repeat;
+                    background-size: 100% 100%;
+                    padding-bottom: 36px;
+                }
+                .item-b {
+                    padding-top: 34px;
                 }
             } 
             .detail-group .detail-item {
@@ -287,5 +301,17 @@
                 padding-bottom: 0px;
             }        
         } 
+    }
+    .address-container .sub-header {
+        .center-box {
+            padding-top: 48px;
+            h2 > span {
+                a.active {
+                    display: block;
+                    width: 73%;
+                }
+            }
+        }
+       
     }
 }
