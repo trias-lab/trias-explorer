@@ -50,19 +50,13 @@ def index_latest_blocks(request):
     """
 
     data = []
-    last_block = url_data(url, "eth_blockNumber", [])['result']
-    for i in range(20):
-        block_num = int(last_block, 16) - i
-        block_info = url_data(url, "eth_getBlockByNumber", [hex(block_num), True])['result']
-        data.append({
-            "height": block_num,
-            "size": int(block_info['size'], 16),
-            "rewards": 3,
-            "time": stamp2datetime(int(block_info['timestamp'], 16)),
-            "block_hash": block_info['hash']
-        })
+    blocks = Block.objects.all().order_by('-number')[:20]
+    if blocks.exists():
+        data = list(blocks.values('number', 'size', 'timestamp', 'hash', 'blockReward'))
+        for item in data:
+            item['time'] = stamp2datetime(item['timestamp'])
 
-    return JsonResponse({"code": 200, "size": 20, "return_data": data})
+    return JsonResponse({"code": 200, "size": len(data), "return_data": data})
 
 
 def index_recent_transactions(request):
@@ -73,13 +67,12 @@ def index_recent_transactions(request):
     """
 
     data = []
-    for i in range(20):
-        data.append({
-                    "tx_hash": "a4337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901e2",
-                    "from": "1f170bV2KrjF3LkLL54So442TqUIsk",
-                    "to": "bb649c83dd1ea5c9d9dec9a18df0ffe9",
-                    "time": str(datetime.datetime.now() - datetime.timedelta(days=i))
-                })
+    transactions = TransactionInfo.objects.all().order_by('-blockNumber')[:20]
+    if transactions.exists():
+        data = list(transactions.values('source', 'to', 'hash', 'blockNumber'))
+        for item in data:
+            block_number = item['blockNumber']
+            item['time'] = stamp2datetime(Block.objects.get(number=block_number).timestamp)
 
     return JsonResponse({"code": 200, "size": 20, "return_data": data})
 
