@@ -68,7 +68,6 @@ export default class Main extends React.Component {
         var self = this
         // Bind search event of search input for mobile devices
         $('#formSearch').bind('search', function () {
-            console.log('search')
             self.search()
         });
     }
@@ -77,6 +76,7 @@ export default class Main extends React.Component {
      * Search transaction/block/address by txHash/block hash/address
      */
     search(){
+        var self = this
         let keyword = ''
         if($('.mobile').css('display') === 'none'){
             keyword = $('#searchPC').val()
@@ -94,14 +94,38 @@ export default class Main extends React.Component {
                 success: function (data) {
                     if(data.code==200){
                         if(data.data_type==="address"){
-                            window.location.href="/address/"+data.address
+                            self.setState({
+                                redirect:<Redirect to={"/address/"+data.address} />
+                            },()=>{
+                                self.setState({
+                                    redirect: null
+                                })
+                            })
                         }else if(data.data_type==="transaction"){
-                            window.location.href="/translist/"+data.tx_hash
+                            self.setState({
+                                redirect:<Redirect to={"/translist/"+data.tx_hash} />
+                            },()=>{
+                                self.setState({
+                                    redirect: null
+                                })
+                            })
                         }else if(data.data_type==="block"){
-                            window.location.href="/blocklist/"+data.block_hash
+                            self.setState({
+                                redirect:<Redirect to={"/blocklist/"+data.block_hash} />
+                            },()=>{
+                                self.setState({
+                                    redirect: null
+                                })
+                            })
                         }
                     }else{
-                        window.location.href="/notfound/"+keyword
+                        self.setState({
+                            redirect:<Redirect to={"/notfound/"+keyword} />
+                        },()=>{
+                            self.setState({
+                                redirect: null
+                            })
+                        })
                     }                
                 }
             })
@@ -201,10 +225,12 @@ export default class Main extends React.Component {
                                             </span>} 
                                         />
                                 </div>
-                                <form id="formSearch" className="mobile">
+                                <form action="" id="formSearch" className="mobile">
+                                    {/* disable refresh of  whole page */}
                                     <input type="text" name="test" style={{display:'none'}}/>
                                     <input id="searchMobile" type="search" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
                                     <span className="search-icon"><i className="fas fa-search"></i></span>
+                                    {this.state.redirect}
                                 </form>                                              
                             </header>
                             <main>
