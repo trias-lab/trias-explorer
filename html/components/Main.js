@@ -67,8 +67,9 @@ export default class Main extends React.Component {
     componentDidMount() {
         var self = this
         // Bind search event of search input for mobile devices
-        $('#formSearch').bind('search', function () {
+        $('#formSearch').bind('search', function (ele) {
             self.search()
+            $('#searchMobile').blur();  // blur the input to let keyboard hide
         });
     }
 
