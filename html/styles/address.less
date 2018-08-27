@@ -253,6 +253,7 @@
                 line-height: 32px;
                 a{
                     word-break: break-all;
+                    display: block;
                 }
             }
             .address-bar{
@@ -264,7 +265,27 @@
                         min-width: auto;
                     }
                 }
-            }            
+            } 
+            .detail-group .detail-item {
+                display: block;
+                padding: 0 0 16px 0px;
+                i {
+                    margin-top: 0px;
+                }
+                br {
+                    display: none;
+                }
+                & > span {
+                    display: block;
+                    padding-left: 36px;
+                    b {
+                        float: right;
+                    }
+                }
+            }
+            .detail-group .detail-item:last-child {
+                padding-bottom: 0px;
+            }        
         } 
     }
 }

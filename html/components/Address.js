@@ -170,7 +170,7 @@ export default class Address extends React.Component {
                         }
                     </div>
                     <section className="graph-group" >
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
                                     <i className="fas fa-envelope-open"></i>
@@ -181,7 +181,7 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
                                     <i className="fas fa-envelope"></i>
@@ -192,7 +192,7 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
                                     <i className="fas fa-balance-scale"></i>
@@ -203,7 +203,7 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
                                     <i className="fas fa-calendar-alt"></i>
@@ -260,7 +260,7 @@ export default class Address extends React.Component {
                                         </Link>
                                     </p>
                                     <div className="detail-group">
-                                        <div className="detail-item">
+                                        <div className="detail-item clearfix">
                                             <i className="fas fa-handshake"></i>
                                             <span>
                                                 <FormattedMessage id="amount"/>
@@ -268,7 +268,7 @@ export default class Address extends React.Component {
                                                 <b>{i.amount_transacted}</b>
                                             </span>
                                         </div>
-                                        <div className="detail-item">
+                                        <div className="detail-item clearfix">
                                             <i className="fas fa-money-bill-wave"></i>
                                             <span>
                                                 <FormattedMessage id="fees"/>
@@ -276,7 +276,7 @@ export default class Address extends React.Component {
                                                 <b>{i.fees}</b>
                                             </span>
                                         </div>
-                                        <div className="detail-item">
+                                        <div className="detail-item clearfix">
                                             <i className="fas fa-calendar-alt"></i>
                                             <span>
                                                 <FormattedMessage id="time"/>
@@ -284,7 +284,7 @@ export default class Address extends React.Component {
                                                 <b>{i.time}</b>
                                             </span>
                                         </div>
-                                        <div className="detail-item">
+                                        <div className="detail-item clearfix">
                                             <i className="fas fa-fingerprint"></i>
                                             <span>
                                                 <FormattedMessage id="status"/>
