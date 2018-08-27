@@ -25,7 +25,7 @@ class Block(models.Model):
     timestamp = models.BigIntegerField()
     transactionsCount = models.BigIntegerField()
     uncleCount = models.BigIntegerField()
-    blockReward = models.BigIntegerField(default=None)
+    blockReward = models.BigIntegerField(default=0)
 
     class Meta:
         db_table = "block"

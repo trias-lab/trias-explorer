@@ -2,11 +2,10 @@
 index message
 """
 import datetime
-import random
 from django.http import JsonResponse
 from app.utils.block_util import url_data, stamp2datetime, hex2int
 from app.utils.localconfig import JsonConfiguration
-from app.models import Block, TransactionInfo, Address, AddressTx, IndexInfo
+from app.models import Block, TransactionInfo, IndexInfo
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
