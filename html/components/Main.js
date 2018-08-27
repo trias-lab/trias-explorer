@@ -23,6 +23,8 @@ import TransactionDetail from "./TransactionDetail"
 import Address from "./Address"
 import NotFound from "./NotFound"
 
+global.Intl = require('intl');  // for older browsers
+
 /**
  * Scroll the window up on every navigation.
  * Documentaion: https://reacttraining.com/react-router/web/guides/scroll-restoration
