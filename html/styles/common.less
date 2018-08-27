@@ -235,7 +235,9 @@ input[type="number"].pageNum {
     .mobile{
         width: 100%;
         .btn-prev{
-            width:90px;
+            max-width:90px;
+            width: 28%;
+            min-width: 70px;
             height:42px;
             background:rgba(255,255,255,1);
             border-radius:4px 0 0 4px;
@@ -248,6 +250,10 @@ input[type="number"].pageNum {
             margin-left: 0;
             .pageNum{
                 border-radius: 0;
+                padding-right: 0;
+                max-width: 64px;
+                width:30%;
+                min-width: 40px;
             }
             .totalPages{
                 font-size:16px;
@@ -257,7 +263,9 @@ input[type="number"].pageNum {
             }
         }
         .btn-next{
-            width:90px;
+            max-width: 90px;
+            width: 20%;
+            min-width: 49px;
             height:42px;
             background:rgba(255,255,255,1);
             border-radius:0 4px 4px 0;
