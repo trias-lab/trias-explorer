@@ -3,6 +3,9 @@ user address info
 """
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from django.db.models import Q
+from app.utils.block_util import stamp2datetime
+from app.models import Block, TransactionInfo, Address
 
 
 def address_info(request):
@@ -16,14 +19,8 @@ def address_info(request):
     if not address:
         return JsonResponse({"code": 201, "message": "Need Address ID"})
 
-    data = {
-            "received": 675347.32077952,
-            "sent": 675347.32077952,
-            "balance": 0.0,
-            "time": "2018-08-17 13:36:26",
-            "address": "1PFtrRjbq4aLfM7k4tyLZ3ZAuTsgLr6Q8Q",
-            "tx_count": 114138,
-        }
+    data = list(Address.objects.filter(address=address).values())[0]
+    data['time'] = stamp2datetime(data['time'])
 
     return JsonResponse({"code": 200, "return_data": data})
 
@@ -54,23 +51,16 @@ def address_transactions(request):
         size = 3
         page = 1
 
-    transactions = [
-        {
-            "amount_transacted": 0.44662462,
-            "fees": 0.00090000,
-            "fees_rate": 791,
-            "time": "2018-08-17 13:36:26",
-            "input": "bc1qwqdg6squsna38e46...ulcc7kytlcckxswvvzej",
-            "output": "3EGxfveUFuSk346WbnCoZWVyhLEdPazry6",
-            "confirmations": 3,
-            "tx_hash": "0x4507a69d03d0dc145d5e7b47bc60f4796d99f594bd450749d689db6e8cebb157"
-        }
-    ] * 5
+    transactions = TransactionInfo.objects.filter(Q(source=address)|Q(to=address)).order_by('-blockNumber')
 
     pag = Paginator(transactions, size)
     if page > pag.num_pages:
         page = 1
-    data = pag.page(page).object_list
+    data = list(pag.page(page).object_list.values('hash', 'gasPrice', 'source', 'value', 'to', 'gasUsed', 'blockNumber'))
+    for item in data:
+        item['time'] = stamp2datetime(Block.objects.get(number=item['blockNumber']).timestamp)
+        item['fees'] = item['gasPrice'] * item['gasUsed']
+        item['confirmations'] = Block.objects.last().number - item['blockNumber']
 
     return JsonResponse({"code": 200, "total_size": len(transactions), "page": page, "total_page": pag.num_pages, "return_data": data})
 

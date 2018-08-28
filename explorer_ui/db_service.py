@@ -18,6 +18,7 @@ def save2db():
         print("Block -%s is saving..." % i)
         if not Block.objects.filter(number=i).exists():
             block_info = url_data(url, "eth_getBlockByNumber", [hex(i), True])['result']
+            time = hex2int(block_info['timestamp'])
             blockHash = block_info['hash']
             a=Block.objects.create(
                 number=i,
@@ -36,7 +37,7 @@ def save2db():
                 size=hex2int(block_info['size']),
                 gasLimit=hex2int(block_info['gasLimit']),
                 gasUsed=hex2int(block_info['gasUsed']),
-                timestamp=hex2int(block_info['timestamp']),
+                timestamp=time,
                 transactionsCount=len(block_info['transactions']),
                 uncleCount = len(block_info['uncles'])
             )
@@ -68,19 +69,26 @@ def save2db():
 
                     if not Address.objects.filter(address=source).exists():
                         src_balance = url_data(url, "eth_getBalance", [source, "latest"])['result']
-                        src_addr = Address.objects.create(address=source, received=0, sent=str(value), balance=str(hex2int(src_balance)))
+                        src_addr = Address.objects.create(address=source, received=0, sent=str(value),
+                                                          balance=str(hex2int(src_balance)), txCount=1, time=time)
                     else:
-                        src_addr = Address.objects.filter(address=source)[0]
-                        Address.objects.update(sent=str(value+int(src_addr.sent)), balance=str(int(src_addr.balance)-value))
+                        src_addr = Address.objects.filter(address=source)
+                        sent = str(value+int(src_addr[0].sent))
+                        balance = str(int(src_addr[0].balance)-value)
+                        count = src_addr[0].txCount + 1
+                        src_addr.update(sent=sent, balance=balance, txCount=count, time=time)
 
                     if not Address.objects.filter(address=to).exists():
                         tag_balance = url_data(url, "eth_getBalance", [to, "latest"])['result']
-                        tag_addr = Address.objects.create(address=to, received=str(value), sent=0, balance=str(hex2int(tag_balance)))
+                        tag_addr = Address.objects.create(address=to, received=str(value), sent=0,
+                                                          balance=str(hex2int(tag_balance)), txCount=1, time=time)
                     else:
-                        tag_addr = Address.objects.filter(address=to)[0]
-                        Address.objects.update(received=str(value+int(tag_addr.received)), balance=str(int(tag_addr.balance)+value))
+                        tag_addr = Address.objects.filter(address=to)
+                        received = str(value + int(tag_addr[0].received))
+                        balance = str(int(tag_addr[0].balance) + value)
+                        count = tag_addr[0].txCount + 1
+                        tag_addr.update(received=received, balance=balance, txCount=count, time=time)
 
-                    print(src_addr.id, src_addr.balance)
                     AddressTx.objects.create(address=src_addr, tx=tx, isSend=True)
                     AddressTx.objects.create(address=tag_addr, tx=tx, isSend=False)
 
@@ -95,11 +103,7 @@ def save2db():
                              'transactions': transactions, 'miningEarnings': miningEarnings, 'totalSupply': totalSupply,
                              'bestTransactionFee': bestTransactionFee, 'lastBlock': int_last_block})
 
-    # all_transactions = TransactionInfo.objects.all()
-    # for item in all_transactions:
-    #     txHash = item.hash
-    #     item.gasUsed = hex2int(url_data(url, "eth_getTransactionReceipt", [txHash])['result']['gasUsed'])
-    #     item.save()
+
 
 
 
