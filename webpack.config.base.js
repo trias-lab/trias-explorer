@@ -1,6 +1,7 @@
 var path = require("path");
 var webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   context: __dirname,
@@ -22,24 +23,12 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({name:'vendors', filename:'vendors.js'}),
-    new webpack.LoaderOptionsPlugin({  
-      options: {  
-          postcss: function(){  
-            return [  
-                require("autoprefixer")({  
-                    browsers: ['ie>=8','>1% in CN']  
-                })  
-            ]  
-          }  
-        }  
-    }),
     new ExtractTextPlugin({ //样式文件单独打包
       filename: "app.css",
       disable: false,
       allChunks: true
     })
   ], // add all common plugins here
-
   module: {
     rules:[
       {
@@ -57,11 +46,12 @@ module.exports = {
                     //process.env.NODE_ENV 变量获取的是命令行中传递的参数（./pack_run.sh 中）
                     minimize: process.env.NODE_ENV==='production'  //生产模式才压缩css文件，否则开发模式下sourcemap会有问题
                 }
-            }, {
-                loader: 'postcss-loader',
-                options: {
-                    sourceMap: true
-                }
+            },  {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                plugins: () => [autoprefixer({ browsers: ['defaults', 'ie >= 8', 'Android >= 4.1', 'iOS >= 10', 'Firefox >= 45'] })],
+              },
             }],
         }))
       },
@@ -75,6 +65,12 @@ module.exports = {
                       sourceMap: true,
                       minimize: process.env.NODE_ENV==='production'
                   }
+              },  {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                  plugins: () => [autoprefixer({ browsers: ['defaults', 'ie >= 8', 'Android >= 4.1', 'iOS >= 10', 'Firefox >= 45'] })],
+                },
               }, {
                   loader: 'less-loader',
                   options: {
