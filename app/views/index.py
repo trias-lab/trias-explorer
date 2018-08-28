@@ -2,11 +2,13 @@
 index message
 """
 import datetime
+import time
 from django.http import JsonResponse
 from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
 from app.models import Block, TransactionInfo, IndexInfo, Address
 from app.utils.logger import logger
+from django.db.models import Q
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -19,29 +21,41 @@ def index_base_info(request):
     :return:
     """
 
-    transactions_data = [756, 695, 858, 862, 664, 965, 569, 787, 683, 743, 815, 974, 664, 806]
-    hash_rate_growth_data = [3.37, 3.01, 2.24, 3.33, 1.44, 2,35, 2.13, 1.21, 2.45, 1.87, 3.44, 1.23, 2.44, 2.35]
-    hash_rate_growth = {}
+    blocks_history = {}
     transactions_history = {}
-
-    for i in range(14):
-        today = datetime.date.today()
-        x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
-        hash_rate_growth[x] = hash_rate_growth_data[i]
-        transactions_history[x] = transactions_data[i]
-
     data = {}
     try:
         index_info = list(IndexInfo.objects.all().values())
         if index_info:
             data = index_info[0]
+
+        blocksRate = 0
+        transactionRate = 0
+        for i in range(14):
+            today = datetime.date.today()
+            x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
+            end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple()))  # i days ago timestamp
+            start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple()))  # i+1 days ago timestamp
+            oneDayBlocks = Block.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start))
+            tx_count = 0
+            blocks_count = oneDayBlocks.count()
+
+            if oneDayBlocks.exists():
+                for item in oneDayBlocks:
+                    tx_count += item.transactionsCount
+                if i == 0:
+                    blocksRate = round(blocks_count/24, 2)
+                    transactionRate = round(tx_count/24, 2)
+
+            transactions_history[x] = tx_count
+            blocks_history[x] = blocks_count
+
+        data['transactionsHistory'] = transactions_history
+        data['blocksHistory'] = blocks_history
+        data['blocksRate'] = blocksRate
+        data['transactionRate'] = transactionRate
     except Exception as e:
         logger.error(e)
-
-    data['transactionsHistory'] = transactions_history
-    data['hashRateGrowth'] = hash_rate_growth
-    data['transactionCelerator'] = 0.0003743
-    data['transactionRate'] = 2.35
 
     return JsonResponse({"code": 200, "return_data": data})
 

@@ -33,12 +33,12 @@ class Block(models.Model):
 
 class IndexInfo(models.Model):
     hashRate = models.BigIntegerField()
-    difficulty = models.CharField(max_length=255)
-    miningEarnings = models.BigIntegerField()
+    totalDifficulty = models.CharField(max_length=255)
+    lastBlockFees = models.BigIntegerField()
     lastBlock = models.BigIntegerField()
-    totalSupply = models.BigIntegerField()
+    addresses = models.BigIntegerField()
     transactions = models.BigIntegerField()
-    bestTransactionFee = models.BigIntegerField()
+    lastTransactionFees = models.BigIntegerField()
     unconfirmed = models.BigIntegerField()
 
     class Meta:

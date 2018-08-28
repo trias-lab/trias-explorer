@@ -103,15 +103,16 @@ def save2db():
             a.save()
 
     hashRate = hex2int(url_data(url, "eth_hashrate", []).get('result', '0x0'))
-    difficulty = str((hex2int(last_block_info['totalDifficulty'])))
+    totalDifficulty = str((hex2int(last_block_info['totalDifficulty'])))
     unconfirmed = hex2int(url_data(url, "txpool_status", []).get('result', '0x0'))
     transactions = TransactionInfo.objects.all().count()
-    miningEarnings = 0
-    totalSupply = 0
-    bestTransactionFee = 0
-    IndexInfo.objects.update_or_create(id=1, defaults = {'hashRate': hashRate, 'difficulty': difficulty, 'unconfirmed': unconfirmed,
-                             'transactions': transactions, 'miningEarnings': miningEarnings, 'totalSupply': totalSupply,
-                             'bestTransactionFee': bestTransactionFee, 'lastBlock': int_last_block})
+    lastBlockFees = Block.objects.last().blockReward
+    addresses = Address.objects.count()
+    last_tx = TransactionInfo.objects.last()
+    lastTransactionFees = last_tx.gasPrice * last_tx.gasUsed
+    IndexInfo.objects.update_or_create(id=1, defaults = {'hashRate': hashRate, 'totalDifficulty': totalDifficulty, 'unconfirmed': unconfirmed,
+                             'transactions': transactions, 'lastBlockFees': lastBlockFees, 'addresses': addresses,
+                             'lastTransactionFees': lastTransactionFees, 'lastBlock': int_last_block})
 
 
 def launch_services():
