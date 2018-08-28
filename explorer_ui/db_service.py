@@ -1,12 +1,17 @@
 from app.models import Block, TransactionInfo, Address, AddressTx, IndexInfo
 from app.utils.localconfig import JsonConfiguration
 from app.utils.block_util import url_data, hex2int
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
 
 
 def save2db():
+    """
+    Updates data from the latest block to database
+    :return:
+    """
     hex_last_block = url_data(url, "eth_blockNumber", [])['result']
     int_last_block = hex2int(hex_last_block)
     last_block_info = url_data(url, "eth_getBlockByNumber", [hex_last_block, True])['result']
@@ -17,6 +22,7 @@ def save2db():
     for i in range(number, int_last_block+1):
         print("Block -%s is saving..." % i)
         if not Block.objects.filter(number=i).exists():
+            reward = 3*10**18
             block_info = url_data(url, "eth_getBlockByNumber", [hex(i), True])['result']
             time = hex2int(block_info['timestamp'])
             blockHash = block_info['hash']
@@ -48,14 +54,16 @@ def save2db():
                     source = transaction_info['from']
                     to = transaction_info['to']
                     value = hex2int(transaction_info['value'])
+                    gasPrice = hex2int(transaction_info['gasPrice'])
                     gasUsed = hex2int(url_data(url, "eth_getTransactionReceipt", [tx['hash']])['result']['gasUsed'])
+                    reward += (gasUsed * gasPrice)
                     tx = TransactionInfo.objects.create(
                              blockHash=blockHash,
                              blockNumber=i,
                              source=source,
                              to=to,
                              gas=hex2int(transaction_info['gas']),
-                             gasPrice=hex2int(transaction_info['gasPrice']),
+                             gasPrice=gasPrice,
                              input=transaction_info['input'],
                              transactionIndex=hex2int(transaction_info['transactionIndex']),
                              value=value,
@@ -91,6 +99,8 @@ def save2db():
 
                     AddressTx.objects.create(address=src_addr, tx=tx, isSend=True)
                     AddressTx.objects.create(address=tag_addr, tx=tx, isSend=False)
+            a.blockReward = reward
+            a.save()
 
     hashRate = hex2int(url_data(url, "eth_hashrate", []).get('result', '0x0'))
     difficulty = str((hex2int(last_block_info['totalDifficulty'])))
@@ -102,6 +112,21 @@ def save2db():
     IndexInfo.objects.update_or_create(id=1, defaults = {'hashRate': hashRate, 'difficulty': difficulty, 'unconfirmed': unconfirmed,
                              'transactions': transactions, 'miningEarnings': miningEarnings, 'totalSupply': totalSupply,
                              'bestTransactionFee': bestTransactionFee, 'lastBlock': int_last_block})
+
+
+def launch_services():
+    """
+    Use the timed task framework to accomplish the task of regularly updating the database
+    :return:
+    """
+    sched = BlockingScheduler()
+    sched.add_job(save2db, 'interval', max_instances=10, seconds=10)
+    print('update database started')
+    try:
+        sched.start()
+    except Exception as e:
+        pass
+
 
 
 
