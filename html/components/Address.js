@@ -228,7 +228,7 @@ export default class Address extends React.Component {
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="txCount" /></span>
-                                    <span className="value">{this.state.detailInfo.tx_count}</span>
+                                    <span className="value">{this.state.detailInfo.txCount}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="time" /></span>
@@ -244,8 +244,8 @@ export default class Address extends React.Component {
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
                                         <span><FormattedMessage id="txHash"/>:</span>
-                                        <Link to={"/translist/"+i.tx_hash}>
-                                            {i.tx_hash}
+                                        <Link to={"/translist/"+i.hash}>
+                                            {i.hash}
                                         </Link>
                                     </p>
                                     <div className="detail-group">
@@ -254,7 +254,7 @@ export default class Address extends React.Component {
                                             <span>
                                                 <FormattedMessage id="amount"/>
                                                 <br />
-                                                <b>{i.amount_transacted}</b>
+                                                <b>{i.value}</b>
                                             </span>
                                         </div>
                                         <div className="detail-item clearfix">
@@ -285,27 +285,27 @@ export default class Address extends React.Component {
                                     <div className="address-bar">
                                         <div className="item-a">
                                             {
-                                                i.output &&
-                                                <Qrcode id={index} text={i.output} size="70" />
+                                                i.source &&
+                                                <Qrcode id={index} text={i.source} size="70" />
                                             }
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
-                                                <Link to={"/address/"+ i.output}>
-                                                    <b>{i.output}</b>
+                                                <Link to={"/address/"+ i.source}>
+                                                    <b>{i.source}</b>
                                                 </Link>
                                             </span>
                                         </div>
                                         <div className="item-b">
                                             {
-                                                i.input &&
-                                                <Qrcode id={index + "a"} text={i.input} size="70" />
+                                                i.to &&
+                                                <Qrcode id={index + "a"} text={i.to} size="70" />
                                             }
                                             <span>
                                                 <FormattedMessage id="address"/>
                                                 <br />
-                                                <Link to={"/address/"+ i.input}>
-                                                    <b>{i.input}</b>
+                                                <Link to={"/address/"+ i.to}>
+                                                    <b>{i.to}</b>
                                                 </Link>
                                             </span>
                                         </div>
@@ -323,7 +323,7 @@ export default class Address extends React.Component {
                                 totalPagesCount={this.state.pageCount}
                                 currentPage={this.state.currentPage}
                                 onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
-                                onSelectPage={(num) => this.handleSelectPage(cum)}
+                                onSelectPage={(num) => this.handleSelectPage(num)}
                                 onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
                             />
                     </section>
