@@ -143,29 +143,29 @@ class TransactionList extends React.Component {
 
                                             <tr key={index}>
                                                 <td className="td-trans-txHash">
-                                                    <Link to={"/translist/"+ item.tx_hash}>
+                                                    <Link to={"/translist/"+ item.hash}>
                                                         <i className="fa fa-handshake"></i>
-                                                        <span>{item.tx_hash}</span>
+                                                        <span>{item.hash}</span>
                                                     </Link>
                                                 </td>
                                                 <td className="td-trans-color">
-                                                    <Link to={"/blocklist/"+ item.block}>
-                                                        <span>{item.block}</span>
+                                                    <Link to={"/blocklist/"+ item.blockNumber}>
+                                                        <span>{item.blockNumber}</span>
                                                     </Link>
                                                 </td>
-                                                <td className="td-trans-color">
-                                                    <Link to={"/address/"+ item.from}>
-                                                        <span>{item.from}</span>
+                                                <td className="td-trans-color td-trans-address">
+                                                    <Link to={"/address/"+ item.source}>
+                                                        <span>{item.source}</span>
                                                     </Link>
                                                 </td>
                                                 <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
-                                                <td className="td-trans-color">
+                                                <td className="td-trans-color td-trans-address">
                                                     <Link to={"/address/"+ item.to}>
                                                         <span>{item.to}</span>
                                                     </Link>
                                                 </td>
                                                 <td>{item.value}</td>
-                                                <td>{item.age}</td>
+                                                <td>{item.time}</td>
                                             </tr>
 
                                         )

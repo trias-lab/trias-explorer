@@ -47,37 +47,36 @@ export default class TransactionDetail extends React.Component {
                 if(data.code==200){
                     self.setState({
                         detailInfo:{
-                            amount_transacted: transData.amount_transacted,
+                            amount_transacted: transData.value,
                             confirmations: transData.confirmations,
-                            fees: transData.fees,
+                            fees: transData.gasUsed * transData.gasPrice,
                             fees_rate: transData.fees_rate,
-                            input: transData.input,
-                            output: transData.output,
+                            input: transData.source,
+                            output: transData.to,
                             time: transData.time,
-                            tx_hash: transData.tx_hash,
-                            tx_receipt_status:transData.tx_receipt_status,
-                            block_height:transData.block_height,
+                            tx_hash: transData.hash,
+                            block_height:transData.blockNumber,
                             value:transData.value,
-                            gas_limit:transData.gas_limit,
-                            gas_used:transData.gas_used,
-                            gas_price:transData.gas_price,
+                            gas_limit:transData.gasLimit,
+                            gas_used:transData.gasUsed,
+                            gas_price:transData.gasPrice,
                             actual_tx_cost:transData.actual_tx_cost,
                             fee:transData.fee,
                             nonce:transData.nonce,
-                            position:transData.position,
-                            input_data:transData.input_data.replace(/\n/g,'#').split('#'),
+                            transactionIndex:transData.transactionIndex,
+                            input_data:transData.input_data ? transData.input_data.replace(/\n/g,'#').split('#') : false,
                         },
                         transactionList:[{
-                            amount_transacted: transData.amount_transacted,
+                            amount_transacted: transData.value,
                             confirmations: transData.confirmations,
-                            fees: transData.fees,
+                            fees: transData.gasUsed * transData.gasPrice,
                             fees_rate: transData.fees_rate,
-                            input: transData.input,
-                            output: transData.output,
+                            input: transData.source,
+                            output: transData.to,
                             time: transData.time,
-                            tx_hash: transData.tx_hash,
+                            tx_hash: transData.hash,
                         }],
-                        eventLogList:transData.receipt,
+                        eventLogList:transData.receipt||[],
                     })
                 }
                 // console.log(data);
@@ -122,7 +121,7 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="fees" tagName="p"/>
-                                    <p>{this.state.detailInfo.fees}</p>
+                                    <p>{this.state.detailInfo.fees }</p>
                                 </div>
                             </div>
                         </div>
@@ -157,10 +156,10 @@ export default class TransactionDetail extends React.Component {
                                     <span className="attr"><FormattedMessage id="txHash"/>:</span>
                                     <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
                                 </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="txReceiptStatus"/></span>
-                                    <span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>
-                                </p>
+                                {/*<p>*/}
+                                    {/*<span className="attr"><FormattedMessage id="txReceiptStatus"/></span>*/}
+                                    {/*<span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>*/}
+                                {/*</p>*/}
                                 <p>
                                     <span className="attr"><FormattedMessage id="height"/></span>
                                     <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
@@ -193,11 +192,11 @@ export default class TransactionDetail extends React.Component {
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="actualTxCostFee"/></span>
-                                    <span className="value">{this.state.detailInfo.actual_tx_cost}&nbsp;{this.state.detailInfo.fee}</span>
+                                    <span className="value">{this.state.detailInfo.fees}</span>
                                 </p>
                                 <p>
                                     <span className="attr">{'Nonce & {Position}'}</span>
-                                    <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.position}{'}'}</span>
+                                    <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.transactionIndex}{'}'}</span>
                                 </p>
                             </div>
                         </div>
@@ -250,19 +249,6 @@ export default class TransactionDetail extends React.Component {
                                     <div className="address-bar">
                                         <div className="item-a">
                                             {
-                                                i.output &&
-                                                <Qrcode id={index} text={i.output} size="70" />
-                                            }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={'/address/'+i.output}>
-                                                    <b>{i.output}</b>
-                                                </Link>
-                                            </span>
-                                        </div>
-                                        <div className="item-b">
-                                            {
                                                 i.input &&
                                                 <Qrcode id={index + "a"} text={i.input} size="70" />
                                             }
@@ -273,6 +259,20 @@ export default class TransactionDetail extends React.Component {
                                                     <b>{i.input}</b>
                                                 </Link>
                                             </span>
+                                        </div>
+                                        <div className="item-b">
+                                            {
+                                                i.output &&
+                                                <Qrcode id={index} text={i.output} size="70" />
+                                            }
+                                            <span>
+                                                <FormattedMessage id="address"/>
+                                                <br />
+                                                <Link to={'/address/'+i.output}>
+                                                    <b>{i.output}</b>
+                                                </Link>
+                                            </span>
+
                                         </div>
                                     </div>
                                 </div>

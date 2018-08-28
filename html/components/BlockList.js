@@ -141,12 +141,12 @@ class BlockList extends React.Component {
 
                                                 <tr key={index}>
                                                     <td className="td-block-height">
-                                                        <Link to={"/blocklist/"+ item.block_hash}><i className="fa fa-cube"></i>{item.height}</Link>
+                                                        <Link to={"/blocklist/"+ item.hash}><i className="fa fa-cube"></i>{item.number}</Link>
                                                     </td>
-                                                    <td>{item.tx_count}</td>
+                                                    <td>{item.transactionsCount}</td>
                                                     <td>{item.size}</td>
-                                                    <td className="td-block-fee"> <span> {item.avg_fee_per_tx}</span></td>
-                                                    <td>{item.reward}</td>
+                                                    <td className="td-block-fee"> <span> {item.avgFee}</span></td>
+                                                    <td>{item.blockReward}</td>
                                                     <td>{item.time}</td>
                                                 </tr>
 
