@@ -11,6 +11,14 @@ It must connect to Trias public chain nodes to collect information. You can use 
  - django-webpack-loader: 0.2.4
  - react: 16.3.2
  - webpack: 2.7.0
+ - requests
+ - apscheduler
+
+## log files
+touch /var/log/trias/explorer.log
+touch /var/log/trias/request.log
+sudo chmod 777 /var/log/trias/explorer.log
+sudo chmod 777 /var/log/trias/request.log
 
 ## Contributions
 Install dependencies: 
