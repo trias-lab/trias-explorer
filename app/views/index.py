@@ -3,9 +3,9 @@ index message
 """
 import datetime
 from django.http import JsonResponse
-from app.utils.block_util import url_data, stamp2datetime, hex2int
+from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
-from app.models import Block, TransactionInfo, IndexInfo
+from app.models import Block, TransactionInfo, IndexInfo, Address
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -87,24 +87,20 @@ def serach(request):
     if not key:
         return JsonResponse({"code": 201, "message": ''})
 
-    try:
-        num = hex(int(key))
-        isBlock = url_data(url, "eth_getBlockByNumber", [num, True]).get('result')
-        if isBlock:
-            return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock['hash']})
-    except:
-        pass
+    isBlock = Block.objects.filter(number=key)
+    if isBlock.exists():
+        return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
 
-    isBlock = url_data(url, "eth_getBlockByHash", [key, True]).get('result')
-    if isBlock:
-        return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock['hash']})
+    isBlock = Block.objects.filter(hash=key)
+    if isBlock.exists():
+        return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
 
-    isTx = url_data(url, "eth_getTransactionByHash", [key]).get('result')
-    if isTx:
-        return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": isTx['hash']})
+    isTx = TransactionInfo.objects.filter(hash=key)
+    if isTx.exists():
+        return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": key})
 
-    isAddress = url_data(url, "eth_getBalance", [key, "latest"]).get('result', '0x0')
-    if hex2int(isAddress):
+    isAddress = Address.objects.filter(address=key)
+    if isAddress.exists():
         return JsonResponse({"code": 200, "data_type": "address", "address": key})
 
     return JsonResponse({"code": 201, "message": ''})
