@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from app.utils.block_util import stamp2datetime
 from app.models import Block, TransactionInfo, Address
+from app.utils.logger import logger
 
 
 def address_info(request):
@@ -19,8 +20,12 @@ def address_info(request):
     if not address:
         return JsonResponse({"code": 201, "message": "Need Address ID"})
 
-    data = list(Address.objects.filter(address=address).values())[0]
-    data['time'] = stamp2datetime(data['time'])
+    try:
+        data = list(Address.objects.filter(address=address).values())[0]
+        data['time'] = stamp2datetime(data['time'])
+    except Exception as e:
+        logger.error(e)
+        return JsonResponse({"code": 201, "message": "ERROR"})
 
     return JsonResponse({"code": 200, "return_data": data})
 
@@ -51,16 +56,19 @@ def address_transactions(request):
         size = 3
         page = 1
 
-    transactions = TransactionInfo.objects.filter(Q(source=address)|Q(to=address)).order_by('-blockNumber')
-
-    pag = Paginator(transactions, size)
-    if page > pag.num_pages:
-        page = 1
-    data = list(pag.page(page).object_list.values('hash', 'gasPrice', 'source', 'value', 'to', 'gasUsed', 'blockNumber'))
-    for item in data:
-        item['time'] = stamp2datetime(Block.objects.get(number=item['blockNumber']).timestamp)
-        item['fees'] = item['gasPrice'] * item['gasUsed']
-        item['confirmations'] = Block.objects.last().number - item['blockNumber']
+    try:
+        transactions = TransactionInfo.objects.filter(Q(source=address)|Q(to=address)).order_by('-blockNumber')
+        pag = Paginator(transactions, size)
+        if page > pag.num_pages:
+            page = 1
+        data = list(pag.page(page).object_list.values('hash', 'gasPrice', 'source', 'value', 'to', 'gasUsed', 'blockNumber'))
+        for item in data:
+            item['time'] = stamp2datetime(Block.objects.get(number=item['blockNumber']).timestamp)
+            item['fees'] = item['gasPrice'] * item['gasUsed']
+            item['confirmations'] = Block.objects.last().number - item['blockNumber']
+    except Exception as e:
+        logger.error(e)
+        return JsonResponse({"code": 201, "message": "ERROR"})
 
     return JsonResponse({"code": 200, "total_size": len(transactions), "page": page, "total_page": pag.num_pages, "return_data": data})
 

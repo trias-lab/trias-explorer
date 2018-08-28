@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
 from app.models import Block, TransactionInfo, IndexInfo, Address
+from app.utils.logger import logger
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -30,9 +31,13 @@ def index_base_info(request):
         transactions_history[x] = transactions_data[i]
 
     data = {}
-    index_info = list(IndexInfo.objects.all().values())
-    if index_info:
-        data = index_info[0]
+    try:
+        index_info = list(IndexInfo.objects.all().values())
+        if index_info:
+            data = index_info[0]
+    except Exception as e:
+        logger.error(e)
+
     data['transactionsHistory'] = transactions_history
     data['hashRateGrowth'] = hash_rate_growth
     data['transactionCelerator'] = 0.0003743
@@ -49,11 +54,14 @@ def index_latest_blocks(request):
     """
 
     data = []
-    blocks = Block.objects.all().order_by('-number')[:20]
-    if blocks.exists():
-        data = list(blocks.values('number', 'size', 'timestamp', 'hash', 'blockReward'))
-        for item in data:
-            item['time'] = stamp2datetime(item['timestamp'])
+    try:
+        blocks = Block.objects.all().order_by('-number')[:20]
+        if blocks.exists():
+            data = list(blocks.values('number', 'size', 'timestamp', 'hash', 'blockReward'))
+            for item in data:
+                item['time'] = stamp2datetime(item['timestamp'])
+    except Exception as e:
+        logger.error(e)
 
     return JsonResponse({"code": 200, "size": len(data), "return_data": data})
 
@@ -66,12 +74,15 @@ def index_recent_transactions(request):
     """
 
     data = []
-    transactions = TransactionInfo.objects.all().order_by('-blockNumber')[:20]
-    if transactions.exists():
-        data = list(transactions.values('source', 'to', 'hash', 'blockNumber'))
-        for item in data:
-            block_number = item['blockNumber']
-            item['time'] = stamp2datetime(Block.objects.get(number=block_number).timestamp)
+    try:
+        transactions = TransactionInfo.objects.all().order_by('-blockNumber')[:20]
+        if transactions.exists():
+            data = list(transactions.values('source', 'to', 'hash', 'blockNumber'))
+            for item in data:
+                block_number = item['blockNumber']
+                item['time'] = stamp2datetime(Block.objects.get(number=block_number).timestamp)
+    except Exception as e:
+        logger.error(e)
 
     return JsonResponse({"code": 200, "size": 20, "return_data": data})
 
@@ -85,22 +96,25 @@ def serach(request):
 
     key = request.GET.get('key')
     if not key:
-        return JsonResponse({"code": 201, "message": ''})
+        return JsonResponse({"code": 201, "message": 'Need a key'})
 
-    isBlock = Block.objects.filter(number=key)
-    if isBlock.exists():
-        return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
+    try:
+        isBlock = Block.objects.filter(number=key)
+        if isBlock.exists():
+            return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
 
-    isBlock = Block.objects.filter(hash=key)
-    if isBlock.exists():
-        return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
+        isBlock = Block.objects.filter(hash=key)
+        if isBlock.exists():
+            return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
 
-    isTx = TransactionInfo.objects.filter(hash=key)
-    if isTx.exists():
-        return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": key})
+        isTx = TransactionInfo.objects.filter(hash=key)
+        if isTx.exists():
+            return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": key})
 
-    isAddress = Address.objects.filter(address=key)
-    if isAddress.exists():
-        return JsonResponse({"code": 200, "data_type": "address", "address": key})
+        isAddress = Address.objects.filter(address=key)
+        if isAddress.exists():
+            return JsonResponse({"code": 200, "data_type": "address", "address": key})
+    except Exception as e:
+        logger.error(e)
 
-    return JsonResponse({"code": 201, "message": ''})
+    return JsonResponse({"code": 201, "message": 'Error key'})

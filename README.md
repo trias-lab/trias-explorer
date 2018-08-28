@@ -15,8 +15,9 @@ It must connect to Trias public chain nodes to collect information. You can use 
  - apscheduler
 
 ## log files
-touch /var/log/trias/explorer.log
-touch /var/log/trias/request.log
+sudo mkdir /var/log/trias
+sudo touch /var/log/trias/explorer.log
+sudo touch /var/log/trias/request.log
 sudo chmod 777 /var/log/trias/explorer.log
 sudo chmod 777 /var/log/trias/request.log
 
