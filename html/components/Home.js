@@ -361,17 +361,21 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
-                            <div className="home-header-item">
-                                <div className='item-wap-img'>
-                                    <i className="fa fa-cube"></i>
+
+                            <Link to="/blocklist">
+                                <div className="home-header-item">
+                                    <div className='item-wap-img'>
+                                        <i className="fa fa-cube"></i>
+                                    </div>
+                                    <FormattedMessage id="lastBlock">
+                                        {(txt) => (
+                                            <p className='item-tit'> {txt}</p>
+                                        )}
+                                    </FormattedMessage>
+                                    <p className='item-pre' title={`# ${this.state.last_block}`}> #{this.state.last_block}</p>
                                 </div>
-                                <FormattedMessage id="lastBlock">
-                                    {(txt) => (
-                                        <p className='item-tit'> {txt}</p>
-                                    )}
-                                </FormattedMessage>
-                                <p className='item-pre' title={`# ${this.state.last_block}`}> #{this.state.last_block}</p>
-                            </div>
+
+                            </Link>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
                             <div className="home-header-item">
@@ -480,7 +484,7 @@ class Home extends React.Component {
                                 <div className="latest-tit pull-left">
                                     <i className="fa fa-cubes" ></i>
                                 </div>
-                                <FormattedMessage id="latestBlocks" 　tagName='p' />
+                                <FormattedMessage id="latestBlocks" tagName='p' />
                                 <Link to="/blocklist"><FormattedMessage id="viewAll" /><i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
@@ -494,7 +498,7 @@ class Home extends React.Component {
                                                         <div className="name pull-left">
                                                             <div>
                                                                 <i className="fa fa-cube"></i>
-                                                                <span title={item.number}>{item.number}</span>
+                                                                <span title={`#${item.number}`}>{`##${item.number}`}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -526,7 +530,7 @@ class Home extends React.Component {
                                 <div className="latest-tit pull-left">
                                     <i className="fa fa-handshake" ></i>
                                 </div>
-                                <FormattedMessage id="latestTransactions" 　tagName='p' />
+                                <FormattedMessage id="latestTransactions" tagName='p' />
                                 <Link to="/translist">  <FormattedMessage id="viewAll" /><i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>

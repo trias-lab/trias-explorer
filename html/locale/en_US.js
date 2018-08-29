@@ -23,7 +23,7 @@ const en_US = {
 
     homeItemTit:"HASH RATE",
     totalDifficulty:"Total Difficulty",
-    miningEarnings:" Mining Earnings",
+    miningEarnings:"Last Block Fees",
     lastBlock:"Last Block",
     Addresses:"Addresses",
     currentBest:"Latest deals of fees",

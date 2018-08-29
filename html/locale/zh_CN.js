@@ -23,7 +23,7 @@ const zh_CN = {
 
     homeItemTit:"总算力",
     totalDifficulty:"总难度",
-    miningEarnings:"挖掘收益",
+    miningEarnings:"最新区块的奖励",
     lastBlock:"最新区块",
     Addresses:"有过交易地址数量",
     currentBest:"最新交易的fees",
