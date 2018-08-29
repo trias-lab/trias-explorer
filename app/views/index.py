@@ -44,11 +44,12 @@ def index_base_info(request):
         data['transactionsHistory'] = transactions_history
         data['blocksRate'] = blocksRate
         data['transactionRate'] = transactionRate
+        data['addresses'] = Address.objects.count()
 
         richList = []
         addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
         if addresses.exists():
-            richList = list(addresses.values('address', 'balance', 'time'))[:10]
+            richList = list(addresses.values('address', 'balance', 'time'))[:8]
             for addr in richList:
                 addr['time'] = stamp2datetime(addr['time'])
         data['richList'] = richList
