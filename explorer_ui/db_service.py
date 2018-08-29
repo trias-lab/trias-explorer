@@ -26,7 +26,7 @@ def save2db():
         number = db_last_block_obj.lastBlock + 1
 
     for i in range(number, int_last_block+1):
-        # print("Block -%s is saving..." % i)
+        print("Block -%s is saving..." % i)
         if not Block.objects.filter(number=i).exists():
             reward = 3*10**18
             block_info = url_data(url, "eth_getBlockByNumber", [hex(i), True])['result']
@@ -123,7 +123,6 @@ def save2db():
                     AddressTx.objects.create(address=src_addr, tx=tx, isSend=True)
             a.blockReward = reward
             a.save()
-    print(55555)
     hashRate = hex2int(url_data(url, "eth_hashrate", []).get('result', '0x0'))
     totalDifficulty = str((hex2int(last_block_info['totalDifficulty'])))
     unconfirmed = hex2int(url_data(url, "txpool_status", []).get('result', '0x0'))

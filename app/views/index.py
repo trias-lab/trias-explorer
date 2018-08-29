@@ -36,15 +36,10 @@ def index_base_info(request):
             x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
             end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple()))  # i days ago timestamp
             start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple()))  # i+1 days ago timestamp
-            oneDayBlocks = Block.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start))
-            tx_count = 0
+            tx_count = TransactionInfo.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
 
-            if oneDayBlocks.exists():
-                for item in oneDayBlocks:
-                    tx_count += item.transactionsCount
-                if i == 0:
-                    transactionRate = round(tx_count / 24, 2)
-
+            if i == 0:
+                transactionRate = round(tx_count / 24, 2)
             transactions_history[x] = tx_count
         data['transactionsHistory'] = transactions_history
         data['blocksRate'] = blocksRate
@@ -54,8 +49,8 @@ def index_base_info(request):
         addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
         if addresses.exists():
             richList = list(addresses.values('address', 'balance', 'time'))[:10]
-            for addr in richList:
-                addr['time'] = stamp2datetime(addr['time'])
+            # for addr in richList:
+            #     addr['time'] = stamp2datetime(addr['time'])
         data['richList'] = richList
 
     except Exception as e:
