@@ -63,7 +63,7 @@ def block_info(request):
     try:
         block_info = Block.objects.filter(hash=block_hash).values('number', 'transactionsCount', 'timestamp', 'size',
                                                                   'difficulty', 'nonce', 'parentHash', 'miner',
-                                                                  'gasLimit', 'gasUsed')
+                                                                  'gasLimit', 'gasUsed', 'blockReward')
         block_info = list(block_info)[0]
         block_info['time'] = stamp2datetime(block_info['timestamp'])
         number = block_info['number']
