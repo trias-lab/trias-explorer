@@ -22,6 +22,7 @@ import TransactionList from "./TransactionList"
 import TransactionDetail from "./TransactionDetail"
 import Address from "./Address"
 import NotFound from "./NotFound"
+import Article from "./Article"
 
 global.Intl = require('intl');  // for older browsers
 
