@@ -204,7 +204,6 @@ class Home extends React.Component {
         setTimeout(function () {
             window.onresize = function () {
                 self.chartLine1.resize();
-                self.chartLine2.resize();
             }
         }, 200)
     }

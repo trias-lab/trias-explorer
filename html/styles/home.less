@@ -320,9 +320,25 @@
 @media screen and (max-width: 768px) {
     .home-page {
         top: -76px;
+        padding: 0px;
         >section .col:nth-child(2) .home-echarts{
             margin-top: 24px;
         }
+        >section .col{
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        >section:first-child .col:nth-child(2n+1){
+            padding-left: 12px;
+            padding-right: 7px;
+        }
+        >section:first-child .col:nth-child(2n){
+            padding-left: 7px;
+            padding-right: 12px;
+        }
+    }
+    .main-title>div{
+        padding: 0 12px;
     }
     .home-page-list .latest-list .block-list{
         padding: 0;
