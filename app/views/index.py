@@ -2,11 +2,13 @@
 index message
 """
 import datetime
+import time
 from django.http import JsonResponse
 from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
 from app.models import Block, TransactionInfo, IndexInfo, Address
 from app.utils.logger import logger
+from django.db.models import Q
 from collections import OrderedDict
 
 jc = JsonConfiguration()
@@ -21,9 +23,6 @@ def index_base_info(request):
     """
 
     transactions_history = OrderedDict()
-    blocks_history = OrderedDict()
-    transactions_data = [100,200,300,400,500,600,700]
-    blocks_data = [100,200,300,400,500,600,700]
     data = {}
     try:
         index_info = list(IndexInfo.objects.all().values())
@@ -35,29 +34,28 @@ def index_base_info(request):
         for i in range(7):
             today = datetime.date.today()
             x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
-            # end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple()))  # i days ago timestamp
-            # start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple()))  # i+1 days ago timestamp
-            # oneDayBlocks = Block.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start))
-            # tx_count = 0
-            #
-            # if oneDayBlocks.exists():
-            #     for item in oneDayBlocks:
-            #         tx_count += item.transactionsCount
-            #     if i == 0:
-            #         transactionRate = round(tx_count/24, 2)
-            #
-            # transactions_history[x] = tx_count
-            transactions_history[x] = transactions_data[i]
-            blocks_history[x] = blocks_data[i]
+            end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple()))  # i days ago timestamp
+            start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple()))  # i+1 days ago timestamp
+            oneDayBlocks = Block.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start))
+            tx_count = 0
+
+            if oneDayBlocks.exists():
+                for item in oneDayBlocks:
+                    tx_count += item.transactionsCount
+                if i == 0:
+                    transactionRate = round(tx_count / 24, 2)
+
+            transactions_history[x] = tx_count
         data['transactionsHistory'] = transactions_history
-        data['blocksHistory'] = blocks_history
         data['blocksRate'] = blocksRate
         data['transactionRate'] = transactionRate
 
         richList = []
-        addresses = Address.objects.all().order_by('-balance', '-time', '-txCount')
+        addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
         if addresses.exists():
             richList = list(addresses.values('address', 'balance', 'time'))[:10]
+            for addr in richList:
+                addr['time'] = stamp2datetime(addr['time'])
         data['richList'] = richList
 
     except Exception as e:

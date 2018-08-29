@@ -17,5 +17,5 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "explorer_ui.settings")
 application = get_wsgi_application()
 
 # from explorer_ui.db_service import launch_services, save2db
-# t = threading.Thread(target=save2db, args=())
+# t = threading.Thread(target=launch_services, args=())
 # t.start()

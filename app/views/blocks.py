@@ -5,8 +5,9 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
-from app.models import Block, TransactionInfo
+from app.models import Block, TransactionInfo, IndexInfo
 from app.utils.logger import logger
+from app.utils.block_util import url_data, hex2int
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -64,14 +65,20 @@ def block_info(request):
         block_info = Block.objects.filter(hash=block_hash).values('number', 'transactionsCount', 'timestamp', 'size',
                                                                   'difficulty', 'nonce', 'parentHash', 'miner',
                                                                   'gasLimit', 'gasUsed', 'blockReward')
-        block_info = list(block_info)[0]
-        block_info['time'] = stamp2datetime(block_info['timestamp'])
-        number = block_info['number']
-        block_info['confirmations'] = Block.objects.last().number - number
+        if block_info.exists():
+            block_info = list(block_info)[0]
+            block_info['time'] = stamp2datetime(block_info['timestamp'])
+            number = block_info['number']
+        else:
+            block_info = url_data(url, "eth_getBlockByHash", [block_hash, True])['result']
+            block_info['time'] = stamp2datetime(hex2int(block_info['timestamp']))
+            block_info['transactionsCount'] = len(block_info['transactions'])
+            number = hex2int(block_info['number'])
 
+        block_info['confirmations'] = IndexInfo.objects.last().lastBlock - number
         if block_info['confirmations'] > 0:
             next_block_number = number + 1
-            block_info['nextHash'] = Block.objects.get(number=next_block_number).hash
+            block_info['nextHash'] = url_data(url, "eth_getBlockByNumber", [hex(next_block_number), True])['result']['hash']
         else:
             block_info['nextHash'] = 'N/A'
     except Exception as e:
@@ -111,6 +118,8 @@ def block_transactions(request):
 
     try:
         total_data = TransactionInfo.objects.filter(blockHash=block_hash).order_by(sort)
+        if total_data.count() == 0:
+            return JsonResponse({"code": 200, "total_size": 0, "return_data": []})
         pag = Paginator(total_data, size)
         if page > pag.num_pages:
             page = 1

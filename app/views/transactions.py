@@ -3,7 +3,7 @@ transactions message
 """
 from django.http import JsonResponse
 from django.core.paginator import Paginator
-from app.models import Block, TransactionInfo
+from app.models import Block, TransactionInfo, IndexInfo
 from app.utils.block_util import stamp2datetime
 from app.utils.logger import logger
 
@@ -55,15 +55,14 @@ def transaction_info(request):
     tx_hash = request.GET.get('tx_hash')
     if not tx_hash:
         return JsonResponse({"code": 201, "message": "Need Transaction Hash"})
-
     data = []
     try:
-        data = TransactionInfo.objects.filter(hash=tx_hash).values()[0]
+        data = list(TransactionInfo.objects.filter(hash=tx_hash).values())[0]
         number = data['blockNumber']
         block = Block.objects.get(number=number)
         data['gasLimit'] = block.gasLimit
         data['time'] = stamp2datetime(block.timestamp)
-        data['confirmations'] = Block.objects.last().number - number
+        data['confirmations'] = IndexInfo.objects.last().lastBlock - number
     except Exception as e:
         logger.error(e)
 

@@ -40,7 +40,7 @@ class IndexInfo(models.Model):
     transactions = models.BigIntegerField()
     lastTransactionFees = models.BigIntegerField()
     unconfirmed = models.BigIntegerField()
-    # timestamp = models.BigIntegerField()
+    timestamp = models.BigIntegerField()
 
     class Meta:
         db_table = "info"
@@ -55,13 +55,13 @@ class TransactionInfo(models.Model):
     gasPrice = models.BigIntegerField()
     nonce = models.BigIntegerField()
     hash = models.CharField(max_length=255, unique=True)
-    input = models.CharField(max_length=1000)
     transactionIndex = models.BigIntegerField()
     value = models.BigIntegerField()
     v = models.BigIntegerField()
     r = models.CharField(max_length=255)
     s = models.CharField(max_length=255)
     gasUsed = models.BigIntegerField()
+    timestamp = models.BigIntegerField()
 
     class Meta:
         db_table = "transaction"
