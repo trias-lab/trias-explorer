@@ -133,7 +133,7 @@ class CustomPagination extends React.Component {
                 </div>
                 <div className="clearfix mobile">
                     <input type="button" 
-                        disabled={this.state.currentPage===1}
+                        disabled={this.state.currentPage<=1}
                         className="btn-prev" 
                         onClick={() => this.props.onSelectPage(this.state.currentPage-1)} 
                         value="Previous" />
@@ -154,7 +154,7 @@ class CustomPagination extends React.Component {
                         <span className='totalPages'> of {this.state.totalPagesCount}</span>
                     </form>
                     <input type="button" 
-                        disabled={this.state.currentPage===this.state.totalPagesCount} 
+                        disabled={this.state.currentPage>=this.state.totalPagesCount} 
                         className="btn-next" 
                         onClick={() => this.props.onSelectPage(this.state.currentPage+1)} 
                         value="Next"/>
