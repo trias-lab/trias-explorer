@@ -236,20 +236,35 @@
             right: 12px;
         }
         .info-part .info-content{
-            padding: 24px 0;
+            padding: 0;
+            >.col{
+                padding-left: 0!important;
+                padding-right: 0!important;
+                p{
+                    padding: 0 22px;
+                }
+            }
         }
         .info-part .info-content .info-col:nth-child(1){
             border: none;
+            padding-top: 1px;
+            >p:first-child{
+                border-top: 0;
+            }
             >p:last-child{
                 border-bottom: none;
             }
         }
         .info-part .info-content .info-col:nth-child(2){
+            padding-bottom: 1px;
             p:nth-child(2n+1){
                 background: inherit;
             }
             p:nth-child(2n){
                 background: #f9fafb;
+            }
+            p:last-child{
+                border-bottom: none;
             }
         }
         .graph-group{
