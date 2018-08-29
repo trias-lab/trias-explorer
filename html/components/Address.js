@@ -158,7 +158,7 @@ export default class Address extends React.Component {
                     <div className="qrcode-layer">
                         {
                             this.state.detailInfo.address &&
-                            <Qrcode id='2' text={this.state.detailInfo.address} size="70" />
+                            <Qrcode id='title' text={this.state.detailInfo.address} size="70" />
                             // console.log(this.state.detailInfo)
                         }
                     </div>
@@ -292,26 +292,32 @@ export default class Address extends React.Component {
                                                 i.source &&
                                                 <Qrcode id={index} text={i.source} size="70" />
                                             }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={"/address/"+ i.source}>
-                                                    <b>{i.source}</b>
-                                                </Link>
-                                            </span>
+                                            {
+                                                i.source &&
+                                                <span>
+                                                    <FormattedMessage id="address"/>
+                                                    <br />
+                                                    <Link to={"/address/"+ i.source}>
+                                                        <b>{i.source}</b>
+                                                    </Link>
+                                                </span>
+                                            }
                                         </div>
                                         <div className="item-b">
                                             {
                                                 i.to &&
                                                 <Qrcode id={index + "a"} text={i.to} size="70" />
                                             }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={"/address/"+ i.to}>
-                                                    <b>{i.to}</b>
-                                                </Link>
-                                            </span>
+                                            {
+                                                i.to &&
+                                                <span>
+                                                    <FormattedMessage id="address"/>
+                                                    <br />
+                                                    <Link to={"/address/"+ i.to}>
+                                                        <b>{i.to}</b>
+                                                    </Link>
+                                                </span>
+                                            }
                                         </div>
                                     </div>
                                 </div>
