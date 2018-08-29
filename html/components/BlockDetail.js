@@ -64,11 +64,19 @@ export default class BlockDetail extends React.Component {
                 sort:0
             },
             success: function (data) {
-                self.setState({
-                    transactionList: data.return_data,
-                    totalItemsCount: data.total_size,
-                    pageCount: data.total_page,
-                })
+                if(data.code===200){
+                    self.setState({
+                        transactionList: data.return_data,
+                        totalItemsCount: data.total_size,
+                        pageCount: data.total_page,
+                    })
+                }else{
+                    self.setState({
+                        transactionList: [],
+                        totalItemsCount: 0,
+                        pageCount: 0,
+                    })
+                }                
             }
         })
     }
@@ -132,9 +140,15 @@ export default class BlockDetail extends React.Component {
                 block_hash: self.state.blockHash
             },
             success: function (data) {
-                self.setState({
-                    detailInfo: data.return_data,
-                })
+                if(data.code===200){
+                    self.setState({
+                        detailInfo: data.return_data,
+                    })
+                }else{
+                    self.setState({
+                        detailInfo: [],
+                    })
+                }               
             }
         })
     }
@@ -174,7 +188,7 @@ export default class BlockDetail extends React.Component {
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="totalFees" tagName="p"/>
-                                    <p>{this.state.detailInfo.total_fees}</p>
+                                    <p>{this.state.detailInfo.blockReward}</p>
                                 </div>
                             </div>
                         </div>
