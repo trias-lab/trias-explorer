@@ -61,7 +61,6 @@ export default class BlockDetail extends React.Component {
                 block_hash: self.state.blockHash,
                 size: rowsPerPage,
                 page_size: currentPage,
-                sort:0
             },
             success: function (data) {
                 if(data.code===200){
