@@ -149,7 +149,7 @@ input[type="number"].pageNum {
     line-height:18px;
     padding: 10px 16px;
     height: 42px;
-    background-color: transparent;
+    background-color: #fff;
     border: none;
     text-align: center;
     border: 1px solid #cbd0d3
@@ -169,6 +169,10 @@ input[type="number"].pageNum {
 .pagination>li>a>span[aria-label='More'] {
     font-size: 16px;
     color: @greenlight;
+}
+
+.pagination>li+li.disabled:not(:last-child)>a{
+    background: transparent;
 }
 
 .pagination>.active>a,
