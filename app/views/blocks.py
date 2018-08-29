@@ -74,6 +74,7 @@ def block_info(request):
             block_info['time'] = stamp2datetime(hex2int(block_info['timestamp']))
             block_info['transactionsCount'] = len(block_info['transactions'])
             number = hex2int(block_info['number'])
+            block_info['number'] = number
 
         block_info['confirmations'] = IndexInfo.objects.last().lastBlock - number
         if block_info['confirmations'] > 0:
