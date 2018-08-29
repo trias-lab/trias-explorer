@@ -1,7 +1,7 @@
 import React from "react"
 import $ from 'jquery'
 import CustomPagination from "./common/CustomPagination"
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import {FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
 import { Link } from 'react-router-dom'
@@ -15,11 +15,11 @@ export default class BlockDetail extends React.Component {
         this.state = {
             subNavbarMatch: this.props.match,
             blockHash: this.props.match.params.blockID,
-            totalItemsCount: 100,
-            pageCount: 10,
+            totalItemsCount: 0,
+            pageCount: 0,
             transactionList: [],
             rowsPerPage: 10,
-            currentPage: 1,
+            currentPage: 0,
             detailInfo: [],
         }
     }
