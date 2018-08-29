@@ -116,7 +116,10 @@ def serach(request):
         isBlock = Block.objects.filter(number=key)
         if isBlock.exists():
             return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
+    except Exception as e:
+        pass
 
+    try:
         isBlock = Block.objects.filter(hash=key)
         if isBlock.exists():
             return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
