@@ -10,16 +10,16 @@ class Home extends React.Component {
             lang: this.props.intl.locale,
             blocksLatest: [],
             transLatest: [],
-            hash_rate: "未获取到数据",
-            difficulty: "未获取到数据",
-            mining_earnings: "未获取到数据",
-            last_block: "未获取到数据",
-            total_supply: "未获取到数据",
-            transactions: "未获取到数据",
+            hash_rate: "",
+            totalDifficulty: "",
+            lastBlockFees: "",
+            last_block: "",
+            addresses: "",
+            transactions: "",
 
         }
         this.lineChartOption1 = {
-            grid:{
+            grid: {
                 top: '28px',
                 left: '43px',
                 right: '13px',
@@ -27,33 +27,33 @@ class Home extends React.Component {
             },
             tooltip: {
                 trigger: 'axis',
-                axisPointer:{
-                    type:'line',
-                    lineStyle:{
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
                         color: '#68BD68',
                         opacity: 0.5,
-                        width:2
+                        width: 2
                     }
                 },
                 formatter: ' <span style="color:#9CA2AB;font-size:12px;">{b0} </span><br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
             },
             xAxis: {
                 type: 'category',
-                axisLine:{
+                axisLine: {
                     show: false
                 },
-                axisTick:{
-                    show:false
+                axisTick: {
+                    show: false
                 },
                 boundaryGap: false,
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
-                axisLine:{
+                axisLine: {
                     show: false
                 },
-                axisTick:{
-                    show:false
+                axisTick: {
+                    show: false
                 },
                 splitLine: {
                     lineStyle: {
@@ -87,12 +87,12 @@ class Home extends React.Component {
                 emphasis: {
                     label: true
                 },
-                
+
             }]
         };
 
         this.lineChartOption2 = {
-            grid:{
+            grid: {
                 top: '28px',
                 left: '43px',
                 right: '13px',
@@ -100,33 +100,33 @@ class Home extends React.Component {
             },
             tooltip: {
                 trigger: 'axis',
-                axisPointer:{
-                    type:'line',
-                    lineStyle:{
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
                         color: '#68BD68',
                         opacity: 0.5,
-                        width:2
+                        width: 2
                     }
                 },
                 formatter: ' <span style="color:#9CA2AB;font-size:12px;">{b0} </span> <br />  <span style="background:rgb(93, 184, 92);width:10px;height:10px; display: inline-block; border-radius: 50%;margin-right:6px;"></span><span style="color:#DEE0E3">Transactions: </span> <span style="color:#FEFEFE">{c0} </span>'
             },
             xAxis: {
-                axisLine:{
+                axisLine: {
                     show: false
                 },
-                axisTick:{
-                    show:false
+                axisTick: {
+                    show: false
                 },
                 type: 'category',
                 boundaryGap: false,
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
-                axisLine:{
+                axisLine: {
                     show: false
                 },
-                axisTick:{
-                    show:false
+                axisTick: {
+                    show: false
                 },
                 splitLine: {
                     lineStyle: {
@@ -186,28 +186,28 @@ class Home extends React.Component {
      */
     updateLineCharts() {
         var self = this;
-        var transactions_history_key = [];   　//用来存放14 Days Transactions History处理后的日期
-        var transactions_history_value = [];　　//用来存放14 Days Transactions History处理后的日期对应值
-        //遍历this.state.transactions_history对象
-        for (var key in this.state.transactions_history) {
-            transactions_history_key.push(key);
-            transactions_history_value.push(this.state.transactions_history[key])
+        var blocksHistory_key = [];   　//用来存放14 Days Transactions History处理后的日期
+        var blocksHistory_value = [];　　//用来存放14 Days Transactions History处理后的日期对应值
+        //遍历this.state.blocksHistory对象
+        for (var key in this.state.blocksHistory) {
+            blocksHistory_key.push(key);
+            blocksHistory_value.push(this.state.blocksHistory[key])
         }
-        var hash_rate_growth_key = [];   //用来存放1HashRate Growth处理后的日期
-        var hash_rate_growth_value = [];　　//用来存放1HashRate Growth处理后的日期对应值
-        //遍历this.state.hash_rate_growth对象
-        for (var key in this.state.hash_rate_growth) {
-            hash_rate_growth_key.push(key);
-            hash_rate_growth_value.push(this.state.hash_rate_growth[key])
+        var transactionsHistory_key = [];   //用来存放1HashRate Growth处理后的日期
+        var transactionsHistory_value = [];　　//用来存放1HashRate Growth处理后的日期对应值
+        //遍历this.state.transactionsHistory对象
+        for (var key in this.state.transactionsHistory) {
+            transactionsHistory_key.push(key);
+            transactionsHistory_value.push(this.state.transactionsHistory[key])
         }
 
-        this.lineChartOption1.xAxis.data = transactions_history_key;　　//设置图表一的日期显示
-        this.lineChartOption1.series[0].data = transactions_history_value　//设置图表一的日期对应的值显示
+        this.lineChartOption1.xAxis.data = blocksHistory_key;　　//设置图表一的日期显示
+        this.lineChartOption1.series[0].data = blocksHistory_value　//设置图表一的日期对应的值显示
         this.chartLine1 = echarts.init(document.getElementById('lineChart1'));　//echarts init折线图
         this.chartLine1.setOption(this.lineChartOption1, true);　　　　//设定值
 
-        this.lineChartOption2.xAxis.data = hash_rate_growth_key;　　　//设置图表二的日期显示
-        this.lineChartOption2.series[0].data = hash_rate_growth_value;　　//设置图表二的日期对应的值显示
+        this.lineChartOption2.xAxis.data = transactionsHistory_key;　　　//设置图表二的日期显示
+        this.lineChartOption2.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
         this.chartLine2 = echarts.init(document.getElementById('lineChart2')); //echarts init折线图
         this.chartLine2.setOption(this.lineChartOption2, true);    　//设定值
 
@@ -278,19 +278,19 @@ class Home extends React.Component {
                 if (data.code == 200) {
                     self.setState({
                         hash_rate: data.return_data.hashRate,
-                        difficulty: data.return_data.difficulty,
-                        mining_earnings: data.return_data.miningEarnings,
+                        totalDifficulty: data.return_data.totalDifficulty,
+                        lastBlockFees: data.return_data.lastBlockFees,
                         last_block: data.return_data.lastBlock,
-                        total_supply: data.return_data.totalSupply,
+                        addresses: data.return_data.addresses,
                         transactions: data.return_data.transactions,
 
-                        transaction_fees: data.return_data.bestTransactionFee,
+                        lastTransactionFees: data.return_data.lastTransactionFees,
                         tx_rate: data.return_data.transactionRate,
-                        hash_rate_growth: data.return_data.hashRateGrowth,
+                        transactionsHistory: data.return_data.transactionsHistory,
 
                         unconfirmed_txs: data.return_data.unconfirmed,
-                        tansaction_celerator: data.return_data.transactionCelerator,
-                        transactions_history: data.return_data.transactionsHistory,
+                        blocksRate: data.return_data.blocksRate,
+                        blocksHistory: data.return_data.blocksHistory,
                     })
 
                     setTimeout(function () {
@@ -339,12 +339,12 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-calculator"></i>
                                 </div>
-                                <FormattedMessage id="difficulty">
-                                {(txt) => (
-                                    <p className='item-tit'> {txt}</p>
-                                )}
-                                 </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.difficulty} T`}> {this.state.difficulty} T</p>
+                                <FormattedMessage id="totalDifficulty">
+                                    {(txt) => (
+                                        <p className='item-tit'> {txt}</p>
+                                    )}
+                                </FormattedMessage>
+                                <p className='item-pre' title={`${this.state.totalDifficulty} T`}> {this.state.totalDifficulty} T</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -353,11 +353,11 @@ class Home extends React.Component {
                                     <i className="fa fa-money-bill-wave"></i>
                                 </div>
                                 <FormattedMessage id="miningEarnings">
-                                {(txt) => (
-                                    <p className='item-tit'> {txt}</p>
-                                )}
-                                 </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.mining_earnings} BTC`}> {this.state.mining_earnings} BTC</p>
+                                    {(txt) => (
+                                        <p className='item-tit'> {txt}</p>
+                                    )}
+                                </FormattedMessage>
+                                <p className='item-pre' title={`${this.state.lastBlockFees} BTC`}> {this.state.lastBlockFees} BTC</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -366,10 +366,10 @@ class Home extends React.Component {
                                     <i className="fa fa-cube"></i>
                                 </div>
                                 <FormattedMessage id="lastBlock">
-                                {(txt) => (
-                                    <p className='item-tit'> {txt}</p>
-                                )}
-                                 </FormattedMessage>
+                                    {(txt) => (
+                                        <p className='item-tit'> {txt}</p>
+                                    )}
+                                </FormattedMessage>
                                 <p className='item-pre' title={`# ${this.state.last_block}`}> #{this.state.last_block}</p>
                             </div>
                         </div>
@@ -378,12 +378,12 @@ class Home extends React.Component {
                                 <div className='item-wap-img'>
                                     <i className="fa fa-dolly-flatbed"></i>
                                 </div>
-                                <FormattedMessage id="totalSupply">
-                                {(txt) => (
-                                    <p className='item-tit'> {txt}</p>
-                                )}
-                                 </FormattedMessage>
-                                <p className='item-pre' title={this.state.total_supply}> {this.state.total_supply}</p>
+                                <FormattedMessage id="Addresses">
+                                    {(txt) => (
+                                        <p className='item-tit'> {txt}</p>
+                                    )}
+                                </FormattedMessage>
+                                <p className='item-pre' title={this.state.addresses}> {this.state.addresses}</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -392,10 +392,10 @@ class Home extends React.Component {
                                     <i className="fa fa-handshake"></i>
                                 </div>
                                 <FormattedMessage id="transactionCount">
-                                {(txt) => (
-                                    <p className='item-tit'> {txt}</p>
-                                )}
-                                 </FormattedMessage>
+                                    {(txt) => (
+                                        <p className='item-tit'> {txt}</p>
+                                    )}
+                                </FormattedMessage>
                                 <p className='item-pre' title={`${this.state.transactions}M`}> {this.state.transactions} M</p>
                             </div>
                         </div>
@@ -410,27 +410,27 @@ class Home extends React.Component {
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="currentBest" />
                                         </p>
-                                        <p className="chart-value" title={`${this.state.transaction_fees} BTC/Gas`}>
-                                            {this.state.transaction_fees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
-                                        </p>                                       
+                                        <p className="chart-value" title={`${this.state.lastTransactionFees} BTC/Gas`}>
+                                            {this.state.lastTransactionFees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
+                                        </p>
                                     </div>
                                     <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="rate24" />
                                         </p>
-                                        <p className="chart-value"  title={`${this.state.tx_rate} txs/s`}>
+                                        <p className="chart-value" title={`${this.state.tx_rate} txs/s`}>
                                             {this.state.tx_rate} txs/s
                                         </p>
-                                     </div>
+                                    </div>
                                 </div>
                                 <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
                                         <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>
-                                        <FormattedMessage id="history14" />
+                                        <FormattedMessage id="history7" />
                                     </div>
                                 </div>
-                                <div id="lineChart1" style={{ width: "100%", height: "370px" }}></div>
+                                <div id="lineChart1" style={{ width: "100%", height: "370px", padding: "0 24px" }}></div>
                             </div>
                         </div>
 
@@ -445,21 +445,23 @@ class Home extends React.Component {
                                         <p className="chart-value" title={`${this.state.unconfirmed_txs}`}>
                                             {this.state.unconfirmed_txs}
                                         </p>
-                                     </div>
-                                    <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
+                                    </div>
+                                    {/*
+                                 <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="transactionAccelerator" />
                                         </p>  
-                                        <p className="chart-value" title={`${this.state.tansaction_celerator} txs/s`}>
-                                            {this.state.tansaction_celerator} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
+                                        <p className="chart-value" title={`${this.state.blocksRate} txs/s`}>
+                                            {this.state.blocksRate} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
                                         </p>                                      
                                      </div>
+                                 */}
                                 </div>
                                 <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
                                     <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
                                         <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i><FormattedMessage id="hashRate" />
-                                     </div>
+                                    </div>
                                 </div>
                                 <div id="lineChart2" style={{ width: "100%", height: "370px" }}></div>
                             </div>
@@ -478,8 +480,8 @@ class Home extends React.Component {
                                 <div className="latest-tit pull-left">
                                     <i className="fa fa-cubes" ></i>
                                 </div>
-                                <FormattedMessage id="latestBlocks"　tagName='p' />
-                                <Link to="/blocklist"><FormattedMessage id="viewAll"/><i className="fa fa-angle-right"></i></Link>
+                                <FormattedMessage id="latestBlocks" 　tagName='p' />
+                                <Link to="/blocklist"><FormattedMessage id="viewAll" /><i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {
@@ -501,11 +503,11 @@ class Home extends React.Component {
                                                             <p className="timestamp">{item.time}</p>
                                                             <p className="other clearfix">
                                                                 <span style={{ width: '60%' }}>
-                                                                    <span className="key"><FormattedMessage id="size"/>:</span>
-                                                                    <span className="value"  title={item.size}>{item.size}</span>
+                                                                    <span className="key"><FormattedMessage id="size" />:</span>
+                                                                    <span className="value" title={item.size}>{item.size}</span>
                                                                 </span>
                                                                 <span style={{ width: '35%' }}>
-                                                                    <span className="key keyReward"><FormattedMessage id="reward"/>:</span>
+                                                                    <span className="key keyReward"><FormattedMessage id="reward" />:</span>
                                                                     <span className="value valueReward" title={item.blockReward}>{item.blockReward}</span>
                                                                 </span>
                                                             </p>
@@ -524,8 +526,8 @@ class Home extends React.Component {
                                 <div className="latest-tit pull-left">
                                     <i className="fa fa-handshake" ></i>
                                 </div>
-                                <FormattedMessage id="latestTransactions"　tagName='p' />
-                                <Link to="/translist">  <FormattedMessage id="viewAll"/><i className="fa fa-angle-right"></i></Link>
+                                <FormattedMessage id="latestTransactions" 　tagName='p' />
+                                <Link to="/translist">  <FormattedMessage id="viewAll" /><i className="fa fa-angle-right"></i></Link>
                             </div>
                             <ul className='block-list'>
                                 {
