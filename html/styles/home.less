@@ -16,9 +16,10 @@
     background:#fff;
     border-radius: 4px;
     border: 1px solid rgba(161, 171, 177, 1);
+    // height: 500px;
     // margin-top: 24px;
     .chart-title {
-        padding: 14px 12px;
+        padding: 14px 0px;
         font-size: 15px;
         font-family: MoskLight300;
         color: #717C88;
@@ -29,7 +30,7 @@
         font-family:MoskMedium500;
         color:rgba(20,42,63,1);
         line-height:32px;
-        padding-left: 35px;
+        padding-left: 20px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis
@@ -289,16 +290,40 @@
         }
     }
 }
-@media screen and (max-width: 1080px){
+
+
+#blockHistoryTable{
+    table-layout:fixed;
+    width: 100%;
+    //background: #fac;
+    margin:20px 0 22px 0;
+    td{
+        font-size:16px;
+        font-family:MoskLight300;
+        color:rgba(20,42,63,1);
+        padding-left: 22px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 36px;
+        padding: 8px;
+    }
+    tr{
+        border-bottom: 1px solid rgba(203,208,211,1);;
+    }
+    tbody tr:nth-child(2n){
+        background:#F6F7F9;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
     .home-page {
         top: -76px;
         >section .col:nth-child(2) .home-echarts{
             margin-top: 24px;
         }
     }
-}
-
-@media screen and (max-width: 768px) {
     .home-page-list .latest-list .block-list{
         padding: 0;
         padding-top:14px;

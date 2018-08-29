@@ -186,13 +186,7 @@ class Home extends React.Component {
      */
     updateLineCharts() {
         var self = this;
-        var blocksHistory_key = [];   　//用来存放14 Days Transactions History处理后的日期
-        var blocksHistory_value = [];　　//用来存放14 Days Transactions History处理后的日期对应值
-        //遍历this.state.blocksHistory对象
-        for (var key in this.state.blocksHistory) {
-            blocksHistory_key.push(key);
-            blocksHistory_value.push(this.state.blocksHistory[key])
-        }
+
         var transactionsHistory_key = [];   //用来存放1HashRate Growth处理后的日期
         var transactionsHistory_value = [];　　//用来存放1HashRate Growth处理后的日期对应值
         //遍历this.state.transactionsHistory对象
@@ -201,15 +195,10 @@ class Home extends React.Component {
             transactionsHistory_value.push(this.state.transactionsHistory[key])
         }
 
-        this.lineChartOption1.xAxis.data = blocksHistory_key;　　//设置图表一的日期显示
-        this.lineChartOption1.series[0].data = blocksHistory_value　//设置图表一的日期对应的值显示
-        this.chartLine1 = echarts.init(document.getElementById('lineChart1'));　//echarts init折线图
-        this.chartLine1.setOption(this.lineChartOption1, true);　　　　//设定值
-
-        this.lineChartOption2.xAxis.data = transactionsHistory_key;　　　//设置图表二的日期显示
-        this.lineChartOption2.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
-        this.chartLine2 = echarts.init(document.getElementById('lineChart2')); //echarts init折线图
-        this.chartLine2.setOption(this.lineChartOption2, true);    　//设定值
+        this.lineChartOption1.xAxis.data = transactionsHistory_key.reverse();　　　//设置图表二的日期显示
+        this.lineChartOption1.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
+        this.chartLine1 = echarts.init(document.getElementById('lineChart1')); //echarts init折线图
+        this.chartLine1.setOption(this.lineChartOption2, true);    　//设定值
 
         //页面缩放echarts折线图重新绘制
         setTimeout(function () {
@@ -263,6 +252,7 @@ class Home extends React.Component {
         })
     }
 
+
     /**
      * 获取首页6条信息和4块信息
      * 
@@ -290,7 +280,7 @@ class Home extends React.Component {
 
                         unconfirmed_txs: data.return_data.unconfirmed,
                         blocksRate: data.return_data.blocksRate,
-                        blocksHistory: data.return_data.blocksHistory,
+                        richList: data.return_data.richList,
                     })
 
                     setTimeout(function () {
@@ -400,7 +390,7 @@ class Home extends React.Component {
                                         <p className='item-tit'> {txt}</p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.transactions}M`}> {this.state.transactions} M</p>
+                                <p className='item-pre' title={`${this.state.transactions}M`}> {this.state.transactions}</p>
                             </div>
                         </div>
                     </section>
@@ -429,12 +419,10 @@ class Home extends React.Component {
                                     </div>
                                 </div>
                                 <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
-                                    <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
-                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>
-                                        <FormattedMessage id="history7" />
-                                    </div>
+                                    <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>
+                                    <FormattedMessage id="history7" />
                                 </div>
-                                <div id="lineChart1" style={{ width: "100%", height: "370px", padding: "0 24px" }}></div>
+                                <div id="lineChart1" style={{ width: "100%", height: "370px", padding: "0 12px" }}></div>
                             </div>
                         </div>
 
@@ -463,11 +451,37 @@ class Home extends React.Component {
                                  */}
                                 </div>
                                 <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
-                                    <div className="col col-xs-12 col-sm-12 col-md-12 col-xl-12">
-                                        <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i><FormattedMessage id="hashRate" />
-                                    </div>
+                                    <i className="fa fa-table" style={{ marginRight: '5px' }}></i><FormattedMessage id="latestActive" />
                                 </div>
-                                <div id="lineChart2" style={{ width: "100%", height: "370px" }}></div>
+
+                                <div style={{padding:"0 15px"}}>
+                                    <table id="blockHistoryTable">
+                                        <thead>
+                                            <tr>
+                                                <FormattedMessage id="address" tagName="td" />
+                                                <FormattedMessage id="balance" tagName="td" />
+                                                <FormattedMessage id="time" tagName="td" />
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.richList && this.state.richList.map(function (item, index) {
+                                                    return (
+
+                                                        <tr key={index}>
+                                                            <td className="td-block-height" title={item.address}>
+                                                               {item.address}
+                                                            </td>
+                                                            <td title={item.balance}>{item.balance}</td>
+                                                            <td title={item.time}>{item.time}</td>
+                                                        </tr>
+
+                                                    )
+                                                }.bind(this))
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -498,7 +512,7 @@ class Home extends React.Component {
                                                         <div className="name pull-left">
                                                             <div>
                                                                 <i className="fa fa-cube"></i>
-                                                                <span title={`#${item.number}`}>{`##${item.number}`}</span>
+                                                                <span title={`#${item.number}`}>{`#${item.number}`}</span>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -31,7 +31,7 @@ const en_US = {
     history7:"7 Days Transactions History",
     unconfirmedTxs:"Unconfirmed Txs (count)",
     transactionAccelerator:"Transaction Accelerator",
-    hashRate:"HashRate Growth",
+    latestActive:"Latest Active Addresses",
 
     latestBlocks:"Latest Blocks",
     latestTransactions :"Latest Transactions",
