@@ -40,6 +40,7 @@ class IndexInfo(models.Model):
     transactions = models.BigIntegerField()
     lastTransactionFees = models.BigIntegerField()
     unconfirmed = models.BigIntegerField()
+    timestamp = models.BigIntegerField()
 
     class Meta:
         db_table = "info"

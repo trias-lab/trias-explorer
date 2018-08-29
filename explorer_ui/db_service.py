@@ -24,6 +24,9 @@ def save2db():
         if not Block.objects.filter(number=i).exists():
             reward = 3*10**18
             block_info = url_data(url, "eth_getBlockByNumber", [hex(i), True])['result']
+            # if not len(block_info['transactions']):
+            #     IndexInfo.objects.update_or_create(id=1, defaults={'lastBlock': i, 'timestamp': hex2int(block_info['timestamp'])})
+            #     continue
             time = hex2int(block_info['timestamp'])
             blockHash = block_info['hash']
             a=Block.objects.create(
@@ -80,22 +83,30 @@ def save2db():
                         src_addr = Address.objects.create(address=source, received=0, sent=str(value),
                                                           balance=str(hex2int(src_balance)), txCount=1, time=time)
                     else:
-                        src_addr = Address.objects.filter(address=source)
-                        sent = str(value+int(src_addr[0].sent))
-                        balance = str(int(src_addr[0].balance)-value)
-                        count = src_addr[0].txCount + 1
-                        src_addr.update(sent=sent, balance=balance, txCount=count, time=time)
+                        src_addr = Address.objects.filter(address=source)[0]
+                        sent = str(value+int(src_addr.sent))
+                        balance = str(int(src_addr.balance)-value)
+                        count = src_addr.txCount + 1
+                        src_addr.sent = sent
+                        src_addr.balance = balance
+                        src_addr.txCount = count
+                        src_addr.time = time
+                        src_addr.save()
 
                     if not Address.objects.filter(address=to).exists():
                         tag_balance = url_data(url, "eth_getBalance", [to, "latest"])['result']
                         tag_addr = Address.objects.create(address=to, received=str(value), sent=0,
                                                           balance=str(hex2int(tag_balance)), txCount=1, time=time)
                     else:
-                        tag_addr = Address.objects.filter(address=to)
-                        received = str(value + int(tag_addr[0].received))
-                        balance = str(int(tag_addr[0].balance) + value)
-                        count = tag_addr[0].txCount + 1
-                        tag_addr.update(received=received, balance=balance, txCount=count, time=time)
+                        tag_addr = Address.objects.filter(address=to)[0]
+                        received = str(value + int(tag_addr.received))
+                        balance = str(int(tag_addr.balance) + value)
+                        count = tag_addr.txCount + 1
+                        tag_addr.received = received
+                        tag_addr.balance = balance
+                        tag_addr.txCount = count
+                        tag_addr.time = time
+                        tag_addr.save()
 
                     AddressTx.objects.create(address=src_addr, tx=tx, isSend=True)
                     AddressTx.objects.create(address=tag_addr, tx=tx, isSend=False)
@@ -121,7 +132,7 @@ def launch_services():
     :return:
     """
     sched = BlockingScheduler()
-    sched.add_job(save2db, 'interval', max_instances=10, seconds=10)
+    sched.add_job(save2db, 'interval', max_instances=1, seconds=5)
     print('update database started')
     try:
         sched.start()

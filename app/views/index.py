@@ -9,6 +9,7 @@ from app.utils.localconfig import JsonConfiguration
 from app.models import Block, TransactionInfo, IndexInfo, Address
 from app.utils.logger import logger
 from django.db.models import Q
+from collections import OrderedDict
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -21,8 +22,8 @@ def index_base_info(request):
     :return:
     """
 
-    blocks_history = {}
-    transactions_history = {}
+    blocks_history = OrderedDict()
+    transactions_history = OrderedDict()
     data = {}
     try:
         index_info = list(IndexInfo.objects.all().values())
@@ -31,7 +32,7 @@ def index_base_info(request):
 
         blocksRate = 0
         transactionRate = 0
-        for i in range(14):
+        for i in range(7):
             today = datetime.date.today()
             x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
             end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple()))  # i days ago timestamp
@@ -49,7 +50,6 @@ def index_base_info(request):
 
             transactions_history[x] = tx_count
             blocks_history[x] = blocks_count
-
         data['transactionsHistory'] = transactions_history
         data['blocksHistory'] = blocks_history
         data['blocksRate'] = blocksRate
