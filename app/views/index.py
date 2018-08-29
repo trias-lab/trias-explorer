@@ -49,8 +49,8 @@ def index_base_info(request):
         addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
         if addresses.exists():
             richList = list(addresses.values('address', 'balance', 'time'))[:10]
-            # for addr in richList:
-            #     addr['time'] = stamp2datetime(addr['time'])
+            for addr in richList:
+                addr['time'] = stamp2datetime(addr['time'])
         data['richList'] = richList
 
     except Exception as e:
