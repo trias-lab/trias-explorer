@@ -19,7 +19,7 @@ export default class BlockDetail extends React.Component {
             pageCount: 0,
             transactionList: [],
             rowsPerPage: 10,
-            currentPage: 0,
+            currentPage: 1,
             detailInfo: [],
         }
     }

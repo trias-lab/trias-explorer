@@ -62,11 +62,11 @@ class CustomPagination extends React.Component {
      */
     componentWillReceiveProps (nextProps) {   
         this.setState({
-            from: nextProps.from,
-            to: nextProps.to,
-            totalItemsCount: nextProps.totalItemsCount, 
-            totalPagesCount: nextProps.totalPagesCount,
-            currentPage: nextProps.currentPage,
+            from: nextProps.from || 0,
+            to: nextProps.to || 0,
+            totalItemsCount: nextProps.totalItemsCount || 0, 
+            totalPagesCount: nextProps.totalPagesCount || 0,
+            currentPage: nextProps.currentPage || 0,
         })
         // if locale language will be changed, reset lang state
         // if(this.state.lang != nextProps.intl.locale){

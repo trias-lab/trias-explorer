@@ -50,6 +50,7 @@ body {
                 height: 76px;
                 width: 100px;
                 img {
+                    width: 100px;
                     height: 44px;
                     margin-top: 16px;
                 }
@@ -152,14 +153,25 @@ body {
             .icon-bar:first-child{
                 margin-top: 2px;
             }
-            .list-block{                
+            .list-block{
+                padding: 0;
+                ul{
+                    margin-bottom: 0px;
+                }
+                li{
+                    padding: 12px 16px;
+                }         
                 li>a{
-                    color: #DAE1E9;
+                    color: #F6F6F6;
+                    font-size: 16px;
+                }
+                li>span{
+                    font-size: 16px;
                 }
                 .fa-globe-americas{
                     color: #1E2328;
                     margin-right: 8px;
-                    font-size: 24px;
+                    font-size: 18px;
                 }
                 span.active .fa-globe-americas{
                     color: #5db85c;
@@ -268,7 +280,8 @@ body {
             left: -68px;
         }
         .wechat-button > .qrcode img {
-            width:100px;    
+            width:100px;
+            height: 100px;
         }    
         .telegram-button{
             display: inline-block;
@@ -484,6 +497,13 @@ body {
     }
     .header{
         position: relative;
+        padding: 19px 12px;
+    }
+    .notfound-page{
+        padding: 10% 12px;
+    }
+    .sub-header .center-box {
+        padding: 84px 12px 0;
     }
     .common-footer{
         background: url('../img//mobile/bg_footer_m@2x.jpg') no-repeat;
