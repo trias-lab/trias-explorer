@@ -63,11 +63,13 @@ export default class Address extends React.Component {
                 address: self.state.addressID
             },
             success: function (data) {
-                self.setState({
-                    transactionList: data.return_data,
-                    totalItemsCount: data.total_size,
-                    pageCount: data.total_page,
-                })
+                if (data.code == 200) {
+                    self.setState({
+                        transactionList: data.return_data,
+                        totalItemsCount: data.total_size,
+                        pageCount: data.total_page,
+                    })
+                }
             }
         })
     }
@@ -139,9 +141,11 @@ export default class Address extends React.Component {
                 address: self.state.addressID
             },
             success: function (data) {
-                self.setState({
-                    detailInfo: data.return_data,
-                })
+                if (data.code == 200) {
+                    self.setState({
+                        detailInfo: data.return_data,
+                    })
+                }
             }
         })
     }
@@ -314,7 +318,10 @@ export default class Address extends React.Component {
                             )
                         }.bind(this))}
                         {
-                            !this.state.transactionList.length && <div className="" style={{ width: '100%', height: '70px', lineHeight: '70px', background: 'transparent', border: 'none', }}>当前没有匹配的数据。</div>
+                            !this.state.transactionList.length && 
+                            <div className="nullData">
+                                <FormattedMessage id="nullData" tagName="p"/>
+                            </div>
                         }
                             <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
