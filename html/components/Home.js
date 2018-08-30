@@ -469,7 +469,7 @@ class Home extends React.Component {
 
                                                         <tr key={index}>
                                                             <td className="td-block-height" title={item.address}>
-                                                               {item.address}
+                                                            <Link to={"/address/" + item.address}>   {item.address}  </Link> 
                                                             </td>
                                                             <td title={item.balance}>{item.balance}</td>
                                                             <td title={item.time}>{item.time}</td>
