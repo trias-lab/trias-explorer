@@ -54,7 +54,6 @@ class SubNavbar extends React.Component {
      * According to the 'match', update navbar
      */
     setNavList(){
-        var self = this
         let messages = this.state.messages  // current react-intl messages
         let path = this.state.match.path    // reference to the 'path' of Routes configured in main.js
         let url = this.state.match.url      // current url

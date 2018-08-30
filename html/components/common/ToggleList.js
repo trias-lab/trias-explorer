@@ -61,7 +61,6 @@ export default class ToggleList extends React.Component {
      * @param {Object} nextProps new props
      */
     componentWillReceiveProps (nextProps) {
-        var self = this
         // if the prop will change
         if(this.props.itemsToSelect != nextProps.itemsToSelect){
             this.setState({
@@ -86,22 +85,12 @@ export default class ToggleList extends React.Component {
         })
     }
 
-    /**
-     * handler for the change of selected item
-     * @param {Object} item 
-     */
-    selectItem(item){
-        this.changeListState() // collapse the drop-down list
-    }
 
     render(){
-        var self = this
         var listToShow = this.state.itemsToSelect && this.state.itemsToSelect.map(function(item,index){
-            return (<li 
-                key={'select-item-'+index}
-                >
-                    {item.ele}
-                </li>)
+            return (<li key={'select-item-'+index}>
+                        {item.ele}
+                    </li>)
             }
         );
         return (
