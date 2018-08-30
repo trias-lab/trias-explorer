@@ -260,20 +260,23 @@ export default class TransactionDetail extends React.Component {
                                                 </Link>
                                             </span>
                                         </div>
-                                        <div className="item-b">
-                                            {
-                                                i.output &&
-                                                <Qrcode id={index} text={i.output} size="70" />
-                                            }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={'/address/'+i.output}>
-                                                    <b>{i.output}</b>
-                                                </Link>
-                                            </span>
+                                        {
+                                            i.output &&
+                                            <div className="item-b">
+                                                {
+                                                    i.output &&
+                                                    <Qrcode id={index} text={i.output} size="70" />
+                                                }
+                                                <span>
+                                                    <FormattedMessage id="address"/>
+                                                    <br />
+                                                    <Link to={'/address/'+i.output}>
+                                                        <b>{i.output}</b>
+                                                    </Link>
+                                                </span>
+                                            </div>
+                                        }
 
-                                        </div>
                                     </div>
                                 </div>
                             )
