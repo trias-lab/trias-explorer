@@ -26,7 +26,7 @@ def save2db():
         if db_last_block_obj:
             i = db_last_block_obj.lastBlock
             number = i + 1
-            if (int_last_block - i) == 0:
+            if (int_last_block - i) <= 0:
                 return
         for i in range(number, number + 11):
             sid = transaction.savepoint()
