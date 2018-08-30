@@ -417,7 +417,7 @@ body {
     text-align: center;
     padding: 10% 20px;
     background: url(../img/bg_search@2x.jpg) no-repeat;
-    background-size: 100vh 600px;
+    background-size: 100% 600px;
     background-size: cover;
     h1{
         font-size:72px;
@@ -453,6 +453,48 @@ body {
     }
 }
 
+.stay-tuned-page{
+    height:800px;
+    background: url(../img/bg_staytuned@2x.jpg) no-repeat;
+    background-size: 100% 800px;
+    background-size: cover;
+    .center-box{
+        max-width: 1104px;
+        margin: 0 auto;
+        padding: 318px 20px;      
+    }
+    h1{
+        font-size:30px;
+        font-family:MoskSemi-Bold600;
+        font-weight:normal;
+        color:rgba(20,42,63,1);
+        line-height:36px;
+    }
+    h2{
+        margin-top: 18px;
+        font-size:15px;
+        font-family:MoskLight300;
+        color:rgba(20,42,63,1);
+        line-height:24px;
+        max-width: 540px;
+    }
+    .btn-group{
+        margin-top: 32px;
+        >a{
+            padding: 9px 16px;
+            height:38px;
+            border:1px solid rgba(20,42,63,1);
+            font-size:16px;
+            font-family:MoskMedium500;
+            color:rgba(20,42,63,1);
+            line-height: 38px;
+            text-decoration: none;
+        }
+        >a:last-child{
+            margin-left: 24px;
+        }
+    }
+}
 /* styles for common sub navbar --------------------------end */
 @media screen and (max-width: 1000px) {
     #app main{
@@ -501,6 +543,15 @@ body {
     }
     .notfound-page{
         padding: 10% 12px;
+    }
+    .stay-tuned-page{
+        height:550px;
+        background: url(../img/bg_staytuned_m@2x.jpg) no-repeat;
+        background-size: 100% 550px;
+        background-size: cover;
+        .center-box{
+            padding: 130px 12px;
+        }
     }
     .sub-header .center-box {
         padding: 84px 12px 0;

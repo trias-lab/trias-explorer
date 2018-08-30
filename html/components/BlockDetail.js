@@ -340,19 +340,19 @@ export default class BlockDetail extends React.Component {
                                                 </Link>
                                             </span>
                                         </div>
-                                        <div className="item-b">
-                                            {
-                                                i.to &&
+                                        {
+                                            i.to &&
+                                            <div className="item-b">
                                                 <Qrcode id={'input-'+index} text={i.to} size="70" />
-                                            }
-                                            <span>
-                                            <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={"/address/"+ i.to}>
-                                                    <b>{i.to}</b>
-                                                </Link>
-                                            </span>
-                                        </div>
+                                                <span>
+                                                <FormattedMessage id="address"/>
+                                                    <br />
+                                                    <Link to={"/address/"+ i.to}>
+                                                        <b>{i.to}</b>
+                                                    </Link>
+                                                </span>
+                                            </div>
+                                        }                                           
                                     </div>
                                 </div>
                             )}.bind(this)):

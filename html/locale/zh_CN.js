@@ -73,6 +73,10 @@ const zh_CN = {
     name: "名称",
     topics: "主题",
     data: "数据",
+    stayTunedTitle:"功能仍在开发，敬请期待！",
+    stayTunedHint:"感谢您对我司项目的厚爱！该产品功能仍在开发中。团队将产品功能打磨完善后，我们将立即更新上线供您使用。",
+    visitHomepage:"访问首页",
+    goBack:"返回"
 }
 
 export default zh_CN;

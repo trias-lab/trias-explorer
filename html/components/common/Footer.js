@@ -100,9 +100,9 @@ class Footer extends React.Component {
                         <div className="docs">
                             <FormattedMessage id="blockchainExplorer" tagName="h2"/>
                             <div className="link">
-                                <a href="/" target="blank">
+                                <Link to="/stayTuned">
                                     <FormattedMessage id="wallet" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="link">
                                 <Link to="/blocklist">

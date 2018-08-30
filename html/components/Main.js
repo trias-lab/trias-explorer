@@ -22,6 +22,7 @@ import TransactionList from "./TransactionList"
 import TransactionDetail from "./TransactionDetail"
 import Address from "./Address"
 import NotFound from "./NotFound"
+import StayTuned from "./StayTuned";
 
 global.Intl = require('intl');  // for older browsers
 
@@ -161,9 +162,9 @@ export default class Main extends React.Component {
         }]
 
         this.navlistMobile = [{
-            ele: <a href="/" target="blank"><FormattedMessage id="wallet" /></a>
+            ele:  <Link to="/stayTuned"><FormattedMessage id="wallet" /></Link>
         }, {
-            ele:  <NavLink exact to="/blocklist"><FormattedMessage id="block" /></NavLink>
+            ele:  <Link to="/blocklist"><FormattedMessage id="block" /></Link>
         },{
             ele: <a href="https://explorer.trias.one/" target="blank"><FormattedMessage id="monitor" /></a>
         }]
@@ -188,14 +189,14 @@ export default class Main extends React.Component {
                                     </div>
                                     <ul className="navbar-menu-pc">
                                         <li>
-                                            <a href="/" target="blank">
+                                            <Link to="/stayTuned">
                                                 <FormattedMessage id="wallet" />
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <NavLink exact to="/blocklist">
+                                            <Link to="/blocklist">
                                                 <FormattedMessage id="block" />
-                                            </NavLink>
+                                            </Link>
                                         </li>  
                                         <li>
                                             <a href="https://explorer.trias.one/" target="blank">
@@ -243,6 +244,7 @@ export default class Main extends React.Component {
                                     <Route exact path="/blocklist/:blockID" component={BlockDetail} />
                                     <Route exact path="/address/:addressID" component={Address} />
                                     <Route exact path="/notfound/:keyword" component={NotFound} />
+                                    <Route exact path="/stayTuned" component={StayTuned} />
                                     <Redirect to="/"/> {/* if no routes above is matched */}
                                 </Switch>                            
                             </main>
