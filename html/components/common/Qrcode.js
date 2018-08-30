@@ -35,7 +35,7 @@ export default class Qrcode extends React.Component {
 
     componentDidMount(){
         var key = document.getElementById("qrcode"+this.props.id)
-        var qrcode = new QRCode(key, {
+        new QRCode(key, {
             text: this.state.text,
             width : this.state.size,
             height : this.state.size,
