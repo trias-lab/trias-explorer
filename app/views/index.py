@@ -35,8 +35,8 @@ def index_base_info(request):
         for i in range(7):
             today = datetime.date.today()
             x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
-            end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple()))  # i days ago timestamp
-            start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple()))  # i+1 days ago timestamp
+            end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple())) + 72000  # i days ago timestamp
+            start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple())) + 72000  # i+1 days ago timestamp
             tx_count = TransactionInfo.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
 
             if i == 0:
