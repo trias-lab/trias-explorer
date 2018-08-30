@@ -56,7 +56,7 @@ class TransactionInfo(models.Model):
     nonce = models.BigIntegerField()
     hash = models.CharField(max_length=255, unique=True)
     transactionIndex = models.BigIntegerField()
-    value = models.BigIntegerField()
+    value = models.CharField(max_length=255)
     v = models.BigIntegerField()
     r = models.CharField(max_length=255)
     s = models.CharField(max_length=255)
