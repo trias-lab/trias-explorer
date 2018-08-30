@@ -25,7 +25,7 @@ const zh_CN = {
     totalDifficulty:"总难度",
     miningEarnings:"最新区块的奖励",
     lastBlock:"最新区块",
-    Addresses:"有过交易地址数量",
+    Addresses:"账户地址数量",
     currentBest:"最新交易费",
     rate24:'24小时出块速率',
     history7:"7天交易历史",
