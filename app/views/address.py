@@ -23,6 +23,17 @@ def address_info(request):
     try:
         data = list(Address.objects.filter(address=address).values())[0]
         data['time'] = stamp2datetime(data['time'])
+        data['txCount'] = TransactionInfo.objects.filter(Q(source=address)|Q(to=address)).count()
+        sent = 0
+        received = 0
+        sent_list =  TransactionInfo.objects.filter(source=address).values_list('value', flat=True)
+        for sent_value in sent_list:
+            sent += int(sent_value)
+        received_list = TransactionInfo.objects.filter(to=address).values_list('value', flat=True)
+        for rec_value in received_list:
+            received += int(rec_value)
+        data['sent'] = sent
+        data['received'] = received
     except Exception as e:
         logger.error(e)
         return JsonResponse({"code": 201, "message": "Address Error"})
