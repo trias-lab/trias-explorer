@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
 from app.utils.block_util import stamp2datetime
-from app.models import Block, TransactionInfo, Address
+from app.models import Block, TransactionInfo, Address, IndexInfo
 from app.utils.logger import logger
 
 
@@ -65,7 +65,7 @@ def address_transactions(request):
         for item in data:
             item['time'] = stamp2datetime(Block.objects.get(number=item['blockNumber']).timestamp)
             item['fees'] = item['gasPrice'] * item['gasUsed']
-            item['confirmations'] = Block.objects.last().number - item['blockNumber']
+            item['confirmations'] = IndexInfo.objects.last().lastBlock - item['blockNumber']
     except Exception as e:
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
