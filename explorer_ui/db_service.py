@@ -172,6 +172,11 @@ def save2db():
 def task():
     while True:
         time.sleep(jc.request_interval)
+        try:
+            url_data(url, "eth_blockNumber", [])['result']
+        except Exception as e:
+            logger.error("While %s" % e)
+            continue
         save2db()
 
 
