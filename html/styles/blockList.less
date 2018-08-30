@@ -29,19 +29,17 @@
     background: #ffffff;
     .table-list{
         max-width: 1040px;
-        margin:0 auto;
+        margin:-2px auto 0;
     }
     table{
         width: 100%;
         //background: #fac;
         margin:2px 0 72px 0;
         td{
-            line-height: 58px;
-            height: 58px;
             font-size:16px;
             font-family:MoskLight300;
             color:rgba(20,42,63,1);
-            padding-left: 22px;
+            padding:20px 0 20px 22px;
         }
         tr{
             border-bottom: 1px solid rgba(203,208,211,1);;
@@ -62,7 +60,7 @@
         td.td-trans-txHash{
             i{
                 margin-right: 4px;
-                font-size: 10px;
+                font-size: 20px;
                 color:rgba(93,184,92,1);
             }
             span{
@@ -110,6 +108,13 @@
                 line-height:28px;
                 text-align: center;
             }
+        }
+        td span.table-td-value{
+            display: inline-block;
+            word-wrap: break-word;
+            line-height: 24px;
+            vertical-align: middle;
+            max-width: 100px;
         }
     }
     .pagination-all{

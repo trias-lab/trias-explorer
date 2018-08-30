@@ -25,7 +25,7 @@ def address_info(request):
         data['time'] = stamp2datetime(data['time'])
     except Exception as e:
         logger.error(e)
-        return JsonResponse({"code": 201, "message": "ERROR"})
+        return JsonResponse({"code": 201, "message": "Address Error"})
 
     return JsonResponse({"code": 200, "return_data": data})
 
