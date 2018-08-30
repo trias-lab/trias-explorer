@@ -10,6 +10,7 @@ class Home extends React.Component {
             lang: this.props.intl.locale,
             blocksLatest: [],
             transLatest: [],
+            richList: [],
             hash_rate: "",
             totalDifficulty: "",
             lastBlockFees: "",
@@ -453,7 +454,7 @@ class Home extends React.Component {
                                     <i className="fa fa-table" style={{ marginRight: '5px' }}></i><FormattedMessage id="latestActive" />
                                 </div>
 
-                                <div style={{padding:"0 15px"}}>
+                                <div style={{ padding: "0 15px" }}>
                                     <table id="blockHistoryTable">
                                         <thead>
                                             <tr>
@@ -469,7 +470,7 @@ class Home extends React.Component {
 
                                                         <tr key={index}>
                                                             <td className="td-block-height" title={item.address}>
-                                                            <Link to={"/address/" + item.address}>   {item.address}  </Link> 
+                                                                <Link to={"/address/" + item.address}>   {item.address}  </Link>
                                                             </td>
                                                             <td title={item.balance}>{item.balance}</td>
                                                             <td title={item.time}>{item.time}</td>
@@ -478,8 +479,17 @@ class Home extends React.Component {
                                                     )
                                                 }.bind(this))
                                             }
+
+
                                         </tbody>
                                     </table>
+
+                                    {
+                                        (this.state.richList.length == 0 || !this.state.richList.length) &&
+                                        <div className="nullData">
+                                            <FormattedMessage id="nullData" tagName="p" />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -535,6 +545,13 @@ class Home extends React.Component {
                                         )
                                     })
                                 }
+
+                                {
+                                    (this.state.blocksLatest.length == 0 || !this.state.blocksLatest.length) &&
+                                    <div className="nullData">
+                                        <FormattedMessage id="nullData" tagName="p" />
+                                    </div>
+                                }
                             </ul>
                         </div>
 
@@ -579,6 +596,13 @@ class Home extends React.Component {
                                             </li>
                                         )
                                     })
+                                }
+
+                                {
+                                    (this.state.transLatest.length == 0 || !this.state.transLatest.length) &&
+                                    <div className="nullData">
+                                        <FormattedMessage id="nullData" tagName="p" />
+                                    </div>
                                 }
                             </ul>
                         </div>

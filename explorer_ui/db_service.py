@@ -28,7 +28,7 @@ def save2db():
             number = i + 1
             if (int_last_block - i) == 0:
                 return
-        for i in range(number, int_last_block+1):
+        for i in range(number, number + 11):
             sid = transaction.savepoint()
             if (time.time() - start) > 10:
                 break
@@ -172,6 +172,11 @@ def save2db():
 def task():
     while True:
         time.sleep(jc.request_interval)
+        try:
+            url_data(url, "eth_blockNumber", [])['result']
+        except Exception as e:
+            logger.error("While %s" % e)
+            continue
         save2db()
 
 
