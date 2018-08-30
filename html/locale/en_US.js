@@ -27,7 +27,7 @@ const en_US = {
     lastBlock:"Last Block",
     Addresses:"Addresses",
     currentBest:"Latest deals of fees",
-    rate24:'24-hour block rate',
+    rate24:'24-hour transaction rate',
     history7:"7 Days Transactions History",
     unconfirmedTxs:"Unconfirmed Txs (count)",
     transactionAccelerator:"Transaction Accelerator",

@@ -27,7 +27,7 @@ const zh_CN = {
     lastBlock:"最新区块",
     Addresses:"账户地址数量",
     currentBest:"最新交易费",
-    rate24:'24小时出块速率',
+    rate24:'24小时交易速率',
     history7:"7天交易历史",
     unconfirmedTxs:"待证实的交易数量",
     transactionAccelerator :"交易加速",
