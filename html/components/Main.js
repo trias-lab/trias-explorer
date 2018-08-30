@@ -166,7 +166,7 @@ export default class Main extends React.Component {
         }, {
             ele:  <Link to="/blocklist"><FormattedMessage id="block" /></Link>
         },{
-            ele: <a href="https://explorer.trias.one/" target="blank"><FormattedMessage id="monitor" /></a>
+            ele: <a href="https://monitor.trias.one/" target="blank"><FormattedMessage id="monitor" /></a>
         }]
 
         return (
@@ -199,7 +199,7 @@ export default class Main extends React.Component {
                                             </Link>
                                         </li>  
                                         <li>
-                                            <a href="https://explorer.trias.one/" target="blank">
+                                            <a href="https://monitor.trias.one/" target="blank">
                                                 <FormattedMessage id="monitor" />
                                             </a>
                                         </li>                                  

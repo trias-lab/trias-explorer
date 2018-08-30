@@ -110,7 +110,7 @@ class Footer extends React.Component {
                                 </Link>
                             </div>
                             <div className="link">
-                                <a href="https://explorer.trias.one/" target="blank">
+                                <a href="https://monitor.trias.one/" target="blank">
                                     <FormattedMessage id="monitor" />
                                 </a>
                             </div>
