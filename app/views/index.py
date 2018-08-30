@@ -10,6 +10,7 @@ from app.models import Block, TransactionInfo, IndexInfo, Address
 from app.utils.logger import logger
 from django.db.models import Q
 from collections import OrderedDict
+from app.utils.block_util import url_data
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -113,17 +114,27 @@ def serach(request):
         return JsonResponse({"code": 201, "message": 'Need a key'})
 
     try:
+        if int(key) > IndexInfo.objects.last().lastBlock:
+            return JsonResponse({"code": 201, "message": 'Error Block Number'})
         isBlock = Block.objects.filter(number=key)
         if isBlock.exists():
             return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
-    except Exception as e:
-        pass
+        hash = url_data(url, "eth_getBlockByNumber", [hex(int(key)), True])['result']['hash']
+        return JsonResponse({"code": 200, "data_type": "block", "block_hash":hash})
+    except:
+        logger.error("Search Block Number Error")
 
     try:
         isBlock = Block.objects.filter(hash=key)
         if isBlock.exists():
             return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
+        else:
+            hash = url_data(url, "eth_getBlockByHash", [key, True])['result']['hash']
+            return JsonResponse({"code": 200, "data_type": "block", "block_hash": hash})
+    except:
+        logger.error("Search Block Hash Error")
 
+    try:
         isTx = TransactionInfo.objects.filter(hash=key)
         if isTx.exists():
             return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": key})
@@ -131,7 +142,7 @@ def serach(request):
         isAddress = Address.objects.filter(address=key)
         if isAddress.exists():
             return JsonResponse({"code": 200, "data_type": "address", "address": key})
-    except Exception as e:
-        logger.error(e)
+    except:
+        logger.error("Search Transaction Or Address Error")
 
     return JsonResponse({"code": 201, "message": 'Error key'})
