@@ -164,8 +164,8 @@ class TransactionList extends React.Component {
                                                         <span>{item.to}</span>
                                                     </Link>
                                                 </td>
-                                                <td>{item.value}</td>
-                                                <td>{item.time}</td>
+                                                <td><span className="table-td-value">{item.value}</span></td>
+                                                <td><span className="table-td-value">{item.time}</span></td>
                                             </tr>
 
                                         )
