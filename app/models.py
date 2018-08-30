@@ -33,7 +33,7 @@ class Block(models.Model):
 
 class IndexInfo(models.Model):
     hashRate = models.BigIntegerField()
-    totalDifficulty = models.CharField(max_length=500)
+    totalDifficulty = models.CharField(max_length=1000)
     lastBlockFees = models.BigIntegerField()
     lastBlock = models.BigIntegerField()
     addresses = models.BigIntegerField()

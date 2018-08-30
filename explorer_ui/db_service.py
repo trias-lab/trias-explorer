@@ -24,8 +24,10 @@ def save2db():
         db_last_block_obj = IndexInfo.objects.last()
         number = 0
         if db_last_block_obj:
-            number = db_last_block_obj.lastBlock + 1
-            i = IndexInfo.objects.last().lastBlock
+            i = db_last_block_obj.lastBlock
+            number = i + 1
+            if (int_last_block - i) == 0:
+                return
         for i in range(number, int_last_block+1):
             sid = transaction.savepoint()
             if (time.time() - start) > 10:
