@@ -93,10 +93,10 @@ export default class Address extends React.Component {
      */
     setRowsPerPage(num) {
         this.setState({
-            rowsPerPage: num
+            rowsPerPage: num,
+            currentPage: 1
         })
-        this.getList(this.state.currentPage, num)
-        //console.log(num)
+        this.getList(1, num)
     }
 
     /**

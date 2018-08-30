@@ -42,10 +42,10 @@ class BlockList extends React.Component {
      */
     setRowsPerPage(num) {
         this.setState({
-            rowsPerPage: num
+            rowsPerPage: num,
+            currentPage: 1
         })
-        this.getBlockList(this.state.currentPage, num)
-        //console.log(num)
+        this.getBlockList(1, num)
     }
 
     /**
@@ -158,7 +158,7 @@ class BlockList extends React.Component {
                             </div>
                             <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
-                                to={this.state.currentPage * this.state.rowsPerPage }
+                                to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.blockList?this.state.blockList.length:0)}
                                 totalItemsCount={this.state.totalItemsCount}
                                 totalPagesCount={this.state.pageCount}
                                 currentPage={this.state.currentPage}

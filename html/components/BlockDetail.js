@@ -86,10 +86,11 @@ export default class BlockDetail extends React.Component {
      */
     setRowsPerPage(num) {
         this.setState({
-            rowsPerPage: num
+            rowsPerPage: num,
+            currentPage: 1
         })
         // get new data and update state.
-        this.getList(this.state.currentPage, num)
+        this.getList(1, num)
     }
 
     /**
