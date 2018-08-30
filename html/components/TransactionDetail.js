@@ -285,10 +285,11 @@ export default class TransactionDetail extends React.Component {
                             </div>
                         }
                     </section>
+                    {
+                        this.state.detailInfo.input_data &&
                     <section className="input-data">
                         <div className="title"><FormattedMessage id="inputData"/></div>
-                        {
-                            this.state.detailInfo.input_data &&
+
                             <div className="data-code">
                                 {this.state.detailInfo.input_data.map(function (item,index) {
                                     return(
@@ -296,58 +297,50 @@ export default class TransactionDetail extends React.Component {
                                     )
                                 }.bind(this))}
                             </div>
-                        }
-                        {
-                            !this.state.detailInfo.input_data &&
-                            <div className="nullData">
-                                <FormattedMessage id="nullData" tagName="p"/>
-                            </div>
-                        }
+
 
                     </section>
-                    <section className="event-log">
-                        <div className="title"><FormattedMessage id="eventLogs" values={{num:this.state.eventLogList.length}}/></div>
-                        {
-                            this.state.eventLogList && this.state.eventLogList.map(function(log,index){
-                                return(
-                                    <div className="eventLog-list" key={index}>
-                                        <p>
-                                            <span className="log-title"><FormattedMessage id="address" /></span>
-                                            <span className="log-value">
-                                                <Link to={'/address/'+log.address}>{log.address}</Link>
+                    }
+                    {
+                        (this.state.eventLogList.length != 0)&&
+                        <section className="event-log">
+                            <div className="title"><FormattedMessage id="eventLogs" values={{num: this.state.eventLogList.length}}/></div>
+                            {
+                                this.state.eventLogList.map(function (log, index) {
+                                    return (
+                                        <div className="eventLog-list" key={index}>
+                                            <p>
+                                                <span className="log-title"><FormattedMessage id="address"/></span>
+                                                <span className="log-value">
+                                                <Link to={'/address/' + log.address}>{log.address}</Link>
                                             </span>
-                                        </p>
-                                        <p>
-                                            <span className="log-title"><FormattedMessage id="name"/></span>
-                                            <span className="log-value">{log.name}</span>
-                                        </p>
-                                        <p>
-                                            <span className="log-title"><FormattedMessage id="topics" /></span>
-                                            <span className="log-value">[0] : {log.topics[0]} <br/> [1] : {log.topics[1]}</span>
-                                        </p>
-                                        <p>
-                                            <span className="log-title"><FormattedMessage id="data"/></span>
-                                            <span className="log-value">
+                                            </p>
+                                            <p>
+                                                <span className="log-title"><FormattedMessage id="name"/></span>
+                                                <span className="log-value">{log.name}</span>
+                                            </p>
+                                            <p>
+                                                <span className="log-title"><FormattedMessage id="topics"/></span>
+                                                <span className="log-value">[0] : {log.topics[0]} <br/> [1] : {log.topics[1]}</span>
+                                            </p>
+                                            <p>
+                                                <span className="log-title"><FormattedMessage id="data"/></span>
+                                                <span className="log-value">
                                                 <Filter
-                                                    dropList = {['Hex','Number','Text','Address']}
-                                                    defaultValue = {'Hex'}
-                                                    handleFilter = {this.handleFilter.bind(this)}
+                                                    dropList={['Hex', 'Number', 'Text', 'Address']}
+                                                    defaultValue={'Hex'}
+                                                    handleFilter={this.handleFilter.bind(this)}
                                                 />
                                                 <i className="fa fa-arrow-alt-circle-right"></i>
-                                                {log.data}</span>
-                                        </p>
-                                    </div>
-                                )
-                            }.bind(this))
-                        }
-                        {
-                            (!this.state.eventLogList.length || this.state.eventLogList.length==0) &&
-                            <div className="nullData">
-                                <FormattedMessage id="nullData" tagName="p"/>
-                            </div>
-                        }
+                                                    {log.data}</span>
+                                            </p>
+                                        </div>
+                                    )
+                                }.bind(this))
+                            }
 
-                    </section>
+                        </section>
+                    }
                 </div>
 
             </div>
