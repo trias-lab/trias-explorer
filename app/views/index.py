@@ -46,6 +46,7 @@ def index_base_info(request):
         data['blocksRate'] = blocksRate
         data['transactionRate'] = transactionRate
         data['addresses'] = Address.objects.count()
+        data['transactions'] = TransactionInfo.objects.count()
 
         richList = []
         addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
