@@ -127,7 +127,7 @@ class CustomPagination extends React.Component {
                         ellipsis={true}
                         boundaryLinks={true}
                         items={this.state.totalPagesCount}
-                        maxButtons={7}
+                        maxButtons={3}
                         activePage={this.state.currentPage}
                         onSelect={this.props.onSelectPage.bind(this)} />
                 </div>
