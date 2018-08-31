@@ -1,10 +1,10 @@
 {
-  "eth_ip": "192.168.1.175",
-  "eth_port": "8545",
-  "mysql_ip": "192.168.1.210",
-  "mysql_port": "3306",
-  "mysql_user": "8lab",
-  "mysql_password": "8lab",
-  "mysql_database": "trias_explorer",
+  "eth_ip": "",
+  "eth_port": "",
+  "mysql_ip": "",
+  "mysql_port": "",
+  "mysql_user": "",
+  "mysql_password": "",
+  "mysql_database": "",
   "request_interval": 0
 }
