@@ -42,7 +42,7 @@ export default class Address extends React.Component {
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
                 subNavbarMatch: nextProps.match,
-                addressID: this.props.match.params.addressID,
+                addressID: nextProps.match.params.addressID,
                 rowsPerPage: 10,
                 currentPage: 1
             },()=> {
