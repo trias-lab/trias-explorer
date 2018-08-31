@@ -125,6 +125,11 @@ export default class Main extends React.Component {
                                 })
                             })
                         }
+                        if($('#searchPC').val()===''){
+                            self.setState({
+                                searchKeyword:''
+                            })
+                        }
                     }else{
                         self.setState({
                             redirect:<Redirect to={"/notfound/"+self.state.searchKeyword} />
