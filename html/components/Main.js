@@ -51,7 +51,8 @@ export default class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: 'en'
+            lang: 'en',
+            searchKeyword:""
         }
     }
 
@@ -72,6 +73,18 @@ export default class Main extends React.Component {
             self.search()
             $('#searchMobile').blur();  // blur the input to let keyboard hide
         });
+        $('#searchPC').blur(function(){
+            $(this).val('')
+            self.setState({
+                searchKeyword:''
+            })
+        })
+        $('#searchMobile').blur(function(){
+            $(this).val('')
+            self.setState({
+                searchKeyword:''
+            })
+        })
     }
 
     /**
@@ -79,19 +92,14 @@ export default class Main extends React.Component {
      */
     search(){
         var self = this
-        let keyword = ''
-        if($('.mobile').css('display') === 'none'){
-            keyword = $('#searchPC').val()
-        }else{
-            keyword = $('#searchMobile').val()
-        }
-        if(keyword){
+
+        if(self.state.searchKeyword){
             $.ajax({
                 url: '/api/search',
                 type: 'get',
                 dataType: 'json',
                 data: {
-                    key: keyword
+                    key: self.state.searchKeyword
                 },
                 success: function (data) {
                     if(data.code==200){
@@ -122,7 +130,7 @@ export default class Main extends React.Component {
                         }
                     }else{
                         self.setState({
-                            redirect:<Redirect to={"/notfound/"+keyword} />
+                            redirect:<Redirect to={"/notfound/"+self.state.searchKeyword} />
                         },()=>{
                             self.setState({
                                 redirect: null
@@ -142,6 +150,19 @@ export default class Main extends React.Component {
         if (e.keyCode === 13) {           // Enter key
             this.search()
         }
+    }
+
+    /**
+     * Check input of saerch keyword
+     * @param {Object} e 
+     */
+    checkSearchKeyword(e){
+        // replace all characters that is not a word character.
+        var keyword = e.target.value.replace(/[\W]/g,'')
+        $(e.target).val(keyword)
+        this.setState({
+            searchKeyword: keyword
+        })
     }
 
     render() {
@@ -184,8 +205,10 @@ export default class Main extends React.Component {
                                         </Link>
                                     </div>
                                     <div className="btn-group">
-                                        <input id="searchPC" type="text" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}
-                                            onKeyDown={(e) => this.handleKeyDown(e)}/>
+                                        <input id="searchPC" type="text" maxLength="42" className="ipt-search" 
+                                            placeholder={messages[this.state.lang].iptSearchPlaceholder}
+                                            onKeyDown={(e) => this.handleKeyDown(e)}
+                                            onKeyUp={(e) => this.checkSearchKeyword(e)}/>
                                         <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch} 
                                             onClick={this.search.bind(this)} />
                                     </div>
@@ -237,7 +260,9 @@ export default class Main extends React.Component {
                                 <form action="" id="formSearch" className="mobile">
                                     {/* disable refresh of  whole page */}
                                     <input type="text" name="test" style={{display:'none'}}/>
-                                    <input id="searchMobile" type="search" className="ipt-search" placeholder={messages[this.state.lang].iptSearchPlaceholder}/>
+                                    <input id="searchMobile" type="search" maxLength="42" className="ipt-search" 
+                                        placeholder={messages[this.state.lang].iptSearchPlaceholder}
+                                        onKeyUp={(e) => this.checkSearchKeyword(e)} />
                                     <span className="search-icon"><i className="fas fa-search"></i></span>
                                     {this.state.redirect}
                                 </form>                                              
