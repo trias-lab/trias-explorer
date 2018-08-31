@@ -41,10 +41,18 @@ export default class Address extends React.Component {
     componentWillReceiveProps(nextProps){
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
-                subNavbarMatch: nextProps.match
+                subNavbarMatch: nextProps.match,
+                addressID: this.props.match.params.addressID,
+                rowsPerPage: 10,
+                currentPage: 1
+            },()=> {
+                this.getList(this.state.currentPage, this.state.rowsPerPage);
+                this.getInfo();
             })
         }
     }
+
+
 
     /**
      * 获取列表数据
