@@ -77,7 +77,8 @@ const zh_CN = {
     stayTunedHint:"感谢您对我司项目的厚爱！该产品功能仍在开发中。团队将产品功能打磨完善后，我们将立即更新上线供您使用。",
     visitHomepage:"访问首页",
     goBack:"返回",
-    triasProject:"Trias 项目"
+    triasProject:"Trias 项目",
+    stayTuned:"敬请期待",
 }
 
 export default zh_CN;

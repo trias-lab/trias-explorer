@@ -332,7 +332,9 @@ class Home extends React.Component {
                                         </p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre' title={this.state.hash_rate}> {this.state.hash_rate}EH/s</p>
+                                <p className='item-pre'> 
+                                 <FormattedMessage id="stayTuned" />
+                                 </p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -345,7 +347,7 @@ class Home extends React.Component {
                                         <p className='item-tit'> {txt}</p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.totalDifficulty} T`}> {this.state.totalDifficulty} T</p>
+                                <p className='item-pre' title={`${this.state.totalDifficulty}`}> {this.state.totalDifficulty}</p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
