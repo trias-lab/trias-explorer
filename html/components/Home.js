@@ -291,6 +291,7 @@ class Home extends React.Component {
         })
     }
 
+    
     // 组件渲染完成后
     componentDidMount() {
         this.getBlockData()　　//获取Latest Blocks列表信息
@@ -415,7 +416,8 @@ class Home extends React.Component {
                                             <FormattedMessage id="currentBest" />
                                         </p>
                                         <p className="chart-value" title={`${this.state.lastTransactionFees} `}>
-                                            {this.state.lastTransactionFees} <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
+                                            {this.state.lastTransactionFees}  
+                                            {/*<i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>*/}
                                         </p>
                                     </div>
                                     {/* <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
