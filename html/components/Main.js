@@ -75,9 +75,6 @@ export default class Main extends React.Component {
         });
         $('#searchPC').blur(function(){
             $(this).val('')
-            self.setState({
-                searchKeyword:''
-            })
         })
         $('#searchMobile').blur(function(){
             $(this).val('')
