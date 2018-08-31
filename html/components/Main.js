@@ -34,6 +34,14 @@ class ScrollToTop extends React.Component {
     componentDidUpdate(prevProps) {
       if (this.props.location !== prevProps.location) {
         window.scrollTo(0, 0)
+
+        // if locaiton changes, clear search input
+        if($('#searchPC').val()!==''){
+            $('#searchPC').val('')
+        }
+        if($('#searchMobile').val()!==''){
+            $('#searchMobile').val('')
+        }
       }
     }
   
@@ -52,7 +60,6 @@ export default class Main extends React.Component {
         super(props);
         this.state = {
             lang: 'en',
-            searchKeyword:""
         }
     }
 
@@ -73,15 +80,6 @@ export default class Main extends React.Component {
             self.search()
             $('#searchMobile').blur();  // blur the input to let keyboard hide
         });
-        $('#searchPC').blur(function(){
-            $(this).val('')
-        })
-        $('#searchMobile').blur(function(){
-            $(this).val('')
-            self.setState({
-                searchKeyword:''
-            })
-        })
     }
 
     /**
@@ -89,14 +87,20 @@ export default class Main extends React.Component {
      */
     search(){
         var self = this
+        let keyword = ''
+        if($('.mobile').css('display') === 'none'){
+            keyword = $('#searchPC').val()
+        }else{
+            keyword = $('#searchMobile').val()
+        }
 
-        if(self.state.searchKeyword){
+        if(keyword){
             $.ajax({
                 url: '/api/search',
                 type: 'get',
                 dataType: 'json',
                 data: {
-                    key: self.state.searchKeyword
+                    key: keyword
                 },
                 success: function (data) {
                     if(data.code==200){
@@ -125,14 +129,9 @@ export default class Main extends React.Component {
                                 })
                             })
                         }
-                        if($('#searchPC').val()===''){
-                            self.setState({
-                                searchKeyword:''
-                            })
-                        }
                     }else{
                         self.setState({
-                            redirect:<Redirect to={"/notfound/"+self.state.searchKeyword} />
+                            redirect:<Redirect to={"/notfound/"+keyword} />
                         },()=>{
                             self.setState({
                                 redirect: null
@@ -162,9 +161,6 @@ export default class Main extends React.Component {
         // replace all characters that is not a word character.
         var keyword = e.target.value.replace(/[\W]/g,'')
         $(e.target).val(keyword)
-        this.setState({
-            searchKeyword: keyword
-        })
     }
 
     render() {
