@@ -76,7 +76,8 @@ const en_US = {
     stayTunedTitle:"Stay tuned for our next big thing!",
     stayTunedHint:"Glad you’re into this project! The project is currently under development, it’ll be updated shortly once our team finishes polishing. ",
     visitHomepage:"Visit Homepage",
-    goBack:"Go Back"
+    goBack:"Go Back",
+    triasProject:"Trias Project"
 }
 
 export default en_US;

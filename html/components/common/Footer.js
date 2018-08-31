@@ -100,6 +100,11 @@ class Footer extends React.Component {
                         <div className="docs">
                             <FormattedMessage id="blockchainExplorer" tagName="h2"/>
                             <div className="link">
+                                <a href="https://www.trias.one/" target="blank">
+                                    <FormattedMessage id="triasProject" />
+                                </a>
+                            </div>
+                            <div className="link">
                                 <Link to="/stayTuned">
                                     <FormattedMessage id="wallet" />
                                 </Link>

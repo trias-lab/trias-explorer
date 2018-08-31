@@ -162,6 +162,8 @@ export default class Main extends React.Component {
         }]
 
         this.navlistMobile = [{
+            ele: <a href="https://www.trias.one/" target="blank"><FormattedMessage id="triasProject" /></a>
+        },{
             ele:  <Link to="/stayTuned"><FormattedMessage id="wallet" /></Link>
         }, {
             ele:  <Link to="/blocklist"><FormattedMessage id="block" /></Link>
@@ -188,6 +190,11 @@ export default class Main extends React.Component {
                                             onClick={this.search.bind(this)} />
                                     </div>
                                     <ul className="navbar-menu-pc">
+                                        <li>
+                                            <a href="https://www.trias.one/" target="blank">
+                                                <FormattedMessage id="triasProject" />
+                                            </a>
+                                        </li>
                                         <li>
                                             <Link to="/stayTuned">
                                                 <FormattedMessage id="wallet" />
