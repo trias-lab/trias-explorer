@@ -296,7 +296,17 @@ class Home extends React.Component {
         this.getBlockData()　　//获取Latest Blocks列表信息
         this.getLatestTrans()  //获取Latest Transactions列表信息
         this.getHeaderMsg()    //获取首页6条信息和4块信息
+        var self = this;
+        this.setinter = setInterval(function () {
+            self.getBlockData()　　//获取Latest Blocks列表信息
+            self.getLatestTrans()  //获取Latest Transactions列表信息
+            self.getHeaderMsg()    //获取首页6条信息和4块信息
+        }, 6000)
     }
+    componentWillUnmount() {
+        clearInterval(this.setinter)
+    }
+
 
     render() {
         return (
@@ -347,7 +357,7 @@ class Home extends React.Component {
                                         <p className='item-tit'> {txt}</p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.lastBlockFees} BTC`}> {this.state.lastBlockFees} BTC</p>
+                                <p className='item-pre' title={`${this.state.lastBlockFees}`}> {this.state.lastBlockFees} </p>
                             </div>
                         </div>
                         <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
@@ -404,11 +414,11 @@ class Home extends React.Component {
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="currentBest" />
                                         </p>
-                                        <p className="chart-value" title={`${this.state.lastTransactionFees} BTC/Gas`}>
-                                            {this.state.lastTransactionFees} BTC/Gas <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
+                                        <p className="chart-value" title={`${this.state.lastTransactionFees} `}>
+                                            {this.state.lastTransactionFees} <i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>
                                         </p>
                                     </div>
-                                    <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
+                                    {/* <div className="col col-xs-12 col-sm-6 col-md-6 col-xl-6">
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="rate24" />
@@ -417,6 +427,7 @@ class Home extends React.Component {
                                             {this.state.tx_rate} txs/s
                                         </p>
                                     </div>
+                                    */}
                                 </div>
                                 <div className="chart-title clearfix" style={{ padding: '24px 12px 0', }}>
                                     <i className="fa fa-chart-area" style={{ marginRight: '5px' }}></i>
@@ -455,34 +466,39 @@ class Home extends React.Component {
                                 </div>
 
                                 <div style={{ padding: "0 15px" }}>
-                                    <table id="blockHistoryTable">
-                                        <thead>
-                                            <tr>
-                                                <FormattedMessage id="address" tagName="td" />
-                                                <FormattedMessage id="balance" tagName="td" />
-                                                <FormattedMessage id="time" tagName="td" />
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                this.state.richList && this.state.richList.map(function (item, index) {
-                                                    return (
 
-                                                        <tr key={index}>
-                                                            <td className="td-block-height" title={item.address}>
-                                                                <Link to={"/address/" + item.address}>   {item.address}  </Link>
-                                                            </td>
-                                                            <td title={item.balance}>{item.balance}</td>
-                                                            <td title={item.time}>{item.time}</td>
-                                                        </tr>
+                                    {this.state.richList.length > 0 &&
 
-                                                    )
-                                                }.bind(this))
-                                            }
+                                        <table id="blockHistoryTable">
+                                            <thead>
+                                                <tr>
+                                                    <FormattedMessage id="address" tagName="td" />
+                                                    <FormattedMessage id="balance" tagName="td" />
+                                                    <FormattedMessage id="time" tagName="td" />
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    this.state.richList && this.state.richList.map(function (item, index) {
+                                                        return (
+
+                                                            <tr key={index}>
+                                                                <td className="td-block-height" title={item.address}>
+                                                                    <Link to={"/address/" + item.address}>   {item.address}  </Link>
+                                                                </td>
+                                                                <td title={item.balance}>{item.balance}</td>
+                                                                <td title={item.time}>{item.time}</td>
+                                                            </tr>
+
+                                                        )
+                                                    }.bind(this))
+                                                }
 
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    }
+
 
                                     {
                                         (this.state.richList.length == 0 || !this.state.richList.length) &&
