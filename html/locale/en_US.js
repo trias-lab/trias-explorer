@@ -29,7 +29,7 @@ const en_US = {
     currentBest:"Latest deals of fees",
     rate24:'24-hour transaction rate',
     history7:"7 Days Transactions History",
-    unconfirmedTxs:"Unconfirmed Txs (count)",
+    unconfirmedTxs:"Recently active account number",
     transactionAccelerator:"Transaction Accelerator",
     latestActive:"Latest Active Addresses",
 

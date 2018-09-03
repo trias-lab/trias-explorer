@@ -29,7 +29,7 @@ const zh_CN = {
     currentBest:"最新交易费",
     rate24:'24小时交易速率',
     history7:"7天交易历史",
-    unconfirmedTxs:"待证实的交易数量",
+    unconfirmedTxs:"最近活跃的账号数量",
     transactionAccelerator :"交易加速",
     latestActive:"最新活动历史",
 
