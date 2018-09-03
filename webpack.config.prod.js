@@ -7,7 +7,7 @@ var config = require('./webpack.config.base.js');
 
 config.output.path = require('path').resolve('./html/static/bundles/prod/');
 config.plugins = config.plugins.concat([
-  new CleanWebpackPlugin(['html/static/bundles/prod']),   //删除文件夹
+  new CleanWebpackPlugin(['html/static/bundles/']),   //删除文件夹
   new BundleTracker({
     filename: './webpack-stats-prod.json'
   }),
