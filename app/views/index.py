@@ -47,6 +47,9 @@ def index_base_info(request):
         data['transactionRate'] = transactionRate
         data['addresses'] = Address.objects.count()
         data['transactions'] = TransactionInfo.objects.count()
+        addr_end = int(time.mktime(datetime.date.today().timetuple())) + 72000
+        addr_satrt = int(time.mktime((datetime.date.today() - datetime.timedelta(days=7)).timetuple())) + 72000
+        data['unconfirmed'] = Address.objects.filter(Q(time__lte=addr_end) & Q(time__gte=addr_satrt)).count()
 
         richList = []
         addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
