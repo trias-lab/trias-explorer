@@ -1,5 +1,5 @@
 ## License
-GPL (see [LICENSE](http://www.gnu.org/licenses/gpl.html))
+GPLv3 (see [LICENSE](https://github.com/trias-lab/trias-explorer/blob/master/LICENSE))
 
 # trias-explorer
 trias-explorer is a Trias blockchain explorer built with Python, Django and React.    
