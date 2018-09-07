@@ -30,25 +30,22 @@ def index_base_info(request):
         if index_info:
             data = index_info[0]
 
-        blocksRate = 0
         transactionRate = 0
         for i in range(7):
-            today = datetime.date.today()
-            x = str((today - datetime.timedelta(days=i)).strftime('%m/%d'))
-            end = int(time.mktime((today - datetime.timedelta(days=i)).timetuple())) + 72000  # i days ago timestamp
-            start = int(time.mktime((today - datetime.timedelta(days=i + 1)).timetuple())) + 72000  # i+1 days ago timestamp
+            end = int(time.time() - 86400*i)  # i days ago timestamp
+            start = int(time.time() - 86400*(i+1))  # i+1 days ago timestamp
+            x = time.strftime("%m/%d", time.localtime(end))
             tx_count = TransactionInfo.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
 
             if i == 0:
                 transactionRate = round(tx_count / 24, 2)
             transactions_history[x] = tx_count
         data['transactionsHistory'] = transactions_history
-        data['blocksRate'] = blocksRate
         data['transactionRate'] = transactionRate
         data['addresses'] = Address.objects.count()
         data['transactions'] = TransactionInfo.objects.count()
-        addr_end = int(time.mktime(datetime.date.today().timetuple())) + 72000
-        addr_satrt = int(time.mktime((datetime.date.today() - datetime.timedelta(days=7)).timetuple())) + 72000
+        addr_end = int(time.time())
+        addr_satrt = int(time.time() - 86400*7)
         data['unconfirmed'] = Address.objects.filter(Q(time__lte=addr_end) & Q(time__gte=addr_satrt)).count()
 
         richList = []
