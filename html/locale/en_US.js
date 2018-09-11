@@ -61,6 +61,7 @@ const en_US = {
     received:'Received',
     sent:'Sent',
     balance:'Balance',
+    shard:'Shard',
     amountTransacted:"Amount Transacted",
     txReceiptStatus: "TxReceipt Status",
     gasLimit: "Gas Limit",   

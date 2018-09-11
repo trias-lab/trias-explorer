@@ -61,6 +61,7 @@ const zh_CN = {
     received:'入账',
     sent:'出帐',
     balance:'余额',
+    shard:'分片',
     amountTransacted:"交易总额",
     txReceiptStatus: "TxReceipt 状态",
     gasLimit: "燃料总量",   
