@@ -17,6 +17,16 @@ def url_data(url, method, eth_params, id=1, jsonrpc="2.0"):
         return {}
 
 
+def simple_request(url, params):
+    try:
+        response = requests.post(url, json=params, headers={'Content-Type': 'application/json'},
+                                timeout=1)
+        result = json.loads(response.text)
+        return result
+    except:
+        return {}
+
+
 def stamp2datetime(stamp):
     # stamp to date
     tl = time.localtime(int(stamp))

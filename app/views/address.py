@@ -4,9 +4,12 @@ user address info
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
-from app.utils.block_util import stamp2datetime
+from app.utils.block_util import stamp2datetime, simple_request
 from app.models import Block, TransactionInfo, Address, IndexInfo
 from app.utils.logger import logger
+from app.utils.localconfig import JsonConfiguration
+
+jc = JsonConfiguration()
 
 
 def address_info(request):
@@ -37,6 +40,13 @@ def address_info(request):
     except Exception as e:
         logger.error(e)
         return JsonResponse({"code": 201, "message": "Address Error"})
+
+    try:
+        url = 'http://' + jc.eth_ip + '/api/'
+        chain = simple_request(url, params={"method":"personal_listAccounts","params":"aa"})
+        data['chain'] = chain.get('chain_id', '')
+    except Exception as e:
+        logger.error(e)
 
     return JsonResponse({"code": 200, "return_data": data})
 
