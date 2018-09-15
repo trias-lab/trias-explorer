@@ -246,10 +246,6 @@ export default class Address extends React.Component {
                                     <span className="attr"><FormattedMessage id="time" /></span>
                                     <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="shard" /></span>
-                                    <span className="value">{this.state.detailInfo.chain}</span>
-                                </p>
                             </div>
                         </div>
                     </section>
