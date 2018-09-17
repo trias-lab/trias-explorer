@@ -170,7 +170,7 @@ export default class TransactionDetail extends React.Component {
                                 </p>
                                 <p>
                                     <span className="attr">To</span>
-                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.output}</Link></span>
+                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.output}>{this.state.detailInfo.output}</Link></span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="value"/></span>
