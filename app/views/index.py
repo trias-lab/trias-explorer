@@ -114,6 +114,7 @@ def serach(request):
     if not key:
         return JsonResponse({"code": 201, "message": 'Need a key'})
 
+    # try search block by block number
     try:
         if int(key) > IndexInfo.objects.last().lastBlock:
             return JsonResponse({"code": 201, "message": 'Error Block Number'})
@@ -125,6 +126,7 @@ def serach(request):
     except:
         logger.error("Search Block Number Error")
 
+    # try search block by block hash
     try:
         isBlock = Block.objects.filter(hash=key)
         if isBlock.exists():
@@ -135,6 +137,7 @@ def serach(request):
     except:
         logger.error("Search Block Hash Error")
 
+    # try search transaction by tx hash
     try:
         isTx = TransactionInfo.objects.filter(hash=key)
         if isTx.exists():

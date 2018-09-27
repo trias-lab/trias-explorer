@@ -41,12 +41,12 @@ def address_info(request):
         logger.error(e)
         return JsonResponse({"code": 201, "message": "Address Error"})
 
-    try:
-        url = 'http://' + jc.eth_ip + '/api/'
-        chain = simple_request(url, params={"method":"personal_listAccounts","params":"aa"})
-        data['chain'] = chain.get('chain_id', '')
-    except Exception as e:
-        logger.error(e)
+    # try:
+    #     url = 'http://' + jc.eth_ip + '/api/'
+    #     chain = simple_request(url, params={"method":"personal_listAccounts","params":"aa"})
+    #     data['chain'] = chain.get('chain_id', '')
+    # except Exception as e:
+    #     logger.error(e)
 
     return JsonResponse({"code": 200, "return_data": data})
 
