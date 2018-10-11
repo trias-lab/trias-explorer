@@ -100,7 +100,7 @@ def index_recent_transactions(request):
     except Exception as e:
         logger.error(e)
 
-    return JsonResponse({"code": 200, "size": 20, "return_data": data})
+    return JsonResponse({"code": 200, "size": len(data), "return_data": data})
 
 
 def serach(request):

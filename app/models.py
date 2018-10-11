@@ -62,6 +62,7 @@ class TransactionInfo(models.Model):
     s = models.CharField(max_length=255)
     gasUsed = models.BigIntegerField()
     timestamp = models.BigIntegerField()
+    logCount = models.BigIntegerField(default=0)
 
     class Meta:
         db_table = "transaction"
