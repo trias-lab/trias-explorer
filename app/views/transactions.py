@@ -42,7 +42,8 @@ def all_transactions(request):
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
 
-    return JsonResponse({"code": 200, "total_size": total_data.count(), "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse(
+        {"code": 200, "total_size": total_data.count(), "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 def transaction_info(request):

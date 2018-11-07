@@ -4,8 +4,8 @@ user address info
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
-from app.utils.block_util import stamp2datetime, simple_request
 from app.models import Block, TransactionInfo, Address, IndexInfo
+from app.utils.block_util import stamp2datetime
 from app.utils.logger import logger
 from app.utils.localconfig import JsonConfiguration
 

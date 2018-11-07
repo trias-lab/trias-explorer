@@ -3,11 +3,10 @@ blocks message
 """
 from django.http import JsonResponse
 from django.core.paginator import Paginator
-from app.utils.block_util import stamp2datetime
-from app.utils.localconfig import JsonConfiguration
 from app.models import Block, TransactionInfo, IndexInfo
+from app.utils.block_util import stamp2datetime, url_data, hex2int
+from app.utils.localconfig import JsonConfiguration
 from app.utils.logger import logger
-from app.utils.block_util import url_data, hex2int
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -39,7 +38,8 @@ def all_blocks(request):
         pag = Paginator(total_data, size)
         if page > pag.num_pages:
             page = 1
-        data = list(pag.page(page).object_list.values('hash', 'number', 'transactionsCount', 'size', 'blockReward', 'timestamp'))
+        data = list(pag.page(page).object_list.values('hash', 'number', 'transactionsCount', 'size', 'blockReward',
+                                                      'timestamp'))
         for item in data:
             item['time'] = stamp2datetime(item['timestamp'])
             item['avgFee'] = 0.00332
@@ -47,7 +47,8 @@ def all_blocks(request):
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
 
-    return JsonResponse({"code": 200, "total_size": total_data.count(), "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse(
+        {"code": 200, "total_size": total_data.count(), "page": page, "total_page": pag.num_pages, "return_data": data})
 
 
 def block_info(request):
@@ -75,12 +76,13 @@ def block_info(request):
             block_info['transactionsCount'] = len(block_info['transactions'])
             number = hex2int(block_info['number'])
             block_info['number'] = number
-            block_info['blockReward'] = 3*10**18
+            block_info['blockReward'] = 3 * 10 ** 18
 
         block_info['confirmations'] = IndexInfo.objects.last().lastBlock - number
         if block_info['confirmations'] > 0:
             next_block_number = number + 1
-            block_info['nextHash'] = url_data(url, "eth_getBlockByNumber", [hex(next_block_number), True])['result']['hash']
+            block_info['nextHash'] = url_data(url, "eth_getBlockByNumber", [hex(next_block_number), True])['result'][
+                'hash']
         else:
             block_info['nextHash'] = 'N/A'
     except Exception as e:
@@ -130,8 +132,5 @@ def block_transactions(request):
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
 
-    return JsonResponse({"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
-
-
-
-
+    return JsonResponse(
+        {"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})

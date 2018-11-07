@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import json
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u(@j1@^-z((!z1(%w#@k(gef0q%*4vo_@$3kz_yx$0s$5^bt1r'
 DEBUG = True
@@ -77,7 +76,6 @@ WEBPACK_LOADER = {
     }
 }
 
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -103,7 +101,6 @@ DATABASES = {
         'CONN_MAX_AGE': 180
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -138,10 +135,10 @@ LOGGING = {
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/trias/explorer.log',     # log file
-            'maxBytes': 1024 * 1024 * 5,                   # file size
-            'backupCount': 5,                              # Backup
-            'formatter': 'standard',                       # log format
+            'filename': '/var/log/trias/explorer.log',  # log file
+            'maxBytes': 1024 * 1024 * 5,  # file size
+            'backupCount': 5,  # Backup
+            'formatter': 'standard',  # log format
         },
         'console': {
             'level': 'DEBUG',
@@ -176,7 +173,6 @@ LOGGING = {
     }
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -193,4 +189,3 @@ SECURE_REQUIRED_PATHS = (
 )
 
 HTTPS_SUPPORT = False
-

@@ -1,16 +1,14 @@
 """
 index message
 """
-import datetime
 import time
 from django.http import JsonResponse
-from app.utils.block_util import stamp2datetime
-from app.utils.localconfig import JsonConfiguration
-from app.models import Block, TransactionInfo, IndexInfo, Address
-from app.utils.logger import logger
 from django.db.models import Q
 from collections import OrderedDict
-from app.utils.block_util import url_data
+from app.models import Block, TransactionInfo, IndexInfo, Address
+from app.utils.block_util import stamp2datetime, url_data
+from app.utils.localconfig import JsonConfiguration
+from app.utils.logger import logger
 
 jc = JsonConfiguration()
 url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
@@ -20,7 +18,6 @@ def index_base_info(request):
     """
     Trias Blockchain BaseInfo
     :param request:
-    :return:
     """
 
     transactions_history = OrderedDict()
@@ -32,8 +29,8 @@ def index_base_info(request):
 
         transactionRate = 0
         for i in range(7):
-            end = int(time.time() - 86400*i)  # i days ago timestamp
-            start = int(time.time() - 86400*(i+1))  # i+1 days ago timestamp
+            end = int(time.time() - 86400 * i)  # i days ago timestamp
+            start = int(time.time() - 86400 * (i + 1))  # i+1 days ago timestamp
             x = time.strftime("%m/%d", time.localtime(end))
             tx_count = TransactionInfo.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
 
@@ -45,7 +42,7 @@ def index_base_info(request):
         data['addresses'] = Address.objects.count()
         data['transactions'] = TransactionInfo.objects.count()
         addr_end = int(time.time())
-        addr_satrt = int(time.time() - 86400*7)
+        addr_satrt = int(time.time() - 86400 * 7)
         data['unconfirmed'] = Address.objects.filter(Q(time__lte=addr_end) & Q(time__gte=addr_satrt)).count()
 
         richList = []
@@ -122,7 +119,7 @@ def serach(request):
         if isBlock.exists():
             return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
         hash = url_data(url, "eth_getBlockByNumber", [hex(int(key)), True])['result']['hash']
-        return JsonResponse({"code": 200, "data_type": "block", "block_hash":hash})
+        return JsonResponse({"code": 200, "data_type": "block", "block_hash": hash})
     except:
         logger.error("Search Block Number Error")
 
