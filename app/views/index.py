@@ -27,6 +27,7 @@ def index_base_info(request):
         if index_info:
             data = index_info[0]
 
+        # 24-hour trading rate and 7-day trading history
         transactionRate = 0
         for i in range(7):
             end = int(time.time() - 86400 * i)  # i days ago timestamp
@@ -37,14 +38,18 @@ def index_base_info(request):
             if i == 0:
                 transactionRate = round(tx_count / 24, 2)
             transactions_history[x] = tx_count
+
         data['transactionsHistory'] = transactions_history
         data['transactionRate'] = transactionRate
         data['addresses'] = Address.objects.count()
         data['transactions'] = TransactionInfo.objects.count()
+
+        # The number of active addresses in the last 7 days
         addr_end = int(time.time())
         addr_satrt = int(time.time() - 86400 * 7)
         data['unconfirmed'] = Address.objects.filter(Q(time__lte=addr_end) & Q(time__gte=addr_satrt)).count()
 
+        # Address balance ranking
         richList = []
         addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
         if addresses.exists():
