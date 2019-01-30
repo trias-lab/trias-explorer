@@ -3,13 +3,9 @@ blocks message
 """
 from django.http import JsonResponse
 from django.core.paginator import Paginator
-from app.models import Block, TransactionInfo, IndexInfo
-from app.utils.block_util import stamp2datetime, url_data, hex2int
-from app.utils.localconfig import JsonConfiguration
+from app.models import Block, TransactionInfo
+from app.utils.block_util import stamp2datetime
 from app.utils.logger import logger
-
-jc = JsonConfiguration()
-url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
 
 
 def all_blocks(request):
@@ -66,23 +62,17 @@ def block_info(request):
         block_info = Block.objects.filter(hash=block_hash).values('number', 'transactionsCount', 'timestamp', 'size',
                                                                   'difficulty', 'nonce', 'parentHash', 'miner',
                                                                   'gasLimit', 'gasUsed', 'blockReward')
-        if block_info.exists():
-            block_info = list(block_info)[0]
-            block_info['time'] = stamp2datetime(block_info['timestamp'])
-            number = block_info['number']
-        else:
-            block_info = url_data(url, "eth_getBlockByHash", [block_hash, True])['result']
-            block_info['time'] = stamp2datetime(hex2int(block_info['timestamp']))
-            block_info['transactionsCount'] = len(block_info['transactions'])
-            number = hex2int(block_info['number'])
-            block_info['number'] = number
-            block_info['blockReward'] = 3 * 10 ** 18
+        if not block_info.exists():
+            return JsonResponse({"code": 201, "message": "The block doesn't exist"})
 
-        block_info['confirmations'] = IndexInfo.objects.last().lastBlock - number
+        block_info = list(block_info)[0]
+        block_info['time'] = stamp2datetime(block_info['timestamp'])
+        number = block_info['number']
+        block_info['confirmations'] = Block.objects.last().number - number
+
         if block_info['confirmations'] > 0:
             next_block_number = number + 1
-            block_info['nextHash'] = url_data(url, "eth_getBlockByNumber", [hex(next_block_number), True])['result'][
-                'hash']
+            block_info['nextHash'] = Block.objects.get(number=number+1).hash
         else:
             block_info['nextHash'] = 'N/A'
     except Exception as e:

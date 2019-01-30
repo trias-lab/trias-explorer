@@ -62,8 +62,8 @@ def transaction_info(request):
         number = data['blockNumber']
         block = Block.objects.get(number=number)
         data['gasLimit'] = block.gasLimit
-        data['time'] = stamp2datetime(block.timestamp)
-        data['confirmations'] = IndexInfo.objects.last().lastBlock - number
+        data['time'] = stamp2datetime(data['timestamp'])
+        data['confirmations'] = Block.objects.last().number - number
     except Exception as e:
         logger.error(e)
 
