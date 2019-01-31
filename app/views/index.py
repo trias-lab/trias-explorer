@@ -2,11 +2,12 @@
 index message
 """
 import time
+import datetime
 from django.http import JsonResponse
 from django.db.models import Q
 from collections import OrderedDict
-from app.models import Block, TransactionInfo, IndexInfo, Address
-from app.utils.block_util import stamp2datetime, url_data
+from app.models import Block, TransactionInfo, Address
+from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
 from app.utils.logger import logger
 
@@ -25,9 +26,13 @@ def index_base_info(request):
         # 24-hour trading rate and 7-day trading history
         transactionRate = 0
         for i in range(7):
-            end = int(time.time() - 86400 * i)  # i days ago timestamp
-            start = int(time.time() - 86400 * (i + 1))  # i+1 days ago timestamp
-            x = time.strftime("%m/%d", time.localtime(end))
+            nowtime = time.time()
+            end = int(time.mktime(datetime.datetime.fromtimestamp(nowtime).date().timetuple()) - 86400 * i + 86400)  # i days ago timestamp
+            start = int(time.mktime(datetime.datetime.fromtimestamp(nowtime).date().timetuple()) - 86400 * i + 1)  # i+1 days ago timestamp
+            x = time.strftime("%m/%d", time.localtime(start))
+            # end = int(time.time() - 86400 * i)  # i days ago timestamp
+            # start = int(time.time() - 86400 * (i + 1))  # i+1 days ago timestamp
+            # x = time.strftime("%m/%d", time.localtime(end))
             tx_count = TransactionInfo.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
 
             if i == 0:
