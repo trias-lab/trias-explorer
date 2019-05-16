@@ -103,6 +103,8 @@ export default class TransactionDetail extends React.Component {
                 <SubNavbar match={this.state.subNavbarMatch}/>
                 <div className="page-content">
                     <section className="graph-group" >
+                    {
+                    this.state.detailInfo.input !== "0" &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -114,6 +116,9 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
+                    }
+                     {
+                    this.state.detailInfo.input !== "0" &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -125,6 +130,9 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
+                     }
+                     {
+                        this.state.detailInfo.input !== "0" &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -136,71 +144,75 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
-                            <div className="item" >
-                                <div className="icon">
-                                    <i className="fas fa-calendar-alt"></i>
-                                </div>
-                                <div className="text">
-                                    <FormattedMessage id="dateAndTime" tagName="p"/>
-                                    <p>{this.state.detailInfo.time}</p>
-                                </div>
+                     }
+                    <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="item" >
+                            <div className="icon">
+                                <i className="fas fa-calendar-alt"></i>
+                            </div>
+                            <div className="text">
+                                <FormattedMessage id="dateAndTime" tagName="p"/>
+                                <p>{this.state.detailInfo.time}</p>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
+                {
+                    this.state.detailInfo.input !== "0" &&
                     <section className="info-part">
                         <div className="title" ><FormattedMessage id="advancedInfo"/></div>
-                        <div className="info-content clearfix">
-                            <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
-                                <p>
-                                    <span className="attr"><FormattedMessage id="txHash"/>:</span>
-                                    <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
-                                </p>
-                                {/*<p>*/}
-                                    {/*<span className="attr"><FormattedMessage id="txReceiptStatus"/></span>*/}
-                                    {/*<span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>*/}
-                                {/*</p>*/}
-                                <p>
-                                    <span className="attr"><FormattedMessage id="height"/></span>
-                                    <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
-                                </p>
-                                <p>
-                                    <span className="attr">From</span>
-                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.input}</Link></span>
-                                </p>
-                                <p>
-                                    <span className="attr">To</span>
-                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.output}>{this.state.detailInfo.output}</Link></span>
-                                </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="value"/></span>
-                                    <span className="value trans-table-value">{this.state.detailInfo.value}</span>
-                                </p>
+                            <div className="info-content clearfix">
+                                <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="txHash"/>:</span>
+                                        <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
+                                    </p>
+                                    {/*<p>*/}
+                                        {/*<span className="attr"><FormattedMessage id="txReceiptStatus"/></span>*/}
+                                        {/*<span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>*/}
+                                    {/*</p>*/}
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="height"/></span>
+                                        <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
+                                    </p>
+                                    <p>
+                                        <span className="attr">From</span>
+                                        <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.input}</Link></span>
+                                    </p>
+                                    <p>
+                                        <span className="attr">To</span>
+                                        <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.output}>{this.state.detailInfo.output}</Link></span>
+                                    </p>
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="value"/></span>
+                                        <span className="value trans-table-value">{this.state.detailInfo.value}</span>
+                                    </p>
+                                </div>
+                                <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="gasLimit"/></span>
+                                        <span className="value">{this.state.detailInfo.gas_limit}</span>
+                                    </p>
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="gasUsed"/></span>
+                                        <span className="value">{this.state.detailInfo.gas_used}</span>
+                                    </p>
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="gasPrice"/></span>
+                                        <span className="value">{this.state.detailInfo.gas_price}</span>
+                                    </p>
+                                    <p>
+                                        <span className="attr"><FormattedMessage id="actualTxCostFee"/></span>
+                                        <span className="value">{this.state.detailInfo.fees}</span>
+                                    </p>
+                                    <p>
+                                        <span className="attr">{'Nonce & {Position}'}</span>
+                                        <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.transactionIndex}{'}'}</span>
+                                    </p>
+                                </div>
                             </div>
-                            <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
-                                <p>
-                                    <span className="attr"><FormattedMessage id="gasLimit"/></span>
-                                    <span className="value">{this.state.detailInfo.gas_limit}</span>
-                                </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="gasUsed"/></span>
-                                    <span className="value">{this.state.detailInfo.gas_used}</span>
-                                </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="gasPrice"/></span>
-                                    <span className="value">{this.state.detailInfo.gas_price}</span>
-                                </p>
-                                <p>
-                                    <span className="attr"><FormattedMessage id="actualTxCostFee"/></span>
-                                    <span className="value">{this.state.detailInfo.fees}</span>
-                                </p>
-                                <p>
-                                    <span className="attr">{'Nonce & {Position}'}</span>
-                                    <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.transactionIndex}{'}'}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    }
                     <section className="list-part">
                         <div className="title"><FormattedMessage id="summary"/></div>
                         {this.state.transactionList && this.state.transactionList.map(function (i, index) {
@@ -216,68 +228,79 @@ export default class TransactionDetail extends React.Component {
                                         <div className="detail-item">
                                             <i className="fas fa-handshake"></i>
                                             <span>
-                                                <FormattedMessage id="amount"/>
+                                                {i.input === "0" ?<FormattedMessage id="txMessage"/>:<FormattedMessage id="amount"/>}
                                                 <br />
                                                 <b>{i.amount_transacted}</b>
                                             </span>
                                         </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-money-bill-wave"></i>
-                                            <span>
-                                                <FormattedMessage id="fees"/>
-                                                <br />
-                                                <b>{i.fees}</b>
-                                            </span>
-                                        </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-calendar-alt"></i>
-                                            <span>
-                                                <FormattedMessage id="time"/>
-                                                <br />
-                                                <b>{i.time}</b>
-                                            </span>
-                                        </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-fingerprint"></i>
-                                            <span>
-                                                <FormattedMessage id="status"/>
-                                                <br />
-                                                <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="address-bar">
-                                        <div className="item-a">
-                                            {
-                                                i.input &&
-                                                <Qrcode id={index + "a"} text={i.input} size="70" />
-                                            }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={'/address/'+i.input}>
-                                                    <b>{i.input}</b>
-                                                </Link>
-                                            </span>
-                                        </div>
                                         {
-                                            i.output &&
-                                            <div className="item-b">
+                                            i.input !== "0" &&
+                                            <div className="detail-item">
+                                                <i className="fas fa-money-bill-wave"></i>
+                                                <span>
+                                                    <FormattedMessage id="fees"/>
+                                                    <br />
+                                                    <b>{i.fees}</b>
+                                                </span>
+                                            </div>
+                                        }
+                                        {
+                                            i.input !== "0" &&
+                                            <div className="detail-item">
+                                                <i className="fas fa-calendar-alt"></i>
+                                                <span>
+                                                    <FormattedMessage id="time"/>
+                                                    <br />
+                                                    <b>{i.time}</b>
+                                                </span>
+                                            </div>
+                                        }
+                                        {
+                                            i.input !== "0" &&
+                                            <div className="detail-item">
+                                                <i className="fas fa-fingerprint"></i>
+                                                <span>
+                                                    <FormattedMessage id="status"/>
+                                                    <br />
+                                                    <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
+                                                </span>
+                                            </div>
+                                        }
+                                    </div>
+                                    {
+                                        i.input !== "0" &&
+                                        <div className="address-bar">
+                                            <div className="item-a">
                                                 {
-                                                    i.output &&
-                                                    <Qrcode id={index} text={i.output} size="70" />
+                                                    i.input &&
+                                                    <Qrcode id={index + "a"} text={i.input} size="70" />
                                                 }
                                                 <span>
                                                     <FormattedMessage id="address"/>
                                                     <br />
-                                                    <Link to={'/address/'+i.output}>
-                                                        <b>{i.output}</b>
+                                                    <Link to={'/address/'+i.input}>
+                                                        <b>{i.input}</b>
                                                     </Link>
                                                 </span>
                                             </div>
-                                        }
-
-                                    </div>
+                                            {
+                                                i.output &&
+                                                <div className="item-b">
+                                                    {
+                                                        i.output &&
+                                                        <Qrcode id={index} text={i.output} size="70" />
+                                                    }
+                                                    <span>
+                                                        <FormattedMessage id="address"/>
+                                                        <br />
+                                                        <Link to={'/address/'+i.output}>
+                                                            <b>{i.output}</b>
+                                                        </Link>
+                                                    </span>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                             )
                         }.bind(this))}
