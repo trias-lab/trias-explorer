@@ -312,6 +312,7 @@ class Home extends React.Component {
             <div>
                 <section className="text-center main-title ">
                     <div>
+                        <FormattedMessage id="dataValidity" tagName="p" />
                         <FormattedMessage id="title" tagName="h1" />
                         <p><i className="fa fa-thumbs-up"></i> by Trias-lab Foundation</p>
                     </div>
@@ -547,14 +548,14 @@ class Home extends React.Component {
                                                         <div className="info">
                                                             <p className="timestamp">{item.time}</p>
                                                             <p className="other clearfix">
-                                                                <span style={{ width: '60%' }}>
-                                                                    <span className="key"><FormattedMessage id="size" />:</span>
-                                                                    <span className="value" title={item.size}>{item.size}</span>
+                                                                <span style={{ width: '100%' }}>
+                                                                    <span className="key"><FormattedMessage id="txCount" />:</span>
+                                                                    <span className="value" title={item.transactionsCount}>{item.transactionsCount}</span>
                                                                 </span>
-                                                                <span style={{ width: '35%' }}>
+                                                                {/* <span style={{ width: '35%' }}>
                                                                     <span className="key keyReward"><FormattedMessage id="reward" />:</span>
                                                                     <span className="value valueReward" title={item.blockReward}>{item.blockReward}</span>
-                                                                </span>
+                                                                </span> */}
                                                             </p>
                                                         </div>
                                                     </div>
