@@ -250,7 +250,7 @@ export default class TransactionDetail extends React.Component {
                                             <span>
                                                 {i.input === "0" ?<FormattedMessage id="txMessage"/>:<FormattedMessage id="amount"/>}
                                                 <br />
-                                                <b>{i.output}</b>
+                                                <b>{i.input === "0" ? i.output:i.amount_transacted}</b>
                                             </span>
                                         </div>
                                         {
