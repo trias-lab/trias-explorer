@@ -35,14 +35,15 @@ export default class TransactionDetail extends React.Component {
 
     getTransDetailData(){
         var self = this
-        $.ajax({
-            url: '/api/transaction_info/',
-            type: 'get',
-            dataType: 'json',
-            data: {
-                tx_hash:self.props.match.params.transID
-            },
-            success: function (data) {
+        // $.ajax({
+        //     url: '/api/transaction_info/',
+        //     type: 'get',
+        //     dataType: 'json',
+        //     data: {
+        //         tx_hash:self.props.match.params.transID
+        //     },
+        //     success: function (data) {
+            var data = {"code": 200, "return_data": {"timestamp": 1558069426, "gasUsed": 0, "transactionIndex": 0, "id": 226148, "source": "0", "hash": "E4F4877B81136F47834127B80394ABA5184241D1", "r": "None", "s": "None", "nonce": 0, "blockHash": "34371D69BF0726BDACC82F00CA648675BD1B362A", "blockNumber": 643697, "time": "2019-05-17 13:03:46", "gasLimit": 0, "gasPrice": 0, "value": "1", "gas": 0, "confirmations": 20, "to": "ccc", "v": 0}};
                 let transData =  data['return_data']
                 if(data.code==200){
                     self.setState({
@@ -79,9 +80,9 @@ export default class TransactionDetail extends React.Component {
                         eventLogList:transData.receipt||[],
                     })
                 }
-                // console.log(data);
-            }
-        })
+        //         // console.log(data);
+        //     }
+        // })
     }
 
     /**
@@ -150,7 +151,21 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
-                     }
+                    }
+                    {
+                        this.state.detailInfo.input === "0" &&
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="item" >
+                            <div className="icon">
+                                <i className="fas fa-cube"></i>
+                            </div>
+                            <div className="text">
+                                <FormattedMessage id="height" tagName="p"/>
+                                <p>{this.state.detailInfo.block_height}</p>
+                            </div>
+                        </div>
+                    </div>
+                    }
                     <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                         <div className="item" >
                             <div className="icon">
