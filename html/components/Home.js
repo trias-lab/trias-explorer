@@ -96,7 +96,7 @@ class Home extends React.Component {
             grid: {
                 top: '28px',
                 left: '43px',
-                right: '13px',
+                right: '16px',
                 bottom: '36px'
             },
             tooltip: {
@@ -182,7 +182,7 @@ class Home extends React.Component {
 
     /**
      * 更新echarts图表的信息
-     * 
+     *
      * @memberof Home
      */
     updateLineCharts() {
@@ -196,8 +196,8 @@ class Home extends React.Component {
             transactionsHistory_value.push(this.state.transactionsHistory[key])
         }
 
-        this.lineChartOption1.xAxis.data = transactionsHistory_key.reverse();　　　//设置图表二的日期显示
-        this.lineChartOption1.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
+        this.lineChartOption2.xAxis.data = transactionsHistory_key.reverse();　　　//设置图表二的日期显示
+        this.lineChartOption2.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
         this.chartLine1 = echarts.init(document.getElementById('lineChart1')); //echarts init折线图
         this.chartLine1.setOption(this.lineChartOption2, true);    　//设定值
 
@@ -212,7 +212,7 @@ class Home extends React.Component {
 
     /**
      * 获取Latest Blocks列表信息
-     * 
+     *
      * @memberof Home
      */
     getBlockData() {
@@ -233,7 +233,7 @@ class Home extends React.Component {
 
     /**
      * 获取Latest Transactions列表信息
-     * 
+     *
      * @memberof Home
      */
     getLatestTrans() {
@@ -255,7 +255,7 @@ class Home extends React.Component {
 
     /**
      * 获取首页6条信息和4块信息
-     * 
+     *
      * @memberof Home
      */
     getHeaderMsg() {
@@ -281,17 +281,15 @@ class Home extends React.Component {
                         unconfirmed_txs: data.return_data.unconfirmed,
                         blocksRate: data.return_data.blocksRate,
                         richList: data.return_data.richList,
-                    })
-
-                    setTimeout(function () {
+                    },()=>{
                         self.updateLineCharts()
-                    }, 200);
+                    })
                 }
             }
         })
     }
 
-    
+
     // 组件渲染完成后
     componentDidMount() {
         this.getBlockData()　　//获取Latest Blocks列表信息
@@ -332,7 +330,7 @@ class Home extends React.Component {
                                         </p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre'> 
+                                <p className='item-pre'>
                                  <FormattedMessage id="stayTuned" />
                                  </p>
                             </div>
@@ -418,7 +416,7 @@ class Home extends React.Component {
                                             <FormattedMessage id="currentBest" />
                                         </p>
                                         <p className="chart-value" title={`${this.state.lastTransactionFees} `}>
-                                            {this.state.lastTransactionFees}  
+                                            {this.state.lastTransactionFees}
                                             {/*<i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>*/}
                                         </p>
                                     </div>
@@ -458,10 +456,10 @@ class Home extends React.Component {
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="transactionAccelerator" />
-                                        </p>  
+                                        </p>
                                         <p className="chart-value" title={`${this.state.blocksRate} txs/s`}>
                                             {this.state.blocksRate} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
-                                        </p>                                      
+                                        </p>
                                      </div>
                                  */}
                                 </div>
