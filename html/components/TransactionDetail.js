@@ -102,6 +102,12 @@ export default class TransactionDetail extends React.Component {
                 {/*TransactionDetail: {this.state.transID}*/}
                 <SubNavbar match={this.state.subNavbarMatch}/>
                 <div className="page-content">
+                    <div className="qrcode-layer">
+                        {
+                            this.state.detailInfo.tx_hash &&
+                            <Qrcode id='txhashQrcode' text={'https://explorer.trias.one/translist/'+this.state.detailInfo.tx_hash} size="70" />
+                        }
+                    </div>
                     <section className="graph-group" >
                     {
                     this.state.detailInfo.input !== "0" &&
@@ -230,7 +236,7 @@ export default class TransactionDetail extends React.Component {
                                             <span>
                                                 {i.input === "0" ?<FormattedMessage id="txMessage"/>:<FormattedMessage id="amount"/>}
                                                 <br />
-                                                <b>{i.amount_transacted}</b>
+                                                <b>{i.output}</b>
                                             </span>
                                         </div>
                                         {
