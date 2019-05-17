@@ -81,6 +81,7 @@ const zh_CN = {
     goBack:"返回",
     triasProject:"Trias 项目",
     stayTuned:"敬请期待",
+    dataValidity: "当前测试网不保证数据永久有效性。"
 }
 
 export default zh_CN;

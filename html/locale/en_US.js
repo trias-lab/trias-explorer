@@ -81,6 +81,7 @@ const en_US = {
     goBack:"Go Back",
     triasProject:"Trias Project",
     stayTuned:"Stay tuned",
+    dataValidity: "The current test network does not guarantee the permanent validity of the data."
 }
 
 export default en_US;

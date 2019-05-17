@@ -5,19 +5,19 @@ import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-in
 
 /**
  * Common SubNavbar section above tables.
- * 
+ *
  * usage:
  * <SubNavbar match={this.state.match}/>
- * 
+ *
  * - match: pass this.props.match to SubNavbar component
  */
 class SubNavbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale, 
+            lang: this.props.intl.locale,
             messages: this.props.intl.messages,
-            match: this.props.match,         
+            match: this.props.match,
             subNavbarTitle: "",
             navList: [], // items in navigation bar
         }
@@ -43,13 +43,13 @@ class SubNavbar extends React.Component {
             },()=>{ // update navbar
                 this.setNavList()
             })
-        }        
+        }
     }
 
     componentDidMount(){
         this.setNavList()
     }
-    
+
     /**
      * According to the 'match', update navbar
      */
@@ -104,10 +104,11 @@ class SubNavbar extends React.Component {
     }
 
     render(){
-        
+
         return (
             <div className="sub-header">
                 <div className="center-box">
+                    <FormattedMessage id="dataValidity" tagName="p" />
                     {
                         this.state.subNavbarTitle && <h1>{this.state.subNavbarTitle}</h1>
                     }
@@ -130,11 +131,11 @@ class SubNavbar extends React.Component {
                         })}
                     </h2>
                     {
-                        this.state.match.path === '/address/:addressID' && 
+                        this.state.match.path === '/address/:addressID' &&
                         <div className="address-qrcode"><img src="" alt=""/></div>
                     }
                 </div>
-            
+
         </div>
         )
     }
