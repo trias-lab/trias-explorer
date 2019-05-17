@@ -79,7 +79,7 @@ def index_latest_blocks(request):
     try:
         blocks = Block.objects.all().order_by('-number')[:20]
         if blocks.exists():
-            data = list(blocks.values('number', 'size', 'timestamp', 'hash', 'blockReward'))
+            data = list(blocks.values('number', 'size', 'timestamp', 'hash', 'blockReward', 'transactionsCount'))
             for item in data:
                 item['time'] = stamp2datetime(item['timestamp'])
     except Exception as e:
