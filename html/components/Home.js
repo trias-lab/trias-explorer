@@ -197,7 +197,7 @@ class Home extends React.Component {
         }
 
         this.lineChartOption2.xAxis.data = transactionsHistory_key.reverse();　　　//设置图表二的日期显示
-        this.lineChartOption2.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
+        this.lineChartOption2.series[0].data = transactionsHistory_value.reverse();　　//设置图表二的日期对应的值显示
         this.chartLine1 = echarts.init(document.getElementById('lineChart1')); //echarts init折线图
         this.chartLine1.setOption(this.lineChartOption2, true);    　//设定值
 
