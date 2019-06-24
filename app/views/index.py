@@ -97,7 +97,7 @@ def index_recent_transactions(request):
 
     data = []
     try:
-        transactions = TransactionInfo.objects.all().order_by('-blockNumber')[:20]
+        transactions = TransactionInfo.objects.all().order_by('-blockNumber', '-timestamp')[:20]
         if transactions.exists():
             data = list(transactions.values('source', 'to', 'hash', 'blockNumber', 'timestamp'))
             for item in data:

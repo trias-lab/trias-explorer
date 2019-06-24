@@ -30,7 +30,7 @@ def all_transactions(request):
         page = 1
 
     try:
-        total_data = TransactionInfo.objects.all().order_by('-blockNumber')
+        total_data = TransactionInfo.objects.all().order_by('-blockNumber', '-timestamp')
         pag = Paginator(total_data, size)
         if page > pag.num_pages:
             page = 1
