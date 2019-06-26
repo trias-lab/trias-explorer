@@ -55,7 +55,7 @@ def index_base_info(request):
 
         # Address balance ranking
         richList = []
-        addresses = Address.objects.all().order_by('-balance', '-id')
+        addresses = Address.objects.all().order_by('-time', '-id')
         if addresses.exists():
             richList = list(addresses.values('address', 'balance', 'time'))[:8]
             for addr in richList:
