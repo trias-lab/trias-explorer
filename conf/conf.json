@@ -6,5 +6,6 @@
   "mysql_user": "",
   "mysql_password": "",
   "mysql_database": "",
-  "request_interval": 0
+  "request_interval": 0,
+  "request_url": ""
 }

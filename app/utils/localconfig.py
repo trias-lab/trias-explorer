@@ -18,3 +18,4 @@ class JsonConfiguration:
         self.mysql_ip = records["mysql_ip"]
         self.mysql_port = records["mysql_port"]
         self.request_interval = records["request_interval"]
+        self.request_url = records["request_url"]

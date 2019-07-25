@@ -3,6 +3,8 @@ index message
 """
 import time
 import datetime
+import requests
+import base64
 from django.http import JsonResponse
 from django.db.models import Q
 from collections import OrderedDict
@@ -27,8 +29,10 @@ def index_base_info(request):
         transactionRate = 0
         for i in range(7):
             nowtime = time.time()
-            end = int(time.mktime(datetime.datetime.fromtimestamp(nowtime).date().timetuple()) - 86400 * i + 86400)  # i days ago timestamp
-            start = int(time.mktime(datetime.datetime.fromtimestamp(nowtime).date().timetuple()) - 86400 * i + 1)  # i+1 days ago timestamp
+            end = int(time.mktime(datetime.datetime.fromtimestamp(
+                nowtime).date().timetuple()) - 86400 * i + 86400)  # i days ago timestamp
+            start = int(time.mktime(
+                datetime.datetime.fromtimestamp(nowtime).date().timetuple()) - 86400 * i + 1)  # i+1 days ago timestamp
             x = time.strftime("%m/%d", time.localtime(start))
             # end = int(time.time() - 86400 * i)  # i days ago timestamp
             # start = int(time.time() - 86400 * (i + 1))  # i+1 days ago timestamp
@@ -116,37 +120,26 @@ def serach(request):
     :return:
     """
 
-    key = request.GET.get('key')
-    if not key:
+    key = request.GET.get('key', '')
+    if not key or len(key) != 40:
         return JsonResponse({"code": 201, "message": 'Need a key'})
-
-    # try search block by block number
-    try:
-        if int(key) > Block.objects.last().number:
-            return JsonResponse({"code": 201, "message": 'Error Block Number'})
-        isBlock = Block.objects.filter(number=key)
-        if isBlock.exists():
-            return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
-    except Exception as e:
-        print(e)
-        logger.error("Search Block Number Error")
-
-    # try search block by block hash
-    try:
-        isBlock = Block.objects.filter(hash=key)
-        if isBlock.exists():
-            return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
-    except:
-        logger.error("Search Block Hash Error")
 
     # try search transaction by tx hash
     try:
-        isTx = TransactionInfo.objects.filter(hash=key)
-        if isTx.exists():
-            return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": key})
-        isAddress = Address.objects.filter(address=key)
-        if isAddress.exists():
-            return JsonResponse({"code": 200, "data_type": "address", "address": key})
+        hash = '0x' + key.lower()
+        response = requests.get(jc.request_url + 'tri_block_tx', params={'hash': hash})
+        query_data = response.json()
+        if query_data['error']:
+            return JsonResponse({"code": 201, "message": query_data['error']})
+        tx_str = str(base64.decodebytes(bytes(query_data['result']['tx'], 'utf-8')))[14:-1]
+        result = {
+            "source": "0",
+            "hash": key,
+            "to": tx_str,
+            "time": "",
+            "blockNumber": Block.objects.last().number - 1
+        }
+        return JsonResponse({"code": 200, "return_data": result})
     except:
         logger.error("Search Transaction Or Address Error")
 
