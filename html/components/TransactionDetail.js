@@ -13,6 +13,10 @@ export default class TransactionDetail extends React.Component {
             detailInfo: {},
             transactionList:[],
             eventLogList:[],
+            isOnlyStr: this.props.location.isOnlyStr,
+            txStr: this.props.location.txStr,
+            blockNumber:  this.props.location.blockNumber,
+            time: this.props.location.time,
         }
     }
 
@@ -25,6 +29,14 @@ export default class TransactionDetail extends React.Component {
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
                 subNavbarMatch: nextProps.match
+            })
+        }
+        if(this.state.txStr !== nextProps.location.txStr){
+            this.setState({
+                isOnlyStr: nextProps.location.isOnlyStr,
+                txStr: nextProps.location.txStr,
+                blockNumber:  nextProps.location.blockNumber,
+                time: nextProps.location.time,
             })
         }
     }
@@ -45,41 +57,67 @@ export default class TransactionDetail extends React.Component {
             success: function (data) {
                 let transData =  data['return_data']
                 if(data.code==200){
-                    self.setState({
-                        detailInfo:{
-                            amount_transacted: transData.value,
-                            confirmations: transData.confirmations,
-                            fees: transData.gasUsed * transData.gasPrice,
-                            fees_rate: transData.fees_rate,
-                            input: transData.source,
-                            output: transData.to,
-                            time: transData.time,
-                            tx_hash: transData.hash,
-                            block_height:transData.blockNumber,
-                            value:transData.value,
-                            gas_limit:transData.gasLimit,
-                            gas_used:transData.gasUsed,
-                            gas_price:transData.gasPrice,
-                            actual_tx_cost:transData.actual_tx_cost,
-                            fee:transData.fee,
-                            nonce:transData.nonce,
-                            transactionIndex:transData.transactionIndex,
-                            input_data:transData.input_data ? transData.input_data.replace(/\n/g,'#').split('#') : false,
-                        },
-                        transactionList:[{
-                            amount_transacted: transData.value,
-                            confirmations: transData.confirmations,
-                            fees: transData.gasUsed * transData.gasPrice,
-                            fees_rate: transData.fees_rate,
-                            input: transData.source,
-                            output: transData.to,
-                            time: transData.time,
-                            tx_hash: transData.hash,
-                        }],
-                        eventLogList:transData.receipt||[],
-                    })
+                    if(transData.length || transData.id){
+                        self.setState({
+                            detailInfo:{
+                                amount_transacted: transData.value,
+                                confirmations: transData.confirmations,
+                                fees: transData.gasUsed * transData.gasPrice,
+                                fees_rate: transData.fees_rate,
+                                input: transData.source,
+                                output: transData.to,
+                                time: transData.time,
+                                tx_hash: transData.hash,
+                                block_height:transData.blockNumber,
+                                value:transData.value,
+                                gas_limit:transData.gasLimit,
+                                gas_used:transData.gasUsed,
+                                gas_price:transData.gasPrice,
+                                actual_tx_cost:transData.actual_tx_cost,
+                                fee:transData.fee,
+                                nonce:transData.nonce,
+                                transactionIndex:transData.transactionIndex,
+                                input_data:transData.input_data ? transData.input_data.replace(/\n/g,'#').split('#') : false,
+                            },
+                            transactionList:[{
+                                amount_transacted: transData.value,
+                                confirmations: transData.confirmations,
+                                fees: transData.gasUsed * transData.gasPrice,
+                                fees_rate: transData.fees_rate,
+                                input: transData.source,
+                                output: transData.to,
+                                time: transData.time,
+                                tx_hash: transData.hash,
+                            }],
+                            eventLogList:transData.receipt||[],
+                        })
+                    } else {
+                        self.search(self.state.transID)
+                    }
                 }
                 // console.log(data);
+            }
+        })
+    }
+
+    search(txHash){
+        let self = this
+        $.ajax({
+            url: '/api/search',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                key: txHash
+            },
+            success: function (data) {
+                if(data.code==200){
+                    self.setState({
+                        isOnlyStr: true,
+                        txStr:data.return_data.to,
+                        blockNumber: data.return_data.blockNumber,
+                        time: data.return_data.time
+                    })
+                }
             }
         })
     }
@@ -93,7 +131,9 @@ export default class TransactionDetail extends React.Component {
     }
 
     componentWillMount(){
-        this.getTransDetailData();
+        if(!(this.props.location && this.props.location.isOnlyStr)){
+            this.getTransDetailData();
+        }
     }
 
     render() {
@@ -110,7 +150,7 @@ export default class TransactionDetail extends React.Component {
                     </div>
                     <section className="graph-group" >
                     {
-                    this.state.detailInfo.input !== "0" &&
+                    !this.state.isOnlyStr && this.state.detailInfo.input !== "0" &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -124,7 +164,7 @@ export default class TransactionDetail extends React.Component {
                         </div>
                     }
                      {
-                    this.state.detailInfo.input !== "0" &&
+                    !this.state.isOnlyStr && this.state.detailInfo.input !== "0" &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -138,7 +178,7 @@ export default class TransactionDetail extends React.Component {
                         </div>
                      }
                      {
-                        this.state.detailInfo.input !== "0" &&
+                        !this.state.isOnlyStr && this.state.detailInfo.input !== "0" &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -152,7 +192,7 @@ export default class TransactionDetail extends React.Component {
                         </div>
                     }
                     {
-                        this.state.detailInfo.input === "0" &&
+                        (this.state.isOnlyStr || this.state.detailInfo.input === "0") &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                         <div className="item" >
                             <div className="icon">
@@ -160,7 +200,7 @@ export default class TransactionDetail extends React.Component {
                             </div>
                             <div className="text">
                                 <FormattedMessage id="height" tagName="p"/>
-                                <p>{this.state.detailInfo.block_height}</p>
+                                <p>{!this.state.isOnlyStr? this.state.detailInfo.block_height:this.state.blockNumber}</p>
                             </div>
                         </div>
                     </div>
@@ -172,13 +212,13 @@ export default class TransactionDetail extends React.Component {
                             </div>
                             <div className="text">
                                 <FormattedMessage id="dateAndTime" tagName="p"/>
-                                <p>{this.state.detailInfo.time}</p>
+                                <p>{!this.state.isOnlyStr? this.state.detailInfo.time : this.state.time}</p>
                             </div>
                         </div>
                     </div>
                 </section>
                 {
-                    this.state.detailInfo.input !== "0" &&
+                    !this.state.isOnlyStr && this.state.detailInfo.input !== "0" &&
                     <section className="info-part">
                         <div className="title" ><FormattedMessage id="advancedInfo"/></div>
                             <div className="info-content clearfix">
@@ -235,7 +275,7 @@ export default class TransactionDetail extends React.Component {
                     }
                     <section className="list-part">
                         <div className="title"><FormattedMessage id="summary"/></div>
-                        {this.state.transactionList && this.state.transactionList.map(function (i, index) {
+                        { !this.state.isOnlyStr && this.state.transactionList && this.state.transactionList.map(function (i, index) {
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
@@ -325,7 +365,27 @@ export default class TransactionDetail extends React.Component {
                             )
                         }.bind(this))}
                         {
-                            (!this.state.transactionList.length || this.state.transactionList.length==0) &&
+                            this.state.isOnlyStr && <div className="list-item">
+                            <p className="item-title">
+                                <span><FormattedMessage id="txHash"/>:</span>
+                                <Link to={"/translist/"+this.state.transID}>
+                                    {this.state.transID}
+                                </Link>
+                            </p>
+                            <div className="detail-group">
+                                <div className="detail-item">
+                                    <i className="fas fa-handshake"></i>
+                                    <span>
+                                        <FormattedMessage id="txMessage"/>
+                                        <br />
+                                        <b>{this.state.txStr}</b>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                        {
+                            ( !this.state.isOnlyStr && (!this.state.transactionList.length || this.state.transactionList.length==0)) &&
                             <div className="nullData">
                                 <FormattedMessage id="nullData" tagName="p"/>
                             </div>

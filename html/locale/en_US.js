@@ -2,7 +2,7 @@ const en_US = {
     home: "Home",
     wallet: "Wallet",
     monitor: "Monitor",
-    iptSearchPlaceholder: "Search by Address/TxHash/Height/Block Hash",
+    iptSearchPlaceholder: "Search by TxHash",
     btnSearch: "Search",
     title: "Trias Blockchain Explorer",
     blockchainExplorer: "Blockchain Explorer",

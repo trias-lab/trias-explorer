@@ -44,7 +44,7 @@ class ScrollToTop extends React.Component {
         }
       }
     }
-  
+
     render() {
       return this.props.children
     }
@@ -104,31 +104,52 @@ export default class Main extends React.Component {
                 },
                 success: function (data) {
                     if(data.code==200){
-                        if(data.data_type==="address"){
-                            self.setState({
-                                redirect:<Redirect to={"/address/"+data.address} />
-                            },()=>{
+                        // if(data.data_type==="address"){
+                        //     self.setState({
+                        //         redirect:<Redirect to={"/address/"+data.address} />
+                        //     },()=>{
+                        //         self.setState({
+                        //             redirect: null
+                        //         })
+                        //     })
+                        // }else if(data.data_type==="transaction"){
+                            if(data.return_data.source === "0"){
                                 self.setState({
-                                    redirect: null
+                                    redirect:<Redirect to={{
+                                        pathname: "/translist/"+data.return_data.hash,
+                                        isOnlyStr: true,
+                                        txStr:data.return_data.to,
+                                        blockNumber: data.return_data.blockNumber,
+                                        time: data.return_data.time
+                                      }} />
+                                },()=>{
+                                    self.setState({
+                                        redirect: null
+                                    })
                                 })
-                            })
-                        }else if(data.data_type==="transaction"){
-                            self.setState({
-                                redirect:<Redirect to={"/translist/"+data.tx_hash} />
-                            },()=>{
+                            } else {
+                                redirect:<Redirect to={{
+                                    pathname: "/translist/"+data.return_data.hash,
+                                    isOnlyStr: false
+                                  }} />
                                 self.setState({
-                                    redirect: null
+                                    redirect:<Redirect to={"/translist/"+data.return_data.hash} />
+                                },()=>{
+                                    self.setState({
+                                        redirect: null
+                                    })
                                 })
-                            })
-                        }else if(data.data_type==="block"){
-                            self.setState({
-                                redirect:<Redirect to={"/blocklist/"+data.block_hash} />
-                            },()=>{
-                                self.setState({
-                                    redirect: null
-                                })
-                            })
-                        }
+                            }
+
+                        // }else if(data.data_type==="block"){
+                        //     self.setState({
+                        //         redirect:<Redirect to={"/blocklist/"+data.block_hash} />
+                        //     },()=>{
+                        //         self.setState({
+                        //             redirect: null
+                        //         })
+                        //     })
+                        // }
                     }else{
                         self.setState({
                             redirect:<Redirect to={"/notfound/"+keyword} />
@@ -137,15 +158,15 @@ export default class Main extends React.Component {
                                 redirect: null
                             })
                         })
-                    }                
+                    }
                 }
             })
-        }        
+        }
     }
 
     /**
      * Keydown event handler for the search input
-     * @param {*} e 
+     * @param {*} e
      */
     handleKeyDown(e){
         if (e.keyCode === 13) {           // Enter key
@@ -155,7 +176,7 @@ export default class Main extends React.Component {
 
     /**
      * Check input of saerch keyword
-     * @param {Object} e 
+     * @param {Object} e
      */
     checkSearchKeyword(e){
         // replace all characters that is not a word character.
@@ -203,11 +224,11 @@ export default class Main extends React.Component {
                                         </Link>
                                     </div>
                                     <div className="btn-group">
-                                        <input id="searchPC" type="text" maxLength="42" className="ipt-search" 
+                                        <input id="searchPC" type="text" maxLength="42" className="ipt-search"
                                             placeholder={messages[this.state.lang].iptSearchPlaceholder}
                                             onKeyDown={(e) => this.handleKeyDown(e)}
                                             onKeyUp={(e) => this.checkSearchKeyword(e)}/>
-                                        <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch} 
+                                        <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch}
                                             onClick={this.search.bind(this)} />
                                     </div>
                                     <ul className="navbar-menu-pc">
@@ -225,12 +246,12 @@ export default class Main extends React.Component {
                                             <Link to="/blocklist">
                                                 <FormattedMessage id="block" />
                                             </Link>
-                                        </li>  
+                                        </li>
                                         <li>
                                             <a href="https://monitor.trias.one/" target="blank">
                                                 <FormattedMessage id="monitor" />
                                             </a>
-                                        </li>                                  
+                                        </li>
                                         <li>
                                         <ToggleList
                                             className="lang"
@@ -252,18 +273,18 @@ export default class Main extends React.Component {
                                                 <div className="icon-bar"></div>
                                                 <div className="icon-bar"></div>
                                                 <div className="icon-bar"></div>
-                                            </span>} 
+                                            </span>}
                                         />
                                 </div>
                                 <form action="" id="formSearch" className="mobile">
                                     {/* disable refresh of  whole page */}
                                     <input type="text" name="test" style={{display:'none'}}/>
-                                    <input id="searchMobile" type="search" maxLength="42" className="ipt-search" 
+                                    <input id="searchMobile" type="search" maxLength="42" className="ipt-search"
                                         placeholder={messages[this.state.lang].iptSearchPlaceholder}
                                         onKeyUp={(e) => this.checkSearchKeyword(e)} />
                                     <span className="search-icon"><i className="fas fa-search"></i></span>
                                     {this.state.redirect}
-                                </form>                                              
+                                </form>
                             </header>
                             <main>
                                 <Switch>
@@ -276,7 +297,7 @@ export default class Main extends React.Component {
                                     <Route exact path="/notfound/:keyword" component={NotFound} />
                                     <Route exact path="/stayTuned" component={StayTuned} />
                                     <Redirect to="/"/> {/* if no routes above is matched */}
-                                </Switch>                            
+                                </Switch>
                             </main>
                             <Footer/>
                         </div>
@@ -290,4 +311,3 @@ export default class Main extends React.Component {
 
 
 
-  

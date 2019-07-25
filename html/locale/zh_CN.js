@@ -2,7 +2,7 @@ const zh_CN = {
     home: "首页",
     wallet: "钱包",
     monitor: "Monitor",
-    iptSearchPlaceholder: "搜索账户地址/交易哈希/区块高度/区块哈希",
+    iptSearchPlaceholder: "搜索交易哈希",
     btnSearch: "搜索",
     title: "Trias 区块链浏览器",
     blockchainExplorer: "区块链浏览器",
