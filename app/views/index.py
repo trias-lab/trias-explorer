@@ -137,7 +137,7 @@ def serach(request):
             "hash": key,
             "to": tx_str,
             "time": "",
-            "blockNumber": Block.objects.last().number - 1
+            "blockNumber": query_data['result']['height']
         }
         return JsonResponse({"code": 200, "return_data": result})
     except:
