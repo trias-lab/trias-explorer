@@ -43,7 +43,7 @@ def index_base_info(request):
         data['transactionRate'] = transactionRate
         data['addresses'] = Address.objects.count()
         data['transactions'] = TransactionInfo.objects.count()
-        data['lastBlock'] = Block.objects.last().number
+        data['lastBlock'] = Block.objects.last().number if Block.objects.exists() else 0
         data['lastBlockFees'] = 'None'
         data['lastTransactionFees'] = 'None'
         data['totalDifficulty'] = 'None'
