@@ -258,7 +258,7 @@ export default class Main extends React.Component {
                                 <form action="" id="formSearch" className="mobile">
                                     {/* disable refresh of  whole page */}
                                     <input type="text" name="test" style={{display:'none'}}/>
-                                    <input id="searchMobile" type="search" maxLength="42" className="ipt-search" 
+                                    <input id="searchMobile" type="search" maxLength="100" className="ipt-search" 
                                         placeholder={messages[this.state.lang].iptSearchPlaceholder}
                                         onKeyUp={(e) => this.checkSearchKeyword(e)} />
                                     <span className="search-icon"><i className="fas fa-search"></i></span>
