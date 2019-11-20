@@ -23,13 +23,17 @@ def address_info(request):
     try:
         data = list(Address.objects.filter(address=address).values())[0]
         data['time'] = stamp2datetime(data['time'])
-        data['txCount'] = TransactionInfo.objects.filter(Q(source=address)|Q(to=address)).count()
+        data['txCount'] = TransactionInfo.objects.filter(
+            Q(source=address) | Q(to=address)).count()
         sent = 0
         received = 0
-        sent_list =  TransactionInfo.objects.filter(source=address).values_list('value', flat=True)
+        sent_list = TransactionInfo.objects.filter(
+            source=address).values_list(
+            'value', flat=True)
         for sent_value in sent_list:
             sent += int(sent_value)
-        received_list = TransactionInfo.objects.filter(to=address).values_list('value', flat=True)
+        received_list = TransactionInfo.objects.filter(
+            to=address).values_list('value', flat=True)
         for rec_value in received_list:
             received += int(rec_value)
         data['sent'] = sent
@@ -68,18 +72,33 @@ def address_transactions(request):
         page = 1
 
     try:
-        transactions = TransactionInfo.objects.filter(Q(source=address)|Q(to=address)).order_by('-blockNumber')
+        transactions = TransactionInfo.objects.filter(
+            Q(source=address) | Q(to=address)).order_by('-blockNumber')
         pag = Paginator(transactions, size)
         if page > pag.num_pages:
             page = 1
-        data = list(pag.page(page).object_list.values('hash', 'gasPrice', 'source', 'value', 'to', 'gasUsed', 'blockNumber'))
+        data = list(
+            pag.page(page).object_list.values(
+                'hash',
+                'gasPrice',
+                'source',
+                'value',
+                'to',
+                'gasUsed',
+                'blockNumber'))
         for item in data:
-            item['time'] = stamp2datetime(Block.objects.get(number=item['blockNumber']).timestamp)
+            item['time'] = stamp2datetime(
+                Block.objects.get(
+                    number=item['blockNumber']).timestamp)
             item['fees'] = item['gasPrice'] * item['gasUsed']
-            item['confirmations'] = Block.objects.last().number - item['blockNumber']
+            item['confirmations'] = Block.objects.last().number - \
+                item['blockNumber']
     except Exception as e:
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
 
-    return JsonResponse({"code": 200, "total_size": len(transactions), "page": page, "total_page": pag.num_pages, "return_data": data})
-
+    return JsonResponse({"code": 200,
+                         "total_size": len(transactions),
+                         "page": page,
+                         "total_page": pag.num_pages,
+                         "return_data": data})

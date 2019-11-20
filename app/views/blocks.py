@@ -34,8 +34,14 @@ def all_blocks(request):
         pag = Paginator(total_data, size)
         if page > pag.num_pages:
             page = 1
-        data = list(pag.page(page).object_list.values('hash', 'number', 'transactionsCount', 'size', 'blockReward',
-                                                      'timestamp'))
+        data = list(
+            pag.page(page).object_list.values(
+                'hash',
+                'number',
+                'transactionsCount',
+                'size',
+                'blockReward',
+                'timestamp'))
         for item in data:
             item['time'] = stamp2datetime(item['timestamp'])
             item['avgFee'] = 0.00332
@@ -43,8 +49,11 @@ def all_blocks(request):
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
 
-    return JsonResponse(
-        {"code": 200, "total_size": total_data.count(), "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200,
+                         "total_size": total_data.count(),
+                         "page": page,
+                         "total_page": pag.num_pages,
+                         "return_data": data})
 
 
 def block_info(request):
@@ -59,11 +68,22 @@ def block_info(request):
         return JsonResponse({"code": 201, "message": "Need Block Hash"})
 
     try:
-        block_info = Block.objects.filter(hash=block_hash).values('number', 'transactionsCount', 'timestamp', 'size',
-                                                                  'difficulty', 'nonce', 'parentHash', 'miner',
-                                                                  'gasLimit', 'gasUsed', 'blockReward')
+        block_info = Block.objects.filter(
+            hash=block_hash).values(
+            'number',
+            'transactionsCount',
+            'timestamp',
+            'size',
+            'difficulty',
+            'nonce',
+            'parentHash',
+            'miner',
+            'gasLimit',
+            'gasUsed',
+            'blockReward')
         if not block_info.exists():
-            return JsonResponse({"code": 201, "message": "The block doesn't exist"})
+            return JsonResponse(
+                {"code": 201, "message": "The block doesn't exist"})
 
         block_info = list(block_info)[0]
         block_info['time'] = stamp2datetime(block_info['timestamp'])
@@ -72,7 +92,7 @@ def block_info(request):
 
         if block_info['confirmations'] > 0:
             next_block_number = number + 1
-            block_info['nextHash'] = Block.objects.get(number=number+1).hash
+            block_info['nextHash'] = Block.objects.get(number=number + 1).hash
         else:
             block_info['nextHash'] = 'N/A'
     except Exception as e:
@@ -111,9 +131,11 @@ def block_transactions(request):
         page = 1
 
     try:
-        total_data = TransactionInfo.objects.filter(blockHash=block_hash).order_by(sort)
+        total_data = TransactionInfo.objects.filter(
+            blockHash=block_hash).order_by(sort)
         if total_data.count() == 0:
-            return JsonResponse({"code": 200, "total_size": 0, "return_data": []})
+            return JsonResponse(
+                {"code": 200, "total_size": 0, "return_data": []})
         pag = Paginator(total_data, size)
         if page > pag.num_pages:
             page = 1
@@ -122,5 +144,8 @@ def block_transactions(request):
         logger.error(e)
         return JsonResponse({"code": 201, "message": "ERROR"})
 
-    return JsonResponse(
-        {"code": 200, "total_size": len(total_data), "page": page, "total_page": pag.num_pages, "return_data": data})
+    return JsonResponse({"code": 200,
+                         "total_size": len(total_data),
+                         "page": page,
+                         "total_page": pag.num_pages,
+                         "return_data": data})

@@ -4,7 +4,7 @@
 
 from django.shortcuts import render_to_response
 from django.conf import settings
-from django.http import  HttpResponsePermanentRedirect, JsonResponse
+from django.http import HttpResponsePermanentRedirect, JsonResponse
 
 
 class QtsAuthentication(object):
@@ -30,7 +30,8 @@ class SecureRequiredMiddleware(object):
             for path in self.paths:
 
                 if request.get_full_path().startswith(path):
-                    request_url = request.build_absolute_uri(request.get_full_path())
+                    request_url = request.build_absolute_uri(
+                        request.get_full_path())
                     secure_url = request_url.replace('http://', 'https://')
 
                     return HttpResponsePermanentRedirect(secure_url)

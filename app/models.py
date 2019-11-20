@@ -79,10 +79,10 @@ class Address(models.Model):
         db_table = "address"
 
 
-class AddressTx(models.Model):
-    address = models.ForeignKey("Address")
-    tx = models.ForeignKey("TransactionInfo")
-    isSend = models.BooleanField()
-
-    class Meta:
-        db_table = "address_tx"
+# class AddressTx(models.Model):
+#     address = models.ForeignKey("Address")
+#     tx = models.ForeignKey("TransactionInfo")
+#     isSend = models.BooleanField()
+#
+#     class Meta:
+#         db_table = "address_tx"

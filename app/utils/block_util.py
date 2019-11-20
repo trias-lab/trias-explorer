@@ -7,23 +7,29 @@ jc = JsonConfiguration()
 
 
 def url_data(url, method, eth_params, id=1, jsonrpc="2.0"):
-    params = {"jsonrpc": jsonrpc, "method": method, "params": eth_params, "id": id}
+    params = {
+        "jsonrpc": jsonrpc,
+        "method": method,
+        "params": eth_params,
+        "id": id}
     try:
-        response = requests.post(url, json=params, headers={'Content-Type': 'application/json'},
-                                 timeout=1)
+        response = requests.post(
+            url, json=params, headers={
+                'Content-Type': 'application/json'}, timeout=1)
         result = json.loads(response.text)
         return result
-    except:
+    except BaseException:
         return {}
 
 
 def simple_request(url, params):
     try:
-        response = requests.post(url, json=params, headers={'Content-Type': 'application/json'},
-                                 timeout=1)
+        response = requests.post(
+            url, json=params, headers={
+                'Content-Type': 'application/json'}, timeout=1)
         result = json.loads(response.text)
         return result
-    except:
+    except BaseException:
         return {}
 
 
