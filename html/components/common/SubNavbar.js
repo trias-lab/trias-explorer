@@ -1,5 +1,4 @@
 import React from "react";
-import $ from "jquery";
 import {NavLink} from 'react-router-dom';
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 

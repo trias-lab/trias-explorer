@@ -1,14 +1,13 @@
 import React from "react"
 import $ from 'jquery'
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import CustomPagination from "./common/CustomPagination"
-class TransactionList extends React.Component {
+export default class TransactionList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale,
             subNavbarMatch: this.props.match,   // Route  match props
             totalItemsCount: 100, //total number = pageCount*rowsPerPage
             pageCount: 10, //total page
@@ -27,11 +26,6 @@ class TransactionList extends React.Component {
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
                 subNavbarMatch: nextProps.match
-            })
-        }
-        if(this.state.lang !== nextProps.intl.locale){
-            this.setState({
-                lang: nextProps.intl.locale
             })
         }
     }
@@ -131,7 +125,7 @@ class TransactionList extends React.Component {
                                     <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
                                     <td>To</td>
                                     <FormattedMessage id="value" tagName="td"/>
-                                    <FormattedMessage id="time" tagName="td"/>                                    
+                                    <FormattedMessage id="time" tagName="td"/>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -170,7 +164,7 @@ class TransactionList extends React.Component {
                                     }.bind(this))
                                 }
                                 </tbody>
-                            </table>                            
+                            </table>
                         </div>
                         <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
@@ -195,10 +189,3 @@ class TransactionList extends React.Component {
         )
     }
 }
-
-/* Inject intl to NodeStatus props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-TransactionList.propTypes = propTypes
-export default injectIntl(TransactionList)

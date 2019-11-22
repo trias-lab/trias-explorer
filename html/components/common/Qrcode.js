@@ -1,12 +1,11 @@
 import React from "react";
-import $ from "jquery";
 
 /**
  * Common Qrcode Component.
- * 
+ *
  * usage:
  * <Qrcode id={index} text={i.input} size="70" />
- * 
+ *
  */
 export default class Qrcode extends React.Component {
     constructor(props) {
@@ -14,7 +13,7 @@ export default class Qrcode extends React.Component {
         this.state = {
             text: this.props.text,
             width : this.props.size,
-            height : this.props.size,         
+            height : this.props.size,
         }
     }
 
@@ -41,9 +40,9 @@ export default class Qrcode extends React.Component {
             height : this.state.size,
             useSVG: true
         });
-      
+
     }
-    
+
     render(){
         return (
             <div className="qrcode-container">

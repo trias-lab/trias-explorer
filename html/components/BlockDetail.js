@@ -48,8 +48,8 @@ export default class BlockDetail extends React.Component {
 
     /**
      * Get transactions list
-     * @param {int} currentPage 
-     * @param {int} rowsPerPage 
+     * @param {int} currentPage
+     * @param {int} rowsPerPage
      */
     getList(currentPage, rowsPerPage) {
         var self = this
@@ -75,7 +75,7 @@ export default class BlockDetail extends React.Component {
                         totalItemsCount: 0,
                         pageCount: 0,
                     })
-                }                
+                }
             }
         })
     }
@@ -124,7 +124,6 @@ export default class BlockDetail extends React.Component {
             currentPage: pagenum
         })
         this.getList(pagenum, this.state.rowsPerPage)
-        //console.log('jump')
     }
 
     /**
@@ -148,7 +147,7 @@ export default class BlockDetail extends React.Component {
                     self.setState({
                         detailInfo: [],
                     })
-                }               
+                }
             }
         })
     }
@@ -243,7 +242,7 @@ export default class BlockDetail extends React.Component {
                                 <p>
                                     <span className="attr"><FormattedMessage id="gasUsed" /></span>
                                     <span className="value">{this.state.detailInfo.gasUsed}</span>
-                                </p>                           
+                                </p>
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
@@ -259,7 +258,7 @@ export default class BlockDetail extends React.Component {
                                             {this.state.detailInfo.parentHash}
                                         </Link>:
                                         this.state.detailInfo.parentHash
-                                    }   
+                                    }
                                     </span>
                                 </p>
                                 <p>
@@ -271,7 +270,7 @@ export default class BlockDetail extends React.Component {
                                             {this.state.detailInfo.nextHash}
                                         </Link>:
                                         this.state.detailInfo.nextHash
-                                    }                                        
+                                    }
                                     </span>
                                 </p>
                                 <p>
@@ -352,14 +351,14 @@ export default class BlockDetail extends React.Component {
                                                     </Link>
                                                 </span>
                                             </div>
-                                        }                                           
+                                        }
                                     </div>
                                 </div>
                             )}.bind(this)):
                             <div className="nullData">
                                 <FormattedMessage id="nullData" tagName="p"/>
                             </div>
-                        }                      
+                        }
                         <CustomPagination
                             from={(this.state.currentPage - 1) * this.state.rowsPerPage}
                             to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
@@ -371,7 +370,7 @@ export default class BlockDetail extends React.Component {
                             onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
                         />
                     </section>
-                </div>               
+                </div>
             </div>
         )
     }

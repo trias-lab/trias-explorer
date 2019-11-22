@@ -1,13 +1,19 @@
 import React from "react"
 import $ from 'jquery'
 import { Link } from 'react-router-dom'
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
-import echarts from 'echarts'
-class Home extends React.Component {
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
+
+// 引入 echarts 主模块。
+import * as echarts from 'echarts/lib/echarts';
+// 引入折线图。
+import 'echarts/lib/chart/line';
+// 引入提示框组件、标题组件、工具箱组件。
+import 'echarts/lib/component/tooltip';
+
+export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale,
             blocksLatest: [],
             transLatest: [],
             richList: [],
@@ -631,10 +637,3 @@ class Home extends React.Component {
         )
     }
 }
-
-/* Inject intl to Home props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-Home.propTypes = propTypes
-export default injectIntl(Home)

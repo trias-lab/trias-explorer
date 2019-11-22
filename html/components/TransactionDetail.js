@@ -1,6 +1,6 @@
 import React from "react"
 import $ from 'jquery'
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
