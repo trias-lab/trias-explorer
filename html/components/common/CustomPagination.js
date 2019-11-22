@@ -44,29 +44,6 @@ import DropdownList from "./DropdownList";     // import custom drop-down list c
 class CustomPagination extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
-            from:this.props.from || 0,  // index of first row in current page, 0 by default
-            to:this.props.to || 0,      // index of last row in current page, 0 by default
-            totalItemsCount: this.props.totalItemsCount || 0,   // total number of items, 0 by default
-            totalPagesCount: this.props.totalPagesCount || 0,   // total number of pages, 0 by default
-            currentPage: this.props.currentPage || 0,           // current page number, 0 by default
-            pageNumInputId: this.props.pageNumInputId || "inputPageNum",        // id of the page number <input>, 'inputPageNum' by default
-            dropdownListId: this.props.dropdownListId || "rows-per-page-list",  // id of the DropdownList, 'rows-per-page-list' by default
-        }
-    }
-
-    /**
-     * Before a mounted component receives new props, reset some state.
-     * @param {Object} nextProps new props
-     */
-    componentWillReceiveProps (nextProps) {
-        this.setState({
-            from: nextProps.from || 0,
-            to: nextProps.to || 0,
-            totalItemsCount: nextProps.totalItemsCount || 0,
-            totalPagesCount: nextProps.totalPagesCount || 0,
-            currentPage: nextProps.currentPage || 0,
-        })
     }
 
     /**
@@ -76,39 +53,49 @@ class CustomPagination extends React.Component {
         var re = /^[0-9]+$/
         var pagenum = e.target.value      //get put in page num
         // the value should be positive interger, and not exceed the maximum number of pages
-        if (pagenum != "" && (!re.test(pagenum) || pagenum == 0 || pagenum > this.state.totalPagesCount)) {
-            $('#'+this.state.pageNumInputId).val('');   // clear the input
+        if (pagenum != "" && (!re.test(pagenum) || pagenum == 0 || pagenum > this.props.totalPagesCount)) {
+            $('#'+this.props.pageNumInputId).val('');   // clear the input
         }
     }
 
     render(){
+        const from = this.props.from || 0  // index of first row in current page, 0 by default
+        const to = this.props.to || 0      // index of last row in current page, 0 by default
+        const totalItemsCount = this.props.totalItemsCount || 0   // total number of items, 0 by default
+        const totalPagesCount = this.props.totalPagesCount || 0   // total number of pages, 0 by default
+        const currentPage = this.props.currentPage || 0           // current page number, 0 by default
+        const pageNumInputId = this.props.pageNumInputId || "inputPageNum"        // id of the page number <input>, 'inputPageNum' by default
+        const dropdownListId = this.props.dropdownListId || "rows-per-page-list"  // id of the DropdownList, 'rows-per-page-list' by default
+
+        const locale = this.props.intl.locale // local language
+
         return (
             <div className="pagination-all clearfix">
                 {/* select the maximum number of rows per page*/}
                 <div className="rowsPerPage pc">
                     <DropdownList
-                        listID={this.state.dropdownListId}
+                        listID={dropdownListId}
                         itemsToSelect={this.props.rowsPerPageRange || [
                             {
-                                name: this.props.intl.locale==='zh'?'10 项/页':'10 / page',
+                                name: locale==='zh'?'10 项/页':'10 / page',
                                 value: 10
                             }, {
-                                name: this.props.intl.locale==='zh'?'20 项/页':'20 / page',
+                                name: locale==='zh'?'20 项/页':'20 / page',
                                 value: 20
                             }, {
-                                name: this.props.intl.locale==='zh'?'30 项/页':'30 / page',
+                                name: locale==='zh'?'30 项/页':'30 / page',
                                 value: 30
                             }, {
-                                name: this.props.intl.locale==='zh'?'40 项/页':'40 / page',
+                                name: locale==='zh'?'40 项/页':'40 / page',
                                 value: 40
                             }, {
-                                name: this.props.intl.locale==='zh'?'50 项/页':'50 / page',
+                                name: locale==='zh'?'50 项/页':'50 / page',
                                 value: 50
                             },
                         ]}
                         onSelect={(item) => this.props.onChangeRowsPerPage(item)} />
                     <p className='itemsCount'>
-                        <FormattedMessage id='paginationItemsCountP' values={{from: this.state.from, to: this.state.to, count: this.state.totalItemsCount}} />
+                        <FormattedMessage id='paginationItemsCountP' values={{from: from, to: to, count: totalItemsCount}} />
                     </p>
                 </div>
                 <div className="pagination-right clearfix pc">
@@ -119,36 +106,37 @@ class CustomPagination extends React.Component {
                         last={false}
                         ellipsis={true}
                         boundaryLinks={true}
-                        items={this.state.totalPagesCount}
+                        items={totalPagesCount}
                         maxButtons={3}
-                        activePage={this.state.currentPage}
+                        activePage={currentPage}
                         onSelect={this.props.onSelectPage.bind(this)} />
                 </div>
+                {/* For mobile devices */}
                 <div className="clearfix mobile">
                     <input type="button"
-                        disabled={this.state.currentPage<=1}
+                        disabled={currentPage<=1}
                         className="btn-prev"
-                        onClick={() => this.props.onSelectPage(this.state.currentPage-1)}
+                        onClick={() => this.props.onSelectPage(currentPage-1)}
                         value="Previous" />
                     {/* Use the key prop to force rendering of an entirely new input */}
                     <form action="javascript:return true;" id="pageNum" className="pageCount">
                         {/* disable refresh of  whole page */}
                         <input
                             className="pageNum"
-                            id={this.state.pageNumInputId}
+                            id={pageNumInputId}
                             type="number"
-                            key={this.state.currentPage}
-                            defaultValue={this.state.currentPage}
+                            key={currentPage}
+                            defaultValue={currentPage}
                             onChange={this.onChangeInputPage.bind(this)}
                             onKeyDown={this.props.onPageInputKeyDown.bind(this)
                             }
                         />
-                        <span className='totalPages'> of {this.state.totalPagesCount}</span>
+                        <span className='totalPages'> of {totalPagesCount}</span>
                     </form>
                     <input type="button"
-                        disabled={this.state.currentPage>=this.state.totalPagesCount}
+                        disabled={currentPage>=totalPagesCount}
                         className="btn-next"
-                        onClick={() => this.props.onSelectPage(this.state.currentPage+1)}
+                        onClick={() => this.props.onSelectPage(currentPage+1)}
                         value="Next"/>
                 </div>
             </div>

@@ -9,8 +9,6 @@ import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 export default class Footer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
     }
 
     componentDidMount(){

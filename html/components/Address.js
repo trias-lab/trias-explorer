@@ -334,16 +334,16 @@ export default class Address extends React.Component {
                                 <FormattedMessage id="nullData" tagName="p"/>
                             </div>
                         }
-                            <CustomPagination
-                                from={(this.state.currentPage - 1) * this.state.rowsPerPage}
-                                to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
-                                totalItemsCount={this.state.totalItemsCount}
-                                totalPagesCount={this.state.pageCount}
-                                currentPage={this.state.currentPage}
-                                onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
-                                onSelectPage={(num) => this.handleSelectPage(num)}
-                                onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
-                            />
+                        <CustomPagination
+                            from={(this.state.currentPage - 1) * this.state.rowsPerPage}
+                            to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
+                            totalItemsCount={this.state.totalItemsCount}
+                            totalPagesCount={this.state.pageCount}
+                            currentPage={this.state.currentPage}
+                            onChangeRowsPerPage={(num) => this.setRowsPerPage(num)}
+                            onSelectPage={(num) => this.handleSelectPage(num)}
+                            onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
+                        />
                     </section>
                 </div>
             </div>
