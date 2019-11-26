@@ -28,8 +28,7 @@ def address_info(request):
         sent = 0
         received = 0
         sent_list = TransactionInfo.objects.filter(
-            source=address).values_list(
-            'value', flat=True)
+            source=address).values_list('value', flat=True)
         for sent_value in sent_list:
             sent += int(sent_value)
         received_list = TransactionInfo.objects.filter(

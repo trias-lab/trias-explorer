@@ -1,6 +1,6 @@
-import requests
-import json
 import time
+import json
+import requests
 from app.utils.localconfig import JsonConfiguration
 
 jc = JsonConfiguration()

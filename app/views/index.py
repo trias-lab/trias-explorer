@@ -3,9 +3,9 @@ index message
 """
 import time
 import datetime
+from collections import OrderedDict
 from django.http import JsonResponse
 from django.db.models import Q
-from collections import OrderedDict
 from app.models import Block, TransactionInfo, Address
 from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
@@ -174,6 +174,6 @@ def serach(request):
         logger.error("Search Address Error")
 
     except Exception as e:
-        print(e)
+        logger.error(e)
 
     return JsonResponse({"code": 201, "message": 'Error key'})

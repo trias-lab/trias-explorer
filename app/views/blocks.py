@@ -70,17 +70,17 @@ def block_info(request):
     try:
         block_info = Block.objects.filter(
             hash=block_hash).values(
-            'number',
-            'transactionsCount',
-            'timestamp',
-            'size',
-            'difficulty',
-            'nonce',
-            'parentHash',
-            'miner',
-            'gasLimit',
-            'gasUsed',
-            'blockReward')
+                'number',
+                'transactionsCount',
+                'timestamp',
+                'size',
+                'difficulty',
+                'nonce',
+                'parentHash',
+                'miner',
+                'gasLimit',
+                'gasUsed',
+                'blockReward')
         if not block_info.exists():
             return JsonResponse(
                 {"code": 201, "message": "The block doesn't exist"})
