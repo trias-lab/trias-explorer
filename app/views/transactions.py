@@ -41,7 +41,9 @@ def all_transactions(request):
                 'to',
                 'value',
                 'blockNumber',
-                'blockHash'))
+                'blockHash',
+                'tx_str',
+                'type'))
         for item in data:
             number = item['blockNumber']
             item['time'] = stamp2datetime(

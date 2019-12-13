@@ -54,7 +54,7 @@ class TransactionInfo(models.Model):
     gas = models.BigIntegerField(default=0)
     gasPrice = models.BigIntegerField(default=0)
     nonce = models.BigIntegerField(default=0)
-    hash = models.CharField(max_length=255, unique=True)
+    hash = models.CharField(max_length=255)
     transactionIndex = models.BigIntegerField(default=0)
     value = models.CharField(max_length=255)
     v = models.BigIntegerField(default=0)
@@ -62,6 +62,8 @@ class TransactionInfo(models.Model):
     s = models.CharField(max_length=255, default='')
     gasUsed = models.BigIntegerField(default=0)
     timestamp = models.BigIntegerField(default=0)
+    tx_str = models.TextField(default='')
+    type = models.IntegerField(default=0)  # 默认utxo交易
 
     class Meta:
         db_table = "transaction"

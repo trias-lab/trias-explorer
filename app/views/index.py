@@ -123,9 +123,11 @@ def index_recent_transactions(request):
                     'to',
                     'hash',
                     'blockNumber',
-                    'timestamp'))
+                    'timestamp',
+                    'tx_str',
+                    'type'))
             for item in data:
-                block_number = item['blockNumber']
+                # block_number = item['blockNumber']
                 item['time'] = stamp2datetime(item['timestamp'])
     except Exception as e:
         logger.error(e)
