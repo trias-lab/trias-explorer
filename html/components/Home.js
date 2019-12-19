@@ -611,7 +611,7 @@ export default class Home extends React.Component {
                                                                 isStr?
                                                                 <p className="other str clearfix">
                                                                     <span style={{ width: '100%' }}>
-                                                                        <span className="key"><FormattedMessage id="txMessage" /></span>
+                                                                        <span className="key"><FormattedMessage id="txMessage" />:</span>
                                                                         <span className="value" title={item.tx_str}>{item.tx_str}</span>
                                                                     </span>
                                                                 </p>:
