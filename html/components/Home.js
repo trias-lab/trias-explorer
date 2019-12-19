@@ -591,6 +591,8 @@ export default class Home extends React.Component {
                             <ul className='block-list'>
                                 {
                                     this.state.transLatest && this.state.transLatest.map(function (item, index) {
+                                        // 如果type为1，为字符串交易
+                                        let isStr = item.type === 1
                                         return (
                                             <li className="clearfix" key={"trans-" + index}>
                                                 <Link to={"/translist/" + item.hash}>
@@ -605,16 +607,25 @@ export default class Home extends React.Component {
                                                     <div className="col col-xs-8 col-sm-8 col-md-8 col-xl-8">
                                                         <div className="info">
                                                             <p className="timestamp">{item.time}</p>
-                                                            <p className="other clearfix">
-                                                                <span style={{ width: '60%' }}>
-                                                                    <span className="key">From:</span>
-                                                                    <span className="value" title={item.source}>{item.source}</span>
-                                                                </span>
-                                                                <span style={{ width: '35%' }}>
-                                                                    <span className="key">To:</span>
-                                                                    <span className="value" title={item.to}>{item.to}</span>
-                                                                </span>
-                                                            </p>
+                                                            {
+                                                                isStr?
+                                                                <p className="other str clearfix">
+                                                                    <span style={{ width: '100%' }}>
+                                                                        <span className="key">Message:</span>
+                                                                        <span className="value" title={item.tx_str}>{item.tx_str}</span>
+                                                                    </span>
+                                                                </p>:
+                                                                <p className="other clearfix">
+                                                                    <span style={{ width: '60%' }}>
+                                                                        <span className="key">From:</span>
+                                                                        <span className="value" title={item.source}>{item.source}</span>
+                                                                    </span>
+                                                                    <span style={{ width: '35%' }}>
+                                                                        <span className="key">To:</span>
+                                                                        <span className="value" title={item.to}>{item.to}</span>
+                                                                    </span>
+                                                                </p>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </Link>
