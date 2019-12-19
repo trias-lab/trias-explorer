@@ -131,8 +131,9 @@ export default class TransactionList extends React.Component {
                                 <tbody>
                                 {
                                     this.state.transList && this.state.transList.map(function(item,index){
+                                        // 如果type为1，为字符串交易
+                                        let isStr = item.type === 1
                                         return (
-
                                             <tr key={index}>
                                                 <td className="td-trans-txHash">
                                                     <Link to={"/translist/"+ item.hash}>
@@ -156,7 +157,7 @@ export default class TransactionList extends React.Component {
                                                         <span>{item.to}</span>
                                                     </Link>
                                                 </td>
-                                                <td><span className="table-td-value">{item.value}</span></td>
+                                                <td><span className="table-td-value" title={isStr?item.tx_str:item.value}>{isStr?item.tx_str:item.value}</span></td>
                                                 <td><span className="table-td-value">{item.time}</span></td>
                                             </tr>
 
