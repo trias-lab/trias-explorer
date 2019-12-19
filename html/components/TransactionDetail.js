@@ -56,6 +56,7 @@ export default class TransactionDetail extends React.Component {
                             output: transData.to,
                             time: transData.time,
                             tx_hash: transData.hash,
+                            block_hash: transData.blockHash,
                             block_height:transData.blockNumber,
                             value:transData.value,
                             gas_limit:transData.gasLimit,
@@ -112,8 +113,8 @@ export default class TransactionDetail extends React.Component {
                         }
                     </div>
                     <section className="graph-group" >
-                    {
-                    !this.state.detailInfo.isStr &&
+                        {
+                        !this.state.detailInfo.isStr &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -125,110 +126,110 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    }
-                     {
-                    !this.state.detailInfo.isStr &&
+                        }
+                        {/* {
+                        !this.state.detailInfo.isStr &&
+                            <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                                <div className="item" >
+                                    <div className="icon">
+                                        <i className="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div className="text">
+                                        <FormattedMessage id="fees" tagName="p"/>
+                                        <p>{this.state.detailInfo.fees }</p>
+                                    </div>
+                                </div>
+                            </div>
+                        } */}
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-money-bill-wave"></i>
+                                    <i className="fas fa-cube"></i>
                                 </div>
                                 <div className="text">
-                                    <FormattedMessage id="fees" tagName="p"/>
-                                    <p>{this.state.detailInfo.fees }</p>
+                                    <FormattedMessage id="height" tagName="p"/>
+                                    <p><Link to={"/blocklist/"+ this.state.detailInfo.block_hash}>{this.state.detailInfo.block_height}</Link></p>
                                 </div>
                             </div>
                         </div>
-                     }
-                    <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
-                        <div className="item" >
-                            <div className="icon">
-                                <i className="fas fa-lock"></i>
-                            </div>
-                            <div className="text">
-                                <FormattedMessage id="confirmationsSum" tagName="p"/>
-                                <p>{this.state.detailInfo.confirmations}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
-                        <div className="item" >
-                            <div className="icon">
-                                <i className="fas fa-cube"></i>
-                            </div>
-                            <div className="text">
-                                <FormattedMessage id="height" tagName="p"/>
-                                <p>{this.state.detailInfo.block_height}</p>
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-lock"></i>
+                                </div>
+                                <div className="text">
+                                    <FormattedMessage id="confirmationsSum" tagName="p"/>
+                                    <p>{this.state.detailInfo.confirmations}</p>
+                                </div>
                             </div>
                         </div>
-                    </div> */}
-                    <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
-                        <div className="item" >
-                            <div className="icon">
-                                <i className="fas fa-calendar-alt"></i>
-                            </div>
-                            <div className="text">
-                                <FormattedMessage id="dateAndTime" tagName="p"/>
-                                <p>{this.state.detailInfo.time}</p>
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-calendar-alt"></i>
+                                </div>
+                                <div className="text">
+                                    <FormattedMessage id="dateAndTime" tagName="p"/>
+                                    <p>{this.state.detailInfo.time}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-                {
+                    </section>
+                    {
                     !this.state.detailInfo.isStr &&
                     <section className="info-part">
                         <div className="title" ><FormattedMessage id="advancedInfo"/></div>
-                            <div className="info-content clearfix">
-                                <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="txHash"/>:</span>
-                                        <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
-                                    </p>
-                                    {/*<p>*/}
-                                        {/*<span className="attr"><FormattedMessage id="txReceiptStatus"/></span>*/}
-                                        {/*<span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>*/}
-                                    {/*</p>*/}
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="height"/></span>
-                                        <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
-                                    </p>
-                                    <p>
-                                        <span className="attr">From</span>
-                                        <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.input}</Link></span>
-                                    </p>
-                                    <p>
-                                        <span className="attr">To</span>
-                                        <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.output}>{this.state.detailInfo.output}</Link></span>
-                                    </p>
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="value"/></span>
-                                        <span className="value trans-table-value">{this.state.detailInfo.value}</span>
-                                    </p>
-                                </div>
-                                <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="gasLimit"/></span>
-                                        <span className="value">{this.state.detailInfo.gas_limit}</span>
-                                    </p>
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="gasUsed"/></span>
-                                        <span className="value">{this.state.detailInfo.gas_used}</span>
-                                    </p>
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="gasPrice"/></span>
-                                        <span className="value">{this.state.detailInfo.gas_price}</span>
-                                    </p>
-                                    <p>
-                                        <span className="attr"><FormattedMessage id="actualTxCostFee"/></span>
-                                        <span className="value">{this.state.detailInfo.fees}</span>
-                                    </p>
-                                    <p>
-                                        <span className="attr">{'Nonce & {Position}'}</span>
-                                        <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.transactionIndex}{'}'}</span>
-                                    </p>
-                                </div>
+                        <div className="info-content clearfix">
+                            <div className="col col-12 col-sm-12 info-col">
+                                <p>
+                                    <span className="attr"><FormattedMessage id="txHash"/>:</span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
+                                </p>
+                                {/*<p>*/}
+                                    {/*<span className="attr"><FormattedMessage id="txReceiptStatus"/></span>*/}
+                                    {/*<span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>*/}
+                                {/*</p>*/}
+                                {/* <p>
+                                    <span className="attr"><FormattedMessage id="height"/></span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
+                                </p> */}
+                                <p>
+                                    <span className="attr">From</span>
+                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.input}</Link></span>
+                                </p>
+                                <p>
+                                    <span className="attr">To</span>
+                                    <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.output}>{this.state.detailInfo.output}</Link></span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="value"/></span>
+                                    <span className="value trans-table-value">{this.state.detailInfo.value}</span>
+                                </p>
                             </div>
-                        </section>
+                            {/* <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
+                                <p>
+                                    <span className="attr"><FormattedMessage id="gasLimit"/></span>
+                                    <span className="value">{this.state.detailInfo.gas_limit}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="gasUsed"/></span>
+                                    <span className="value">{this.state.detailInfo.gas_used}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="gasPrice"/></span>
+                                    <span className="value">{this.state.detailInfo.gas_price}</span>
+                                </p>
+                                <p>
+                                    <span className="attr"><FormattedMessage id="actualTxCostFee"/></span>
+                                    <span className="value">{this.state.detailInfo.fees}</span>
+                                </p>
+                                <p>
+                                    <span className="attr">{'Nonce & {Position}'}</span>
+                                    <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.transactionIndex}{'}'}</span>
+                                </p>
+                            </div> */}
+                        </div>
+                    </section>
                     }
                     <section className="list-part">
                         <div className="title"><FormattedMessage id="summary"/></div>

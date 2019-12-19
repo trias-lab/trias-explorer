@@ -235,14 +235,14 @@ export default class BlockDetail extends React.Component {
                                     <span className="attr"><FormattedMessage id="time" /></span>
                                     <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
-                                <p>
+                                {/* <p>
                                     <span className="attr"><FormattedMessage id="gasLimit" /></span>
                                     <span className="value">{this.state.detailInfo.gasLimit}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="gasUsed" /></span>
                                     <span className="value">{this.state.detailInfo.gasUsed}</span>
-                                </p>
+                                </p> */}
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
