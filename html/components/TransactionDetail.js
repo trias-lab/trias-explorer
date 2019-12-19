@@ -47,10 +47,11 @@ export default class TransactionDetail extends React.Component {
                 if(data.code==200){
                     self.setState({
                         detailInfo:{
+                            isStr: transData.type === 1,
                             amount_transacted: transData.value,
                             confirmations: transData.confirmations,
                             fees: transData.gasUsed * transData.gasPrice,
-                            fees_rate: transData.fees_rate,
+                            // fees_rate: transData.fees_rate,
                             input: transData.source,
                             output: transData.to,
                             time: transData.time,
@@ -67,14 +68,16 @@ export default class TransactionDetail extends React.Component {
                             input_data:transData.input_data ? transData.input_data.replace(/\n/g,'#').split('#') : false,
                         },
                         transactionList:[{
+                            isStr: transData.type === 1,
                             amount_transacted: transData.value,
                             confirmations: transData.confirmations,
                             fees: transData.gasUsed * transData.gasPrice,
-                            fees_rate: transData.fees_rate,
+                            // fees_rate: transData.fees_rate,
                             input: transData.source,
                             output: transData.to,
                             time: transData.time,
                             tx_hash: transData.hash,
+                            tx_str: transData.tx_str
                         }],
                         eventLogList:transData.receipt||[],
                     })
@@ -110,7 +113,7 @@ export default class TransactionDetail extends React.Component {
                     </div>
                     <section className="graph-group" >
                     {
-                    this.state.detailInfo.input !== "0" &&
+                    !this.state.detailInfo.isStr &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -124,7 +127,7 @@ export default class TransactionDetail extends React.Component {
                         </div>
                     }
                      {
-                    this.state.detailInfo.input !== "0" &&
+                    !this.state.detailInfo.isStr &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -137,23 +140,18 @@ export default class TransactionDetail extends React.Component {
                             </div>
                         </div>
                      }
-                     {
-                        this.state.detailInfo.input !== "0" &&
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
-                            <div className="item" >
-                                <div className="icon">
-                                    <i className="fas fa-lock"></i>
-                                </div>
-                                <div className="text">
-                                    <FormattedMessage id="confirmationsSum" tagName="p"/>
-                                    <p>{this.state.detailInfo.confirmations}</p>
-                                </div>
+                    <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                        <div className="item" >
+                            <div className="icon">
+                                <i className="fas fa-lock"></i>
+                            </div>
+                            <div className="text">
+                                <FormattedMessage id="confirmationsSum" tagName="p"/>
+                                <p>{this.state.detailInfo.confirmations}</p>
                             </div>
                         </div>
-                    }
-                    {
-                        this.state.detailInfo.input === "0" &&
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                    </div>
+                    {/* <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                         <div className="item" >
                             <div className="icon">
                                 <i className="fas fa-cube"></i>
@@ -163,8 +161,7 @@ export default class TransactionDetail extends React.Component {
                                 <p>{this.state.detailInfo.block_height}</p>
                             </div>
                         </div>
-                    </div>
-                    }
+                    </div> */}
                     <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                         <div className="item" >
                             <div className="icon">
@@ -178,7 +175,7 @@ export default class TransactionDetail extends React.Component {
                     </div>
                 </section>
                 {
-                    this.state.detailInfo.input !== "0" &&
+                    !this.state.detailInfo.isStr &&
                     <section className="info-part">
                         <div className="title" ><FormattedMessage id="advancedInfo"/></div>
                             <div className="info-content clearfix">
@@ -244,17 +241,17 @@ export default class TransactionDetail extends React.Component {
                                             {i.tx_hash}
                                         </Link>
                                     </p>
-                                    <div className="detail-group">
-                                        <div className="detail-item">
-                                            <i className="fas fa-handshake"></i>
-                                            <span>
-                                                {i.input === "0" ?<FormattedMessage id="txMessage"/>:<FormattedMessage id="amount"/>}
-                                                <br />
-                                                <b>{i.input === "0" ? i.output:i.amount_transacted}</b>
-                                            </span>
-                                        </div>
-                                        {
-                                            i.input !== "0" &&
+                                    {
+                                        !i.isStr &&
+                                        <div className="detail-group">
+                                            <div className="detail-item">
+                                                <i className="fas fa-handshake"></i>
+                                                <span>
+                                                    <FormattedMessage id="amount"/>
+                                                    <br />
+                                                    <b>{i.amount_transacted}</b>
+                                                </span>
+                                            </div>
                                             <div className="detail-item">
                                                 <i className="fas fa-money-bill-wave"></i>
                                                 <span>
@@ -263,9 +260,6 @@ export default class TransactionDetail extends React.Component {
                                                     <b>{i.fees}</b>
                                                 </span>
                                             </div>
-                                        }
-                                        {
-                                            i.input !== "0" &&
                                             <div className="detail-item">
                                                 <i className="fas fa-calendar-alt"></i>
                                                 <span>
@@ -274,9 +268,6 @@ export default class TransactionDetail extends React.Component {
                                                     <b>{i.time}</b>
                                                 </span>
                                             </div>
-                                        }
-                                        {
-                                            i.input !== "0" &&
                                             <div className="detail-item">
                                                 <i className="fas fa-fingerprint"></i>
                                                 <span>
@@ -285,10 +276,17 @@ export default class TransactionDetail extends React.Component {
                                                     <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
                                                 </span>
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
+
                                     {
-                                        i.input !== "0" &&
+                                        i.isStr ?
+                                        <div className="address-bar">
+                                            <p className="str">
+                                                {i.tx_str}
+                                            </p>
+                                        </div>
+                                        :
                                         <div className="address-bar">
                                             <div className="item-a">
                                                 {

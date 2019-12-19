@@ -283,6 +283,8 @@ export default class BlockDetail extends React.Component {
                     <section className="list-part">
                         <div className="title"><FormattedMessage id="transactions"/></div>
                         {this.state.transactionList && this.state.transactionList.length>0 ? this.state.transactionList.map(function (i, index) {
+                            // 如果type为1，为字符串交易
+                            let isStr = i.type === 1
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
@@ -291,7 +293,8 @@ export default class BlockDetail extends React.Component {
                                             {i.hash}
                                         </Link>
                                     </p>
-                                    <div className="detail-group">
+                                    {
+                                        !isStr && <div className="detail-group">
                                         <div className="detail-item">
                                             <i className="fas fa-handshake"></i>
                                             <span>
@@ -325,34 +328,44 @@ export default class BlockDetail extends React.Component {
                                             </span>
                                         </div> */}
                                     </div>
-                                    <div className="address-bar">
-                                        <div className="item-a">
-                                            {
-                                                i.source &&
-                                                <Qrcode id={'output-'+index} text={i.source} size="70" />
-                                            }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={"/address/"+ i.source}>
-                                                    <b>{i.source}</b>
-                                                </Link>
-                                            </span>
+                                    }
+                                    {
+                                        isStr?<div className="address-bar">
+                                            <p className="str">
+                                                {i.tx_str}
+                                            </p>
                                         </div>
-                                        {
-                                            i.to &&
-                                            <div className="item-b">
-                                                <Qrcode id={'input-'+index} text={i.to} size="70" />
+                                        :
+                                        <div className="address-bar">
+                                            <div className="item-a">
+                                                {
+                                                    i.source &&
+                                                    <Qrcode id={'output-'+index} text={i.source} size="70" />
+                                                }
                                                 <span>
-                                                <FormattedMessage id="address"/>
+                                                    <FormattedMessage id="address"/>
                                                     <br />
-                                                    <Link to={"/address/"+ i.to}>
-                                                        <b>{i.to}</b>
+                                                    <Link to={"/address/"+ i.source}>
+                                                        <b>{i.source}</b>
                                                     </Link>
                                                 </span>
                                             </div>
-                                        }
-                                    </div>
+                                            {
+                                                i.to &&
+                                                <div className="item-b">
+                                                    <Qrcode id={'input-'+index} text={i.to} size="70" />
+                                                    <span>
+                                                    <FormattedMessage id="address"/>
+                                                        <br />
+                                                        <Link to={"/address/"+ i.to}>
+                                                            <b>{i.to}</b>
+                                                        </Link>
+                                                    </span>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+
                                 </div>
                             )}.bind(this)):
                             <div className="nullData">
