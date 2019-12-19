@@ -151,7 +151,9 @@ export default class TransactionList extends React.Component {
                                                         <span>{item.source}</span>
                                                     </Link>
                                                 </td>
-                                                <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
+                                                <td className="td-trans-circle">
+                                                    {!isStr && <i className="fa fa-arrow-alt-circle-right"></i>}
+                                                </td>
                                                 <td className="td-trans-color td-trans-address">
                                                     <Link to={"/address/"+ item.to}>
                                                         <span>{item.to}</span>
