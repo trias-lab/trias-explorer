@@ -1,0 +1,10 @@
+{
+  "mysql_ip": "",
+  "mysql_port": 0,
+  "mysql_user": "",
+  "mysql_password": "",
+  "mysql_database": "",
+  "request_interval": 1,
+  "bdb_mongo_ip": "",
+  "bdb_mongo_port": 0
+}
