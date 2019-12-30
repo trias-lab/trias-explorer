@@ -17,4 +17,5 @@ class JsonConfiguration:
         self.eth_port = records["eth_port"]
         self.mysql_ip = records["mysql_ip"]
         self.mysql_port = records["mysql_port"]
+        self.chain_server = records["chain_server"]
         self.request_interval = records["request_interval"]

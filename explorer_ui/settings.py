@@ -99,7 +99,23 @@ DATABASES = {
         'HOST': records["mysql_ip"],
         'PORT': records["mysql_port"],
         'CONN_MAX_AGE': 180
+    },
+    'fabric_postgresql': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': records['pgsql_database'],
+        'USER': records["pgsql_user"],
+        'PASSWORD': records["pgsql_password"],
+        'HOST': records["pgsql_host"],
+        'PORT': records["pgsql_port"],
+        'CONN_MAX_AGE': 180
     }
+}
+
+DATABASE_ROUTERS = ["explorer_ui.db_router.DatabaseAppsRouter"]
+
+
+DATABASE_APPS_MAPPING = {
+    'fabric': 'fabric_postgresql',
 }
 
 # Password validation
