@@ -1,4 +1,5 @@
 import time
+import datetime
 import json
 import requests
 from app.utils.localconfig import JsonConfiguration
@@ -43,3 +44,12 @@ def stamp2datetime(stamp):
 def hex2int(hex_str):
     # hex to decimal
     return int(hex_str, 16)
+
+
+def get_range_datetime(num):
+    start_datetime = datetime.datetime.now()
+    result = []
+    for i in range(num):
+        temp = start_datetime.replace(hour=0, minute=0, second=0, microsecond=0) - datetime.timedelta(days=i)
+        result.append(temp)
+    return result

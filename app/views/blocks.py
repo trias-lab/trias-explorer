@@ -1,6 +1,7 @@
 """
 blocks message
 """
+import json
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from app.models import Block, TransactionInfo
@@ -314,7 +315,7 @@ def _get_block_transactions_from_fabric(request):
                 'read_set': item.pop('read_set'),
                 'write_set': item.pop('write_set')
             }
-            item['tx_str'] = tx_str
+            item['tx_str'] = json.dumps(tx_str)
             item['type'] = 1
     except Exception as e:
         logger.error(e)
