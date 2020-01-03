@@ -7,9 +7,10 @@ from collections import OrderedDict
 from django.http import JsonResponse
 from django.db.models import Q
 from app.models import Block, TransactionInfo, Address
-from app.utils.block_util import stamp2datetime
+from app.utils.block_util import stamp2datetime, RepresentsInt
 from app.utils.localconfig import JsonConfiguration
 from app.utils.logger import logger
+import traceback
 
 jc = JsonConfiguration()
 
@@ -148,11 +149,13 @@ def serach(request):
 
     try:
         # search block by block number
-        isBlock = Block.objects.filter(number=key)
-        if isBlock.exists():
-            return JsonResponse(
-                {"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
-        logger.warning("Search Block Number Error")
+        isInt = RepresentsInt(key)
+        if isInt:
+            isBlock = Block.objects.filter(number=key)
+            if isBlock.exists():
+                return JsonResponse(
+                    {"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
+            logger.warning("Search Block Number Error")
 
         # search block by block hash
         isBlock = Block.objects.filter(hash=key)
@@ -177,5 +180,6 @@ def serach(request):
 
     except Exception as e:
         logger.error(e)
+        traceback.print_exc()
 
     return JsonResponse({"code": 201, "message": 'Error key'})

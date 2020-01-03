@@ -43,3 +43,10 @@ def stamp2datetime(stamp):
 def hex2int(hex_str):
     # hex to decimal
     return int(hex_str, 16)
+
+def RepresentsInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False

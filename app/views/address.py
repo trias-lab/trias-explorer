@@ -7,7 +7,7 @@ from django.db.models import Q
 from app.models import Block, TransactionInfo, Address
 from app.utils.block_util import stamp2datetime
 from app.utils.logger import logger
-
+import traceback
 
 def address_info(request):
     """
@@ -30,11 +30,11 @@ def address_info(request):
         sent_list = TransactionInfo.objects.filter(
             source=address).values_list('value', flat=True)
         for sent_value in sent_list:
-            sent += int(sent_value)
+            sent += 1
         received_list = TransactionInfo.objects.filter(
             to=address).values_list('value', flat=True)
         for rec_value in received_list:
-            received += int(rec_value)
+            received += 1
         data['sent'] = sent
         data['received'] = received
     except Exception as e:
@@ -89,11 +89,12 @@ def address_transactions(request):
             item['time'] = stamp2datetime(
                 Block.objects.get(
                     number=item['blockNumber']).timestamp)
-            item['fees'] = item['gasPrice'] * item['gasUsed']
+            #item['fees'] = item['gasPrice'] * item['gasUsed']
             item['confirmations'] = Block.objects.last().number - \
                 item['blockNumber']
     except Exception as e:
         logger.error(e)
+        traceback.print_exc()
         return JsonResponse({"code": 201, "message": "ERROR"})
 
     return JsonResponse({"code": 200,

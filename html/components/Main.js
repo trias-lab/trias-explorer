@@ -202,7 +202,7 @@ export default class Main extends React.Component {
                                         </Link>
                                     </div>
                                     <div className="btn-group">
-                                        <input id="searchPC" type="text" maxLength="42" className="ipt-search"
+                                        <input id="searchPC" type="text" maxLength="100" className="ipt-search"
                                             placeholder={messages[this.state.lang].iptSearchPlaceholder}
                                             onKeyDown={(e) => this.handleKeyDown(e)}
                                             onKeyUp={(e) => this.checkSearchKeyword(e)}/>
