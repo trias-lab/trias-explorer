@@ -101,7 +101,7 @@ export default class Home extends React.Component {
         this.lineChartOption2 = {
             grid: {
                 top: '28px',
-                left: '43px',
+                left: '50px',
                 right: '16px',
                 bottom: '36px'
             },
