@@ -1,0 +1,10 @@
+{
+  "mysql_ip": "192.168.1.210",
+  "mysql_port": 3306,
+  "mysql_user": "8lab",
+  "mysql_password": "8lab",
+  "mysql_database": "trias_explorer_bdb_test",
+  "request_interval": 1,
+  "bdb_mongo_ip": "192.168.1.182",
+  "bdb_mongo_port": 28000
+}
