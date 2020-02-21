@@ -3,11 +3,14 @@ import $ from 'jquery';
 import { Pagination } from 'react-bootstrap';   // import Pagination component
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
 import DropdownList from "./DropdownList";     // import custom drop-down list component
+import PropTypes from 'prop-types';
 
 /**
  * Custom pagination component.
  * Combined with pagenation component of React-Bootstrap.
+ * 
  * Usage:
+ * ```js
  * <CustomPagination
  *  from={(this.currentPage-1)*this.state.rowsPerPage}
  *  to={this.currentPage*this.state.rowsPerPage}
@@ -25,23 +28,47 @@ import DropdownList from "./DropdownList";     // import custom drop-down list c
  *      {name: '150 项/页',value: 150},
  *      {name: '200 项/页',value: 200}]}
  * />
- *
- * Attributes:
- * - from: index of first row in current page. 0 by default.
- * - to: index of last row in current page. 0 by default.
- * - totalItemsCount: total number of items. 0 by default.
- * - totalPagesCount: total number of pages. 0 by default.
- * - currentPage: current page number. 0 by default.
- * - onChangeRowsPerPage: handler for the change of maximum number of rows per page.
- * - onSelectPage: handler for the change of current page number by clicking buttons in the pagination.
- * - onPageInputKeyDown: event handler for the change event of the page number input area.
- * - onClickJumpButton: event handler for the keydown event of the page number input area.
- * (Optional:)
- * - pageNumInputId: id of the page number <input>, required when there are multiple CustomPaginations in a page. 'inputPageNum' by default.
- * - dropdownListId: id of the DropdownList, required when there are multiple CustomPaginations or DropdownLists in a page. 'rows-per-page-list' by default.
- * - rowsPerPageRange: options for the drop-down list of the maximum number of rows per page
+ * ```
  */
 class CustomPagination extends React.Component {
+    static propTypes = {
+        /** Inject intl to CustomPagination props */
+        intl: intlShape.isRequired,
+        /** Index of first row in current page */
+        from: PropTypes.number,
+        /** Index of last row in current page. */
+        to: PropTypes.number,
+        /** Total number of items. */
+        totalItemsCount: PropTypes.number,
+        /** Total number of pages. */
+        totalPagesCount: PropTypes.number,
+        /** Current page number */
+        currentPage: PropTypes.number,
+        /** Handler for the change of maximum number of rows per page. */
+        onChangeRowsPerPage: PropTypes.func,
+        /** Handler for the change of current page number by clicking buttons in the pagination. */
+        onSelectPage: PropTypes.func,
+        /** Event handler for the change event of the page number input area. */
+        onPageInputKeyDown: PropTypes.func,
+        /** Event handler for the keydown event of the page number input area. */
+        onClickJumpButton: PropTypes.func,
+        /** (Optional) Id of the page number `<input>`, required when there are multiple CustomPaginations in a page. */
+        pageNumInputId: PropTypes.string,
+        /** (Optional) Id of the DropdownList, required when there are multiple CustomPaginations or DropdownLists in a page. */
+        dropdownListId: PropTypes.string,
+        /** (Optional) Options for the drop-down list of the maximum number of rows per page*/
+        rowsPerPageRange: PropTypes.object
+    }
+
+    static defaultProps = {
+        from: 0,
+        to: 0,
+        totalItemsCount: 0,
+        totalPagesCount: 0,
+        currentPage: 0,
+        pageNumInputId: 'inputPageNum',
+        dropdownListId:'rows-per-page-list'
+    }
     constructor(props) {
         super(props);
     }
@@ -143,9 +170,5 @@ class CustomPagination extends React.Component {
         )
     }
 }
-/* Inject intl to CustomPagination props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-CustomPagination.propTypes = propTypes
+
 export default injectIntl(CustomPagination)

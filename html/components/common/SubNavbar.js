@@ -1,16 +1,25 @@
 import React from "react";
 import {NavLink} from 'react-router-dom';
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import PropTypes from 'prop-types';
 
 /**
  * Common SubNavbar section above tables.
  *
- * usage:
+ * Usage:
+ * 
+ * ```js
  * <SubNavbar match={this.state.match}/>
- *
- * - match: pass this.props.match to SubNavbar component
+ * ```
  */
 class SubNavbar extends React.Component {
+    static propTypes = {
+        /** Inject intl to CustomPagination props */
+        intl: intlShape.isRequired,
+        /** Pass this.props.match to SubNavbar component */
+        match: PropTypes.object 
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -140,9 +149,4 @@ class SubNavbar extends React.Component {
     }
 }
 
-/* Inject intl to NodeStatus props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-SubNavbar.propTypes = propTypes
 export default injectIntl(SubNavbar)

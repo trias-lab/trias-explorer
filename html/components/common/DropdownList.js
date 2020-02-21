@@ -2,17 +2,22 @@ import React from "react"
 import $ from "jquery";
 /**
  * Custom drop-down list component.
- * Usage:
+ * 
+ * ### Usage:
+ * 
+ * ```js
  * <DropdownList
  *  listID="id"
  *  itemsToSelect={this.searchTypes}
  *  onSelect={(value) => this.selectItem(value)}
  *  itemDefault={this.searchTypes[1]} />
+ * ```
  * 
- * Attributes:
+ * ### Attributes:
  * - listID: id of the outer container
  * - itemsToSelect: a list containing options for this drop-down list. 
- *      (ex. [{name:'主机名',value:'clientname'},{name:'文件哈希',value:'filedata'},...])
+ * 
+ *      `(ex. [{name:'主机名',value:'clientname'},{name:'文件哈希',value:'filedata'},...])`
  *      - name: shows in the drop-down list
  *      - value: will be passed when related option is selected.
  * 

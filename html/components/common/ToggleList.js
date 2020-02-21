@@ -2,7 +2,10 @@ import React from "react"
 import $ from "jquery";
 /**
  * Custom toggle list component.
+ * 
  * Usage:
+ * 
+ * ```js
  * <ToggleList
  * listID="langlist"
  * itemsToSelect={[{
@@ -11,8 +14,10 @@ import $ from "jquery";
         ele: <span  onClick={()=>this.changeLanguage('en')}>English</span>
     }]}
  * name={<i className="fas fa-globe-americas"></i>} />
- *
- * Attributes:
+ * ```
+ * 
+ * Props:
+ * 
  * - listID: id of the outer container
  * - itemsToSelect: a list of elements( ele: element shows in the drop-down list )
  * - name: shows in the toggle button

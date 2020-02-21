@@ -56,7 +56,6 @@ export default class BlockList extends React.Component {
 
     /**
      * enter page and jump
-     * @return {[type]} [description]
      */
     jumpPageKeyDown(e) {
         if (e.keyCode === 13) {           //if enter key

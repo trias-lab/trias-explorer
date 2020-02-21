@@ -1,8 +1,3 @@
-/**
- *
- * Address Page
- *
- */
 import React from "react"
 import $ from "jquery"
 import { Link } from 'react-router-dom'
@@ -10,6 +5,10 @@ import CustomPagination from "./common/CustomPagination"
 import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
+
+/**
+ * Component for address page.
+ */
 export default class Address extends React.Component {
     constructor(props) {
         super(props);
@@ -117,7 +116,6 @@ export default class Address extends React.Component {
 
     /**
      * 跳转输入框的按键事件监听
-     * @return {[type]} [description]
      */
     jumpPageKeyDown(e) {
         if (e.keyCode === 13) {           //当按下的键是回车键

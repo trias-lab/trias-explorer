@@ -3,8 +3,11 @@ import React from "react";
 /**
  * Common Qrcode Component.
  *
- * usage:
+ * Usage:
+ * 
+ * ```js
  * <Qrcode id={index} text={i.input} size="70" />
+ * ```
  *
  */
 export default class Qrcode extends React.Component {
