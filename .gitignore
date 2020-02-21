@@ -90,3 +90,5 @@ terraform.tfstate.backup
 
 package-lock.json
 
+!docs/build/
+
