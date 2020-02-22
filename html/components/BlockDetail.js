@@ -50,6 +50,7 @@ export default class BlockDetail extends React.Component {
      * Get transactions list
      * @param {int} currentPage
      * @param {int} rowsPerPage
+     * @public
      */
     getList(currentPage, rowsPerPage) {
         var self = this
@@ -127,6 +128,7 @@ export default class BlockDetail extends React.Component {
 
     /**
      * Get details of current block
+     * @public
      */
     getInfo() {
         var self = this

@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 /**
  * Common Qrcode Component.
  *
- * Usage:
+ * ### Example:
  * 
  * ```js
  * <Qrcode id={index} text={i.input} size="70" />
@@ -11,6 +12,15 @@ import React from "react";
  *
  */
 export default class Qrcode extends React.Component {
+    static propTypes = {
+        /** Id of the div element inside QrCode component */
+        id: PropTypes.string,
+        /** Text to convert */
+        text: PropTypes.string,
+        /** Size of qrcode image generated ( size x size ) */
+        size : PropTypes.string
+    }
+
     constructor(props) {
         super(props);
         this.state = {

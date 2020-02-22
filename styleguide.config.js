@@ -30,12 +30,12 @@ module.exports = {
     },
     sections:[
         {
-            name:"Page Components",
-            components: "html/components/**.js"
-        },
-        {
             name:"UI Components",
             components: "html/components/common/**.js"
+        },
+        {
+            name:"Page Components",
+            components: "html/components/**.js"
         },
     ],
     styleguideDir: "docs"

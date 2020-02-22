@@ -10,6 +10,9 @@ import 'echarts/lib/chart/line';
 // 引入提示框组件、标题组件、工具箱组件。
 import 'echarts/lib/component/tooltip';
 
+/**
+ * Component for homepage
+ */
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -190,6 +193,7 @@ export default class Home extends React.Component {
      * 更新echarts图表的信息
      *
      * @memberof Home
+     * @public
      */
     updateLineCharts() {
         var self = this;
@@ -220,6 +224,7 @@ export default class Home extends React.Component {
      * 获取Latest Blocks列表信息
      *
      * @memberof Home
+     * @public
      */
     getBlockData() {
         var self = this;
@@ -241,6 +246,7 @@ export default class Home extends React.Component {
      * 获取Latest Transactions列表信息
      *
      * @memberof Home
+     * @public
      */
     getLatestTrans() {
         var self = this;
@@ -263,6 +269,7 @@ export default class Home extends React.Component {
      * 获取首页6条信息和4块信息
      *
      * @memberof Home
+     * @public
      */
     getHeaderMsg() {
         var self = this;

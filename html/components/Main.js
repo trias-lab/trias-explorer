@@ -83,6 +83,7 @@ export default class Main extends React.Component {
 
     /**
      * Search transaction/block/address by txHash/block hash/address
+     * @public
      */
     search(){
         var self = this

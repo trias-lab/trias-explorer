@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  * Custom pagination component.
  * Combined with pagenation component of React-Bootstrap.
  * 
- * Usage:
+ * ### Example:
  * ```js
  * <CustomPagination
  *  from={(this.currentPage-1)*this.state.rowsPerPage}

@@ -55,6 +55,7 @@ export default class Address extends React.Component {
      * 获取列表数据
      * @param {int} currentPage
      * @param {int} rowsPerPage
+     * @public
      */
     getList(currentPage, rowsPerPage) {
         var self = this
@@ -134,6 +135,10 @@ export default class Address extends React.Component {
         this.getList(pagenum, this.state.rowsPerPage)
     }
 
+    /**
+     * 获取地址详情
+     * @public
+     */
     getInfo() {
         var self = this
         $.ajax({

@@ -4,6 +4,10 @@ import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
+
+/**
+ * Component for transaction detail page.
+ */
 export default class TransactionDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -29,10 +33,10 @@ export default class TransactionDetail extends React.Component {
         }
     }
 
-    /*
-    * get trans details data
-    * */
-
+    /**
+     * get trans details data
+     * @public
+     */
     getTransDetailData(){
         var self = this
         $.ajax({

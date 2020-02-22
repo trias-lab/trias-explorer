@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 /**
  * Common SubNavbar section above tables.
  *
- * Usage:
+ * ### Example:
  * 
  * ```js
  * <SubNavbar match={this.state.match}/>

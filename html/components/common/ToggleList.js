@@ -1,9 +1,11 @@
 import React from "react"
 import $ from "jquery";
+import PropTypes from 'prop-types';
+
 /**
  * Custom toggle list component.
  * 
- * Usage:
+ * ### Example:
  * 
  * ```js
  * <ToggleList
@@ -15,14 +17,16 @@ import $ from "jquery";
     }]}
  * name={<i className="fas fa-globe-americas"></i>} />
  * ```
- * 
- * Props:
- * 
- * - listID: id of the outer container
- * - itemsToSelect: a list of elements( ele: element shows in the drop-down list )
- * - name: shows in the toggle button
  */
 export default class ToggleList extends React.Component {
+    static propTypes = {
+        /** Id of the outer container */
+        listID: PropTypes.string,
+        /** A list of elements( ele: element shows in the drop-down list ) */
+        itemsToSelect: PropTypes.object,
+        /** Name to show in the toggle button */
+        name: PropTypes.string
+    }
     constructor(props) {
         super(props);
         this.state={

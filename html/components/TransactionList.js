@@ -4,6 +4,10 @@ import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import CustomPagination from "./common/CustomPagination"
+
+/**
+ * Component for transaction list page.
+ */
 export default class TransactionList extends React.Component {
     constructor(props) {
         super(props);
@@ -72,9 +76,11 @@ export default class TransactionList extends React.Component {
         //console.log('jump')
     }
 
-    /*
+    /**
      * get block list
-     * */
+     * @param {int} pageNum page number
+     * @param {int} rowsPerPage number of items per page
+     */
     getBlockList(pageNum,rowsPerPage){
         var self = this
         $.ajax({

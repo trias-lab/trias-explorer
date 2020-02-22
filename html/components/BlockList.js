@@ -5,6 +5,9 @@ import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import CustomPagination from "./common/CustomPagination"
 
+/**
+ * Component for block list
+ */
 export default class BlockList extends React.Component {
     constructor(props) {
         super(props);
@@ -75,9 +78,12 @@ export default class BlockList extends React.Component {
         //console.log('jump')
     }
 
-    /*
-    * get block list
-    * */
+    /**
+     * Get block list
+     * @param {int} pageNum page number
+     * @param {int} rowsPerPage number of items per page
+     * @public
+     */
     getBlockList(pageNum,rowsPerPage){
         var self = this
         $.ajax({
