@@ -55,3 +55,6 @@ Then, start the django server:
 `python3 manage.py runserver`
 
 Finally, open http://localhost:8000 .
+
+## Documentaiton
+We published a documentation about front-end components using GitHub Pages: https://trias-lab.github.io/trias-explorer/ .
