@@ -1,25 +1,14 @@
 import React from "react";
 import $ from "jquery";
 import {Link} from 'react-router-dom';
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 
 /**
  * Common footer section.
  */
-class Footer extends React.Component {
+export default class Footer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            lang: this.props.intl.locale
-        }
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(this.state.lang !== nextProps.intl.locale){
-            this.setState({
-                lang: nextProps.intl.locale
-            })
-        }
     }
 
     componentDidMount(){
@@ -32,7 +21,7 @@ class Footer extends React.Component {
             }
         })
     }
-    
+
 
     render(){
         return (
@@ -80,7 +69,7 @@ class Footer extends React.Component {
                     <span className="btn-icon">
                         <i className="fa fa-github" aria-hidden="true"></i>
                     </span>
-                </a>                
+                </a>
                 <a className="email-button toggle-button">
                     <span className="btn-icon">
                         <i className="fas fa-envelope"></i>
@@ -105,7 +94,7 @@ class Footer extends React.Component {
                                 </a>
                             </div>
                             <div className="link">
-                                <Link to="/stayTuned">
+                                <Link to="https://wallet.trias.one/">
                                     <FormattedMessage id="wallet" />
                                 </Link>
                             </div>
@@ -127,16 +116,9 @@ class Footer extends React.Component {
                     <hr/>
                     <span className="pull-left">© 2018 Trias-lab Foundation. </span>
                     <span className="pull-right">All rights reserved.</span>
-                </div> 
-            </div>                   
+                </div>
+            </div>
         </div>
         )
     }
 }
-
-/* Inject intl to NodeStatus props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-Footer.propTypes = propTypes
-export default injectIntl(Footer)

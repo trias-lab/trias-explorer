@@ -2,16 +2,16 @@
 index message
 """
 import time
+import datetime
+from collections import OrderedDict
 from django.http import JsonResponse
 from django.db.models import Q
-from collections import OrderedDict
-from app.models import Block, TransactionInfo, IndexInfo, Address
-from app.utils.block_util import stamp2datetime, url_data
+from app.models import Block, TransactionInfo, Address
+from app.utils.block_util import stamp2datetime
 from app.utils.localconfig import JsonConfiguration
 from app.utils.logger import logger
 
 jc = JsonConfiguration()
-url = "http://%s:%s" % (jc.eth_ip, jc.eth_port)
 
 
 def index_base_info(request):
@@ -23,17 +23,25 @@ def index_base_info(request):
     transactions_history = OrderedDict()
     data = {}
     try:
-        index_info = list(IndexInfo.objects.all().values())
-        if index_info:
-            data = index_info[0]
-
         # 24-hour trading rate and 7-day trading history
         transactionRate = 0
         for i in range(7):
-            end = int(time.time() - 86400 * i)  # i days ago timestamp
-            start = int(time.time() - 86400 * (i + 1))  # i+1 days ago timestamp
-            x = time.strftime("%m/%d", time.localtime(end))
-            tx_count = TransactionInfo.objects.filter(Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
+            nowtime = time.time()
+            end = int(
+                time.mktime(
+                    datetime.datetime.fromtimestamp(nowtime).date().timetuple()) -
+                86400 *
+                i +
+                86400)  # i days ago timestamp
+            start = int(
+                time.mktime(
+                    datetime.datetime.fromtimestamp(nowtime).date().timetuple()) -
+                86400 *
+                i +
+                1)  # i+1 days ago timestamp
+            x = time.strftime("%m/%d", time.localtime(start))
+            tx_count = TransactionInfo.objects.filter(
+                Q(timestamp__lte=end) & Q(timestamp__gte=start)).count()
 
             if i == 0:
                 transactionRate = round(tx_count / 24, 2)
@@ -43,15 +51,21 @@ def index_base_info(request):
         data['transactionRate'] = transactionRate
         data['addresses'] = Address.objects.count()
         data['transactions'] = TransactionInfo.objects.count()
+        data['lastBlock'] = Block.objects.last(
+        ).number if Block.objects.exists() else 0
+        data['lastBlockFees'] = 'None'
+        data['lastTransactionFees'] = 'None'
+        data['totalDifficulty'] = 'None'
 
         # The number of active addresses in the last 7 days
         addr_end = int(time.time())
         addr_satrt = int(time.time() - 86400 * 7)
-        data['unconfirmed'] = Address.objects.filter(Q(time__lte=addr_end) & Q(time__gte=addr_satrt)).count()
+        data['unconfirmed'] = Address.objects.filter(
+            Q(time__lte=addr_end) & Q(time__gte=addr_satrt)).count()
 
         # Address balance ranking
         richList = []
-        addresses = Address.objects.all().order_by('-time', '-txCount', '-id')
+        addresses = Address.objects.all().order_by('-time', '-id')
         if addresses.exists():
             richList = list(addresses.values('address', 'balance', 'time'))[:8]
             for addr in richList:
@@ -75,7 +89,14 @@ def index_latest_blocks(request):
     try:
         blocks = Block.objects.all().order_by('-number')[:20]
         if blocks.exists():
-            data = list(blocks.values('number', 'size', 'timestamp', 'hash', 'blockReward'))
+            data = list(
+                blocks.values(
+                    'number',
+                    'size',
+                    'timestamp',
+                    'hash',
+                    'blockReward',
+                    'transactionsCount'))
             for item in data:
                 item['time'] = stamp2datetime(item['timestamp'])
     except Exception as e:
@@ -93,12 +114,21 @@ def index_recent_transactions(request):
 
     data = []
     try:
-        transactions = TransactionInfo.objects.all().order_by('-blockNumber')[:20]
+        transactions = TransactionInfo.objects.all().order_by(
+            '-blockNumber', '-timestamp')[:20]
         if transactions.exists():
-            data = list(transactions.values('source', 'to', 'hash', 'blockNumber'))
+            data = list(
+                transactions.values(
+                    'source',
+                    'to',
+                    'hash',
+                    'blockNumber',
+                    'timestamp',
+                    'tx_str',
+                    'type'))
             for item in data:
-                block_number = item['blockNumber']
-                item['time'] = stamp2datetime(Block.objects.get(number=block_number).timestamp)
+                # block_number = item['blockNumber']
+                item['time'] = stamp2datetime(item['timestamp'])
     except Exception as e:
         logger.error(e)
 
@@ -116,39 +146,36 @@ def serach(request):
     if not key:
         return JsonResponse({"code": 201, "message": 'Need a key'})
 
-    # try search block by block number
     try:
-        if int(key) > IndexInfo.objects.last().lastBlock:
-            return JsonResponse({"code": 201, "message": 'Error Block Number'})
+        # search block by block number
         isBlock = Block.objects.filter(number=key)
         if isBlock.exists():
-            return JsonResponse({"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
-        hash = url_data(url, "eth_getBlockByNumber", [hex(int(key)), True])['result']['hash']
-        return JsonResponse({"code": 200, "data_type": "block", "block_hash": hash})
-    except:
-        logger.error("Search Block Number Error")
+            return JsonResponse(
+                {"code": 200, "data_type": "block", "block_hash": isBlock[0].hash})
+        logger.warning("Search Block Number Error")
 
-    # try search block by block hash
-    try:
+        # search block by block hash
         isBlock = Block.objects.filter(hash=key)
         if isBlock.exists():
-            return JsonResponse({"code": 200, "data_type": "block", "block_hash": key})
-        else:
-            hash = url_data(url, "eth_getBlockByHash", [key, True])['result']['hash']
-            return JsonResponse({"code": 200, "data_type": "block", "block_hash": hash})
-    except:
-        logger.error("Search Block Hash Error")
+            return JsonResponse(
+                {"code": 200, "data_type": "block", "block_hash": key})
+        logger.warning("Search Block Hash Error")
 
-    # try search transaction by tx hash
-    try:
+        # search transaction by tx hash
         isTx = TransactionInfo.objects.filter(hash=key)
         if isTx.exists():
-            return JsonResponse({"code": 200, "data_type": "transaction", "tx_hash": key})
+            return JsonResponse(
+                {"code": 200, "data_type": "transaction", "tx_hash": key})
+        logger.error("Search Transaction Error")
 
+        # search address by tx hash
         isAddress = Address.objects.filter(address=key)
         if isAddress.exists():
-            return JsonResponse({"code": 200, "data_type": "address", "address": key})
-    except:
-        logger.error("Search Transaction Or Address Error")
+            return JsonResponse(
+                {"code": 200, "data_type": "address", "address": key})
+        logger.error("Search Address Error")
+
+    except Exception as e:
+        logger.error(e)
 
     return JsonResponse({"code": 201, "message": 'Error key'})

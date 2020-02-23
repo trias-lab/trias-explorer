@@ -48,8 +48,9 @@ export default class BlockDetail extends React.Component {
 
     /**
      * Get transactions list
-     * @param {int} currentPage 
-     * @param {int} rowsPerPage 
+     * @param {int} currentPage
+     * @param {int} rowsPerPage
+     * @public
      */
     getList(currentPage, rowsPerPage) {
         var self = this
@@ -60,7 +61,7 @@ export default class BlockDetail extends React.Component {
             data: {
                 block_hash: self.state.blockHash,
                 size: rowsPerPage,
-                page_size: currentPage,
+                page: currentPage,
             },
             success: function (data) {
                 if(data.code===200){
@@ -75,7 +76,7 @@ export default class BlockDetail extends React.Component {
                         totalItemsCount: 0,
                         pageCount: 0,
                     })
-                }                
+                }
             }
         })
     }
@@ -107,7 +108,6 @@ export default class BlockDetail extends React.Component {
 
     /**
      * enter page and jump
-     * @return {[type]} [description]
      */
     jumpPageKeyDown(e) {
         if (e.keyCode === 13) {           //if enter key
@@ -124,11 +124,11 @@ export default class BlockDetail extends React.Component {
             currentPage: pagenum
         })
         this.getList(pagenum, this.state.rowsPerPage)
-        //console.log('jump')
     }
 
     /**
      * Get details of current block
+     * @public
      */
     getInfo() {
         var self = this
@@ -148,7 +148,7 @@ export default class BlockDetail extends React.Component {
                     self.setState({
                         detailInfo: [],
                     })
-                }               
+                }
             }
         })
     }
@@ -236,14 +236,14 @@ export default class BlockDetail extends React.Component {
                                     <span className="attr"><FormattedMessage id="time" /></span>
                                     <span className="value">{this.state.detailInfo.time}</span>
                                 </p>
-                                <p>
+                                {/* <p>
                                     <span className="attr"><FormattedMessage id="gasLimit" /></span>
                                     <span className="value">{this.state.detailInfo.gasLimit}</span>
                                 </p>
                                 <p>
                                     <span className="attr"><FormattedMessage id="gasUsed" /></span>
                                     <span className="value">{this.state.detailInfo.gasUsed}</span>
-                                </p>                           
+                                </p> */}
                             </div>
                             <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
@@ -259,7 +259,7 @@ export default class BlockDetail extends React.Component {
                                             {this.state.detailInfo.parentHash}
                                         </Link>:
                                         this.state.detailInfo.parentHash
-                                    }   
+                                    }
                                     </span>
                                 </p>
                                 <p>
@@ -271,7 +271,7 @@ export default class BlockDetail extends React.Component {
                                             {this.state.detailInfo.nextHash}
                                         </Link>:
                                         this.state.detailInfo.nextHash
-                                    }                                        
+                                    }
                                     </span>
                                 </p>
                                 <p>
@@ -284,6 +284,8 @@ export default class BlockDetail extends React.Component {
                     <section className="list-part">
                         <div className="title"><FormattedMessage id="transactions"/></div>
                         {this.state.transactionList && this.state.transactionList.length>0 ? this.state.transactionList.map(function (i, index) {
+                            // 如果type为1，为字符串交易
+                            let isStr = i.type === 1
                             return (
                                 <div className="list-item" key={index}>
                                     <p className="item-title">
@@ -292,7 +294,8 @@ export default class BlockDetail extends React.Component {
                                             {i.hash}
                                         </Link>
                                     </p>
-                                    <div className="detail-group">
+                                    {
+                                        !isStr && <div className="detail-group">
                                         <div className="detail-item">
                                             <i className="fas fa-handshake"></i>
                                             <span>
@@ -326,40 +329,50 @@ export default class BlockDetail extends React.Component {
                                             </span>
                                         </div> */}
                                     </div>
-                                    <div className="address-bar">
-                                        <div className="item-a">
-                                            {
-                                                i.source &&
-                                                <Qrcode id={'output-'+index} text={i.source} size="70" />
-                                            }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={"/address/"+ i.source}>
-                                                    <b>{i.source}</b>
-                                                </Link>
-                                            </span>
+                                    }
+                                    {
+                                        isStr?<div className="address-bar">
+                                            <p className="str">
+                                                {i.tx_str}
+                                            </p>
                                         </div>
-                                        {
-                                            i.to &&
-                                            <div className="item-b">
-                                                <Qrcode id={'input-'+index} text={i.to} size="70" />
+                                        :
+                                        <div className="address-bar">
+                                            <div className="item-a">
+                                                {
+                                                    i.source &&
+                                                    <Qrcode id={'output-'+index} text={i.source} size="70" />
+                                                }
                                                 <span>
-                                                <FormattedMessage id="address"/>
+                                                    <FormattedMessage id="address"/>
                                                     <br />
-                                                    <Link to={"/address/"+ i.to}>
-                                                        <b>{i.to}</b>
+                                                    <Link to={"/address/"+ i.source}>
+                                                        <b>{i.source}</b>
                                                     </Link>
                                                 </span>
                                             </div>
-                                        }                                           
-                                    </div>
+                                            {
+                                                i.to &&
+                                                <div className="item-b">
+                                                    <Qrcode id={'input-'+index} text={i.to} size="70" />
+                                                    <span>
+                                                    <FormattedMessage id="address"/>
+                                                        <br />
+                                                        <Link to={"/address/"+ i.to}>
+                                                            <b>{i.to}</b>
+                                                        </Link>
+                                                    </span>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+
                                 </div>
                             )}.bind(this)):
                             <div className="nullData">
                                 <FormattedMessage id="nullData" tagName="p"/>
                             </div>
-                        }                      
+                        }
                         <CustomPagination
                             from={(this.state.currentPage - 1) * this.state.rowsPerPage}
                             to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
@@ -371,7 +384,7 @@ export default class BlockDetail extends React.Component {
                             onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
                         />
                     </section>
-                </div>               
+                </div>
             </div>
         )
     }

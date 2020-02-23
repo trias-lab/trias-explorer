@@ -1,5 +1,5 @@
 const en_US = {
-    home: "Home", 
+    home: "Home",
     wallet: "Wallet",
     monitor: "Monitor",
     iptSearchPlaceholder: "Search by Address/TxHash/Height/Block Hash",
@@ -55,6 +55,7 @@ const en_US = {
     miner: "Miner",
     advancedInfo:"Advanced Info",
     txHash:"txHash",
+    txMessage:"Message",
     amount:"Amount",
     fees:"Fees",
     status:"Status",
@@ -64,7 +65,7 @@ const en_US = {
     shard:'Shard',
     amountTransacted:"Amount Transacted",
     txReceiptStatus: "TxReceipt Status",
-    gasLimit: "Gas Limit",   
+    gasLimit: "Gas Limit",
     gasUsed:"Gas Used",
     gasPrice: "Gas Price",
     actualTxCostFee:"Actual Tx Cost/Fee",
@@ -80,6 +81,7 @@ const en_US = {
     goBack:"Go Back",
     triasProject:"Trias Project",
     stayTuned:"Stay tuned",
+    dataValidity: "The current test network does not guarantee the permanent validity of the data."
 }
 
 export default en_US;

@@ -1,9 +1,13 @@
 import React from "react"
 import $ from 'jquery'
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
+
+/**
+ * Component for transaction detail page.
+ */
 export default class TransactionDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -29,10 +33,10 @@ export default class TransactionDetail extends React.Component {
         }
     }
 
-    /*
-    * get trans details data
-    * */
-
+    /**
+     * get trans details data
+     * @public
+     */
     getTransDetailData(){
         var self = this
         $.ajax({
@@ -47,14 +51,16 @@ export default class TransactionDetail extends React.Component {
                 if(data.code==200){
                     self.setState({
                         detailInfo:{
+                            isStr: transData.type === 1,
                             amount_transacted: transData.value,
                             confirmations: transData.confirmations,
                             fees: transData.gasUsed * transData.gasPrice,
-                            fees_rate: transData.fees_rate,
+                            // fees_rate: transData.fees_rate,
                             input: transData.source,
                             output: transData.to,
                             time: transData.time,
                             tx_hash: transData.hash,
+                            block_hash: transData.blockHash,
                             block_height:transData.blockNumber,
                             value:transData.value,
                             gas_limit:transData.gasLimit,
@@ -67,14 +73,16 @@ export default class TransactionDetail extends React.Component {
                             input_data:transData.input_data ? transData.input_data.replace(/\n/g,'#').split('#') : false,
                         },
                         transactionList:[{
+                            isStr: transData.type === 1,
                             amount_transacted: transData.value,
                             confirmations: transData.confirmations,
                             fees: transData.gasUsed * transData.gasPrice,
-                            fees_rate: transData.fees_rate,
+                            // fees_rate: transData.fees_rate,
                             input: transData.source,
                             output: transData.to,
                             time: transData.time,
                             tx_hash: transData.hash,
+                            tx_str: transData.tx_str
                         }],
                         eventLogList:transData.receipt||[],
                     })
@@ -102,7 +110,15 @@ export default class TransactionDetail extends React.Component {
                 {/*TransactionDetail: {this.state.transID}*/}
                 <SubNavbar match={this.state.subNavbarMatch}/>
                 <div className="page-content">
+                    <div className="qrcode-layer">
+                        {
+                            this.state.detailInfo.tx_hash &&
+                            <Qrcode id='txhashQrcode' text={'https://explorer.trias.one/translist/'+this.state.detailInfo.tx_hash} size="70" />
+                        }
+                    </div>
                     <section className="graph-group" >
+                        {
+                        !this.state.detailInfo.isStr &&
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
@@ -114,14 +130,29 @@ export default class TransactionDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        }
+                        {/* {
+                        !this.state.detailInfo.isStr &&
+                            <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
+                                <div className="item" >
+                                    <div className="icon">
+                                        <i className="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div className="text">
+                                        <FormattedMessage id="fees" tagName="p"/>
+                                        <p>{this.state.detailInfo.fees }</p>
+                                    </div>
+                                </div>
+                            </div>
+                        } */}
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-5 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-money-bill-wave"></i>
+                                    <i className="fas fa-cube"></i>
                                 </div>
                                 <div className="text">
-                                    <FormattedMessage id="fees" tagName="p"/>
-                                    <p>{this.state.detailInfo.fees }</p>
+                                    <FormattedMessage id="height" tagName="p"/>
+                                    <p><Link to={"/blocklist/"+ this.state.detailInfo.block_hash}>{this.state.detailInfo.block_height}</Link></p>
                                 </div>
                             </div>
                         </div>
@@ -148,10 +179,12 @@ export default class TransactionDetail extends React.Component {
                             </div>
                         </div>
                     </section>
+                    {
+                    !this.state.detailInfo.isStr &&
                     <section className="info-part">
                         <div className="title" ><FormattedMessage id="advancedInfo"/></div>
                         <div className="info-content clearfix">
-                            <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
+                            <div className="col col-12 col-sm-12 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="txHash"/>:</span>
                                     <span className="value trans-table-value">{this.state.detailInfo.tx_hash}</span>
@@ -160,10 +193,10 @@ export default class TransactionDetail extends React.Component {
                                     {/*<span className="attr"><FormattedMessage id="txReceiptStatus"/></span>*/}
                                     {/*<span className="value trans-table-value">{this.state.detailInfo.tx_receipt_status}</span>*/}
                                 {/*</p>*/}
-                                <p>
+                                {/* <p>
                                     <span className="attr"><FormattedMessage id="height"/></span>
                                     <span className="value trans-table-value">{this.state.detailInfo.block_height}</span>
-                                </p>
+                                </p> */}
                                 <p>
                                     <span className="attr">From</span>
                                     <span className="value trans-table-value"><Link to={"/address/"+this.state.detailInfo.input}>{this.state.detailInfo.input}</Link></span>
@@ -177,7 +210,7 @@ export default class TransactionDetail extends React.Component {
                                     <span className="value trans-table-value">{this.state.detailInfo.value}</span>
                                 </p>
                             </div>
-                            <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
+                            {/* <div className="col col-12 col-sm-12 col-md-6 col-xl-5 info-col">
                                 <p>
                                     <span className="attr"><FormattedMessage id="gasLimit"/></span>
                                     <span className="value">{this.state.detailInfo.gas_limit}</span>
@@ -198,9 +231,10 @@ export default class TransactionDetail extends React.Component {
                                     <span className="attr">{'Nonce & {Position}'}</span>
                                     <span className="value">{this.state.detailInfo.nonce} & {'{'}{this.state.detailInfo.transactionIndex}{'}'}</span>
                                 </p>
-                            </div>
+                            </div> */}
                         </div>
                     </section>
+                    }
                     <section className="list-part">
                         <div className="title"><FormattedMessage id="summary"/></div>
                         {this.state.transactionList && this.state.transactionList.map(function (i, index) {
@@ -212,72 +246,84 @@ export default class TransactionDetail extends React.Component {
                                             {i.tx_hash}
                                         </Link>
                                     </p>
-                                    <div className="detail-group">
-                                        <div className="detail-item">
-                                            <i className="fas fa-handshake"></i>
-                                            <span>
-                                                <FormattedMessage id="amount"/>
-                                                <br />
-                                                <b>{i.amount_transacted}</b>
-                                            </span>
+                                    {
+                                        !i.isStr &&
+                                        <div className="detail-group">
+                                            <div className="detail-item">
+                                                <i className="fas fa-handshake"></i>
+                                                <span>
+                                                    <FormattedMessage id="amount"/>
+                                                    <br />
+                                                    <b>{i.amount_transacted}</b>
+                                                </span>
+                                            </div>
+                                            <div className="detail-item">
+                                                <i className="fas fa-money-bill-wave"></i>
+                                                <span>
+                                                    <FormattedMessage id="fees"/>
+                                                    <br />
+                                                    <b>{i.fees}</b>
+                                                </span>
+                                            </div>
+                                            <div className="detail-item">
+                                                <i className="fas fa-calendar-alt"></i>
+                                                <span>
+                                                    <FormattedMessage id="time"/>
+                                                    <br />
+                                                    <b>{i.time}</b>
+                                                </span>
+                                            </div>
+                                            <div className="detail-item">
+                                                <i className="fas fa-fingerprint"></i>
+                                                <span>
+                                                    <FormattedMessage id="status"/>
+                                                    <br />
+                                                    <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-money-bill-wave"></i>
-                                            <span>
-                                                <FormattedMessage id="fees"/>
-                                                <br />
-                                                <b>{i.fees}</b>
-                                            </span>
+                                    }
+
+                                    {
+                                        i.isStr ?
+                                        <div className="address-bar">
+                                            <p className="str">
+                                                {i.tx_str}
+                                            </p>
                                         </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-calendar-alt"></i>
-                                            <span>
-                                                <FormattedMessage id="time"/>
-                                                <br />
-                                                <b>{i.time}</b>
-                                            </span>
-                                        </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-fingerprint"></i>
-                                            <span>
-                                                <FormattedMessage id="status"/>
-                                                <br />
-                                                <b>{i.confirmations} <FormattedMessage id="confirmations"/></b>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="address-bar">
-                                        <div className="item-a">
-                                            {
-                                                i.input &&
-                                                <Qrcode id={index + "a"} text={i.input} size="70" />
-                                            }
-                                            <span>
-                                                <FormattedMessage id="address"/>
-                                                <br />
-                                                <Link to={'/address/'+i.input}>
-                                                    <b>{i.input}</b>
-                                                </Link>
-                                            </span>
-                                        </div>
-                                        {
-                                            i.output &&
-                                            <div className="item-b">
+                                        :
+                                        <div className="address-bar">
+                                            <div className="item-a">
                                                 {
-                                                    i.output &&
-                                                    <Qrcode id={index} text={i.output} size="70" />
+                                                    i.input &&
+                                                    <Qrcode id={index + "a"} text={i.input} size="70" />
                                                 }
                                                 <span>
                                                     <FormattedMessage id="address"/>
                                                     <br />
-                                                    <Link to={'/address/'+i.output}>
-                                                        <b>{i.output}</b>
+                                                    <Link to={'/address/'+i.input}>
+                                                        <b>{i.input}</b>
                                                     </Link>
                                                 </span>
                                             </div>
-                                        }
-
-                                    </div>
+                                            {
+                                                i.output &&
+                                                <div className="item-b">
+                                                    {
+                                                        i.output &&
+                                                        <Qrcode id={index} text={i.output} size="70" />
+                                                    }
+                                                    <span>
+                                                        <FormattedMessage id="address"/>
+                                                        <br />
+                                                        <Link to={'/address/'+i.output}>
+                                                            <b>{i.output}</b>
+                                                        </Link>
+                                                    </span>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                             )
                         }.bind(this))}

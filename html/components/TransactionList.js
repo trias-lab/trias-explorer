@@ -1,14 +1,17 @@
 import React from "react"
 import $ from 'jquery'
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import { Link } from 'react-router-dom'
 import SubNavbar from "./common/SubNavbar"
 import CustomPagination from "./common/CustomPagination"
-class TransactionList extends React.Component {
+
+/**
+ * Component for transaction list page.
+ */
+export default class TransactionList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale,
             subNavbarMatch: this.props.match,   // Route  match props
             totalItemsCount: 100, //total number = pageCount*rowsPerPage
             pageCount: 10, //total page
@@ -27,11 +30,6 @@ class TransactionList extends React.Component {
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
                 subNavbarMatch: nextProps.match
-            })
-        }
-        if(this.state.lang !== nextProps.intl.locale){
-            this.setState({
-                lang: nextProps.intl.locale
             })
         }
     }
@@ -59,7 +57,6 @@ class TransactionList extends React.Component {
 
     /**
      * enter page and jump
-     * @return {[type]} [description]
      */
     jumpPageKeyDown(e) {
         if (e.keyCode === 13) {           //if enter key
@@ -79,9 +76,11 @@ class TransactionList extends React.Component {
         //console.log('jump')
     }
 
-    /*
+    /**
      * get block list
-     * */
+     * @param {int} pageNum page number
+     * @param {int} rowsPerPage number of items per page
+     */
     getBlockList(pageNum,rowsPerPage){
         var self = this
         $.ajax({
@@ -131,14 +130,15 @@ class TransactionList extends React.Component {
                                     <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
                                     <td>To</td>
                                     <FormattedMessage id="value" tagName="td"/>
-                                    <FormattedMessage id="time" tagName="td"/>                                    
+                                    <FormattedMessage id="time" tagName="td"/>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {
                                     this.state.transList && this.state.transList.map(function(item,index){
+                                        // 如果type为1，为字符串交易
+                                        let isStr = item.type === 1
                                         return (
-
                                             <tr key={index}>
                                                 <td className="td-trans-txHash">
                                                     <Link to={"/translist/"+ item.hash}>
@@ -156,13 +156,15 @@ class TransactionList extends React.Component {
                                                         <span>{item.source}</span>
                                                     </Link>
                                                 </td>
-                                                <td className="td-trans-circle"><i className="fa fa-arrow-alt-circle-right"></i></td>
+                                                <td className="td-trans-circle">
+                                                    {!isStr && <i className="fa fa-arrow-alt-circle-right"></i>}
+                                                </td>
                                                 <td className="td-trans-color td-trans-address">
                                                     <Link to={"/address/"+ item.to}>
                                                         <span>{item.to}</span>
                                                     </Link>
                                                 </td>
-                                                <td><span className="table-td-value">{item.value}</span></td>
+                                                <td><span className="table-td-value" title={isStr?item.tx_str:item.value}>{isStr?item.tx_str:item.value}</span></td>
                                                 <td><span className="table-td-value">{item.time}</span></td>
                                             </tr>
 
@@ -170,7 +172,7 @@ class TransactionList extends React.Component {
                                     }.bind(this))
                                 }
                                 </tbody>
-                            </table>                            
+                            </table>
                         </div>
                         <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
@@ -195,10 +197,3 @@ class TransactionList extends React.Component {
         )
     }
 }
-
-/* Inject intl to NodeStatus props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-TransactionList.propTypes = propTypes
-export default injectIntl(TransactionList)

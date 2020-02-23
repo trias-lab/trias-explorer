@@ -1,13 +1,22 @@
 import React from "react"
 import $ from 'jquery'
 import { Link } from 'react-router-dom'
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
-import echarts from 'echarts'
-class Home extends React.Component {
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
+
+// 引入 echarts 主模块。
+import * as echarts from 'echarts/lib/echarts';
+// 引入折线图。
+import 'echarts/lib/chart/line';
+// 引入提示框组件、标题组件、工具箱组件。
+import 'echarts/lib/component/tooltip';
+
+/**
+ * Component for homepage
+ */
+export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale,
             blocksLatest: [],
             transLatest: [],
             richList: [],
@@ -95,8 +104,8 @@ class Home extends React.Component {
         this.lineChartOption2 = {
             grid: {
                 top: '28px',
-                left: '43px',
-                right: '13px',
+                left: '50px',
+                right: '16px',
                 bottom: '36px'
             },
             tooltip: {
@@ -182,8 +191,9 @@ class Home extends React.Component {
 
     /**
      * 更新echarts图表的信息
-     * 
+     *
      * @memberof Home
+     * @public
      */
     updateLineCharts() {
         var self = this;
@@ -196,8 +206,8 @@ class Home extends React.Component {
             transactionsHistory_value.push(this.state.transactionsHistory[key])
         }
 
-        this.lineChartOption1.xAxis.data = transactionsHistory_key.reverse();　　　//设置图表二的日期显示
-        this.lineChartOption1.series[0].data = transactionsHistory_value;　　//设置图表二的日期对应的值显示
+        this.lineChartOption2.xAxis.data = transactionsHistory_key.reverse();　　　//设置图表二的日期显示
+        this.lineChartOption2.series[0].data = transactionsHistory_value.reverse();　　//设置图表二的日期对应的值显示
         this.chartLine1 = echarts.init(document.getElementById('lineChart1')); //echarts init折线图
         this.chartLine1.setOption(this.lineChartOption2, true);    　//设定值
 
@@ -212,8 +222,9 @@ class Home extends React.Component {
 
     /**
      * 获取Latest Blocks列表信息
-     * 
+     *
      * @memberof Home
+     * @public
      */
     getBlockData() {
         var self = this;
@@ -233,8 +244,9 @@ class Home extends React.Component {
 
     /**
      * 获取Latest Transactions列表信息
-     * 
+     *
      * @memberof Home
+     * @public
      */
     getLatestTrans() {
         var self = this;
@@ -255,8 +267,9 @@ class Home extends React.Component {
 
     /**
      * 获取首页6条信息和4块信息
-     * 
+     *
      * @memberof Home
+     * @public
      */
     getHeaderMsg() {
         var self = this;
@@ -281,17 +294,15 @@ class Home extends React.Component {
                         unconfirmed_txs: data.return_data.unconfirmed,
                         blocksRate: data.return_data.blocksRate,
                         richList: data.return_data.richList,
-                    })
-
-                    setTimeout(function () {
+                    },()=>{
                         self.updateLineCharts()
-                    }, 200);
+                    })
                 }
             }
         })
     }
 
-    
+
     // 组件渲染完成后
     componentDidMount() {
         this.getBlockData()　　//获取Latest Blocks列表信息
@@ -314,6 +325,7 @@ class Home extends React.Component {
             <div>
                 <section className="text-center main-title ">
                     <div>
+                        <FormattedMessage id="dataValidity" tagName="p" />
                         <FormattedMessage id="title" tagName="h1" />
                         <p><i className="fa fa-thumbs-up"></i> by Trias-lab Foundation</p>
                     </div>
@@ -332,7 +344,7 @@ class Home extends React.Component {
                                         </p>
                                     )}
                                 </FormattedMessage>
-                                <p className='item-pre'> 
+                                <p className='item-pre'>
                                  <FormattedMessage id="stayTuned" />
                                  </p>
                             </div>
@@ -418,7 +430,7 @@ class Home extends React.Component {
                                             <FormattedMessage id="currentBest" />
                                         </p>
                                         <p className="chart-value" title={`${this.state.lastTransactionFees} `}>
-                                            {this.state.lastTransactionFees}  
+                                            {this.state.lastTransactionFees}
                                             {/*<i className="fa fa-arrow-alt-circle-up" style={{ marginLeft: '5px', color: '#5DB85C' }}></i>*/}
                                         </p>
                                     </div>
@@ -458,10 +470,10 @@ class Home extends React.Component {
                                         <p className="chart-title">
                                             <i className="fa fa-line-chart" style={{ marginRight: '5px' }}></i>
                                             <FormattedMessage id="transactionAccelerator" />
-                                        </p>  
+                                        </p>
                                         <p className="chart-value" title={`${this.state.blocksRate} txs/s`}>
                                             {this.state.blocksRate} txs/s  <i className="fa fa-arrow-alt-circle-down" style={{ marginLeft: '5px', color: '#F57123' }}></i>
-                                        </p>                                      
+                                        </p>
                                      </div>
                                  */}
                                 </div>
@@ -549,14 +561,14 @@ class Home extends React.Component {
                                                         <div className="info">
                                                             <p className="timestamp">{item.time}</p>
                                                             <p className="other clearfix">
-                                                                <span style={{ width: '60%' }}>
-                                                                    <span className="key"><FormattedMessage id="size" />:</span>
-                                                                    <span className="value" title={item.size}>{item.size}</span>
+                                                                <span style={{ width: '100%' }}>
+                                                                    <span className="key"><FormattedMessage id="txCount" />:</span>
+                                                                    <span className="value" title={item.transactionsCount}>{item.transactionsCount}</span>
                                                                 </span>
-                                                                <span style={{ width: '35%' }}>
+                                                                {/* <span style={{ width: '35%' }}>
                                                                     <span className="key keyReward"><FormattedMessage id="reward" />:</span>
                                                                     <span className="value valueReward" title={item.blockReward}>{item.blockReward}</span>
-                                                                </span>
+                                                                </span> */}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -586,6 +598,8 @@ class Home extends React.Component {
                             <ul className='block-list'>
                                 {
                                     this.state.transLatest && this.state.transLatest.map(function (item, index) {
+                                        // 如果type为1，为字符串交易
+                                        let isStr = item.type === 1
                                         return (
                                             <li className="clearfix" key={"trans-" + index}>
                                                 <Link to={"/translist/" + item.hash}>
@@ -600,16 +614,25 @@ class Home extends React.Component {
                                                     <div className="col col-xs-8 col-sm-8 col-md-8 col-xl-8">
                                                         <div className="info">
                                                             <p className="timestamp">{item.time}</p>
-                                                            <p className="other clearfix">
-                                                                <span style={{ width: '60%' }}>
-                                                                    <span className="key">From:</span>
-                                                                    <span className="value" title={item.source}>{item.source}</span>
-                                                                </span>
-                                                                <span style={{ width: '35%' }}>
-                                                                    <span className="key">To:</span>
-                                                                    <span className="value" title={item.to}>{item.to}</span>
-                                                                </span>
-                                                            </p>
+                                                            {
+                                                                isStr?
+                                                                <p className="other str clearfix">
+                                                                    <span style={{ width: '100%' }}>
+                                                                        <span className="key"><FormattedMessage id="txMessage" />:</span>
+                                                                        <span className="value" title={item.tx_str}>{item.tx_str}</span>
+                                                                    </span>
+                                                                </p>:
+                                                                <p className="other clearfix">
+                                                                    <span style={{ width: '60%' }}>
+                                                                        <span className="key">From:</span>
+                                                                        <span className="value" title={item.source}>{item.source}</span>
+                                                                    </span>
+                                                                    <span style={{ width: '35%' }}>
+                                                                        <span className="key">To:</span>
+                                                                        <span className="value" title={item.to}>{item.to}</span>
+                                                                    </span>
+                                                                </p>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -632,10 +655,3 @@ class Home extends React.Component {
         )
     }
 }
-
-/* Inject intl to Home props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-Home.propTypes = propTypes
-export default injectIntl(Home)

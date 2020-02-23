@@ -7,7 +7,7 @@ It must connect to Trias public chain nodes to collect information. You can use 
 
 ## Requirements
  - python: 3.4 or later.
- - Django: 1.9.7 or later.
+ - Django: 1.11.5 or later.
  - django-webpack-loader: 0.2.4
  - react: 16.3.2
  - webpack: 2.7.0

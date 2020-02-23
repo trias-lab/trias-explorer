@@ -32,9 +32,9 @@ config.plugins = config.plugins.concat([
   //拷贝文件到 webpack-dev-server服务器
   new CopyWebpackPlugin([ //from相对于context, context相对于此文件所在目录，
     //to生产模式时是相对于output.path;开发模式时相对于 output.publicPath
-    {from: './favicon.ico', to:'./',context: 'html/'},  
+    {from: './favicon.ico', to:'./',context: 'html/'},
     {from: './vendors/', to:'./vendors/',context: 'html/',toType: 'dir'},
     ]),
-  new BundleTracker({filename: './webpack-stats-local.json'}),
+  new BundleTracker({filename: './webpack-stats-dev.json'}),
 ]);
 module.exports = config;

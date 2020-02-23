@@ -2,7 +2,9 @@ import React from "react"
 import {Link} from 'react-router-dom';
 import {FormattedMessage } from 'react-intl'; /* react-intl imports */
 
-/* Component for stay tuned page */
+/** 
+ * Component for stay tuned page
+ */
 export default class StayTuned extends React.Component {
     constructor(props) {
         super(props);

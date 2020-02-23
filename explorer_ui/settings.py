@@ -15,7 +15,7 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u(@j1@^-z((!z1(%w#@k(gef0q%*4vo_@$3kz_yx$0s$5^bt1r'
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 

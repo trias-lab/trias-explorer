@@ -1,5 +1,5 @@
 const zh_CN = {
-    home: "首页", 
+    home: "首页",
     wallet: "钱包",
     monitor: "Monitor",
     iptSearchPlaceholder: "搜索账户地址/交易哈希/区块高度/区块哈希",
@@ -55,6 +55,7 @@ const zh_CN = {
     miner: "矿工",
     advancedInfo:"高级信息",
     txHash:"交易哈希",
+    txMessage:"消息内容",
     amount:"数量",
     fees:"手续费",
     status:"状态",
@@ -64,7 +65,7 @@ const zh_CN = {
     shard:'分片',
     amountTransacted:"交易总额",
     txReceiptStatus: "TxReceipt 状态",
-    gasLimit: "燃料总量",   
+    gasLimit: "燃料总量",
     gasUsed:"燃料用量",
     gasPrice: "燃料价格",
     actualTxCostFee:"实际交易花费",
@@ -80,6 +81,7 @@ const zh_CN = {
     goBack:"返回",
     triasProject:"Trias 项目",
     stayTuned:"敬请期待",
+    dataValidity: "当前测试网不保证数据永久有效性。"
 }
 
 export default zh_CN;
