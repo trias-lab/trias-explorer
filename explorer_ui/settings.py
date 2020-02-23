@@ -71,7 +71,7 @@ WSGI_APPLICATION = 'explorer_ui.wsgi.application'
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/prod/',  # change when production
+        'BUNDLE_DIR_NAME': 'bundles/prod/',  # prod for production, dev for development
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json'),  # change when production
     }
 }
