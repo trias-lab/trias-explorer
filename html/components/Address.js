@@ -69,7 +69,7 @@ export default class Address extends React.Component {
                 address: self.state.addressID
             },
             success: function (data) {
-                if (data.code == 200) {
+                if (data.code === 200) {
                     self.setState({
                         transactionList: data.return_data,
                         totalItemsCount: data.total_size,
@@ -149,7 +149,7 @@ export default class Address extends React.Component {
                 address: self.state.addressID
             },
             success: function (data) {
-                if (data.code == 200) {
+                if (data.code === 200) {
                     self.setState({
                         detailInfo: data.return_data,
                     })
@@ -174,7 +174,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope-open"></i>
+                                    <i className="fas fa-envelope-open"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="received" tagName="p"/>
@@ -185,7 +185,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope"></i>
+                                    <i className="fas fa-envelope"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="sent" tagName="p"/>
@@ -196,7 +196,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-balance-scale"></i>
+                                    <i className="fas fa-balance-scale"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="balance" tagName="p"/>
@@ -207,7 +207,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-calendar-alt"></i>
+                                    <i className="fas fa-calendar-alt"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="dateAndTime" tagName="p"/>
