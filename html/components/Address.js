@@ -174,7 +174,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope-open"/>
+                                    <i className="fas fa-envelope-open"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="received" tagName="p"/>
@@ -185,7 +185,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope"/>
+                                    <i className="fas fa-envelope"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="sent" tagName="p"/>
@@ -196,7 +196,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-balance-scale"/>
+                                    <i className="fas fa-balance-scale"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="balance" tagName="p"/>
@@ -207,7 +207,7 @@ export default class Address extends React.Component {
                         <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-calendar-alt"/>
+                                    <i className="fas fa-calendar-alt"></i>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="dateAndTime" tagName="p"/>
