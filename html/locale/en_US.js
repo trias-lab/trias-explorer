@@ -81,7 +81,13 @@ const en_US = {
     goBack:"Go Back",
     triasProject:"Trias Project",
     stayTuned:"Stay tuned",
-    dataValidity: "The current test network does not guarantee the permanent validity of the data."
+    dataValidity: "The current test network does not guarantee the permanent validity of the data.",
+    moreData:"More Data",
+    privacyBalance:"Privacy Balance",
+    privacyTips1: "Privacy balances are only opened to the owner. ",
+    privacyTips2: " to view yours.",
+    logIn: "Log in"
+
 }
 
 export default en_US;

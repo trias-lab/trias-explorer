@@ -90,6 +90,69 @@
             line-height: 32px;
         }
     }
+    .item-more-data {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+
+        .item-tit {
+            float: left;
+        }
+
+        .fa-caret-down {
+            float: left;
+            font-size: 15px;
+            line-height: 22px;
+            margin-left: 8px;
+            color: #586A7B;
+        }
+
+        .item-bubble {
+            width: 150px;
+            position: absolute;
+            background: #fff;
+            box-shadow:0px -2px 15px 0px rgba(0,32,63,0.2);
+            left: 40px;
+            top: 22px;
+            z-index: 10;
+            padding: 6px 12px;
+            cursor:default;
+            display: none;
+
+
+            p {
+                font-size:15px;
+                font-family:Roboto-Regular,Roboto;
+                font-weight:400;
+                color:rgba(171,177,184,1);
+                line-height:22px;
+                padding: 8px 0;
+                text-align: center;
+                border-bottom: 1px solid #F2F5F7;
+            }
+
+            .none-border {
+                border: none;
+            }
+        }
+
+        .icon_arrow {
+            width: 23px;
+            height: 11px;
+            display: none;
+            background: url('../img/icon_arrow_up.png') no-repeat;
+            background-size: 100% 100%;
+            position: absolute;
+            top: 11px;
+            left: 56px;
+            z-index: 11;
+        }
+
+
+        .item-bubbling {
+            display: block;
+        }
+    }
     .item-tit {
         font-size: 15px;
         font-family: MoskLight300;

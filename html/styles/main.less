@@ -21,6 +21,19 @@ body {
     font-size: 14px;
 }
 
+.clear {
+    zoom: 1;
+    clear: both;
+}
+
+.clear:after {
+    display: block;
+    content: "\0020";
+    overflow: hidden;
+    height: 0;
+    clear: both;
+}
+
 #app main {
     width: 100%;
     padding-top: 76px;

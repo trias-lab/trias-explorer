@@ -30,6 +30,69 @@
                     border:1px solid rgba(93,184,92,1);
                     padding: 14px 14px 14px 12px;
                     background:rgba(255,255,255,1);
+
+                    .item-more-data {
+                        position: relative;
+                        display: inline-block;
+                        cursor: pointer;
+
+                        .item-tit {
+                            float: left;
+                        }
+
+                        .fa-question-circle {
+                            float: left;
+                            font-size: 15px;
+                            line-height: 22px;
+                            margin-left: 4px;
+                            color: #586A7B;
+                        }
+
+                        .icon_arrow {
+                            width: 23px;
+                            height: 11px;
+                            display: none;
+                            background: url('../img/icon_arrow_down.png') no-repeat;
+                            background-size: 100% 100%;
+                            position: absolute;
+                            top: -4px;
+                            left: 70px;
+                            z-index: 11;
+                        }
+
+                        .item-bubble {
+                            width:300px;
+                            box-shadow:0px 2px 15px 0px rgba(0,32,63,0.2);
+                            position: absolute;
+                            background: #fff;
+                            left: -30px;
+                            top: -70px;
+                            z-index: 10;
+                            padding: 11px 18px;
+                            display: none;
+                            font-size:15px;
+                            font-family:Roboto-Regular,Roboto;
+                            font-weight:400;
+                            color:rgba(20,42,63,1);
+                            line-height:22px;
+
+                            a {
+                                color: #36AB43;
+                                cursor: pointer;
+                                outline: medium none;
+                                text-decoration: none;
+                            }
+
+                            a:hover {
+                                text-decoration: none;
+                            }
+                        }
+
+                        .item-bubbling {
+                            display: block;
+                        }
+                    }
+
                     .icon {
                         font-size:24px;
                         color:rgba(93,184,92,1);
@@ -60,6 +123,18 @@
 
             }
         }
+        .address-graph-group {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            overflow: visible;
+
+            .address-stats-col {
+                width: 18%;
+            }
+        }
+
         .info-part {
             // height: 266px;
             // overflow: hidden;
@@ -292,6 +367,18 @@
         .graph-group{
             .stats-col{
                 margin-bottom: 24px;
+            }
+        }
+
+        .address-graph-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .address-stats-col {
+                width: 100%;
+                .item-bubble {
+                   left: -5px !important;
+                }
             }
         }
         .list-part .list-item{

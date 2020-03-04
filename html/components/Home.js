@@ -26,8 +26,8 @@ export default class Home extends React.Component {
             last_block: "",
             addresses: "",
             transactions: "",
-
-        }
+            explaining: false,              // 浮窗控制 rate提示
+        };
         this.lineChartOption1 = {
             grid: {
                 top: '28px',
@@ -319,6 +319,19 @@ export default class Home extends React.Component {
         clearInterval(this.setinter)
     }
 
+    // 显示
+    showExplain = () => {
+        this.setState({
+            explaining: true
+        })
+    };
+
+    // 隐藏
+    hideExplain = (key) => {
+        this.setState({
+            explaining: false
+        })
+    };
 
     render() {
         return (
@@ -332,55 +345,55 @@ export default class Home extends React.Component {
                 </section>
                 <div className="home-page public-content">
                     <section className="clearfix">
-                        <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
-                            <div className="home-header-item">
-                                <div className='item-wap-img'>
-                                    <i className="fa fa-line-chart"></i>
-                                </div>
-                                <FormattedMessage id="homeItemTit">
-                                    {(txt) => (
-                                        <p className='item-tit'>
-                                            {txt}
-                                        </p>
-                                    )}
-                                </FormattedMessage>
-                                <p className='item-pre'>
-                                 <FormattedMessage id="stayTuned" />
-                                 </p>
-                            </div>
-                        </div>
-                        <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
-                            <div className="home-header-item">
-                                <div className='item-wap-img'>
-                                    <i className="fa fa-calculator"></i>
-                                </div>
-                                <FormattedMessage id="totalDifficulty">
-                                    {(txt) => (
-                                        <p className='item-tit'> {txt}</p>
-                                    )}
-                                </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.totalDifficulty}`}> {this.state.totalDifficulty}</p>
-                            </div>
-                        </div>
-                        <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
-                            <div className="home-header-item">
-                                <div className='item-wap-img'>
-                                    <i className="fa fa-money-bill-wave"></i>
-                                </div>
-                                <FormattedMessage id="miningEarnings">
-                                    {(txt) => (
-                                        <p className='item-tit'> {txt}</p>
-                                    )}
-                                </FormattedMessage>
-                                <p className='item-pre' title={`${this.state.lastBlockFees}`}> {this.state.lastBlockFees} </p>
-                            </div>
-                        </div>
-                        <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
+                        {/*<div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">*/}
+                            {/*<div className="home-header-item">*/}
+                                {/*<div className='item-wap-img'>*/}
+                                    {/*<i className="fa fa-line-chart"></i>*/}
+                                {/*</div>*/}
+                                {/*<FormattedMessage id="homeItemTit">*/}
+                                    {/*{(txt) => (*/}
+                                        {/*<p className='item-tit'>*/}
+                                            {/*{txt}*/}
+                                        {/*</p>*/}
+                                    {/*)}*/}
+                                {/*</FormattedMessage>*/}
+                                {/*<p className='item-pre'>*/}
+                                 {/*<FormattedMessage id="stayTuned" />*/}
+                                 {/*</p>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                        {/*<div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">*/}
+                            {/*<div className="home-header-item">*/}
+                                {/*<div className='item-wap-img'>*/}
+                                    {/*<i className="fa fa-calculator"></i>*/}
+                                {/*</div>*/}
+                                {/*<FormattedMessage id="totalDifficulty">*/}
+                                    {/*{(txt) => (*/}
+                                        {/*<p className='item-tit'> {txt}</p>*/}
+                                    {/*)}*/}
+                                {/*</FormattedMessage>*/}
+                                {/*<p className='item-pre' title={`${this.state.totalDifficulty}`}> {this.state.totalDifficulty}</p>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                        {/*<div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">*/}
+                            {/*<div className="home-header-item">*/}
+                                {/*<div className='item-wap-img'>*/}
+                                    {/*<i className="fa fa-money-bill-wave"></i>*/}
+                                {/*</div>*/}
+                                {/*<FormattedMessage id="miningEarnings">*/}
+                                    {/*{(txt) => (*/}
+                                        {/*<p className='item-tit'> {txt}</p>*/}
+                                    {/*)}*/}
+                                {/*</FormattedMessage>*/}
+                                {/*<p className='item-pre' title={`${this.state.lastBlockFees}`}> {this.state.lastBlockFees} </p>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3">
 
                             <Link to="/blocklist">
                                 <div className="home-header-item">
                                     <div className='item-wap-img'>
-                                        <i className="fa fa-cube"></i>
+                                        <i className="fa fa-cube"/>
                                     </div>
                                     <FormattedMessage id="lastBlock">
                                         {(txt) => (
@@ -392,10 +405,10 @@ export default class Home extends React.Component {
 
                             </Link>
                         </div>
-                        <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-dolly-flatbed"></i>
+                                    <i className="fa fa-dolly-flatbed"/>
                                 </div>
                                 <FormattedMessage id="Addresses">
                                     {(txt) => (
@@ -405,10 +418,10 @@ export default class Home extends React.Component {
                                 <p className='item-pre' title={this.state.addresses}> {this.state.addresses}</p>
                             </div>
                         </div>
-                        <div className="col col-xs-6 col-sm-4 col-md-2 col-xl-2">
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3">
                             <div className="home-header-item">
                                 <div className='item-wap-img'>
-                                    <i className="fa fa-handshake"></i>
+                                    <i className="fa fa-handshake"/>
                                 </div>
                                 <FormattedMessage id="transactionCount">
                                     {(txt) => (
@@ -416,6 +429,25 @@ export default class Home extends React.Component {
                                     )}
                                 </FormattedMessage>
                                 <p className='item-pre' title={`${this.state.transactions}M`}> {this.state.transactions}</p>
+                            </div>
+                        </div>
+                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3">
+                            <div className="home-header-item">
+                                <div className='item-wap-img'>
+                                    <i className="fas fa-th-list"/>
+                                </div>
+                                <div className='item-more-data clear' onMouseOver={() => this.showExplain()}
+                                     onMouseLeave={() => this.hideExplain()} >
+                                    <p className='item-tit'><FormattedMessage id="moreData" /></p>
+                                    <i className="fas fa-caret-down"/>
+                                    <div className={`item-bubble ${this.state.explaining && 'item-bubbling'}`}>
+                                        <p><FormattedMessage id="homeItemTit" /></p>
+                                        <p><FormattedMessage id="totalDifficulty" /></p>
+                                        <p className='none-border'><FormattedMessage id="miningEarnings" /></p>
+                                    </div>
+                                    <span className={`icon_arrow ${this.state.explaining && 'item-bubbling'}`}/>
+                                </div>
+                                <p className='item-pre'><FormattedMessage id="stayTuned" /></p>
                             </div>
                         </div>
                     </section>

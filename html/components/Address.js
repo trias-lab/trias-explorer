@@ -21,7 +21,8 @@ export default class Address extends React.Component {
             transactionList: [],
             rowsPerPage: 10,
             currentPage: 1,
-            detailInfo: []
+            detailInfo: [],
+            explaining: false,              // 浮窗控制 rate提示
         }
     }
 
@@ -158,6 +159,20 @@ export default class Address extends React.Component {
         })
     }
 
+    // 显示
+    showExplain = () => {
+        this.setState({
+            explaining: true
+        })
+    };
+
+    // 隐藏
+    hideExplain = (key) => {
+        this.setState({
+            explaining: false
+        })
+    };
+
     render() {
         return (
             <div className='address-container'>
@@ -170,11 +185,11 @@ export default class Address extends React.Component {
                             <Qrcode id='title' text={this.state.detailInfo.address} size="70" />
                         }
                     </div>
-                    <section className="graph-group" >
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                    <section className="graph-group address-graph-group" >
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope-open"></i>
+                                    <i className="fas fa-envelope-open"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="received" tagName="p"/>
@@ -182,10 +197,10 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope"></i>
+                                    <i className="fas fa-envelope"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="sent" tagName="p"/>
@@ -193,10 +208,10 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-balance-scale"></i>
+                                    <i className="fas fa-balance-scale"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="balance" tagName="p"/>
@@ -204,10 +219,31 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-calendar-alt"></i>
+                                    <i className="fas fa-money-check"/>
+                                </div>
+                                <div className="text">
+                                    <div className='item-more-data clear' onMouseOver={() => this.showExplain()}
+                                         onMouseLeave={() => this.hideExplain()} >
+                                        <p className='item-tit'><FormattedMessage id="privacyBalance" /></p>
+                                        <i className="fas fa-question-circle"/>
+                                        <div className={`item-bubble ${this.state.explaining && 'item-bubbling'}`}>
+                                            <span><FormattedMessage id="privacyTips1" /></span>
+                                            <a href="https://wallet.trias.one/"><FormattedMessage id="logIn" /></a>
+                                            <span><FormattedMessage id="privacyTips2" /></span>
+                                        </div>
+                                        <span className={`icon_arrow ${this.state.explaining && 'item-bubbling'}`}/>
+                                    </div>
+                                    <p>********</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="stats-col address-stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-calendar-alt"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="dateAndTime" tagName="p"/>
