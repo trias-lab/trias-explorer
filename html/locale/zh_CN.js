@@ -84,9 +84,9 @@ const zh_CN = {
     dataValidity: "当前测试网不保证数据永久有效性。",
     moreData:"更多数据",
     privacyBalance:"隐私余额",
-    privacyTips1: "隐私余额仅对本人可见，",
-    privacyTips2: "查看个人信息。",
-    logIn: "请登录"
+    privacyTips1: "隐私余额仅对本人可见，请使用 ",
+    privacyTips2: " 查看您的账户信息。",
+    logIn: "Trias Wallet"
 }
 
 export default zh_CN;

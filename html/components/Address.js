@@ -2,14 +2,19 @@ import React from "react"
 import $ from "jquery"
 import { Link } from 'react-router-dom'
 import CustomPagination from "./common/CustomPagination"
-import { FormattedMessage } from 'react-intl'; /* react-intl imports */
+import {injectIntl, FormattedMessage, intlShape} from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
 
 /**
  * Component for address page.
  */
-export default class Address extends React.Component {
+class Address extends React.Component {
+    static propTypes = {
+        /** Inject intl to CustomPagination props */
+        intl: intlShape.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +27,7 @@ export default class Address extends React.Component {
             rowsPerPage: 10,
             currentPage: 1,
             detailInfo: [],
+            lang: this.props.intl.locale,
             explaining: false,              // 浮窗控制 rate提示
         }
     }
@@ -44,6 +50,14 @@ export default class Address extends React.Component {
                 rowsPerPage: 10,
                 currentPage: 1
             },()=> {
+                this.getList(this.state.currentPage, this.state.rowsPerPage);
+                this.getInfo();
+            })
+        }
+        if(this.state.lang !== nextProps.intl.locale){  // if language changes
+            this.setState({
+                lang: nextProps.intl.locale,
+            },()=>{
                 this.getList(this.state.currentPage, this.state.rowsPerPage);
                 this.getInfo();
             })
@@ -229,7 +243,7 @@ export default class Address extends React.Component {
                                          onMouseLeave={() => this.hideExplain()} >
                                         <p className='item-tit'><FormattedMessage id="privacyBalance" /></p>
                                         <i className="fas fa-question-circle"/>
-                                        <div className={`item-bubble ${this.state.explaining && 'item-bubbling'}`}>
+                                        <div className={`item-bubble ${this.state.explaining && 'item-bubbling'} ${this.state.lang === 'en' && 'bubble-location'}`}>
                                             <span><FormattedMessage id="privacyTips1" /></span>
                                             <a href="https://wallet.trias.one/"><FormattedMessage id="logIn" /></a>
                                             <span><FormattedMessage id="privacyTips2" /></span>
@@ -389,3 +403,5 @@ export default class Address extends React.Component {
         )
     }
 }
+
+export default injectIntl(Address)

@@ -84,9 +84,9 @@ const en_US = {
     dataValidity: "The current test network does not guarantee the permanent validity of the data.",
     moreData:"More Data",
     privacyBalance:"Privacy Balance",
-    privacyTips1: "Privacy balances are only opened to the owner. ",
-    privacyTips2: " to view yours.",
-    logIn: "Log in"
+    privacyTips1: "Privacy balance is only open to the owner. Use ",
+    privacyTips2: " to view your account info.",
+    logIn: "Trias Wallet"
 
 }
 
