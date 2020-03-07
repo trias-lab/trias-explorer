@@ -212,26 +212,26 @@ export default class Main extends React.Component {
                                     </div>
                                     <ul className="navbar-menu-pc">
                                         <li>
-                                            <a href="https://www.trias.one/" target="blank">
+                                            <a className="nav-button" href="https://www.trias.one/" target="blank">
                                                 <FormattedMessage id="triasProject" />
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="https://wallet.trias.one" target="blank">
+                                            <a className="nav-button" href="https://wallet.trias.one" target="blank">
                                                 <FormattedMessage id="wallet" />
                                             </a>
                                         </li>
                                         <li>
-                                            <Link to="/blocklist">
+                                            <Link className="nav-button" to="/blocklist">
                                                 <FormattedMessage id="block" />
                                             </Link>
                                         </li>
                                         <li>
-                                            <a href="https://monitor.trias.one/" target="blank">
+                                            <a className="nav-button" href="https://monitor.trias.one/" target="blank">
                                                 <FormattedMessage id="monitor" />
                                             </a>
                                         </li>
-                                        <li>
+                                        <li className="nav-logo">
                                         <ToggleList
                                             className="lang"
                                             listID="langlist"
