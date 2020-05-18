@@ -89,7 +89,8 @@ def address_transactions(request):
             item['time'] = stamp2datetime(
                 Block.objects.get(
                     number=item['blockNumber']).timestamp)
-            item['fees'] = item['gasPrice'] * item['gasUsed']
+            # item['fees'] = item['gasPrice'] * item['gasUsed']
+            item['fees'] = 0
             item['confirmations'] = Block.objects.last().number - \
                 item['blockNumber']
     except Exception as e:
