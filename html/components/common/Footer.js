@@ -38,7 +38,7 @@ class Footer extends React.Component {
         return (
         <div className="common-footer">
             <div className="contacts">
-                <a target="blank" href="https://twitter.com/triaslab">
+                <a target="blank" href="https://twitter.com/Trias_One">
                     <span className="btn-icon">
                         <i className="fa fa-twitter" aria-hidden="true"></i>
                     </span>
