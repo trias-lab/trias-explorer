@@ -13,7 +13,7 @@ module.exports = {
   },
 
   output: {
-      path: path.resolve('./html/static/bundles/local/'),
+      path: path.resolve('./html/static/bundles/dev/'),
       filename: "[name]-[hash].js",
       publicPath: '/static/bundles/prod/'
   },
@@ -32,7 +32,7 @@ module.exports = {
   module: {
     rules:[
       {
-        test: /\/expression\/parser\.js$/, 
+        test: /\/expression\/parser\.js$/,
         use: 'exports-loader?parser'
       },
       {
@@ -80,22 +80,22 @@ module.exports = {
           }))
       },
       {
-        test: /\.html$/, 
+        test: /\.html$/,
         use: 'raw-loader'
       },
       {
-        test: /\.(gif|png|jpg|jpeg)$/, 
+        test: /\.(gif|png|jpg|jpeg)$/,
         use: 'url-loader?limit=8192'
       },
       {
-        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, 
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: 'url-loader?limit=81920'
       },
-      { 
-        test: /\.jsx?$/, 
-        exclude: /node_modules/, 
-        use: ['babel-loader'] 
-      }, 
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      },
     ] // add all common loaders here
   },
 

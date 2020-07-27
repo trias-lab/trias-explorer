@@ -1,14 +1,17 @@
 import React from "react"
 import $ from 'jquery'
 import { Link } from 'react-router-dom'
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import { FormattedMessage } from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import CustomPagination from "./common/CustomPagination"
-class BlockList extends React.Component {
+
+/**
+ * Component for block list
+ */
+export default class BlockList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale,
             subNavbarMatch: this.props.match,   // Route  match props
             totalItemsCount: 100, //total number = pageCount*rowsPerPage
             pageCount: 10, //total page
@@ -27,11 +30,6 @@ class BlockList extends React.Component {
         if(this.state.subNavbarMatch.url !== nextProps.match.url){
             this.setState({
                 subNavbarMatch: nextProps.match
-            })
-        }
-        if(this.state.lang !== nextProps.intl.locale){
-            this.setState({
-                lang: nextProps.intl.locale
             })
         }
     }
@@ -58,10 +56,9 @@ class BlockList extends React.Component {
         this.getBlockList(pagenum, this.state.rowsPerPage)
         //console.log(pagenum)
     }
-    
+
     /**
      * enter page and jump
-     * @return {[type]} [description]
      */
     jumpPageKeyDown(e) {
         if (e.keyCode === 13) {           //if enter key
@@ -80,10 +77,13 @@ class BlockList extends React.Component {
         this.getBlockList(pagenum, this.state.rowsPerPage)
         //console.log('jump')
     }
-    
-    /*
-    * get block list
-    * */
+
+    /**
+     * Get block list
+     * @param {int} pageNum page number
+     * @param {int} rowsPerPage number of items per page
+     * @public
+     */
     getBlockList(pageNum,rowsPerPage){
         var self = this
         $.ajax({
@@ -102,7 +102,6 @@ class BlockList extends React.Component {
                         totalItemsCount:data.total_size,
                     })
                 }
-                // console.log(data);
             }
         })
     }
@@ -154,7 +153,7 @@ class BlockList extends React.Component {
                                         }.bind(this))
                                     }
                                     </tbody>
-                                </table>                                
+                                </table>
                             </div>
                             <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
@@ -179,10 +178,3 @@ class BlockList extends React.Component {
         )
     }
 }
-
-/* Inject intl to NodeStatus props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-BlockList.propTypes = propTypes
-export default injectIntl(BlockList)

@@ -9,13 +9,21 @@
 	{% comment %}<meta http-equiv="Content-Security-Policy" content="object-src 'none';child-src https:">{% endcomment %}
 	<title>Trias Explorer</title>
 	<link rel="shortcut icon" href="/static/bundles/favicon.ico" type="image/x-icon">
-	<script nomodule type="text/javascript" src="/static/bundles/vendors/polyfill.js" ></script>
+	<script nomodule type="text/javascript" src="/static/bundles/vendors/polyfill.js"></script>
 	{% render_bundle 'app' 'css'%}
 </head>
 <body>
-<div id="app"></div>
-
+<div id="app" ></div>
 {% render_bundle 'vendors' %}
 {% render_bundle 'app' 'js'%}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-159935673-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-159935673-1');
+</script>
 </body>
 </html>

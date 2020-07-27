@@ -1,4 +1,4 @@
-Django==1.9.7
+Django==1.11.5
 django-webpack-loader==0.2.4
 requests
 apscheduler

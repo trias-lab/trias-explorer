@@ -14,7 +14,6 @@ import $ from 'jquery'
 
 import ToggleList from './common/ToggleList'    //import drop-down list component
 import Home from "./Home"
-import Other from "./Other"
 import Footer from "./common/Footer"
 import BlockList from "./BlockList"
 import BlockDetail from "./BlockDetail"
@@ -44,7 +43,7 @@ class ScrollToTop extends React.Component {
         }
       }
     }
-  
+
     render() {
       return this.props.children
     }
@@ -84,6 +83,7 @@ export default class Main extends React.Component {
 
     /**
      * Search transaction/block/address by txHash/block hash/address
+     * @public
      */
     search(){
         var self = this
@@ -137,15 +137,15 @@ export default class Main extends React.Component {
                                 redirect: null
                             })
                         })
-                    }                
+                    }
                 }
             })
-        }        
+        }
     }
 
     /**
      * Keydown event handler for the search input
-     * @param {*} e 
+     * @param {*} e
      */
     handleKeyDown(e){
         if (e.keyCode === 13) {           // Enter key
@@ -155,7 +155,7 @@ export default class Main extends React.Component {
 
     /**
      * Check input of saerch keyword
-     * @param {Object} e 
+     * @param {Object} e
      */
     checkSearchKeyword(e){
         // replace all characters that is not a word character.
@@ -183,7 +183,7 @@ export default class Main extends React.Component {
         this.navlistMobile = [{
             ele: <a href="https://www.trias.one/" target="blank"><FormattedMessage id="triasProject" /></a>
         },{
-            ele:  <Link to="/stayTuned"><FormattedMessage id="wallet" /></Link>
+            ele:  <a href="https://wallet.trias.one" target="blank"><FormattedMessage id="wallet" /></a>
         }, {
             ele:  <Link to="/blocklist"><FormattedMessage id="block" /></Link>
         },{
@@ -203,35 +203,35 @@ export default class Main extends React.Component {
                                         </Link>
                                     </div>
                                     <div className="btn-group">
-                                        <input id="searchPC" type="text" maxLength="42" className="ipt-search" 
+                                        <input id="searchPC" type="text" className="ipt-search"
                                             placeholder={messages[this.state.lang].iptSearchPlaceholder}
                                             onKeyDown={(e) => this.handleKeyDown(e)}
                                             onKeyUp={(e) => this.checkSearchKeyword(e)}/>
-                                        <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch} 
+                                        <input type="button" className="btn-search" value={messages[this.state.lang].btnSearch}
                                             onClick={this.search.bind(this)} />
                                     </div>
                                     <ul className="navbar-menu-pc">
                                         <li>
-                                            <a href="https://www.trias.one/" target="blank">
+                                            <a className="nav-button" href="https://www.trias.one/" target="blank">
                                                 <FormattedMessage id="triasProject" />
                                             </a>
                                         </li>
                                         <li>
-                                            <Link to="/stayTuned">
+                                            <a className="nav-button" href="https://wallet.trias.one" target="blank">
                                                 <FormattedMessage id="wallet" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <Link className="nav-button" to="/blocklist">
+                                                <FormattedMessage id="block" />
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/blocklist">
-                                                <FormattedMessage id="block" />
-                                            </Link>
-                                        </li>  
-                                        <li>
-                                            <a href="https://monitor.trias.one/" target="blank">
+                                            <a className="nav-button" href="https://monitor.trias.one/" target="blank">
                                                 <FormattedMessage id="monitor" />
                                             </a>
-                                        </li>                                  
-                                        <li>
+                                        </li>
+                                        <li className="nav-logo">
                                         <ToggleList
                                             className="lang"
                                             listID="langlist"
@@ -252,18 +252,18 @@ export default class Main extends React.Component {
                                                 <div className="icon-bar"></div>
                                                 <div className="icon-bar"></div>
                                                 <div className="icon-bar"></div>
-                                            </span>} 
+                                            </span>}
                                         />
                                 </div>
                                 <form action="" id="formSearch" className="mobile">
                                     {/* disable refresh of  whole page */}
                                     <input type="text" name="test" style={{display:'none'}}/>
-                                    <input id="searchMobile" type="search" maxLength="42" className="ipt-search" 
+                                    <input id="searchMobile" type="search" maxLength="100" className="ipt-search"
                                         placeholder={messages[this.state.lang].iptSearchPlaceholder}
                                         onKeyUp={(e) => this.checkSearchKeyword(e)} />
                                     <span className="search-icon"><i className="fas fa-search"></i></span>
                                     {this.state.redirect}
-                                </form>                                              
+                                </form>
                             </header>
                             <main>
                                 <Switch>
@@ -276,7 +276,7 @@ export default class Main extends React.Component {
                                     <Route exact path="/notfound/:keyword" component={NotFound} />
                                     <Route exact path="/stayTuned" component={StayTuned} />
                                     <Redirect to="/"/> {/* if no routes above is matched */}
-                                </Switch>                            
+                                </Switch>
                             </main>
                             <Footer/>
                         </div>
@@ -290,4 +290,3 @@ export default class Main extends React.Component {
 
 
 
-  

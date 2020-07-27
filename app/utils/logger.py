@@ -13,4 +13,3 @@ def make_trias_django_logger():
 
 
 logger = make_trias_django_logger()
-

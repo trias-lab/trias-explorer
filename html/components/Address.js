@@ -1,16 +1,20 @@
-/**
- * 
- * Address Page
- * 
- */
 import React from "react"
 import $ from "jquery"
 import { Link } from 'react-router-dom'
 import CustomPagination from "./common/CustomPagination"
-import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import {injectIntl, FormattedMessage, intlShape} from 'react-intl'; /* react-intl imports */
 import SubNavbar from "./common/SubNavbar"
 import Qrcode from "./common/Qrcode"
-export default class Address extends React.Component {
+
+/**
+ * Component for address page.
+ */
+class Address extends React.Component {
+    static propTypes = {
+        /** Inject intl to CustomPagination props */
+        intl: intlShape.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -23,8 +27,8 @@ export default class Address extends React.Component {
             rowsPerPage: 10,
             currentPage: 1,
             detailInfo: [],
-            // nodeid: this.props.location.state.nodeid,
-            // blockid: this.props.match.params.blockid,
+            lang: this.props.intl.locale,
+            explaining: false,              // 浮窗控制 rate提示
         }
     }
 
@@ -50,17 +54,26 @@ export default class Address extends React.Component {
                 this.getInfo();
             })
         }
+        if(this.state.lang !== nextProps.intl.locale){  // if language changes
+            this.setState({
+                lang: nextProps.intl.locale,
+            },()=>{
+                this.getList(this.state.currentPage, this.state.rowsPerPage);
+                this.getInfo();
+            })
+        }
     }
 
 
 
     /**
      * 获取列表数据
-     * @param {int} currentPage 
-     * @param {int} rowsPerPage 
+     * @param {int} currentPage
+     * @param {int} rowsPerPage
+     * @public
      */
     getList(currentPage, rowsPerPage) {
-        var self = this
+        let self = this;
         $.ajax({
             url: '/api/address_transactions/',
             type: 'get',
@@ -71,7 +84,7 @@ export default class Address extends React.Component {
                 address: self.state.addressID
             },
             success: function (data) {
-                if (data.code == 200) {
+                if (data.code === 200) {
                     self.setState({
                         transactionList: data.return_data,
                         totalItemsCount: data.total_size,
@@ -97,7 +110,7 @@ export default class Address extends React.Component {
 
     /**
      * 设置列表每页最多显示行数
-     * @param {int} num 行数 
+     * @param {int} num 行数
      */
     setRowsPerPage(num) {
         this.setState({
@@ -115,12 +128,10 @@ export default class Address extends React.Component {
             currentPage: pagenum
         })
         this.getList(pagenum, this.state.rowsPerPage)
-        //console.log(pagenum)
     }
 
     /**
      * 跳转输入框的按键事件监听
-     * @return {[type]} [description]
      */
     jumpPageKeyDown(e) {
         if (e.keyCode === 13) {           //当按下的键是回车键
@@ -139,6 +150,10 @@ export default class Address extends React.Component {
         this.getList(pagenum, this.state.rowsPerPage)
     }
 
+    /**
+     * 获取地址详情
+     * @public
+     */
     getInfo() {
         var self = this
         $.ajax({
@@ -149,7 +164,7 @@ export default class Address extends React.Component {
                 address: self.state.addressID
             },
             success: function (data) {
-                if (data.code == 200) {
+                if (data.code === 200) {
                     self.setState({
                         detailInfo: data.return_data,
                     })
@@ -157,6 +172,21 @@ export default class Address extends React.Component {
             }
         })
     }
+
+    // 显示
+    showExplain = () => {
+        this.setState({
+            explaining: true
+        })
+    };
+
+    // 隐藏
+    hideExplain = (key) => {
+        this.setState({
+            explaining: false
+        })
+    };
+
     render() {
         return (
             <div className='address-container'>
@@ -167,14 +197,13 @@ export default class Address extends React.Component {
                         {
                             this.state.detailInfo.address &&
                             <Qrcode id='title' text={this.state.detailInfo.address} size="70" />
-                            // console.log(this.state.detailInfo)
                         }
                     </div>
-                    <section className="graph-group" >
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                    <section className="graph-group address-graph-group" >
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope-open"></i>
+                                    <i className="fas fa-envelope-open"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="received" tagName="p"/>
@@ -182,10 +211,10 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-envelope"></i>
+                                    <i className="fas fa-envelope"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="sent" tagName="p"/>
@@ -193,10 +222,10 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-balance-scale"></i>
+                                    <i className="fas fa-balance-scale"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="balance" tagName="p"/>
@@ -204,10 +233,31 @@ export default class Address extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-12 col-sm-12 col-md-3 col-xl-3 stats-col">
+                        <div className="stats-col address-stats-col">
                             <div className="item" >
                                 <div className="icon">
-                                    <i className="fas fa-calendar-alt"></i>
+                                    <i className="fas fa-money-check"/>
+                                </div>
+                                <div className="text">
+                                    <div className='item-more-data clear' onMouseOver={() => this.showExplain()}
+                                         onMouseLeave={() => this.hideExplain()} >
+                                        <p className='item-tit'><FormattedMessage id="privacyBalance" /></p>
+                                        <i className="fas fa-question-circle"/>
+                                        <div className={`item-bubble ${this.state.explaining && 'item-bubbling'} ${this.state.lang === 'en' && 'bubble-location'}`}>
+                                            <span><FormattedMessage id="privacyTips1" /></span>
+                                            <a href="https://wallet.trias.one/"><FormattedMessage id="logIn" /></a>
+                                            <span><FormattedMessage id="privacyTips2" /></span>
+                                        </div>
+                                        <span className={`icon_arrow ${this.state.explaining && 'item-bubbling'}`}/>
+                                    </div>
+                                    <p>********</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="stats-col address-stats-col">
+                            <div className="item" >
+                                <div className="icon">
+                                    <i className="fas fa-calendar-alt"/>
                                 </div>
                                 <div className="text">
                                     <FormattedMessage id="dateAndTime" tagName="p"/>
@@ -332,14 +382,15 @@ export default class Address extends React.Component {
                             )
                         }.bind(this))}
                         {
-                            !this.state.transactionList.length && 
+                            !this.state.transactionList.length &&
                             <div className="nullData">
                                 <FormattedMessage id="nullData" tagName="p"/>
                             </div>
                         }
+                        {   this.state.transactionList.length > 0 &&
                             <CustomPagination
                                 from={(this.state.currentPage - 1) * this.state.rowsPerPage}
-                                to={(this.state.currentPage-1)*this.state.rowsPerPage + (this.state.transactionList?this.state.transactionList.length:0)}
+                                to={(this.state.currentPage - 1) * this.state.rowsPerPage + (this.state.transactionList ? this.state.transactionList.length : 0)}
                                 totalItemsCount={this.state.totalItemsCount}
                                 totalPagesCount={this.state.pageCount}
                                 currentPage={this.state.currentPage}
@@ -347,9 +398,12 @@ export default class Address extends React.Component {
                                 onSelectPage={(num) => this.handleSelectPage(num)}
                                 onPageInputKeyDown={(e) => this.jumpPageKeyDown(e)}
                             />
+                        }
                     </section>
                 </div>
             </div>
         )
     }
 }
+
+export default injectIntl(Address)

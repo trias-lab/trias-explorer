@@ -32,7 +32,7 @@ class Footer extends React.Component {
             }
         })
     }
-    
+
 
     render(){
         return (
@@ -80,7 +80,7 @@ class Footer extends React.Component {
                     <span className="btn-icon">
                         <i className="fa fa-github" aria-hidden="true"></i>
                     </span>
-                </a>                
+                </a>
                 <a className="email-button toggle-button">
                     <span className="btn-icon">
                         <i className="fas fa-envelope"></i>
@@ -127,8 +127,8 @@ class Footer extends React.Component {
                     <hr/>
                     <span className="pull-left">© 2018 Trias-lab Foundation. </span>
                     <span className="pull-right">All rights reserved.</span>
-                </div> 
-            </div>                   
+                </div>
+            </div>
         </div>
         )
     }

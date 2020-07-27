@@ -1,7 +1,7 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "./reset.css";
-@import "./all.css";
-@import "./v4-shims.css";
+@import "./font-awesome/all.css";
+@import "./font-awesome/v4-shims.css";
 @import "./moskfont/moskfont.css";
 @import "./common";
 @import "./home";
@@ -19,6 +19,19 @@ body {
     background-color: @background;
     color: @text;
     font-size: 14px;
+}
+
+.clear {
+    zoom: 1;
+    clear: both;
+}
+
+.clear:after {
+    display: block;
+    content: "\0020";
+    overflow: hidden;
+    height: 0;
+    clear: both;
 }
 
 #app main {
@@ -78,7 +91,7 @@ body {
             -webkit-padding-start: 0;
             >li {
                 display: inline-block;
-                padding: 26px 21px;
+                padding: 19px 0;
                 a {
                     position: relative;
                     font-size: 16px;
@@ -87,6 +100,17 @@ body {
                 }
                 >a.active {
                     color: #FEFEFE;
+                }
+                .nav-button {
+                    display: inline-block;
+                    border-radius: 4px;
+                    padding: 0 18px;
+                    text-decoration: none;
+                    line-height: 38px;
+                }
+
+                .nav-button:hover {
+                    background: #36AB43;
                 }
                 #subnavlist{
                     .list-block{
@@ -97,6 +121,9 @@ body {
                         }
                     }
                 }
+            }
+            .nav-logo {
+                padding: 19px 21px;
             }
             .toggle-list.lang{
                 .item-selected{
@@ -123,9 +150,9 @@ body {
                     span.active .fa-globe-americas{
                         color: #5db85c;
                     }
-                }      
+                }
             }
-        }               
+        }
         .toggle-list.mobile{
             display: none;
             float: right;
@@ -160,7 +187,7 @@ body {
                 }
                 li{
                     padding: 12px 16px;
-                }         
+                }
                 li>a{
                     color: #F6F6F6;
                     font-size: 16px;
@@ -176,13 +203,13 @@ body {
                 span.active .fa-globe-americas{
                     color: #5db85c;
                 }
-            } 
+            }
         }
     }
     .mobile{
         display: none;
     }
-    
+
     #formSearch{
         position: relative;
         margin: 23px auto 0;
@@ -200,7 +227,7 @@ body {
             color: #5DB85C;
             line-height: 38px;
         }
-    }    
+    }
 }
 
 
@@ -269,7 +296,7 @@ body {
                 border-top: 5px solid transparent;
                 border-right: 12px solid transparent;
                 border-left: 12px solid transparent;
-                border-bottom: 9px solid #e4e7eb;    
+                border-bottom: 9px solid #e4e7eb;
             }
         }
         .wechat-button > .qrcode {
@@ -282,7 +309,7 @@ body {
         .wechat-button > .qrcode img {
             width:100px;
             height: 100px;
-        }    
+        }
         .telegram-button{
             display: inline-block;
             width: 26px;
@@ -300,8 +327,8 @@ body {
             }
         }
         .email-button{
-            .email-box {                
-                text-align: center;               
+            .email-box {
+                text-align: center;
                 cursor: text;
                 user-select: text;
             }
@@ -315,7 +342,7 @@ body {
     .center-box{
         max-width: 1120px;
         margin: 0 auto;
-        padding: 0 20px;      
+        padding: 0 20px;
     }
     .info{
         width: 100%;
@@ -328,7 +355,7 @@ body {
             height: 274px;
             padding-top: 64px;
         }
-        .intro{         
+        .intro{
             img{
                 width: 100px;
                 height: 44px;
@@ -356,7 +383,7 @@ body {
                 font-family: MoskLight300;
                 font-size: 14px;
                 color: rgba(255,255,255,1);
-                line-height: 22px; 
+                line-height: 22px;
             }
         }
         hr{
@@ -379,6 +406,14 @@ body {
         padding-top: 84px;
         max-width: 1120px;
         margin: 0 auto;
+        >p {
+            font-family: MoskLight300;
+            font-size: 14px;
+            text-align: left;
+            line-height: 22px;
+            margin-top: -50px;
+            margin-bottom: 40px;
+        }
         h1{
             font-size:30px;
             font-family:MoskLight300;
@@ -387,6 +422,10 @@ body {
         }
         h2{
             margin-top: 4px;
+            width: 80%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             .angle{
                 font-size:16px;
                 font-family:FontAwesome5FreeSolid;
@@ -461,7 +500,7 @@ body {
     .center-box{
         max-width: 1104px;
         margin: 0 auto;
-        padding: 318px 20px;      
+        padding: 318px 20px;
     }
     h1{
         font-size:30px;
@@ -501,7 +540,7 @@ body {
         padding-top: 137px;
     }
     .header{
-        height: 137px;        
+        height: 137px;
         width: 100%;
         padding: 19px 20px;
         z-index: 99999999;
@@ -519,7 +558,7 @@ body {
                     height: 44px;
                     margin-top: -3px;
                 }
-            } 
+            }
             ul.navbar-menu-pc{
                 display: none;
             }
@@ -529,8 +568,8 @@ body {
         }
         .mobile{
             display: block!important;
-        }    
-    }    
+        }
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -555,6 +594,10 @@ body {
     }
     .sub-header .center-box {
         padding: 84px 12px 0;
+        >p{
+            margin-top: -33px;
+            margin-bottom: 21px;
+        }
     }
     .common-footer{
         background: url('../img//mobile/bg_footer_m@2x.jpg') no-repeat;
@@ -585,11 +628,11 @@ body {
                 padding-top: 0;
             }
             hr{
-                margin-top: 24px;                
+                margin-top: 24px;
             }
             span{
                 float: none;
             }
-        }     
+        }
     }
 }

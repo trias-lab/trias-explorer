@@ -1,25 +1,38 @@
 import React from "react"
 import $ from "jquery";
+import PropTypes from 'prop-types';
+
 /**
  * Custom drop-down list component.
- * Usage:
+ * 
+ * ### Example:
+ * 
+ * ```jsx
  * <DropdownList
  *  listID="id"
  *  itemsToSelect={this.searchTypes}
  *  onSelect={(value) => this.selectItem(value)}
  *  itemDefault={this.searchTypes[1]} />
- * 
- * Attributes:
- * - listID: id of the outer container
- * - itemsToSelect: a list containing options for this drop-down list. 
- *      (ex. [{name:'主机名',value:'clientname'},{name:'文件哈希',value:'filedata'},...])
- *      - name: shows in the drop-down list
- *      - value: will be passed when related option is selected.
- * 
- * - onSelect: handler for the change of option selected.
- * - itemDefault: initial option. The first item of itemsToSelect by default.
+ * ```
  */
 export default class DropdownList extends React.Component {
+    static propTypes = {
+        /** Id of the outer container */
+        listID: PropTypes.string,
+        /** Index of first row in current page.
+         * 
+         * (ex. [{name:'主机名',value:'clientname'},{name:'文件哈希',value:'filedata'},...]).
+         * 
+         * - The name shows in the drop-down list.
+         * - The value will be passed when related option is selected.
+         */
+        itemsToSelect: PropTypes.object,
+        /** Index of last row in current page. */
+        onSelect: PropTypes.func,
+        /** Total number of items. */
+        itemDefault: PropTypes.object
+    }
+    
     constructor(props) {
         super(props);
         this.state={

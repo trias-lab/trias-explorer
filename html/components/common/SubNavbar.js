@@ -1,23 +1,31 @@
 import React from "react";
-import $ from "jquery";
 import {NavLink} from 'react-router-dom';
 import {injectIntl, intlShape, FormattedMessage } from 'react-intl'; /* react-intl imports */
+import PropTypes from 'prop-types';
 
 /**
  * Common SubNavbar section above tables.
+ *
+ * ### Example:
  * 
- * usage:
+ * ```js
  * <SubNavbar match={this.state.match}/>
- * 
- * - match: pass this.props.match to SubNavbar component
+ * ```
  */
 class SubNavbar extends React.Component {
+    static propTypes = {
+        /** Inject intl to CustomPagination props */
+        intl: intlShape.isRequired,
+        /** Pass this.props.match to SubNavbar component */
+        match: PropTypes.object 
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-            lang: this.props.intl.locale, 
+            lang: this.props.intl.locale,
             messages: this.props.intl.messages,
-            match: this.props.match,         
+            match: this.props.match,
             subNavbarTitle: "",
             navList: [], // items in navigation bar
         }
@@ -43,13 +51,13 @@ class SubNavbar extends React.Component {
             },()=>{ // update navbar
                 this.setNavList()
             })
-        }        
+        }
     }
 
     componentDidMount(){
         this.setNavList()
     }
-    
+
     /**
      * According to the 'match', update navbar
      */
@@ -104,10 +112,11 @@ class SubNavbar extends React.Component {
     }
 
     render(){
-        
+
         return (
             <div className="sub-header">
                 <div className="center-box">
+                    <FormattedMessage id="dataValidity" tagName="p" />
                     {
                         this.state.subNavbarTitle && <h1>{this.state.subNavbarTitle}</h1>
                     }
@@ -130,19 +139,14 @@ class SubNavbar extends React.Component {
                         })}
                     </h2>
                     {
-                        this.state.match.path === '/address/:addressID' && 
+                        this.state.match.path === '/address/:addressID' &&
                         <div className="address-qrcode"><img src="" alt=""/></div>
                     }
                 </div>
-            
+
         </div>
         )
     }
 }
 
-/* Inject intl to NodeStatus props */
-const propTypes = {
-    intl: intlShape.isRequired,
-};
-SubNavbar.propTypes = propTypes
 export default injectIntl(SubNavbar)
