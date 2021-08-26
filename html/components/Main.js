@@ -182,8 +182,8 @@ export default class Main extends React.Component {
 
         this.navlistMobile = [{
             ele: <a href="https://www.trias.one/" target="blank"><FormattedMessage id="triasProject" /></a>
-        },{
-            ele:  <a href="https://wallet.trias.one" target="blank"><FormattedMessage id="wallet" /></a>
+        // },{
+        //     ele:  <a href="https://wallet.trias.one" target="blank"><FormattedMessage id="wallet" /></a>
         }, {
             ele:  <Link to="/blocklist"><FormattedMessage id="block" /></Link>
         },{
@@ -216,11 +216,11 @@ export default class Main extends React.Component {
                                                 <FormattedMessage id="triasProject" />
                                             </a>
                                         </li>
-                                        <li>
-                                            <a className="nav-button" href="https://wallet.trias.one" target="blank">
-                                                <FormattedMessage id="wallet" />
-                                            </a>
-                                        </li>
+                                        {/*<li>*/}
+                                        {/*    <a className="nav-button" href="https://wallet.trias.one" target="blank">*/}
+                                        {/*        <FormattedMessage id="wallet" />*/}
+                                        {/*    </a>*/}
+                                        {/*</li>*/}
                                         <li>
                                             <Link className="nav-button" to="/blocklist">
                                                 <FormattedMessage id="block" />
