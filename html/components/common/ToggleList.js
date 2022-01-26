@@ -91,9 +91,9 @@ export default class ToggleList extends React.Component {
 
         return (
             <div className={"my-dropdown-list toggle-list "+ (this.props.className|| '')} id={this.props.listID}>
-                <div className="item-selected">
-                    <a onClick={this.changeListState.bind(this)}>{name}</a>
-                </div>
+                {/*<div className="item-selected">*/}
+                {/*    <a onClick={this.changeListState.bind(this)}>{name}</a>*/}
+                {/*</div>*/}
                 {/* Collapse or expand the drop-down list according to this.state.showListBlock; if there is no option, then always hide the option box. */}
                 <div className={(this.state.showListBlock && listToShow.length>0)?"list-block":"hide list-block"} onClick={()=>{this.changeListState()}}>
                     <ul>

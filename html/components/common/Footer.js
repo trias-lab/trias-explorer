@@ -48,13 +48,18 @@ class Footer extends React.Component {
                         <i className="fab fa-medium-m"></i>
                     </span>
                 </a>
-                <a className="wechat-button toggle-button" href="javascript:void(0)">
+                {/*<a className="wechat-button toggle-button" href="javascript:void(0)">*/}
+                {/*    <span className="btn-icon">*/}
+                {/*        <i className="fa fa-weixin" aria-hidden="true"></i>*/}
+                {/*    </span>*/}
+                {/*    <div className='qrcode toggle-box'>*/}
+                {/*        <img src={require('../../img/wechat-qrcode.jpeg')} />*/}
+                {/*    </div>*/}
+                {/*</a>*/}
+                <a target="blank" href="https://discord.com/invite/9b2FQc4M5j">
                     <span className="btn-icon">
-                        <i className="fa fa-weixin" aria-hidden="true"></i>
+                        <i className="fab fa-discord"></i>
                     </span>
-                    <div className='qrcode toggle-box'>
-                        <img src={require('../../img/wechat-qrcode.jpeg')} />
-                    </div>
                 </a>
                 <a target="blank" href="https://www.reddit.com/r/Trias_Lab">
                     <span className="btn-icon">
@@ -71,11 +76,11 @@ class Footer extends React.Component {
                         <a target="blank" href="https://t.me/TriasOfficial">Telegram-Channel</a>
                     </div>
                 </span>
-                <a target="blank" href="https://0.plus/sp/triaslab">
-                    <span className="btn-icon logo-biyong">
-                        <i className="fas fa-envelope" style={{color:'transparent'}}></i>
-                    </span>
-                </a>
+                {/*<a target="blank" href="https://0.plus/sp/triaslab">*/}
+                {/*    <span className="btn-icon logo-biyong">*/}
+                {/*        <i className="fas fa-envelope" style={{color:'transparent'}}></i>*/}
+                {/*    </span>*/}
+                {/*</a>*/}
                 <a target="blank" href="https://github.com/trias-lab/Documentation">
                     <span className="btn-icon">
                         <i className="fa fa-github" aria-hidden="true"></i>
@@ -104,11 +109,11 @@ class Footer extends React.Component {
                                     <FormattedMessage id="triasProject" />
                                 </a>
                             </div>
-                            <div className="link">
-                                <Link to="/stayTuned">
-                                    <FormattedMessage id="wallet" />
-                                </Link>
-                            </div>
+                            {/*<div className="link">*/}
+                            {/*    <Link to="/stayTuned">*/}
+                            {/*        <FormattedMessage id="wallet" />*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
                             <div className="link">
                                 <Link to="/blocklist">
                                     <FormattedMessage id="block" />
@@ -125,7 +130,7 @@ class Footer extends React.Component {
                 </div>
                 <div className="center-box clearfix">
                     <hr/>
-                    <span className="pull-left">© 2018 Trias-lab Foundation. </span>
+                    <span className="pull-left">© 2022 Trias-lab Foundation. </span>
                     <span className="pull-right">All rights reserved.</span>
                 </div>
             </div>
