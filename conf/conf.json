@@ -1,7 +1,7 @@
 {
   "eth_ip": "",
   "eth_port": "",
-  "mysql_ip": "192.168.1.210",
+  "mysql_ip": "192.168.1.99",
   "mysql_port": "3306",
   "mysql_user": "8lab",
   "mysql_password": "8lab",
